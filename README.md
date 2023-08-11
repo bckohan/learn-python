@@ -39,6 +39,7 @@ Download python to your brains.
 
 4. Module 4 - Object Oriented Programming
     - Classes
+    - Inheritance and Polymorphism
     - Design Patterns
 
 5. Module 5 - Meta Programming
