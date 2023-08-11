@@ -3,7 +3,7 @@ name = "learn-python"
 version = "0.1.0"
 description = "Download Python into your brains."
 authors = ["Brian Kohan <bckohan@gmail.com>"]
-license = "Unlicense"
+license = "LICENSE"
 readme = "README.md"
 packages = [{include = "learn_python"}]
 
