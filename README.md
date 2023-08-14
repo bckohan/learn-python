@@ -16,19 +16,22 @@ Download python to your brains.
 0. Preamble
     - What is a computer?
     - What is an operating system?
-    - WTF is a "program"?
+    - What is a "process"?
     - Interpreted vs Compiled Languages
     - What is Python?
 
-1. Module 1 - The Python Runtime
+1. Module 1 - Getting started with Python
 
-    - How Python Works
-        - The Python Runtime
-        - Python PATH
-        - [Interpreter](https://opensource.com/article/18/4/introduction-python-bytecode)
-    - The Python standard library
-    - Python Packages and Modules
-    - Build Tools (Poetry)
+    - Tools
+        - [git](https://git-scm.com/)
+        - [GitHub](https://github.com)
+        - [Poetry](https://python-poetry.org/)
+        - [Standard Library](https://docs.python.org/3/library/index.html)
+        - [PyPi](https://pypi.org/)
+
+    - Python PATH
+    - Packages and Modules
+    - Importing Code
     - Hello World
 
 2. Module 2 - Program Flow
