@@ -1,0 +1,301 @@
+<mxfile host="app.diagrams.net" modified="2023-08-14T17:47:45.938Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="YDjIb4Z70sfC0CaBkfsF" version="21.6.8" type="device">
+  <diagram name="Page-1" id="gMEmZ_tKlukDzc5xzY0I">
+    <mxGraphModel dx="1461" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-70" value="" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="314.94" y="588" width="188.12" height="236.25" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-45" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="334" y="178" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-54" value="Core 3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="494" y="258" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-53" value="Core 2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="414" y="258" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-55" value="Core 1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="334" y="258" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-30" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="276" y="311.5" width="20" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-33" value="Virtual Memory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" parent="1" vertex="1">
+          <mxGeometry x="236" y="364" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="138" width="120" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-2" value="Main Memory (RAM)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="140" y="140" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-4" value="OS Kernel&lt;br&gt;(e.g. Linux)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="130" y="200" width="120" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-5" value="OS Libraries&lt;br&gt;(e.g. GNU, Ubuntu)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="278" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-6" value="Manages the hardware (system calls)" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1" y="195" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-7" value="UIs, shells, etc" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1" y="269" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-8" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-6" target="J1TYXXAHnKXQNXY6jSpp-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-50" y="368" as="sourcePoint" />
+            <mxPoint y="318" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-10" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-7" target="J1TYXXAHnKXQNXY6jSpp-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="123" y="228" as="sourcePoint" />
+            <mxPoint x="123" y="288" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-11" value="User Process 1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="130" y="318" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-12" value="User Process 2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="130" y="378" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-13" value="User Process 3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="130" y="438" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-17" value="CPU" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="426" y="188" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="334" y="328" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-19" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="334" y="318" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-21" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="414" y="328" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-22" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="414" y="318" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-23" value="MMU" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="349" y="213" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-24" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="90" y="568" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-25" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-13" target="J1TYXXAHnKXQNXY6jSpp-24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="418" as="sourcePoint" />
+            <mxPoint x="450" y="368" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-27" value="Machine Instructions&lt;br&gt;(Code)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="130" y="598" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-28" value="Stack Memory&lt;br&gt;(local variables)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="130" y="648" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-29" value="Heap Memory&lt;br&gt;(global variables)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="130" y="688" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-31" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="276" y="443" width="20" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-32" value="Virtual Memory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" parent="1" vertex="1">
+          <mxGeometry x="236" y="492" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-35" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-30" target="J1TYXXAHnKXQNXY6jSpp-23" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="468" as="sourcePoint" />
+            <mxPoint x="450" y="418" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-36" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-30" target="J1TYXXAHnKXQNXY6jSpp-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="306" y="322" as="sourcePoint" />
+            <mxPoint x="359" y="253" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-38" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;width=7.5;startSize=3.325925925925926;endSize=3.8624338624338628;exitX=0.999;exitY=0.615;exitDx=0;exitDy=0;exitPerimeter=0;startWidth=10.423280423280424;endWidth=10.423280423280424;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="295.98" y="388.375" as="sourcePoint" />
+            <mxPoint x="374.00000000000006" y="338.00000000000006" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="374" y="388" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-39" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;width=7.5;startSize=3.325925925925926;endSize=3.8624338624338628;exitX=0.999;exitY=0.615;exitDx=0;exitDy=0;exitPerimeter=0;startWidth=10.423280423280424;endWidth=10.423280423280424;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" target="J1TYXXAHnKXQNXY6jSpp-21" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="296" y="508.375" as="sourcePoint" />
+            <mxPoint x="374.02000000000004" y="458.00000000000006" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="454" y="508" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-40" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=-0.008;entryY=0.773;entryDx=0;entryDy=0;width=2.651515151515152;endSize=1.687218045112782;endWidth=5.608004974843123;startSize=1.8181818181818183;startWidth=5.608004974843123;entryPerimeter=0;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" target="J1TYXXAHnKXQNXY6jSpp-30" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="250" y="408" as="sourcePoint" />
+            <mxPoint x="190" y="308" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-41" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=-0.008;entryY=0.773;entryDx=0;entryDy=0;width=2.651515151515152;endSize=1.687218045112782;endWidth=5.608004974843123;startSize=1.8181818181818183;startWidth=5.608004974843123;entryPerimeter=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="250" y="480" as="sourcePoint" />
+            <mxPoint x="276" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-42" value="The Kernel and the CPU&#39;s Memory Management Unit (MMU) conspire to hide physical memory from user space processes" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="229" y="8" width="181" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-43" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-30" target="J1TYXXAHnKXQNXY6jSpp-42" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="368" as="sourcePoint" />
+            <mxPoint x="300" y="318" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-44" value="&lt;font style=&quot;font-size: 21px;&quot;&gt;Processes&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1" y="392" width="129" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-48" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="494" y="328" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-49" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="494" y="318" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-57" value="Clock" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="509" y="198" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-58" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;width=7.5;startSize=3.325925925925926;endSize=3.8624338624338628;startWidth=10.423280423280424;endWidth=10.423280423280424;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" target="J1TYXXAHnKXQNXY6jSpp-48" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="296" y="548" as="sourcePoint" />
+            <mxPoint x="542" y="338" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="534" y="548" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-59" value="Process 3 has 2 &quot;threads&quot;, meaning two different execution flows can happen simultaneously on different cores" style="ellipse;whiteSpace=wrap;html=1;spacing=22;" parent="1" vertex="1">
+          <mxGeometry x="611" y="246" width="230" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-60" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-54" target="J1TYXXAHnKXQNXY6jSpp-59" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="318" as="sourcePoint" />
+            <mxPoint x="410" y="388" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-61" value="It is up to the programmer to make sure these threads do not operate on the same memory simultaneously." style="ellipse;whiteSpace=wrap;html=1;spacing=25;" parent="1" vertex="1">
+          <mxGeometry x="611" y="371" width="230" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-62" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-59" target="J1TYXXAHnKXQNXY6jSpp-61" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="438" as="sourcePoint" />
+            <mxPoint x="410" y="388" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-63" value="This is achieved using synchronization primitives supplied by the kernel called &lt;font color=&quot;#ff3333&quot;&gt;mutexes&lt;/font&gt; (&lt;font color=&quot;#ff3333&quot;&gt;mut&lt;/font&gt;ually &lt;font color=&quot;#ff3333&quot;&gt;ex&lt;/font&gt;clusive locks)" style="ellipse;whiteSpace=wrap;html=1;spacing=20;" parent="1" vertex="1">
+          <mxGeometry x="611" y="496" width="230" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-64" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-61" target="J1TYXXAHnKXQNXY6jSpp-63" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="736" y="497" as="sourcePoint" />
+            <mxPoint x="736" y="533" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-65" value="Device Drivers" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="243" width="120" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-66" value="foo()" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="349" y="628" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-67" value="bar()" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="349" y="648" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-68" value="main()" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="349" y="668" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-69" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="J1TYXXAHnKXQNXY6jSpp-28" target="J1TYXXAHnKXQNXY6jSpp-70" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="448" as="sourcePoint" />
+            <mxPoint x="320" y="668" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="J1TYXXAHnKXQNXY6jSpp-71" value="A stack is a Last-In-First-Out (LIFO) queue - think of a stack of papers. &lt;br&gt;main() -&amp;gt; bar() -&amp;gt; foo()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="329" y="698" width="161" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-1" value="MyProgram.c&lt;br&gt;(text file with C code)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="688" width="145" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-2" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;Compiled Languages&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="776" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-3" value="Compile&lt;br&gt;(gcc, clang)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="688" width="144" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-4" value="x86_64&lt;br&gt;executable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="632" width="70" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-5" value="arm64&lt;br&gt;executable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="692" width="70" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-6" value="RISC&lt;br&gt;executable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="754" width="70" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-7" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;width=3.6363636363636362;endSize=2.077272727272727;endWidth=7.892561983471073;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-1" target="S2fSQJvqtbLU7FYURSkp-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="550" as="sourcePoint" />
+            <mxPoint x="1000" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-8" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;width=3.6363636363636362;endSize=2.077272727272727;endWidth=7.892561983471073;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-3" target="S2fSQJvqtbLU7FYURSkp-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="695" y="728" as="sourcePoint" />
+            <mxPoint x="720" y="728" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-9" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;width=3.6363636363636362;endSize=2.077272727272727;endWidth=7.892561983471073;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-3" target="S2fSQJvqtbLU7FYURSkp-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="864" y="713" as="sourcePoint" />
+            <mxPoint x="900" y="668" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;width=3.6363636363636362;endSize=2.077272727272727;endWidth=7.892561983471073;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-3" target="S2fSQJvqtbLU7FYURSkp-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="864" y="728" as="sourcePoint" />
+            <mxPoint x="900" y="728" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-13" value="MyProgram.c" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="856" y="138" width="230" height="452" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-15" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-comment&quot;&gt;// This program allocates memory with&lt;/span&gt;&lt;span style=&quot;color: rgb(22, 22, 22); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-comment&quot;&gt;// malloc, assigns a string to that&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-comment&quot;&gt;// memory, prints the string, frees the&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-comment&quot;&gt;// memory then exits.&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-comment&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;color: rgb(22, 22, 22); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: rgb(0, 104, 129); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-meta&quot;&gt;#&lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-string&quot;&gt;&amp;lt;stdlib.h&amp;gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: rgb(0, 104, 129); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot; class=&quot;hljs-meta&quot;&gt;#&lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-string&quot;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(22, 22, 22); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400; background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-meta&quot;&gt;&lt;font color=&quot;#006881&quot;&gt;#&lt;/font&gt;&lt;span style=&quot;color: rgb(0, 104, 129); box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-keyword&quot;&gt;include&lt;/span&gt; &lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-string&quot;&gt;&lt;font color=&quot;#006881&quot;&gt;&amp;lt;malloc.h&amp;gt;&lt;/font&gt;&lt;font color=&quot;#008000&quot;&gt; # free, malloc&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: rgb(0, 104, 129); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400; background-color: rgb(242, 242, 242);&quot; class=&quot;hljs-meta&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-string&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit; color: rgb(0, 104, 129); font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400; background-color: rgb(242, 242, 242);&quot; class=&quot;hljs-meta&quot;&gt;&lt;span style=&quot;box-sizing: inherit; outline-color: inherit;&quot; class=&quot;hljs-meta-string&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;char*&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#990000&quot;&gt;make&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#990000&quot;&gt;String&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;(int &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;size&lt;/span&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;) {&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp; &amp;nbsp; char* &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;str&lt;/span&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-weight: 400; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px; background-color: initial; border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;= malloc(size);&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; font-weight: 400; font-family: Helvetica; font-size: 12px; border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;b style=&quot;border-color: var(--border-color); color: rgb(51, 51, 255);&quot;&gt;return&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); color: rgb(51, 51, 51); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp;str;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; font-weight: 400; font-family: Helvetica; font-size: 12px; border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;char*&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#990000&quot;&gt;bar&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;() {&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp; char* &lt;/b&gt;str = foo(3);&lt;/span&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51);&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp; &amp;nbsp; *str = &#39;bar&#39;;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;b style=&quot;color: rgb(51, 51, 255);&quot;&gt;return&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt; str;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;// main is the entry point for a&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;// c program&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;int&lt;/span&gt; &lt;span style=&quot;box-sizing: inherit; color: rgb(153, 0, 0); font-weight: bold;&quot; class=&quot;hljs-title&quot;&gt;main&lt;/span&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-params&quot;&gt;(&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;int&lt;/span&gt; argc, &lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;char&amp;nbsp;&lt;/span&gt;*argv[])&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; background-color: rgb(248, 248, 248); font-size: 11px;&quot;&gt;{&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 248, 248); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; font-size: 11px; display: inline !important;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;b&gt;char&lt;/b&gt;* barStr = bar();&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; print(*barStr);&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; free(barStr);&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;b style=&quot;color: rgb(51, 51, 255);&quot;&gt;return&lt;/b&gt; 0;&lt;/div&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;}&lt;/div&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="S2fSQJvqtbLU7FYURSkp-13">
+          <mxGeometry y="23" width="230" height="429" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-14" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-1" target="S2fSQJvqtbLU7FYURSkp-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="584" y="308" as="sourcePoint" />
+            <mxPoint x="621" y="309" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-17" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Threads&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="170" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-18" value="LOAD&lt;br&gt;ADD&lt;br&gt;MOVE&lt;br&gt;etc..." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1004" y="662" width="70" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-19" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="S2fSQJvqtbLU7FYURSkp-5" target="S2fSQJvqtbLU7FYURSkp-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="460" as="sourcePoint" />
+            <mxPoint x="620" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S2fSQJvqtbLU7FYURSkp-20" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;What happens when you &quot;run&quot; a program??&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="486" y="20" width="510" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -13,10 +13,17 @@ Download python to your brains.
 
 ## Syllabus
 
-1. Module 1 - What is Python?
-
+0. Preamble
+    - What is a computer?
+    - What is an operating system?
+    - WTF is a "program"?
     - Interpreted vs Compiled Languages
-    - The Python Runtime
+    - What is Python?
+
+1. Module 1 - The Python Runtime
+
+    - How Python Works
+        - The Python Runtime
         - Python PATH
         - [Interpreter](https://opensource.com/article/18/4/introduction-python-bytecode)
     - The Python standard library
@@ -34,6 +41,8 @@ Download python to your brains.
 
 3. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
+    - Strings
+      - regex
     - Complexity Theory
       - BigO notation
 
@@ -46,7 +55,14 @@ Download python to your brains.
     - __new__ and MetaClasses
     - Introspection
 
-6. Module 6 - Working with Data
+6. MOdule 6 - Typing in Python
+    - Type Hints
+    - Static Type Checking
+    - Type based interfaces
+        - Typer
+        - FastAPI
+
+7. Module 7 - Working with Data
 
   - Getting data from disk to memory
     - csv, file i/o
@@ -57,5 +73,5 @@ Download python to your brains.
     - pandas
     - scipy
 
-7. Module 7 - Databases
-   - ORMs (Django ORM, SQL Alchemy)
+7. Module 8 - Databases
+   - Object Relational Models (Django ORM, SQL Alchemy)

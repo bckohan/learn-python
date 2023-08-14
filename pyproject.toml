@@ -9,6 +9,7 @@ packages = [{include = "learn_python"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+ipython = "^8.14.0"
 
 
 [build-system]

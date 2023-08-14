@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net" modified="2023-08-14T19:01:51.446Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" version="21.6.8" etag="XBNFjcR0BVXcxjijRmPp" type="device">
+  <diagram id="Y6QhWPbkHoeEa-vTTTj3" name="Page-1">
+    <mxGraphModel dx="1461" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wRvB8EkBGP11LalY_vZD-1" value="&lt;b&gt;CPython.c&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="94" y="121" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-2" value="&lt;font style=&quot;font-size: 32px;&quot;&gt;Python is an Interpretted Language&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="40" width="840" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-3" value="&lt;b&gt;compiler&lt;br&gt;(gcc)&lt;/b&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="121" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-4" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;width=5.675675675675675;endSize=3.710810810810811;endWidth=11.709276844411978;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="wRvB8EkBGP11LalY_vZD-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="214" y="150.64" as="sourcePoint" />
+            <mxPoint x="274" y="151" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-5" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;width=5.675675675675675;endSize=3.710810810810811;endWidth=11.709276844411978;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="wRvB8EkBGP11LalY_vZD-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="394" y="150.67" as="sourcePoint" />
+            <mxPoint x="454" y="150.67" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-6" value="&lt;b&gt;&lt;font color=&quot;#008000&quot;&gt;python&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="464" y="121" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-8" value="&lt;font color=&quot;#990000&quot;&gt;MyProgram.py&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="464" y="298" width="230" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-9" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; background-color: rgb(255, 255, 255);&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;color: green; font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; background-color: rgb(255, 255, 255);&quot;&gt;This program is roughly equivalent&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;to MyProgram.c&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;span style=&quot;font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; border-color: var(--border-color); box-sizing: inherit; background-color: rgb(255, 255, 255);&quot; class=&quot;hljs-keyword&quot;&gt;&lt;span style=&quot;font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; font-weight: 400;&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;&quot;&quot;&quot;&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 9px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;font-family: SFMono-Regular, Consolas, &amp;quot;Liberation Mono&amp;quot;, Menlo, Courier, monospace; background-color: rgb(255, 255, 255);&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot; color=&quot;#006881&quot;&gt;import sys&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: initial; font-weight: bold; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;border-color: var(--border-color); box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#990000&quot;&gt;bar&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;():&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;b style=&quot;color: rgb(51, 51, 255);&quot;&gt;return&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(51, 51, 51); box-sizing: inherit;&quot; class=&quot;hljs-keyword&quot;&gt; &#39;bar&#39;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; color: rgb(34, 34, 34); font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; color: rgb(51, 51, 51); font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;# this is the entry point for a&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial; box-sizing: inherit; font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-size: 11px;&quot; class=&quot;hljs-function&quot;&gt;&lt;span style=&quot;box-sizing: inherit; font-weight: bold;&quot; class=&quot;hljs-keyword&quot;&gt;&lt;font color=&quot;#008000&quot;&gt;# python program&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-family: &amp;quot;Red Hat Mono&amp;quot;, monospace; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 248, 248); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; font-size: 11px; display: inline !important;&quot;&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;if __name__ == &#39;__main__&#39;:&lt;/div&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-weight: 400; text-align: left;&quot;&gt;&lt;span style=&quot;color: rgb(34, 34, 34);&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;font color=&quot;#008000&quot;&gt;# the command line args&lt;/font&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; print(sys.argv)&lt;/div&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;&amp;nbsp; &amp;nbsp; print(bar())&lt;/div&gt;&lt;div style=&quot;font-weight: 400; color: rgb(34, 34, 34); text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-8">
+          <mxGeometry y="23" width="230" height="237" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-10" value="Terminal" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="14" y="383" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-13" value="&lt;font style=&quot;&quot; color=&quot;#ffffff&quot;&gt;&amp;gt;&lt;/font&gt; &lt;b&gt;&lt;font color=&quot;#008000&quot;&gt;python&lt;/font&gt;&lt;/b&gt; &lt;b&gt;&lt;font color=&quot;#990000&quot;&gt;MyProgram.py&lt;/font&gt;&lt;font color=&quot;#ffffff&quot;&gt; &lt;/font&gt;&lt;/b&gt;&lt;font color=&quot;#ffffff&quot;&gt;arg1 arg2&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#ffffff&quot;&gt;[&#39;MyProgram.py&#39;,&amp;nbsp; &#39;arg1&#39;, &#39;arg2&#39; ]&lt;br&gt;bar&lt;br&gt;&amp;gt;&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=#1A1A1A;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-10">
+          <mxGeometry y="23" width="200" height="67" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-14" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="230" width="120" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-15" value="Main Memory (RAM)" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="284" y="232" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-16" value="OS Kernel&lt;br&gt;(e.g. Linux)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="274" y="292" width="120" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-17" value="OS Libraries&lt;br&gt;(e.g. GNU, Ubuntu)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="370" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-20" value="&lt;b&gt;&lt;font color=&quot;#ffffff&quot;&gt;python&lt;br&gt;&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#008000;strokeColor=#3333FF;" vertex="1" parent="1">
+          <mxGeometry x="274" y="410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-23" value="Device Drivers" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="274" y="335" width="120" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-25" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;width=4.615384615384616;endSize=2.9340659340659343;endWidth=11.073541842772613;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="wRvB8EkBGP11LalY_vZD-20" target="wRvB8EkBGP11LalY_vZD-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="384" y="470" as="sourcePoint" />
+            <mxPoint x="394" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-26" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;width=4.615384615384616;endSize=2.9340659340659343;endWidth=11.073541842772613;" edge="1" parent="1" source="wRvB8EkBGP11LalY_vZD-13" target="wRvB8EkBGP11LalY_vZD-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="394" y="480" as="sourcePoint" />
+            <mxPoint x="484" y="295" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-29" value="&lt;div&gt;&amp;nbsp; 1&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;0 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;0 (&#39;\n...n&#39;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 2 STORE_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;0 (__doc__)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; 6&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;4 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;1 (0)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 6 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2 (None)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 8 IMPORT_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1 (sys)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;10 STORE_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;1 (sys)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; 8&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 12 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;3 (&amp;lt;....&amp;gt;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;14 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;4 (&#39;bar&#39;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;16 MAKE_FUNCTION&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;18 STORE_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2 (bar)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;13&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 20 LOAD_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 3 (__name__)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;22 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;5 (&#39;__main__&#39;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;24 COMPARE_OP&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2 (==)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;26 POP_JUMP_IF_FALSE&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;48&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;16&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 28 LOAD_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 4 (print)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;30 LOAD_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1 (sys)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;32 LOAD_ATTR&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 5 (argv)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;34 CALL_FUNCTION&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;36 POP_TOP&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;17&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 38 LOAD_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 4 (print)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;40 LOAD_NAME&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 2 (bar)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;42 CALL_FUNCTION&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;44 CALL_FUNCTION&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;46 POP_TOP&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;gt;&amp;gt;&amp;nbsp; &amp;nbsp;48 LOAD_CONST&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;2 (None)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;50 RETURN_VALUE&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=default;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="748" y="180" width="275" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-30" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.998;exitY=0.505;exitDx=0;exitDy=0;exitPerimeter=0;width=4.482758620689656;endSize=2.9931034482758623;endWidth=12.158145065398337;" edge="1" parent="1" source="wRvB8EkBGP11LalY_vZD-9" target="wRvB8EkBGP11LalY_vZD-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="427" as="sourcePoint" />
+            <mxPoint x="630" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-31" value="&lt;font color=&quot;#990000&quot;&gt;MyProgram.pyc&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="748" y="162" width="276" height="528" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-33" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Advantages&lt;/font&gt;&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="18" y="530" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-34" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Platform Independence&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-33">
+          <mxGeometry y="30" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-35" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Simpler Syntax&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-33">
+          <mxGeometry y="60" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-36" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Introspection&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-33">
+          <mxGeometry y="90" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-37" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="268" y="570" width="312" height="272" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-38" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.288;entryY=0.043;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="wRvB8EkBGP11LalY_vZD-20" target="wRvB8EkBGP11LalY_vZD-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="540" as="sourcePoint" />
+            <mxPoint x="630" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-39" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Disadvantages&lt;/font&gt;&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="18" y="670" width="220" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-40" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Slower&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-39">
+          <mxGeometry y="30" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-41" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;More errors discovered at runtime&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="wRvB8EkBGP11LalY_vZD-39">
+          <mxGeometry y="60" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-43" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" target="wRvB8EkBGP11LalY_vZD-44">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="724" y="438" as="sourcePoint" />
+            <mxPoint x="700" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-44" value="Compilation step happens at runtime" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="624" y="181" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-45" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="326" y="626" width="80" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-46" value="Memory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="326" y="626" width="80" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-47" value="&lt;font color=&quot;#ffffff&quot;&gt;MyProgram&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#990000;" vertex="1" parent="1">
+          <mxGeometry x="326" y="660" width="80" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-48" value="CPU" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="669" width="90" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-49" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="733" width="90" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-51" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="723" width="90" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-52" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="743" width="90" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="wRvB8EkBGP11LalY_vZD-53" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Virtual Machine&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="434" y="603" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

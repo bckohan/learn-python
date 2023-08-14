@@ -1,0 +1,217 @@
+<mxfile host="app.diagrams.net" modified="2023-08-14T17:47:10.913Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="9ShQd4NhtgD_575Lh_gu" version="21.6.8" type="device">
+  <diagram name="Page-1" id="1J6WagQCUvYmf21s5ytZ">
+    <mxGraphModel dx="2311" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-505" y="230" width="240" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-2" value="Core1" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-485" y="282" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-3" value="Core1" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-375" y="283" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-5" value="Core" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-475" y="292" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-6" value="CPU" style="rounded=0;whiteSpace=wrap;html=1;gradientColor=none;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-485" y="250" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-7" value="Cache Memory&lt;br&gt;(fast)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-495" y="420" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-8" value="Main Memory (RAM - Gigabytes)&lt;br&gt;(medium)" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-615" y="540" width="415" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-10" value="Disk Storage&lt;br&gt;(Terabytes)&lt;br&gt;(slow)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="-847" y="480" width="150" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-11" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.553;exitY=-0.018;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;exitPerimeter=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-8" target="YPh2wvaOejQGUnnW6WLR-7" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-425" y="440" as="sourcePoint" />
+            <mxPoint x="-325" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-14" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" source="YPh2wvaOejQGUnnW6WLR-8" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-715" y="629" as="sourcePoint" />
+            <mxPoint x="-695" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-15" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-640" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-16" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-630" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-17" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-620" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-18" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-610" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-19" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-600" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-20" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-590" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-21" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-580" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-22" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-570" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-23" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-560" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-24" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
+          <mxGeometry x="-550" y="565" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-26" value="My laptop has 16GB of RAM at a word size of 64 bits, meaning each of these holds 8 bytes therefore there are (16*(1024^3))/8 =~ 2.1 billion addressable memory slots" style="ellipse;whiteSpace=wrap;html=1;labelPadding=2;perimeterSpacing=11;spacingLeft=0;spacing=21;" parent="1" vertex="1">
+          <mxGeometry x="-654" y="640" width="275" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-27" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.303;exitY=0.093;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-26" target="YPh2wvaOejQGUnnW6WLR-19" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-395" y="580" as="sourcePoint" />
+            <mxPoint x="-345" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-28" value="CPU cores execute machine instructs. Modern processors have something like ~50 total instructions. These do things like LOAD a word from a RAM address, ADD a number to it, and MOVE it back to the RAM address" style="ellipse;whiteSpace=wrap;html=1;labelPadding=2;perimeterSpacing=11;spacingLeft=0;spacing=21;" parent="1" vertex="1">
+          <mxGeometry x="-295" y="40" width="275" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-29" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-475" y="362" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-31" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-475" y="352" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-32" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-475" y="342" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-33" value="Core" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-366" y="293" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-34" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-366" y="363" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-35" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-366" y="353" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-36" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-180;" parent="1" vertex="1">
+          <mxGeometry x="-366" y="343" width="80" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-38" value="REGISTERS: Each holds one 64 bit word, processor instructions operate on these, and a typical core might have 16 registers, one of which holds the current instruction" style="ellipse;whiteSpace=wrap;html=1;spacing=23;" parent="1" vertex="1">
+          <mxGeometry x="-230.5" y="292" width="204.5" height="159" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-39" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-38" target="YPh2wvaOejQGUnnW6WLR-34" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-235" y="360" as="sourcePoint" />
+            <mxPoint x="-345" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-40" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;width=3.3220338983050848;endSize=2.71728813559322;endWidth=6.101694915254237;startWidth=5.423728813559322;startSize=2.5254237288135593;" parent="1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-434" y="420" as="sourcePoint" />
+            <mxPoint x="-434" y="372" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-41" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;width=3.3220338983050848;endSize=2.71728813559322;endWidth=6.101694915254237;startWidth=5.423728813559322;startSize=2.5254237288135593;" parent="1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-326.25" y="421" as="sourcePoint" />
+            <mxPoint x="-326.25" y="373" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-42" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0.326;exitY=0.908;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-28" target="YPh2wvaOejQGUnnW6WLR-33" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-215" y="240" as="sourcePoint" />
+            <mxPoint x="-205" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-43" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;WTF is a computer anyway??&lt;br&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-805" y="66" width="300" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-57" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-663.5" y="373" width="117" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-56" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#434445;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.vvd.keyboard;" parent="1" vertex="1">
+          <mxGeometry x="-640" y="420" width="75" height="53.25" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-62" value="Input Devices" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-630" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-64" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=12.716049382716049;endSize=4.811111111111111;width=5.555555555555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" source="YPh2wvaOejQGUnnW6WLR-57" target="YPh2wvaOejQGUnnW6WLR-16" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-385" y="430" as="sourcePoint" />
+            <mxPoint x="-335" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-69" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=12.716049382716049;endSize=4.811111111111111;width=5.555555555555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-284.55999999999995" y="600" as="sourcePoint" />
+            <mxPoint x="-284.55999999999995" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-70" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="-147" y="520" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-73" value="Core" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-111" y="583" width="55" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-72" value="Core" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-117" y="576" width="55" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-71" value="Core" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-125" y="570" width="55" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-74" value="GPU" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-123" y="530" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-76" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#f5f5f5;strokeColor=#666666;endWidth=7.943262411347518;endSize=3.0652482269503545;width=5.1063829787234045;startSize=3.321985815602837;startWidth=7.943262411347518;" parent="1" target="YPh2wvaOejQGUnnW6WLR-8" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-150" y="570" as="sourcePoint" />
+            <mxPoint x="-375" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-77" value="GPUs excel at 3D processing b/c they are Single Instruction Multiple Data (SIMD)" style="ellipse;whiteSpace=wrap;html=1;spacing=20;" parent="1" vertex="1">
+          <mxGeometry x="-171.5" y="663" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-78" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="-340" y="651" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-66" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="YPh2wvaOejQGUnnW6WLR-78" vertex="1">
+          <mxGeometry width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-65" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#000000;shape=mxgraph.azure.computer" parent="YPh2wvaOejQGUnnW6WLR-78" vertex="1">
+          <mxGeometry x="33.5" y="50" width="50" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-67" value="Output Devices" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="YPh2wvaOejQGUnnW6WLR-78" vertex="1">
+          <mxGeometry x="28.5" y="9" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-82" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-77" target="YPh2wvaOejQGUnnW6WLR-70" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-377" y="400" as="sourcePoint" />
+            <mxPoint x="-327" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-83" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Its a machine thats built simply to move numbers from where they are to where they need to be and to do basic arithmetic on those numbers&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-770" y="138" width="220" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-85" value="Slow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-680" y="583" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-86" value="Fast" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-365" y="490" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-87" value="Fastest" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-415" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JkDWy64XercFXgoT1gKL-1" value="Clock" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-336" y="240" width="50" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
