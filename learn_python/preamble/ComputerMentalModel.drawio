@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-08-14T17:47:10.913Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="9ShQd4NhtgD_575Lh_gu" version="21.6.8" type="device">
+<mxfile host="app.diagrams.net" modified="2023-08-15T04:20:26.661Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="LxURzcVX_wiUxbUXxrSs" version="21.6.8" type="device">
   <diagram name="Page-1" id="1J6WagQCUvYmf21s5ytZ">
-    <mxGraphModel dx="2311" dy="893" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2092" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -70,10 +70,10 @@
         <mxCell id="YPh2wvaOejQGUnnW6WLR-24" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=90;" parent="1" vertex="1">
           <mxGeometry x="-550" y="565" width="60" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="YPh2wvaOejQGUnnW6WLR-26" value="My laptop has 16GB of RAM at a word size of 64 bits, meaning each of these holds 8 bytes therefore there are (16*(1024^3))/8 =~ 2.1 billion addressable memory slots" style="ellipse;whiteSpace=wrap;html=1;labelPadding=2;perimeterSpacing=11;spacingLeft=0;spacing=21;" parent="1" vertex="1">
-          <mxGeometry x="-654" y="640" width="275" height="140" as="geometry" />
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-26" value="My laptop has 16GB of RAM which is byte addressable meaning there are 16*(1024^3) =~ 17 billion addressable memory slots" style="ellipse;whiteSpace=wrap;html=1;labelPadding=2;perimeterSpacing=11;spacingLeft=0;spacing=21;" parent="1" vertex="1">
+          <mxGeometry x="-657.5" y="663" width="275" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="YPh2wvaOejQGUnnW6WLR-27" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.303;exitY=0.093;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-26" target="YPh2wvaOejQGUnnW6WLR-19" edge="1">
+        <mxCell id="YPh2wvaOejQGUnnW6WLR-27" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.359;exitY=0.115;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="YPh2wvaOejQGUnnW6WLR-26" target="YPh2wvaOejQGUnnW6WLR-19" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-395" y="580" as="sourcePoint" />
             <mxPoint x="-345" y="530" as="targetPoint" />
@@ -203,12 +203,12 @@
           <mxGeometry x="-680" y="583" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="YPh2wvaOejQGUnnW6WLR-86" value="Fast" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="-365" y="490" width="60" height="30" as="geometry" />
+          <mxGeometry x="-377" y="485" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="YPh2wvaOejQGUnnW6WLR-87" value="Fastest" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-415" y="380" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="JkDWy64XercFXgoT1gKL-1" value="Clock" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="JkDWy64XercFXgoT1gKL-1" value="Clock" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-336" y="240" width="50" height="30" as="geometry" />
         </mxCell>
       </root>

@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" modified="2023-08-15T18:19:42.339Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="y-bqzuDDCmwqzYP9dVfK" version="21.6.8" type="device">
+  <diagram name="Page-1" id="T08rEuOR68TW8czzlQmA">
+    <mxGraphModel dx="1293" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NWs9tob289een6YKppSF-12" value="project1" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="616" y="150" width="440" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-21" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="NWs9tob289een6YKppSF-12">
+          <mxGeometry x="50" y="250" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-13" value="&lt;b&gt;/Users/bckohan/project1&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;&quot;&gt;├── bin&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── Activate.ps1&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp;├── activate&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── activate.csh&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── activate.fish&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── pip&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── pip3&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;├── pip3.11&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp;├── python -&amp;gt; /Users/bckohan/.pyenv/versions/3.11.4/bin/python&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp;├── python3 -&amp;gt; python&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp;└── python3.11 -&amp;gt; python&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;├── include&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;└── python3.11&lt;/div&gt;&lt;div style=&quot;&quot;&gt;├── lib&lt;/div&gt;&lt;div style=&quot;&quot;&gt;│&amp;nbsp; &amp;nbsp;└── python3.11&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;└── site-packages&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;div&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── requests&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── requests-2.28.2.dist-info&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── urllib3&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;└── urllib3-1.26.16.dist-info&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;└── pyvenv.cfg&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="NWs9tob289een6YKppSF-12">
+          <mxGeometry x="10" y="30" width="430" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-1" value="&lt;div&gt;/Users/bckohan/.pyenv/versions&lt;/div&gt;&lt;div&gt;├── 3.10.2&lt;/div&gt;&lt;div&gt;├── 3.10.9&lt;/div&gt;&lt;div&gt;├── 3.11.1&lt;/div&gt;&lt;div&gt;├── 3.11.4&lt;/div&gt;&lt;div&gt;├── 3.7.12&lt;/div&gt;&lt;div&gt;├── 3.8.12&lt;/div&gt;&lt;div&gt;├── 3.9.10&lt;/div&gt;&lt;div&gt;├── 3.9.16&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="46" y="120" width="210" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-2" value="&lt;b style=&quot;font-size: 19px;&quot;&gt;Python Installations&lt;br&gt;&lt;/b&gt;(pyenv example)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="46" y="60" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-3" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="126" y="210.71428571428567" as="sourcePoint" />
+            <mxPoint x="306" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-5" value="3.11.4" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="306" y="40" width="290" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-20" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="NWs9tob289een6YKppSF-5">
+          <mxGeometry x="20" y="261" width="260" height="129" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-6" value="&lt;b&gt;/Users/bckohan/.pyenv/versions/3.11.4/&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/b&gt;├── bin&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;├── pip -&amp;gt; pip3.11&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;├── pip3&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;├── python -&amp;gt; python3.11&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;├── python3.11&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;├── include&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;└── python3.11&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── Python.h&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── abstract.h&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;├── lib&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;├── libpython3.11.dylib&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp;└── python3.11&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── LICENSE.txt&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── abc.py&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── ....&lt;br style=&quot;border-color: var(--border-color); font-weight: 700;&quot;&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;├── site-packages&lt;/span&gt;&lt;div style=&quot;border-color: var(--border-color); font-weight: 700;&quot;&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;│&amp;nbsp; &amp;nbsp;├── requests&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;│&amp;nbsp; &amp;nbsp;├── requests-2.31.0.dist-info&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;│&amp;nbsp; &amp;nbsp;├── urllib3&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;│&amp;nbsp; &amp;nbsp;└── urllib3-2.0.4.dist-info&lt;/div&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: 700;&quot;&gt;│&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;└── ....&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-weight: 700;&quot;&gt;└── share&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&amp;nbsp; &amp;nbsp; └── man&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; └── man1&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="NWs9tob289een6YKppSF-5">
+          <mxGeometry x="10" y="30" width="260" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-9" value="&lt;font size=&quot;1&quot; color=&quot;#3333ff&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;&amp;gt; python -m venv ~/project1&lt;br&gt;&amp;gt; source ~/project1/bin/activate&lt;br&gt;(project1)&amp;gt; pip install requests==2.28.2&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="656" y="30" width="374" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-10" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="NWs9tob289een6YKppSF-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="596" y="70" as="sourcePoint" />
+            <mxPoint x="746" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0.489;entryY=-0.003;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="NWs9tob289een6YKppSF-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="831" y="110" as="sourcePoint" />
+            <mxPoint x="782" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NWs9tob289een6YKppSF-22" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="NWs9tob289een6YKppSF-20" target="NWs9tob289een6YKppSF-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="486" y="400" as="sourcePoint" />
+            <mxPoint x="606" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

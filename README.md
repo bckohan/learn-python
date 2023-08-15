@@ -25,6 +25,10 @@ Download python to your brains.
     - Tools
         - [git](https://git-scm.com/)
         - [GitHub](https://github.com)
+
+            - Workshop - fork this repository
+
+        - [Python Virtual Environments](https://realpython.com/python-virtual-environments-a-primer/)
         - [Poetry](https://python-poetry.org/)
         - [Standard Library](https://docs.python.org/3/library/index.html)
         - [PyPi](https://pypi.org/)
@@ -32,15 +36,20 @@ Download python to your brains.
     - Python PATH
     - Packages and Modules
     - Importing Code
-    - Hello World
+    - [Dunder Variables](https://www.pythonmorsels.com/dunder-variables/)
+    - Running Code
+        - Hello World
+    - Gateway 1
 
 2. Module 2 - Program Flow
-    - debugging (PDB)
+
+    - scoping
     - functions
     - call stacks
     - exceptions
     - context blocks
     - variable scoping
+    - debugging (PDB)
 
 3. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
