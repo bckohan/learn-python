@@ -9,6 +9,7 @@ Download python to your brains.
 3. [VSCode](https://code.visualstudio.com/)
     - [GitHub Extension](https://code.visualstudio.com/docs/sourcecontrol/github)
     - [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+    - [TOML Extension](https://marketplace.visualstudio.com/items?itemName=be5invis.toml)
 
 
 ## Syllabus
@@ -41,15 +42,18 @@ Download python to your brains.
         - Hello World
     - Gateway 1
 
-2. Module 2 - Program Flow
+2. Module 2 - Builtin Types, Operators and Loops
 
-    - scoping
-    - functions
-    - call stacks
-    - exceptions
-    - context blocks
-    - variable scoping
-    - debugging (PDB)
+    - builtin types
+        - strings
+        - lists
+        - integers
+        - floats
+    - operators
+        - cheat sheet
+    - dynamic typing
+    - loops
+
 
 3. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
@@ -57,6 +61,9 @@ Download python to your brains.
       - regex
     - Complexity Theory
       - BigO notation
+
+4. Module 4 - Debugging and Exceptions
+    - 
 
 4. Module 4 - Object Oriented Programming
     - Classes
