@@ -14,14 +14,15 @@ Download python to your brains.
 
 ## Syllabus
 
-[0. Preamble](https://www.youtube.com/watch?v=ZhbVGXxVoGk&t=3256s&ab_channel=bckohan)
+0. [Preamble](https://www.youtube.com/watch?v=ZhbVGXxVoGk&t=3256s&ab_channel=bckohan)
+1. 
     - What is a computer?
     - What is an operating system?
     - What is a "process"?
     - Interpreted vs Compiled Languages
     - What is Python?
 
-[1. Module 1 - Getting started with Python](https://www.youtube.com/watch?v=EI1qbU32e5w&ab_channel=bckohan)
+2. [Module 1 - Getting started with Python](https://www.youtube.com/watch?v=EI1qbU32e5w&ab_channel=bckohan)
 
     - Tools
         - [git](https://git-scm.com/)
@@ -39,7 +40,7 @@ Download python to your brains.
     - Running Code
     - Gateway 1
 
-2. Module 2 - Builtin Types, Operators and Loops
+3. Module 2 - Builtin Types, Operators and Loops
 
     - builtin types
         - strings
@@ -51,7 +52,7 @@ Download python to your brains.
     - dynamic typing
     - loops
 
-3. Module 3 - Data Structures
+4. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
     - Strings
       - regex
@@ -59,26 +60,26 @@ Download python to your brains.
     - Complexity Theory
       - BigO notation
 
-4. Module 4 - Debugging and Exceptions
+5. Module 4 - Debugging and Exceptions
     - 
 
-5. Module 5 - Object Oriented Programming
+6. Module 5 - Object Oriented Programming
     - Classes
     - Inheritance and Polymorphism
     - Design Patterns
 
-6. Module 6 - Meta Programming
+7. Module 6 - Meta Programming
     - __new__ and MetaClasses
     - Introspection
 
-7. Module 7 - Typing in Python
+8. Module 7 - Typing in Python
     - Type Hints
     - Static Type Checking
     - Type based interfaces
         - Typer
         - FastAPI
 
-8. Module 8 - Working with Data
+9. Module 8 - Working with Data
 
   - Getting data from disk to memory
     - csv, file i/o
