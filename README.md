@@ -15,7 +15,6 @@ Download python to your brains.
 ## Syllabus
 
 0. [Preamble](https://www.youtube.com/watch?v=ZhbVGXxVoGk&t=3256s&ab_channel=bckohan)
-1. 
     - What is a computer?
     - What is an operating system?
     - What is a "process"?
@@ -23,7 +22,6 @@ Download python to your brains.
     - What is Python?
 
 2. [Module 1 - Getting started with Python](https://www.youtube.com/watch?v=EI1qbU32e5w&ab_channel=bckohan)
-
     - Tools
         - [git](https://git-scm.com/)
         - [GitHub](https://github.com)
@@ -33,7 +31,6 @@ Download python to your brains.
         - [PyPi](https://pypi.org/)
         - [VSCode](https://code.visualstudio.com/)
         - [ChatGPT](https://chat.openai.com/)
-
     - Python PATH
     - Packages and Modules
     - Importing Code
@@ -41,7 +38,6 @@ Download python to your brains.
     - Gateway 1
 
 3. Module 2 - Builtin Types, Operators and Loops
-
     - builtin types
         - strings
         - lists
