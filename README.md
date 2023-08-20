@@ -14,32 +14,29 @@ Download python to your brains.
 
 ## Syllabus
 
-0. Preamble
+[0. Preamble](https://www.youtube.com/watch?v=ZhbVGXxVoGk&t=3256s&ab_channel=bckohan)
     - What is a computer?
     - What is an operating system?
     - What is a "process"?
     - Interpreted vs Compiled Languages
     - What is Python?
 
-1. Module 1 - Getting started with Python
+[1. Module 1 - Getting started with Python](https://www.youtube.com/watch?v=EI1qbU32e5w&ab_channel=bckohan)
 
     - Tools
         - [git](https://git-scm.com/)
         - [GitHub](https://github.com)
-
-            - Workshop - fork this repository
-
         - [Python Virtual Environments](https://realpython.com/python-virtual-environments-a-primer/)
         - [Poetry](https://python-poetry.org/)
         - [Standard Library](https://docs.python.org/3/library/index.html)
         - [PyPi](https://pypi.org/)
+        - [VSCode](https://code.visualstudio.com/)
+        - [ChatGPT](https://chat.openai.com/)
 
     - Python PATH
     - Packages and Modules
     - Importing Code
-    - [Dunder Variables](https://www.pythonmorsels.com/dunder-variables/)
     - Running Code
-        - Hello World
     - Gateway 1
 
 2. Module 2 - Builtin Types, Operators and Loops
@@ -54,34 +51,34 @@ Download python to your brains.
     - dynamic typing
     - loops
 
-
 3. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
     - Strings
       - regex
+    - Comprehensions
     - Complexity Theory
       - BigO notation
 
 4. Module 4 - Debugging and Exceptions
     - 
 
-4. Module 4 - Object Oriented Programming
+5. Module 5 - Object Oriented Programming
     - Classes
     - Inheritance and Polymorphism
     - Design Patterns
 
-5. Module 5 - Meta Programming
+6. Module 6 - Meta Programming
     - __new__ and MetaClasses
     - Introspection
 
-6. MOdule 6 - Typing in Python
+7. Module 7 - Typing in Python
     - Type Hints
     - Static Type Checking
     - Type based interfaces
         - Typer
         - FastAPI
 
-7. Module 7 - Working with Data
+8. Module 8 - Working with Data
 
   - Getting data from disk to memory
     - csv, file i/o
@@ -92,5 +89,5 @@ Download python to your brains.
     - pandas
     - scipy
 
-7. Module 8 - Databases
+9. Module 9 - Databases
    - Object Relational Models (Django ORM, SQL Alchemy)
