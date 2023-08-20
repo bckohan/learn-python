@@ -3,11 +3,13 @@ from contextlib import redirect_stdout
 import subprocess
 from pathlib import Path
 import re
+import pytest
+
 
 modules = Path(__file__).parent.parent 
 gateway1 = modules / 'module1' / 'gateway1.py'
 
-
+@pytest.mark.skipif(not gateway1.exists(), reason="Gateway1 exercise does not exist.")
 def test_gateway1_part1():
 
     f = io.StringIO()
@@ -20,6 +22,7 @@ def test_gateway1_part1():
     assert lines[2].strip().lower() == 'print 3', 'Line 3 should be "print 3"'
 
 
+@pytest.mark.skipif(not gateway1.exists(), reason="Gateway1 exercise does not exist.")
 def test_gateway1_part2():
     # run the gateway1 script as a subprocess and capture the output
     output = subprocess.check_output(['python', gateway1.absolute()])
