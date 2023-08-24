@@ -34,17 +34,14 @@ def test_gateway1_part2():
     # we use regular expressions to check the pretty printed output of the python path list. We also check
     # that the directories exist - because they should!
     
-    # first path line
-    mtch = re.match(r"\['((\/[^/,']*)+)',", lines[2].strip())
-    assert mtch and Path(mtch.groups()[0]).exists(), f'Line 3 should be the first path in sys.path'
-    
-    # lines in the middle
-    for idx, line in enumerate(lines[3:-2]):
-        mtch = re.match(r"'((\/[^/,']*)+)',", line.strip())
-        assert mtch and (Path(mtch.groups()[0]).exists() or mtch.groups()[0].endswith('.zip')), f'Line {idx+4} should be a valid path in sys.path'
-    
-    # last path line
-    mtch = re.match(r"'((\/[^/,']*)+)'\]", lines[-2].strip())
-    assert mtch and Path(mtch.groups()[0]).exists(), f'Line {len(lines)-1} should be the last path in sys.path'
+    # check that sys path is a list of paths - luckily we can stitch the pretty printed terminal output
+    # back together into a valid python list and evaluate it as code!
+    try:
+        paths = eval('\n'.join(lines[2:-1]))
+        for path in paths:
+            assert Path(path).exists() or path.endswith('.zip'), f'{path} is not a valid path'
+        assert len(path) > 0, 'sys.path should not be empty'
+    except Exception as e:
+        pytest.fail(f'Lines 2 through {len(lines)-1} are not a list of paths:\n{e}')
     
     assert lines[-1].strip().lower() == 'print 3', 'Last line should be "print 3"'
