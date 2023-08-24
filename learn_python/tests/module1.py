@@ -31,9 +31,6 @@ def test_gateway1_part2():
     assert lines[0].strip().lower() == 'print 1', 'Line 1 should be "print 1"'
     assert lines[1].strip().lower() == 'hello world! python will look for code in these directories:'
     
-    # we use regular expressions to check the pretty printed output of the python path list. We also check
-    # that the directories exist - because they should!
-    
     # check that sys path is a list of paths - luckily we can stitch the pretty printed terminal output
     # back together into a valid python list and evaluate it as code!
     try:

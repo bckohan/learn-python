@@ -176,7 +176,7 @@ assert my_list[0] == 1
 # python also supports negative indexing (i.e. count from the end, 1-indexed)
 assert my_list[-1] == 5
 
-# lists are mutable
+# lists are mutable, meaning we can change their elements!
 my_list[0] = 0
 assert my_list == [0, 2, 3, 4, 5]
 
@@ -192,7 +192,7 @@ assert len(my_list) == 5
 
 # you might frequently see len() used in slicing, all of the below are
 # equivalent. Also in python if we have really long line we can use \
-# to break it up into multiple lines
+# to break it up into multiple lines (it is better to avoid writing long lines!)
 assert \
     my_list[0:5] == \
     my_list[:len(my_list)] == \
@@ -218,8 +218,66 @@ assert matrix[2][2] == 9
 assert matrix[2][0] == 7
 assert matrix[0][2] == 3 
 
+# all sequences including lists can be empty!
+my_empty_list = []
+assert len(my_empty_list) == 0
+# when sequences are empty, they evaluate to False
+assert not my_empty_list
+# written another way:
+assert bool(my_empty_list) is False
+
+# because of this you will frequently see code like:
+if my_list:
+    pass  # do something with my_list because it is not empty!
+
+# the in operator checks if a value is in a sequence
+assert 1 in my_list
+assert 15 not in my_list  # use "not in" instead of not (x in y)
+# but this will still work
+assert not 15 in my_list
+
 # what happens when you multiply a list by an integer? 
 #   Probably not what you think if you do a lot of math!
+# ****************************************************************************
+
+# ********* Tuples ***********************************************************
+# tuples are like lists, but they are immutable (unchanging)
+# they are specified with parenthesis instead of square brackets
+my_tuple = (1, 2, 3)
+assert type(my_tuple) == tuple
+assert my_tuple[0] == 1
+assert my_tuple[-1] == 3
+
+# you can also specify a tuple without parenthesis
+my_tuple = 1, 2, 3
+assert type(my_tuple) == tuple
+assert my_tuple[0] == 1
+assert my_tuple[-1] == 3
+
+# tuples are slicable like lists
+assert my_tuple[1:3] == (2, 3)
+
+# but you cannot change their elements!
+# my_tuple[0] = 0 -> this will error out!
+
+# tuples are perfered to lists in situations where the number of elements are 
+# small, fixed and unchanging
+
+# they are also preferable because "unpacking" a tuple is safer than unpacking 
+# a list, because the length of a list might change on you!
+a, b, c = my_tuple
+assert a == 1
+assert b == 2
+assert c == 3
+
+# this is especially useful when returning multiple values from a function
+def my_function():
+    return 1, 2, 3
+
+a, b, c = my_function()
+assert a == 1
+assert b == 2
+assert c == 3
 # ****************************************************************************
 
 # ********* Strings **********************************************************
@@ -233,7 +291,7 @@ assert my_string == "hello world"
 assert 'hello "world"' == "hello \"world\""
 assert "hello 'world'" == 'hello \'world\''
 
-#  most of the immutable (unchanging) list operators are available, including 
+# most of the immutable (unchanging) list operators are available, including 
 # indexing and slicing!
 
 # recall my_string == 'hello world'
@@ -241,7 +299,7 @@ assert my_string[0] == 'h'
 assert my_string[-1] == 'd'
 assert my_string[0:5] == 'hello'
 assert my_string[6:] == 'world'
-assert my_string[::2] == 'hlowrd'
+assert my_string[::2] == 'hlowrd'  # slice to every other character
 
 # assignment to an element is not available because strings are immutable!
 #   my_string[0] = 'H' -> this will error out!
@@ -264,6 +322,13 @@ assert f'my_int == {my_int}' == 'my_int == 3'
 # f-strings have configurable formatting, for example you can specify the number
 # of decimal places to display for a float
 assert f'my_float == {my_float:.2f}' == 'my_float == 345.60'
+# or pad an integer with zeros
+assert f'my_int == {my_int:03d}' == 'my_int == 003'
+
+# the formatting options are numerous and the standard library documentation is
+# extensive (https://docs.python.org/3/library/string.html#formatspec) and therefore
+# hard to read! I recommend asking chatgpt questions like: 
+#   how do I pad an integer with empty spaces in a python f-string
 
 # combining strings with variables has gone through a few iterations in python:
 #   optionally read more: https://realpython.com/python-f-strings/
@@ -272,11 +337,21 @@ assert 'my_int == %d' % my_int == 'my_int == 3'
 # or like this
 assert 'my_int == {}'.format(my_int) == 'my_int == 3'
 
+# f-strings are clearly more readable, but lots of old code is still around that
+# uses the old methods!
+
 # lets just chop that last "!" off the end of my_string, by re-assigning it
 #  to a slice of itself :-)
 assert my_string == 'hello world!'
 my_string = my_string[:-1]
 assert my_string == 'hello world'
+
+# as with lists, the empty string evaluates to False
+assert not ''
+
+# which means you will see code like:
+if my_string:
+    pass  # do something with my_string because it is not empty!
 
 # working with strings is a very common and important task in programming because
 # its the predominant way our program talks to humans!
@@ -290,7 +365,8 @@ assert my_string == 'hello world'
 
 # you can specify a set like this
 my_set = {1, 2, 3}
-#  any duplicate values will be ommitted!
+assert type(my_set) == set
+# any duplicate values will be ommitted!
 assert my_set == {1, 2, 3} == {1, 2, 3, 1, 2, 3}
 
 # ********* Functions vs Operators *******************************************
@@ -327,8 +403,8 @@ assert ' '.join(my_string.split()) == 'hello world'
 # rewrite the above to be more readable like this:
 assert ' '.join(
                        # when written this way you may think it is more easy
-    my_string.split()  # to see that the argument itself is the return value 
-                       # of a function call
+    my_string.split()  # to see that the argument to join() is the return value 
+                       # of the function call my_string.split()
 ) == 'hello world'
 
 # read all about the string methods here: 
@@ -349,14 +425,59 @@ assert last == 6
 
 # what happens when you use an operator like multiply?
 #  python invokes the special function __mul__ for you!
-assert my_int * 7 == my_int.__mul__(7) == 3 * 7 == 21
+assert my_int * 7 == my_int.__mul__(7)
 
 # all operators map to special functions like this! For example, == maps to
 # __eq__ and > maps to __gt__ and so on.
-assert my_int == 3 and my_int.__eq__(3)
-assert my_int > 2 and my_int.__gt__(2)
+assert (my_int == 3) == my_int.__eq__(3)
+assert (my_int > 2) == my_int.__gt__(2)
 
 # we'll talk more about this and why it's important when we discuss classes!
+#  hint: its because when we define our own custom types we can define these
+#  special functions to make our types usable with operators!
+# ****************************************************************************
+
+
+# ********* Dictionaries ****************************************************
+# dictionaries are collections of key-value pairs
+#   * values may be anything! including other dictionaries!
+#   * keys can be any python type that is "hashable" - we'll talk about this
+#       later but for now just know that most builtin primitive types are 
+#       hashable
+my_dict = {
+    'a': 1,
+    'b': 2,
+    'c': 3
+}
+
+# you can access values by key
+assert my_dict['a'] == 1
+assert my_dict['b'] == 2
+assert my_dict['c'] == 3
+
+# we can overwrite values by assigning to the key
+my_dict['a'] = 0
+assert my_dict['a'] == 0
+
+# as with lists, keys do not have to be of the same type, and values can be other dictionaries
+complex_dict = {
+    0: {
+        'key1': None,
+        'key2': [1, 2, 3],
+        'key3': []
+    }
+}
+
+assert complex_dict[0] == {
+    'key1': None,
+    'key2': [1, 2, 3],
+    'key3': []
+}
+
+# dictionaries are extremely flexible data stores and are used extensively
+# in python programs to keep track of structured data! There are also
+# a bunch of ways to easily serialize python dictionary data to external data
+# formats like json (the most common data interchange format on the internet)
 # ****************************************************************************
 
 
@@ -370,3 +491,203 @@ assert my_int > 2 and my_int.__gt__(2)
 # {1: 'one', 2: 'two'} is a dictionary literal
 # True and False are boolean literals
 # ****************************************************************************
+
+
+# ********* Immutability and Memory ******************************************
+# variables are references to objects in memory - think of them as addresses
+# or "pointers". Python hides this from us because when we use a variable we are
+# using its value, but understanding how and when operators change existing
+# objects in memory (mutability) or create new objects in memory (immutability)
+# is important
+
+# the id() built-in function returns the virtual memory address of the variable!
+my_int_address = id(my_int)
+assert my_int_address == id(my_int)
+
+# integers are immutable, so when we do math on them Python creates new integers
+#  we can see this because the memory address will change:
+my_int += 1
+assert my_int_address != id(my_int)
+
+# this is handy in function calls because we can rest assured that our original
+# integer will be unchanged!
+assert my_int == 4
+
+def add_one(x):
+    x += 1
+    return x
+
+incremented = add_one(my_int)
+assert incremented == 5
+assert my_int == 4
+
+# but lists are mutable!
+my_list = [1, 2, 3]
+
+def append_item(lst, item):
+    lst.append(item)
+    return lst
+
+appended = append_item(my_list, 4)
+assert appended == [1, 2, 3, 4]
+assert my_list == [1, 2, 3, 4]
+assert id(appended) == id(my_list)
+
+# the is operator checks if two variables are the same object in memory, it is
+#  the same as comparing their memory addresses with id()
+assert appended is my_list
+
+# this is why we use "is" to check if a variable is None - because None is a
+# special object in memory that is immutable and there is only one of them!
+assert id(None) == id(None)
+assert None is None
+
+my_none = None
+other_none = None
+assert id(my_none) == id(other_none)
+assert my_none is other_none
+
+# functions are pass-by-reference as opposed to pass-by-value, meaning that
+#  when you pass a variable to a function, the function gets a reference to
+#  the variable in memory, not a copy of the variable!
+
+def pass_by_ref_example(my_argument):
+    # my_argument is the same piece of memory as my_int
+    assert my_argument is my_int
+
+pass_by_ref_example(my_int)
+
+# this might seem confusing, but you mostly do not have to worry about it
+# because the choices the language has made are intuitive! Just
+# be aware that when dealing with mutable types like lists, sets or dictionaries
+# functions can modify the original object!
+# ****************************************************************************
+
+
+# ********* Looping and Iteration ********************************************
+# there are two types of loops in python, for loops and while loops
+# loops let you do something repeatedly until a condition is met
+
+# while loops are the most basic type of loop, they repeat until a condition
+# is met while <condition>:
+while my_int < 10:  # add 1 to my_int until my_int is >= 10
+    my_int += 1
+
+assert my_int == 10
+
+# the "break" keyword can be used to exit a loop early, for example the above loop
+# is equivalent to:
+my_int = 3
+while True:
+    my_int += 1
+    if my_int >= 10:
+        break
+
+assert my_int == 10
+
+# careful! if the if condition above was never met, the loop would run forever
+#  this is called an "infinite loop" and it will hang your program - if this
+#  happens, enter ctrl-c in your terminal to kill the program
+
+# the "continue" keyword can be used to skip the rest of the loop and start the
+# next iteration of the loop early
+my_int = 0
+while my_int < 10:
+    my_int += 1
+    if my_int % 2 == 0:  # skip even numbers
+        continue
+    assert my_int % 2 == 1  # what operator is this??
+
+
+# for loops are more common in python, they iterate over a sequence of values
+#  and assign each value to a variable: 
+#   for <variable> in <sequence>:
+
+my_other_list = []
+for element in my_list:
+    my_other_list.append(element)
+
+assert my_other_list == my_list
+
+# continue and break also work inside for loops!
+
+# the built-in range() function is a convenient way to generate a sequence of integers
+zero_to_nine = []
+for i in range(10):
+    zero_to_nine.append(i)
+
+assert zero_to_nine == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# python provides a shorthand for creating lists with loops called a "comprehension":
+assert zero_to_nine == [i for i in range(10)]
+
+# when you see a list comprehension, read it as "for each i in range(10), 
+#  add i to the list" this is a very common pattern in python!
+
+# you can also use comprehensions to filter elements of a list, by adding a 
+# condition to the end, this will only add i to the list if the trailing 
+# if condition is True:
+assert [i for i in range(10) if i % 2 == 0] == [0, 2, 4, 6, 8]
+
+# we could also add some spaces to this to make it more readable:
+assert [
+    i for i in range(10)
+    if i % 2 == 0
+] == [0, 2, 4, 6, 8]
+
+# you might wonder if range(10) is returning a list and if it is why bother with
+#  the comprehension?
+#  but it is not! range() returns a special type called a "generator" that we'll
+#  talk about later, but for now just know that it is a sequence of values that
+#  can be iterated over like a list, but it is not a list! you can convert it
+#  to a list with the list() function:
+assert range(10) != zero_to_nine
+assert list(range(10)) == zero_to_nine
+
+# list() will turn any iterable type (or sequence) into a list, for example a 
+#  string is an iterable of characters:
+assert list('hello') == ['h', 'e', 'l', 'l', 'o']
+
+# the built-in enumerate() function is a convenient way to iterate over a sequence and
+#  get the index of each element:
+for index, element in enumerate(my_list):  # enumerate() returns a 2-tuple that we can unpack!
+    assert element == my_list[index]
+
+# there is also a built-in reversed() function that iterates over a sequence
+#  in reverse order:
+assert list(reversed([1, 2, 3])) == [3, 2, 1]
+
+# when iterating over dictionaries you use the .items() method to get
+# key-value pairs:
+simple_dict = {'a': 1, 'b': 2}
+for key, value in simple_dict.items():
+    assert key == 'a' or key == 'b'
+    assert value == 1 or value == 2
+
+# you can wrap any iterable in enumerate(), for example:
+for index, (key, value) in enumerate(simple_dict.items()):
+    # since python 3.7 dictionaries iterate in insertion order, so we
+    #   know that the below code will work!
+    if index == 0:
+        assert key == 'a'
+        assert value == 1
+    elif index == 1:
+        assert key == 'b'
+        assert value == 2
+    else:
+        assert False, 'this should never happen!'
+
+# dictionaries have comprehensions too!
+assert {
+    key: value
+    for key, value in simple_dict.items()
+    if key != 'a'
+} == {'b': 2}
+
+assert {i: str(i) for i in range(3)} == {0: '0', 1: '1', 2: '2'}
+
+# ****************************************************************************
+
+# if you made any modifications to this file and you want to revert it back to
+# the original, run this command:
+#   git checkout -- learn_python/module2_data_types/demo.py
