@@ -2,7 +2,7 @@ import io
 from contextlib import redirect_stdout
 import subprocess
 from pathlib import Path
-import re
+import sys
 import pytest
 
 
@@ -38,9 +38,7 @@ def test_gateway1_part2():
     # back together into a valid python list and evaluate it as code!
     try:
         paths = eval('\n'.join(lines[2:-1]))
-        for path in paths:
-            assert Path(path).exists() or path.endswith('.zip'), f'{path} is not a valid path'
-        assert len(path) > 0, 'sys.path should not be empty'
+        assert paths == sys.path, 'sys.path should be the same as the pretty printed list'
     except Exception as e:
         pytest.fail(f'Lines 2 through {len(lines)-1} are not a list of paths:\n{e}')
     
