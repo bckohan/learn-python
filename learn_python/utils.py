@@ -1,15 +1,7 @@
-from io import StringIO 
-import sys
+import importlib
 
 
-class CaptureStdOut(list):
-
-    def __enter__(self):
-        self._stdout = sys.stdout
-        sys.stdout = self._stringio = StringIO()
-        return self
-    
-    def __exit__(self, *args):
-        self.extend(self._stringio.getvalue().splitlines())
-        del self._stringio    # free up some memory
-        sys.stdout = self._stdout
+def import_string(str_to_import):
+    module_name, attr_name = str_to_import.rsplit('.', 1)
+    module = importlib.import_module(module_name)
+    return getattr(module, attr_name)
