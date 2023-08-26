@@ -10,6 +10,7 @@ Download python to your brains.
     - [GitHub Extension](https://code.visualstudio.com/docs/sourcecontrol/github)
     - [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
     - [TOML Extension](https://marketplace.visualstudio.com/items?itemName=be5invis.toml)
+    - [SVG Viewer](https://marketplace.visualstudio.com/items?itemName=vitaliymaz.vscode-svg-previewer)
 
 
 ## Syllabus
@@ -37,7 +38,7 @@ Download python to your brains.
     - Running Code
     - Gateway 1
 
-3. Module 2 - Builtin Types, Operators and Loops
+3. Module 2 - The Basics
     - builtin types
         - strings
         - lists
@@ -45,8 +46,8 @@ Download python to your brains.
         - floats
     - operators
         - cheat sheet
-    - dynamic typing
     - loops
+    - Gateway 2
 
 4. Module 3 - Data Structures
     - Lists, Sets, Dictionaries
@@ -58,33 +59,3 @@ Download python to your brains.
 
 5. Module 4 - Debugging and Exceptions
     - 
-
-6. Module 5 - Object Oriented Programming
-    - Classes
-    - Inheritance and Polymorphism
-    - Design Patterns
-
-7. Module 6 - Meta Programming
-    - __new__ and MetaClasses
-    - Introspection
-
-8. Module 7 - Typing in Python
-    - Type Hints
-    - Static Type Checking
-    - Type based interfaces
-        - Typer
-        - FastAPI
-
-9. Module 8 - Working with Data
-
-  - Getting data from disk to memory
-    - csv, file i/o
-  - Getting data from the interwebs to memory
-    - requests & APIs
-  - Data Processing
-    - numpy
-    - pandas
-    - scipy
-
-9. Module 9 - Databases
-   - Object Relational Models (Django ORM, SQL Alchemy)

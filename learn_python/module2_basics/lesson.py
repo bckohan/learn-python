@@ -1,11 +1,12 @@
 """
-This file contains examples of the basic data types in python. We use assertion
-statements to verify that the statements are accurate. assert <expression> is a
-special statement in python that will error out if the <expression> is False.
-When executed this file should produce no output because all the assertions are
-True!
+This module covers the basics of python data types, operators and looping. We 
+use assertion statements to verify that the statements are accurate. 
+assert <expression> is a special statement in python that will error out if 
+the <expression> is False. When executed this file should produce no output 
+because all the assertions are True!
 
-You can also add an optional string after an assert expression, try this:
+You can also add an optional human readable reason after an assert expression, 
+try this:
 
     assert False, 'False is not True!'
 
@@ -16,18 +17,120 @@ This multi-line string - delineated by triple quotes - is called a docstring
 when it appears at the top of a module like this. It will be put in a special
 variable called __doc__. Try this:
 
-    from learn_python.module2_data_types import demo
-    print(demo.__doc__)
+    from learn_python.module2_basics import lesson
+    print(lesson.__doc__)
+    # also try:
+    help(lesson)  # look familiar?
+
+Tools exist to convert doctstrings to html or pdf documentation - much of the
+python standard library is documented this way, so help() may look very familiar
+to what you read on the internet!
+
+The walkthrough in this lesson is designed to emerse you in code, but
+as a quick reference these resources are better:
+
+A nice 2-page pdf cheat sheet:
+    http://sixthresearcher.com/wp-content/uploads/2016/12/Python3_reference_cheat_sheet.pdf
+
+An extremely well organized cheat sheet web page:    
+    https://www.pythoncheatsheet.org/cheatsheet/basics
+
+Extensive cheat sheet w/ popular data science packages:
+    https://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf
+
+If in the course of playing around with this file, you would like to revert it to the
+original version without your edits you can use git:
+    git checkout -- learn_python/module2_basics/lesson.py
 
 """
 
+# Lets get going!
+#
+# What are data types?
+#
+# Data types are both:
+#     1. Information (values, i.e. bits & bytes stored in memory)
+#     2. Behavior (cpu instructions - also stored in memory)
+#
+# Operators & Functions
+#      Operators are special functions the language supports to make code more readable
+#        i.e. multiply(2, 3) can be more clearly written 2 * 3
+#
+# We can define our own data types!
+#     - Most custom data types are composites of the standard Python data types - meaning
+#       we create several of them together and add a little extra behavior on top to do 
+#       useful things
+#     - Custom data types will be covered in the module on Object Oriented Programming
+#
+# But today we're going to go through the basics! The code covered below is the backbone
+# of programming in python and once you're comfortable with it you will be able to do
+# almost anything you want to do!
+#
+# Here is the order of this lesson file:
+# 
+#  - Terminology
+#  - Integers
+#  - Booleans
+#  - None
+#  - Ternary if/else statements
+#  - Functions
+#  - Floating point numbers
+#  - type() (dynamic typing)
+#  - Casting (aka Coercion)
+#  - Lists
+#  - Tuples
+#  - Strings
+#  - Sets
+#  - Functions vs Operators
+#  - Dictionaries
+#  - Immutability and Memory
+#  - Looping and Iteration
+#
+
+
+# ********* Terminology ******************************************************
+# (1) Literal
+#   When you see a primitive type specified directly as its value it is called a
+#   "literal":
+#       - 3 is an integer literal
+#       - 'hello world' is a string literal
+#       - [0, 1, 2] is a list literal
+#       - {1, 2, 3} is a set literal
+#       - {1: 'one', 2: 'two'} is a dictionary literal
+#       - True and False are boolean literals
+# 
+# (2) Expression
+#   An expression is a combination of literals, variables, operators and functions
+#   that evaluates to a value:
+#       - 3 + 2 is an expression that evaluates to 5
+#       - 3 + 2 * 4 is an expression that evaluates to 11
+#       - a < b is an expression that evaluates to True if a is less than b and False otherwise
+#       - sqrt(4) is an expression that calls a function that evaluates to 2
+# 
+# (3) Statement
+#   A statement differs from an expression in that it does not typically evaluate
+#   to a value, but instead performs some action:
+#       - a = 3 is a statement that assigns the value 3 to the variable a
+#       - if a < b: is a statement that controls the flow of the program
+#       - def my_function(): is a statement that defines a function
+#       - return a + b is a statement that returns a value from a function
+#       - assert a == b is a statement that will error out if a is not equal to b
+#
+# (4) Operator
+#   An operator is a special function that is used to combine expressions. Operators
+#   always 'operate' on one or two expressions. For example:
+#       - 3 + 2       in this expression + is the operator
+#       - 3 + 2 * 4   in this expression + and * are operators
+#       - not False   in this expression not is a unary operator
+# ****************************************************************************
+
 
 # ********* Integers *********************************************************
-# integers do not have fractional components
+# integers are whole numbers (they do not have fractional components)
 my_int = 3
 
-# integers are not limited to the word size of your processor (i.e. 64 bits)!
-#  They can be as large as your computer's memory can hold!
+# integers in Python are not limited to the word size of your processor 
+#  (i.e. 64 bits)! They can be as large as your computer's memory can hold!
 my_512_bit_integer = 2**512-1
 
 # math on integers is straight forward:
@@ -46,6 +149,28 @@ my_int /= 2
 assert my_int == 3
 
 my_int = 3
+
+# Here are the common numerical operators (also look at the cheat sheets from above!):
+# 
+# Mathematical Operators (the result of these operations is another number):
+#
+#   +    addition
+#   -    subtraction
+#   *    multiplication
+#   /    division
+#   //   integer division (result is rounded down to the nearest whole number)
+#   %    modulus (remainder) - for example 5 % 2 == 1 because 5 / 2 == 2 remainder 1
+#   **   exponentiation - for example 2 ** 3 == 8 because 2 * 2 * 2 == 8
+# 
+# Comparison Operators (the result of these operatons is a boolean):
+#
+#   ==   equal to
+#   !=   not equal to
+#   >    greater than
+#   <    less than
+#   >=   greater than or equal to
+#   <=   less than or equal to
+#
 # ****************************************************************************
 
 
@@ -76,6 +201,10 @@ assert not not my_boolean
 assert not (my_boolean and False)
 assert my_boolean or False
 
+# if you are ever confused about why your logic statement is not working
+# correctly - try explicitly adding parenthesis just to make sure its not
+# an order of operations problem!
+
 # booleans behave like integers when you do math on them!
 #  where True == 1 and False == 0
 assert True == 1
@@ -86,8 +215,177 @@ assert my_boolean + my_int == 4
 # ****************************************************************************
 
 
+# ********* None *************************************************************
+# the "absence" of a value is None
+empty = None
+assert empty is None  # comparison to None is done with "is" - more on this later
+assert empty == None  # but this will also work!
+# ****************************************************************************
+
+
+# ********* Ternary if/else expressions **************************************
+# as we have already discussed if/else statements are used to control the flow
+#  of a program:
+
+# this block adds 1 to my_int if my_boolean is True, and subtracts 1 if it is
+#  False
+if my_boolean:
+    my_int += 1
+else:
+    my_int -= 1
+
+# this is a pretty bulky 4-line statement to just switch between addition and
+# subtraction - Ternary if/else expressions are a shorthand that let us write
+# this in a single line. They are written like this:
+#   <expression> if <condition> else <expression>
+
+# this is equivalent to the above if/else statement, it should be read as:
+#   add 1 to my_int if my_boolean is True, otherwise add -1
+my_int += 1 if my_boolean else -1
+
+# sometimes adding parentheses can make this more readable as a visual cue
+#  that the ternary expression is a single statement with a result that is
+#  being passed to the += operator along with my_int
+my_int += (1 if my_boolean else -1)
+
+# parenthesis also allow us to split code along multiple lines, some people
+#  prefer this style:
+my_int += (
+    1 if my_boolean
+    else -1
+)  # but now we're back to 4 whole lines! this is a stylistic preference,
+   #  use what you like!
+
+# ternary expressions do not support elif statements! They are for very simple
+#  conditions only - the result of a ternary statement is an expression
+#  (i.e. a ternary if/else statement produces a value where normal if/else 
+#  statements switch logic flow)
+# Said another way: if/else logic switches are statements and ternary if/else
+# expressions are expressions because they produce a value.
+
+# != means not equal and is the inverse of ==
+my_int = 3 if my_int != 3 else my_int
+
+# you might notice that the above statement is just a more complicated way of
+#  writing:
+my_int = 3
+# ****************************************************************************
+
+# Do Gateway assignment tasks 1-5 here! (see learn_python/module2_basics/gateway2.py)
+
+# ********* Functions ********************************************************
+# We talked about basic function definitions last time - but here's a few more
+#  things to know about python functions.
+
+# 1) They can have default arguments! For example, when called if the second
+#    argument is not supplied it will default to 2
+def my_function(x, y=2):
+    return x + y
+
+assert my_function(1) == 3
+assert my_function(1, 5) == 6
+
+# 2) If functions do not return anything, their return value is None
+def returns_nothing():
+    pass
+
+assert returns_nothing() is None
+
+# this is equivalent to:
+def also_returns_nothing():
+    return None
+
+assert also_returns_nothing() is returns_nothing() is None
+
+# 3) Functions can return multiple values! This is a very common pattern in
+#    python:
+def returns_multiple_values():
+    return 1, 2, 3
+
+a, b, c = returns_multiple_values()
+
+assert a == 1 and b == 2 and c == 3
+
+# 4) Function arguments can be passed by name, this is useful when you have 
+#    many default arguments:
+def lots_of_args(w=0, x=1, y=2, z=3):
+    return w, x, y, z
+
+# if you wanted to invoke lots_of_args and only use a non-default value for z
+# you could call it like this:
+assert lots_of_args(0, 1, 2, 4) == (0, 1, 2, 4)
+
+# or you could call it like this:
+assert lots_of_args(z=4) == (0, 1, 2, 4)  # much simpler huh?
+
+# not only is the second version simpler, it is more robust! If the maintainer
+# of lots_of_args decided to change the values of the defaults in a future
+# version, your invocation of the function in the first example would be
+# "hard coded" to the original default values!
+
+# When should you provide default arguments for your function? Usually anytime
+# you can think of a "reasonable default". Many functions do a lot of work
+# for you to execute some complex task that can be "configured" via various
+# parameters, so think of defaults as providing a "sensible" basic configuration
+# For example, you might have a function that plots a graph and one of the inputs
+# might be the color of the line to use. Maybe a reasonable default for that color
+# is black: plot(data, color='black')
+
+# 5) Functions can have multiple return statements, that are hit by different
+#    logic conditions - but only one will execute per invocation because once
+#    you return - you are out of the function!
+def multiple_returns(x):
+    """
+    6) Functions can have docstrings too! Try:
+        from learn_python.module2_basics import lesson
+        help(lesson.multiple_returns)
+    
+    This function returns either -1, 0, or 1 depending on if
+    the value of x is negative (-1), zero (0), or positive (1).
+
+    :param x: int - the value to return the sign of
+    :return: int - -1 if x is negative, 0 if x is zero, 1 if x is positive
+    """
+    if x < 0:
+        return -1
+    elif x > 0:
+        return 1
+    return x  # we could have put this in an else statement, but this is 
+              # functionally equivalent and less code!
+
+assert multiple_returns(-1123) == -1
+assert multiple_returns(0) == 0
+assert multiple_returns(1123) == 1
+#
+# ****************************************************************************
+
+
 # ********* Floats ***********************************************************
-# Floating point numbers are numbers with a decimal point
+# Numbers with fractions (e.g. 2.99792458)!
+# 
+# Feel free to skip everything between here ----------------------------------
+# 
+# It is impossible to represent all arbitrary real numbers using a finite
+#   number of 1s and 0s!
+# 
+# Python uses the 64 bit IEEE-754 specification for floating point numbers. 
+#   For all the gory details checkout this video (at 3/4 speed):
+#       https://www.youtube.com/watch?v=dQhj5RGtag0&ab_channel=janMisali
+#
+# It’s called “floating point” because its a binary version of scientific 
+#   notation where some bits are reserved for the exponent - which allows us
+#   to manipulate where the “point” resides.
+# 
+# You do not need to know the details! Except to understand that not all numbers
+#  are representable and this can introduce small precision errors in mathematics
+#  that are almost but not always inconsequential:
+#      https://blog.esciencecenter.nl/floating-point-butterfly-effect-62ebe004200f
+# 
+# What every scientist should know about floating point numbers:
+#    https://dl.acm.org/doi/10.1145/103162.103163
+#  
+# And here ----------------------------------------------------------------------
+
 my_float = 345.6
 # you can also specify floats with scientific notation
 assert my_float == 345.6 == 3.456e2 == 345.6e0 == 3.456*(10**2)
@@ -102,19 +400,55 @@ assert 4.0 + 2.0 == 6.0
 assert 4.0 + 2.0 == 6
 assert 6.1 > 6
 assert 6.1 > my_int  # remember my_int == 3
-# ****************************************************************************
 
+# remember, floats are not infinitely precise! Because they are stored in a
+# finite number of bits (usually 64 or 80):
+number1 = 0.1
+# Lets add a very tiny number to 0.1
+number2 = number1 + 1e-308
 
-# ********* None *************************************************************
-# the "absence" of a value is None
-empty = None
-assert empty is None  # comparison to None is done with "is"
-assert empty == None  # but this will also work!
+# logically number1 and number2 should compare as *not equal* right?
+# but they are *equal*! because the precision of the float is not high enough
+# to store the difference
+assert number1 == number2
+
+# this also means that mathematical operations that should produce the exact
+# same number might not! For example:
+# the standard library math package has functions for sin() and cos()
+import math
+
+x = 1e-10
+result1 = (1 - math.cos(x)) / x**2
+
+# Using an alternative formula to compute the same value
+result2 = (2 * math.sin(x/2)**2) / x**2
+
+assert result1 == 0.0   # Expected around 0.5, but the output is 0.0
+assert result2 == 0.5   # this one is correct
+
+# what happened here? In the cos formula we subtracted two numbers that are
+# very close to each other, this can lead to a catastrophic loss of precision
+# that was amplified by our division by another very small number
+
+# You mostly do not need to worry about catastrophic precision errors and if
+# you do, you will know that you do. This does effect normal logic operations
+# involving the results of floating point expressions though. Mostly because
+# of the small inherent imprecision with floating point computations it is
+# always dangerous to compare floats for equality because they might differ
+# by a small but insignificant precision error. It is usally a good practice
+# to compare floating point numbers to within a tolerance. For example:
+
+# math provides an is_close function that compares two floats to within a
+# specified tolerance. The below statement returns True if result2 is within 
+# 1e-10 of 0.5
+assert math.isclose(result2, 0.5, abs_tol=1e-10)
 # ****************************************************************************
 
 
 # ********* type() ***********************************************************
-# not sure what a variable is? use built-in function type() to find out!
+# Python has dynamic typing - meaning a variable might hold anything!
+#   When you are not sure what a variable is you can use built-in function
+#   type() to find out!
 assert type(my_int) == int
 assert type(my_float) == float
 assert type(my_boolean) == bool
@@ -151,8 +485,8 @@ assert str(type(None)) ==  "<class 'NoneType'>"
 assert str(int) == "<class 'int'>"
 
 # what happens when you coerce an imported module to a string?
-from learn_python.module2_data_types import demo
-demo_str = str(demo)
+from learn_python.module2_basics import lesson
+demo_str = str(lesson)
 
 # when you divide two integers you get a float!
 assert 4/3 == (1 + 1/3)
@@ -481,18 +815,6 @@ assert complex_dict[0] == {
 # ****************************************************************************
 
 
-# ********* Terminology ******************************************************
-# when you see a primitive type specified directly as its value it is called a
-# "literal"
-# 3 is an integer literal
-# 'hello world' is a string literal
-# [0, 1, 2] is a list literal
-# {1, 2, 3} is a set literal
-# {1: 'one', 2: 'two'} is a dictionary literal
-# True and False are boolean literals
-# ****************************************************************************
-
-
 # ********* Immutability and Memory ******************************************
 # variables are references to objects in memory - think of them as addresses
 # or "pointers". Python hides this from us because when we use a variable we are
@@ -690,4 +1012,4 @@ assert {i: str(i) for i in range(3)} == {0: '0', 1: '1', 2: '2'}
 
 # if you made any modifications to this file and you want to revert it back to
 # the original, run this command:
-#   git checkout -- learn_python/module2_data_types/demo.py
+#   git checkout -- learn_python/module2_basics/lesson.py
