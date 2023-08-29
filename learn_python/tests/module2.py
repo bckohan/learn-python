@@ -22,8 +22,12 @@ from learn_python.tests.utils import (
     has_or,
     has_not,
     has_logical_operator,
-    count_calls
+    count_calls,
+    compare_floats,
+    has_while_loop,
+    has_break
 )
+from functools import partial
 import platform
 
 
@@ -333,6 +337,345 @@ def test_gateway2_normal_distribution():
 
 
 @pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('divide'),
+    reason='divide not implemented yet.'
+)
+def test_gateway2_divide():
+    from learn_python.module2_basics.gateway2 import divide
+    import math
+
+    assert divide(1, 1) == 1, f'divide(1, 1) should return 1, but returns {divide(1, 1)}'
+    assert type(divide(1, 1)) is int, f'divide(1, 1) should return an integer, but returns {type(divide(1, 1))}'
+    assert divide(1, 2) == 0, f'divide(1, 2) should return 0, but returns {divide(1, 2)}'
+    assert type(divide(1, 2)) is int, f'divide(1, 2) should return an integer, but returns {type(divide(1, 2))}'
+
+    assert divide(1, 2.0) == 0.5, f'divide(1, 2.0) should return 0.5, but returns {divide(1, 2.0)}'
+    assert divide(1.0, 2) == 0.5, f'divide(1.0, 2) should return 0.5, but returns {divide(1.0, 2)}'
+
+    assert divide(3, 0) is None, f'divide(3, 0) should return None, but returns {divide(3, 0)}'
+    assert divide(5.0, 0) is None, f'divide(5.0, 0) should return None, but returns {divide(5.0, 0)}'
+    assert divide(5.5, 0.0) is None, f'divide(5.5, 0.0) should return None, but returns {divide(5.5, 0.0)}'
+
+    assert math.isclose(divide(2.5, 1e-300), 2.5e300), f'divide(2.5, 1e-300) should return 2.5e300, but returns {divide(2.5, 1e-300)}'
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('get_decimal'),
+    reason='get_decimal not implemented yet.'
+)
+def test_gateway2_get_decimal():
+    from learn_python.module2_basics.gateway2 import get_decimal
+    from math import isclose
+
+    assert get_decimal(0.0) == 0, f'get_decimal(0.0) should return 0.0, but returns {get_decimal(0.0)}'
+    assert get_decimal(1.0) == 0, f'get_decimal(1.0) should return 0.0, but returns {get_decimal(1.0)}'
+    assert isclose(get_decimal(1.1), 0.1), f'get_decimal(1.1) should return 0.1, but returns {get_decimal(1.1)}'
+    assert isclose(get_decimal(1.9), 0.9), f'get_decimal(1.9) should return 0.9, but returns {get_decimal(1.9)}'
+    assert isclose(get_decimal(3.14159), 0.14159), f'get_decimal(3.14159) should return 0.14159, but returns {get_decimal(3.14159)}'
+    assert isclose(get_decimal(2.71828), 0.71828), f'get_decimal(2.71828) should return 0.71828, but returns {get_decimal(2.71828)}'
+    assert isclose(get_decimal(-123.126662), -0.126662), f'get_decimal(-123.126662) should return -0.126662, but returns {get_decimal(-123.126662)}'
+    assert isclose(get_decimal(8), 0.0), f'get_decimal(8) should return 0.0, but returns {get_decimal(8)}'
+    assert type(get_decimal(8)) is float, f'get_decimal(8) should return a float, but returns {type(get_decimal(8))}'
+    assert num_statements(get_decimal) == 1 or (num_statements(get_decimal) == 2 and has_docstring(get_decimal)), 'get_decimal() should only require one statement'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('float_range'),
+    reason='float_range not implemented yet.'
+)
+def test_gateway2_float_range():
+    from learn_python.module2_basics.gateway2 import float_range
+
+    assert compare_floats(float_range(0, 1, 0.1), [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]), f'float_range(0, 1, 0.1) should return [0, 0.1, 0.2, 0.3, 0.4, 0.5, ..., 1], but returns {float_range(0, 1, 0.1)}'
+    assert compare_floats(float_range(0, -1, -0.1), [0, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9, -1]), f'float_range(0, -1, -0.1) should return [0, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9, -1], but returns {float_range(0, -1, -0.1)}'
+    assert compare_floats(float_range(0, -1, -0.1), float_range(0, -1, 0.1)), f'float_range(0, -1, -0.1) should return the same as float_range(0, -1, 0.1), but returns {float_range(0, -1, -0.1)}'
+    assert compare_floats(float_range(0, -1.01, -0.1), float_range(0, -1, -0.1)), f'float_range(0, -1.01, -0.1) should return the same as float_range(0, -1, -0.1), but returns {float_range(0, -1.01, -0.1)}'
+    assert compare_floats(float_range(3, 2, -0.5), [3, 2.5, 2]), f'float_range(3, 2, -0.5) should return [3, 2.5, 2], but returns {float_range(3, 2, -0.5)}'
+    assert compare_floats(float_range(1e-12, 2e-12, 2e-13), [1e-12, 1.2e-12, 1.4e-12, 1.6e-12, 1.8e-12, 2e-12]), f'float_range(1e-12, 2e-12, 2e-13) should return [1e-12, 1.2e-12, 1.4e-12, 1.6e-12, 1.8e-12, 2e-12], but returns {float_range(1e-12, 2e-12, 1e-13)}'
+    assert compare_floats(float_range(0.099, 0.297, 0.099), [0.099, 0.198, 0.297]), f'float_range(0.099, 0.297, 0.099) should return [0.099, 0.198, 0.297], but returns {float_range(0.099, 0.297, 0.099)}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('xy_values'),
+    reason='xy_values not implemented yet.'
+)
+def test_gateway2_xy_values():
+    from learn_python.module2_basics.gateway2 import xy_values
+    from learn_python.tests.utils import float_range
+    from math import isclose
+
+    def normal(x, σ=1, μ=0):
+        from math import pi, sqrt, exp
+        return 1 / (σ * sqrt(2 * pi)) * exp(-0.5 * ((x - μ) / σ) ** 2)
+    
+    def poisson(x, λ=1):
+        from math import exp
+        from math import factorial as fact
+        return exp(-λ) * λ ** int(x) / fact(int(x))
+
+    params = [
+        (normal, ({'σ': 1, 'μ': 0}, (-3, 3, 0.01))),     # normal(σ=1, μ=0)
+        (normal, ({'σ': 1, 'μ': 2}, (-2, 6, 0.05))),     # normal(σ=1, μ=2)
+        (normal, ({'σ': 0.5, 'μ': 0}, (-2, 2, 0.005))),  # normal(σ=0.5, μ=0)
+        (normal, ({'σ': 2, 'μ': 2}, (-4, 8, 0.1))),      # normal(σ=2, μ=2)
+        (poisson, ({'λ': 0.5}, (0, 4, 1))),              # poisson(λ=0.5)
+        (poisson, ({'λ': 1}, (0, 6, 1))),                # poisson(λ=1)
+        (poisson, ({'λ': 2}, (0, 8, 1))),                # poisson(λ=2)
+        (poisson, ({'λ': 3}, (0, 10, 1))),               # poisson(λ=3)
+        (poisson, ({'λ': 6}, (0, 12, 1))),               # poisson(λ=6)
+    ]
+
+    for pdf, (kwargs, (x_min, x_max, step)) in params:
+        x_range = list(float_range(x_min, x_max, step))
+        returned = xy_values(partial(pdf, **kwargs), start=x_min, stop=x_max, step=step)
+        assert len(returned) == len(x_range), f'xy_values({str(pdf)}, start={x_min}, stop={x_max}, step={step}) should return {len(x_range)} values, but returns {len(returned)}'
+        expected = [(x, pdf(x, **kwargs)) for x in x_range]
+        for index, (exp, ret) in enumerate(zip(expected, returned)):
+            assert isclose(exp[0], ret[0]), f'xy_values(partial({pdf.__name__}, {kwargs}), start={x_min}, stop={x_max}, step={step})[{index}] x value == {ret[0]} when {exp[0]} was expected.'
+            assert isclose(exp[1], ret[1]), f'xy_values(partial({pdf.__name__}, {kwargs}), start={x_min}, stop={x_max}, step={step})[{index}] y value == {ret[1]} when {exp[1]} was expected'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('separate'),
+    reason='separate not implemented yet.'
+)
+def test_gateway2_separate():
+    from learn_python.module2_basics.gateway2 import separate
+    from learn_python.tests.utils import float_range
+
+    for inpt, expected in [
+        ([(x, x+0.01) for x in range(0, 5)], ([x for x in range(0, 5)], [x+0.01 for x in range(0, 5)])),
+        ([(x, x-1.56) for x in float_range(0, -1, 0.1)], ([x for x in float_range(0, -1, 0.1)], [x-1.56 for x in float_range(0, -1, 0.1)]))
+    ]:
+        assert separate(inpt) == expected, f'separate({inpt}) should return {expected}, but returns {separate(inpt)}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('combine'),
+    reason='combine not implemented yet.'
+)
+def test_gateway2_combine():
+    from learn_python.module2_basics.gateway2 import combine
+    from learn_python.tests.utils import float_range
+
+    for expected, (list1, list2) in [
+        ([(x, x+0.01) for x in range(0, 5)], ([x for x in range(0, 5)], [x+0.01 for x in range(0, 5)])),
+        ([(x, x-1.56) for x in float_range(0, -1, 0.1)], ([x for x in float_range(0, -1, 0.1)], [x-1.56 for x in float_range(0, -1, 0.1)]))
+    ]:
+        assert combine(list1, list2) == expected, f'combine({list1}, {list2}) should return {expected}, but returns {combine(list1, list2)}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('decimate'),
+    reason='decimate not implemented yet.'
+)
+def test_gateway2_decimate():
+    from learn_python.module2_basics.gateway2 import decimate
+    from learn_python.tests.utils import float_range
+
+    list1 = [1, 2, 3, 4, 5, 6]
+    list2 = list(float_range(12, -3, 0.1))
+
+    assert decimate(list1, 1) == [1, 2, 3, 4, 5, 6], f'decimate({list1}, 1) should return {list1}, but returns {decimate(list1, 1)}'
+    assert decimate(list1, 2) == [1, 3, 5], f'decimate({list1}, 2) should return [1, 3, 5], but returns {decimate(list1, 2)}'
+    assert decimate(list1, 3) == [1, 4], f'decimate({list1}, 3) should return [1, 4], but returns {decimate(list1, 3)}'
+    assert decimate(list1, 4) == [1, 5], f'decimate({list1}, 4) should return [1, 5], but returns {decimate(list1, 4)}'
+    assert decimate(list1) == [1] == decimate(list1, factor=10), f'decimate({list1}) should return [1], but returns {decimate(list1)}'
+
+    assert decimate(list2, 1) == list2, f'decimate({list2}, 1) should return {list2}, but returns {decimate(list2, 1)}'
+    assert decimate(list2) == list2[::10], f'decimate({list2}) should return {list2[::10]}, but returns {decimate(list2)}'
+    assert decimate(list2, 25) == list2[::25], f'decimate({list2}) should return {list2[::25]}, but returns {decimate(list2, 25)}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('approximate_integral'),
+    reason='approximate_integral not implemented yet.'
+)
+def test_gateway2_approximate_integral():
+    from learn_python.module2_basics.gateway2 import approximate_integral
+    from learn_python.tests.utils import float_range
+    from math import isclose
+
+    def normal(x, σ=1, μ=0):
+        from math import pi, sqrt, exp
+        return 1 / (σ * sqrt(2 * pi)) * exp(-0.5 * ((x - μ) / σ) ** 2)
+    
+    def xy_values(pdf, start, stop, step):
+        return [(x, pdf(x)) for x in float_range(start, stop, step)]
+
+    try:
+        approximate_integral([])
+        assert False, 'approximate_integral() should raise an AssertionError if the list of xy values is empty'
+    except AssertionError:
+        pass
+    for pdf, (kwargs, (x_min, x_max, step)) in [
+        (normal, ({'σ': 1, 'μ': 0}, (-6, 6, 0.04))),     # normal(σ=1, μ=0)
+        (normal, ({'σ': 1, 'μ': 2}, (-4, 8, 0.04))),     # normal(σ=1, μ=2)
+        (normal, ({'σ': 0.5, 'μ': 0}, (-4, 4, 0.005))),  # normal(σ=0.5, μ=0)
+        (normal, ({'σ': 2, 'μ': 2}, (-8, 12, 0.1))),      # normal(σ=2, μ=2)
+    ]:
+        xy = xy_values(partial(pdf, **kwargs), start=x_min, stop=x_max, step=step)
+        if len(xy) % 2 != 0:
+            try:
+                approximate_integral(xy)
+                assert False, 'approximate_integral() should raise an AssertionError if the list of xy values has an odd number of elements'
+            except AssertionError:
+                pass
+            xy = xy[:-1]
+        area = approximate_integral(xy)
+        assert isclose(area, 1.0, abs_tol=.01), f'approximate_integral() should return ~1.0 for any normal distribution, but returns {area}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('deduplicate'),
+    reason='deduplicate not implemented yet.'
+)
+def test_gateway2_deduplicate():
+    from learn_python.module2_basics.gateway2 import deduplicate
+    from learn_python.tests.utils import float_range
+
+    list1 = [-4, 4, 1, 2, 3, 1, 2, 3, 4]
+    de_duplicated = deduplicate(list1)
+    assert type(de_duplicated) is list, f'deduplicate({list1}) should return a list, but returns {type(de_duplicated)}'
+    assert de_duplicated != [-4, 1, 2, 3, 4] and sorted(de_duplicated) == [-4, 1, 2, 3, 4], f'deduplicate({list1}) should return [-4, 1, 2, 3, 4], but returns {de_duplicated}'
+    de_duplicated = deduplicate(list1, preserve_order=True)
+    assert type(de_duplicated) is list, f'deduplicate({list1}, preserve_order=True) should return a list, but returns {type(de_duplicated)}'
+    assert de_duplicated == [-4, 4, 1, 2, 3], f'deduplicate({list1}) should return [-4, 4, 1, 2, 3], but returns {de_duplicated}'
+    assert num_statements(deduplicate) == 1 or (num_statements(deduplicate) == 2 and has_docstring(deduplicate)), 'deduplicate() should only require 1 statement'
+
+
+def lists_compare(list1, list2):
+    from learn_python.tests.utils import compare_floats
+    return compare_floats(sorted(list1), sorted(list2))
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('list_intersection'),
+    reason='list_intersection not implemented yet.'
+)
+def test_gateway2_list_intersection():
+    from learn_python.module2_basics.gateway2 import list_intersection
+    from learn_python.tests.utils import float_range, compare_floats
+
+    list1 = list(range(-5, 5))
+    list2 = list(range(0, 10))
+
+    list3 = list(float_range(2, -2, 0.1))
+    list4 = [*list3[:len(list3)//2],  *float_range(2.1, 4, 0.1)]
+
+    assert lists_compare(list_intersection(list1, list2), list(range(0, 5))), f'list_intersection({list1}, {list2}) should return {list(range(0, 5))}, but returns {list_intersection(list1, list2)}'
+    assert lists_compare(list_intersection(list3, list4), list3[:len(list3)//2]), f'list_intersection({list3}, {list4}) should return {list3[:len(list3)/2]}, but returns {list_intersection(list3, list4)}'
+    assert num_statements(list_intersection) == 1 or (num_statements(list_intersection) == 2 and has_docstring(list_intersection)), 'list_intersection() should only require 1 statement'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('list_difference'),
+    reason='list_difference not implemented yet.'
+)
+def test_gateway2_list_difference():
+    from learn_python.module2_basics.gateway2 import list_difference
+    from learn_python.tests.utils import float_range, compare_floats
+
+    list1 = list(range(-5, 5))
+    list2 = list(range(0, 10))
+
+    list3 = list(float_range(2, -2, 0.1))
+    list4 = [*list3[:len(list3)//2],  *float_range(2.1, 4, 0.1)]
+
+    assert lists_compare(list_difference(list1, list2), list1[:list1.index(0)]), f'list_difference({list1}, {list2}) should return {list1[:list1.index(0)]}, but returns {list_difference(list1, list2)}'
+    assert lists_compare(list_difference(list3, list4), list3[len(list3)//2:]), f'list_difference({list3}, {list4}) should return {list3[len(list3)//2:]}, but returns {list_difference(list3, list4)}'
+    assert num_statements(list_difference) == 1 or (num_statements(list_difference) == 2 and has_docstring(list_difference)), 'list_difference() should only require 1 statement'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('list_symmetric_difference'),
+    reason='list_symmetric_difference not implemented yet.'
+)
+def test_gateway2_list_symmetric_difference():
+    from learn_python.module2_basics.gateway2 import list_symmetric_difference
+    from learn_python.tests.utils import float_range, compare_floats
+
+    list1 = list(range(-5, 5))
+    list2 = list(range(0, 10))
+
+    list3 = list(float_range(2, -2, 0.1))
+    list4 = [*list3[:len(list3)//2],  *float_range(2.1, 4, 0.1)]
+
+    assert lists_compare(list_symmetric_difference(list1, list2), [*list1[:list1.index(0)], *list2[list2.index(5):]]), f'list_symmetric_difference({list1}, {list2}) should return {[*list1[:list1.index(0)], *list2[list2.index(5):]]}, but returns {list_symmetric_difference(list1, list2)}'
+    assert lists_compare(list_symmetric_difference(list3, list4), [*list3[len(list3)//2:], *list4[len(list3)//2:]]), f'list_symmetric_difference({list3}, {list4}) should return {[*list3[len(list3)//2:], *list4[len(list3)//2:]]}, but returns {list_symmetric_difference(list3, list4)}'
+    assert num_statements(list_symmetric_difference) == 1 or (num_statements(list_symmetric_difference) == 2 and has_docstring(list_symmetric_difference)), 'list_symmetric_difference() should only require 1 statement'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('list_union'),
+    reason='list_union not implemented yet.'
+)
+def test_gateway2_list_union():
+    from learn_python.module2_basics.gateway2 import list_union
+    from learn_python.tests.utils import float_range, compare_floats
+
+    list1 = list(range(-5, 5))
+    list2 = list(range(0, 10))
+
+    list3 = list(float_range(2, -2, 0.1))
+    list4 = [*list3[:len(list3)//2],  *float_range(2.1, 4, 0.1)]
+
+    assert lists_compare(list_union(list1, list2), list(set([*list1, *list2]))), f'list_union({list1}, {list2}) should return {list(set([*list1, *list2]))}, but returns {list_union(list1, list2)}'
+    assert lists_compare(list_union(list3, list4), list(set([*list3, *list4]))), f'list_union({list3}, {list4}) should return {list(set([*list3, *list4]))}, but returns {list_union(list3, list4)}'
+    assert num_statements(list_union) == 1 or (num_statements(list_union) == 2 and has_docstring(list_union)), 'list_union() should only require 1 statement'
+
+def check_is_fibonacci(numbers):
+    if len(numbers) == 1:
+        return numbers == [0]
+    elif len(numbers) == 2:
+        return numbers == [0, 1]
+    for index, value in enumerate(numbers):
+        if index > 2:
+            if value != numbers[index-1] + numbers[index-2]:
+                return False
+    return True
+    
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('fibonacci'),
+    reason='fibonacci not implemented yet.'
+)
+def test_gateway2_fibonacci():
+    from learn_python.module2_basics.gateway2 import fibonacci
+    from learn_python.tests.utils import float_range, compare_floats
+    
+    assert fibonacci(0) == [], f'fibonacci(0) should return [], but returns {fibonacci(0)}'
+    assert fibonacci(1) == [0], f'fibonacci(1) should return [0], but returns {fibonacci(1)}'
+    assert fibonacci(2) == [0, 1], f'fibonacci(2) should return [0, 1], but returns {fibonacci(2)}'
+    assert fibonacci(3) == [0, 1, 1], f'fibonacci(3) should return [0, 1, 1], but returns {fibonacci(3)}'
+    assert fibonacci(4) == [0, 1, 1, 2], f'fibonacci(4) should return [0, 1, 1, 2], but returns {fibonacci(4)}'
+    assert fibonacci(5) == [0, 1, 1, 2, 3], f'fibonacci(5) should return [0, 1, 1, 2, 3], but returns {fibonacci(5)}'
+
+    for length in [6, 12, 24, 37]:
+        numbers = fibonacci(length)
+        assert len(numbers) == length, f'fibonacci({length}) should return a list of length {length}, but returns {len(numbers)}'
+        assert check_is_fibonacci(numbers), f'fibonacci({length}) == {numbers} is not a fibonacci sequence'
+
+    assert has_while_loop(fibonacci), 'fibonacci() does not use a while loop!'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('fibonacci_gr'),
+    reason='fibonacci_gr not implemented yet.'
+)
+def test_gateway2_fibonacci_gr():
+    from learn_python.module2_basics.gateway2 import fibonacci_gr
+    from learn_python.tests.utils import float_range, compare_floats
+    
+    for tol in [1e-2, 1e-3, 1e-6, 1e-8, 1e-12, 1e-100]:
+        numbers = fibonacci_gr(tol)
+        assert check_is_fibonacci(numbers), f'fibonacci({tol}) == {numbers} is not a fibonacci sequence'
+        assert abs(numbers[-1] / numbers[-2] - ((1 + 5 ** 0.5) / 2)) < tol, f'fibonacci({tol:.2E}) produced {len(numbers)} numbers and did not reach the tolerance {tol:.2E}. Last ratio: {numbers[-1] / numbers[-2]:.12f}'
+        assert abs(numbers[-2] / numbers[-3] - ((1 + 5 ** 0.5) / 2)) > tol,  f'fibonacci({tol:.2E}) produced {len(numbers)} numbers and went past the tolerance {tol:.2E}. Ratio before last: {numbers[-2] / numbers[-3]:.12f}'
+
+    assert has_break(fibonacci_gr), 'fibonacci() does not use a break statement!'
+
+
+@pytest.mark.skipif(
     not gateway2.exists() or unimplemented('are_same_object'),
     reason="are_same_object not implemented yet."
 )
@@ -440,3 +783,79 @@ def test_gateway2_is_identity():
     assert is_identity([[1, 0, 0], [0, 1, 0]]) is False, f'is_identity([[1, 0, 0], [0, 1, 0]]) should return False, but returns {is_identity([[1, 0, 0], [0, 1, 0]])}'
     assert is_identity([[1, 0, 0], [0, 1, 0], [0, 0, 1]]) is True, f'is_identity([[1, 0, 0], [0, 1, 0], [0, 0, 1]]) should return True, but returns {is_identity([[1, 0, 0], [0, 1, 0], [0, 0, 1]])}'
     assert is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]]) is False, f'is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]]) should return True, but returns {is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]])}'
+
+
+# test scenario
+candidates = {
+    0: 'Ada Lovelace',
+    1: 'Grace Hopper',
+    2: 'Annie Easley',
+    3: 'Katherine Johnson'
+}
+ballots = [
+    *[[0, 2, 3]] * 6,  # 6 ballots look like [Ada, Annie, Katherine]
+    *[[1, 3, 2]] * 4,  # 4 ballots look like [Grace, Katherine, Annie]
+    *[[2, 0, 1, 3]] * 2,
+    *[[2, 3]] * 2,
+    *[[2, 1]] * 1,
+    *[[3, 1, 0, 2]] * 2,
+    [3]
+]
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('ranked_choice'),
+    reason="ranked_choice not implemented yet."
+)
+def test_gateway2_ranked_choice():
+    from learn_python.module2_basics.gateway2 import ranked_choice, print_report
+
+    scenario1 = ranked_choice(candidates, ballots)
+    assert scenario1['winner'] == 'Ada Lovelace', "Ada Lovelace should have won! Not: {scenario1['winner']}"
+    assert len(scenario1['rounds']) == 3, f"The test election scenario should have had 3 rounds! Not: {len(scenario1['rounds'])}"
+    assert len(scenario1['rounds']) == 3, f"The test election scenario should have had 3 rounds! Not: {len(scenario1['rounds'])}"
+
+    round1 = scenario1['rounds'][0]
+    round2 = scenario1['rounds'][1]
+    round3 = scenario1['rounds'][2]
+
+    assert round1['votes'] == 18, f"Round 1 should have had 18 votes! Not: {round1['votes']}"
+    assert round2['votes'] == 17, f"Round 2 should have had 17 votes! Not: {round2['votes']}"
+    assert round3['votes'] == 15, f"Round 2 should have had 15 votes! Not: {round3['votes']}"
+
+    round1_result = [('Ada Lovelace', 6), ('Annie Easley', 5), ('Grace Hopper', 4), ('Katherine Johnson', 3)]
+    round2_result = [('Ada Lovelace', 6), ('Grace Hopper', 6), ('Annie Easley', 5)]
+    round3_result = [('Ada Lovelace', 8), ('Grace Hopper', 7)]
+    assert round1['ranking'] == round1_result, f"Round 1 ranking is not correct: {round1['ranking']} - expected: {round1_result}" 
+    assert round2['ranking'] == round2_result, f"Round 2 ranking is not correct: {round2['ranking']} - expected: {round2_result}" 
+    assert round3['ranking'] == round3_result, f"Round 3 ranking is not correct: {round3['ranking']} - expected: {round3_result}" 
+
+
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('ranked_choice') or unimplemented('print_report'),
+    reason="ranked_choice and/or print_report not implemented yet."
+)
+def test_gateway2_print_result():
+    from learn_python.module2_basics.gateway2 import ranked_choice, print_report
+
+    f = io.StringIO()
+    with redirect_stdout(f):
+        print_report(ranked_choice(candidates, ballots))
+    output = f.getvalue().split('\n')
+
+    assert output[0] == '-' * 32, "line 0 should be 32 dashes."
+    assert output[1] == 'Round 0', "line 1 should be 'Round 0'"
+    assert output[2] == '       Ada Lovelace:  6 (33.33%)', "Line 2 should be '       Ada Lovelace:  6 (33.33%)'"
+    assert output[3] == '       Annie Easley:  5 (27.78%)', "Line 3 should be '       Annie Easley:  5 (27.78%)'"
+    assert output[4] == '       Grace Hopper:  4 (22.22%)', "Line 3 should be '       Grace Hopper:  4 (22.22%)'"
+    assert output[5] == '  Katherine Johnson:  3 (16.67%)', "Line 3 should be '  Katherine Johnson:  3 (16.67%)'"
+    assert output[6] == '-' * 32, "line 6 should be 32 dashes."
+    assert output[7] == 'Round 1', "line 7 should be 'Round 1'"
+    assert output[8] == '       Ada Lovelace:  6 (35.29%)', "Line 2 should be '       Ada Lovelace:  6 (35.29%)'"
+    assert output[9] == '       Grace Hopper:  6 (35.29%)', "Line 2 should be '       Grace Hopper:  6 (35.29%)'"
+    assert output[10] == '       Annie Easley:  5 (29.41%)', "Line 2 should be '       Annie Easley:  5 (29.41%)'"
+    assert output[11] == '-' * 32, "line 11 should be 32 dashes."
+    assert output[12] == 'Round 2 (Winner: Ada Lovelace)', "line 12 should be 'Round 2 (Winner: Ada Lovelace)'"
+    assert output[13] == '       Ada Lovelace:  8 (53.33%)', "Line 13 should be '       Ada Lovelace:  8 (53.33%)'"
+    assert output[14] == '       Grace Hopper:  7 (46.67%)', "Line 14 should be '       Grace Hopper:  7 (46.67%)'"

@@ -22,11 +22,11 @@ variable called __doc__. Try this:
     # also try:
     help(lesson)  # look familiar?
 
-Tools exist to convert doctstrings to html or pdf documentation - much of the
+Tools exist to convert doc strings to html or pdf documentation - much of the
 python standard library is documented this way, so help() may look very familiar
 to what you read on the internet!
 
-The walkthrough in this lesson is designed to emerse you in code, but
+The walkthrough in this lesson is designed to immerse you in code, but
 as a quick reference these resources are better:
 
 A nice 2-page pdf cheat sheet:
@@ -37,6 +37,9 @@ An extremely well organized cheat sheet web page:
 
 Extensive cheat sheet w/ popular data science packages:
     https://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf
+
+Python standard library built-in function documentation:
+    https://docs.python.org/3/library/functions.html
 
 If in the course of playing around with this file, you would like to revert it to the
 original version without your edits you can use git:
@@ -162,7 +165,7 @@ my_int = 3
 #   %    modulus (remainder) - for example 5 % 2 == 1 because 5 / 2 == 2 remainder 1
 #   **   exponentiation - for example 2 ** 3 == 8 because 2 * 2 * 2 == 8
 # 
-# Comparison Operators (the result of these operatons is a boolean):
+# Comparison Operators (the result of these operations is a boolean):
 #
 #   ==   equal to
 #   !=   not equal to
@@ -220,6 +223,10 @@ assert my_boolean + my_int == 4
 empty = None
 assert empty is None  # comparison to None is done with "is" - more on this later
 assert empty == None  # but this will also work!
+
+# None evaluates to false when used in a boolean expression:
+if None:
+    assert False  # this will not execute because None is False
 # ****************************************************************************
 
 
@@ -279,11 +286,11 @@ my_int = 3
 
 # 1) They can have default arguments! For example, when called if the second
 #    argument is not supplied it will default to 2
-def my_function(x, y=2):
+def add(x, y=2):
     return x + y
 
-assert my_function(1) == 3
-assert my_function(1, 5) == 6
+assert add(1) == 3
+assert add(1, 5) == 6
 
 # 2) If functions do not return anything, their return value is None
 def returns_nothing():
@@ -336,7 +343,7 @@ assert lots_of_args(z=4) == (0, 1, 2, 4)  # much simpler huh?
 #    you return - you are out of the function!
 def multiple_returns(x):
     """
-    6) Functions can have docstrings too! Try:
+    6) Functions can have doc strings too! Try:
         from learn_python.module2_basics import lesson
         help(lesson.multiple_returns)
     
@@ -356,6 +363,35 @@ def multiple_returns(x):
 assert multiple_returns(-1123) == -1
 assert multiple_returns(0) == 0
 assert multiple_returns(1123) == 1
+
+# In python you can store practically anything in a variable - including
+# functions!
+
+my_function = add
+assert my_function(1, 2) == 3
+
+# this means you can pass functions as arguments to other functions!
+def apply_function(func):
+    return func(1, 2)
+
+assert apply_function(add) == 3
+
+# this is a technique or pattern called "inversion of control" or delegation
+# it can be very powerful in situations where you want to plug-in different
+# specifics to the business logic of your program - we will see an example of
+# this in our gateway assignment.
+
+# when we store a function in a variable, we can "bind" some or all of its
+# arguments
+from functools import partial
+
+add_one = partial(add, y=1)
+assert add_one(2) == 3
+assert add_one(5) == 6
+
+add_one_to_five = partial(add, x=1, y=5)
+assert add_one_to_five() == 6
+
 #
 # ****************************************************************************
 
@@ -396,7 +432,7 @@ assert not 0.0
 # when you do math with floats, you get a float back
 assert 4.0 + 2.0 == 6.0
 # but if you compare to an integer, python will "coerce" the integer to a float
-#  and the comparison will evalutate as you expect
+#  and the comparison will evaluate as you expect
 assert 4.0 + 2.0 == 6
 assert 6.1 > 6
 assert 6.1 > my_int  # remember my_int == 3
@@ -418,7 +454,7 @@ assert number1 == number2
 import math
 
 x = 1e-10
-result1 = (1 - math.cos(x)) / x**2
+result1 = (1 - math.cos(x)) / x**2  # in the limit as x -> 0 this should approach 0.5
 
 # Using an alternative formula to compute the same value
 result2 = (2 * math.sin(x/2)**2) / x**2
@@ -430,13 +466,13 @@ assert result2 == 0.5   # this one is correct
 # very close to each other, this can lead to a catastrophic loss of precision
 # that was amplified by our division by another very small number
 
-# You mostly do not need to worry about catastrophic precision errors and if
-# you do, you will know that you do. This does effect normal logic operations
-# involving the results of floating point expressions though. Mostly because
-# of the small inherent imprecision with floating point computations it is
-# always dangerous to compare floats for equality because they might differ
-# by a small but insignificant precision error. It is usally a good practice
-# to compare floating point numbers to within a tolerance. For example:
+# You mostly do not need to worry about precision errors and if you do, you 
+# will know that you do. This does however, effect normal logic
+# operations involving the results of floating point expressions. The small 
+# inherent imprecision with floating point computations means it is dangerous
+# to compare floats for equality because they might differ by a small but 
+# insignificant precision error. It is usually a good practice to compare 
+# floating point numbers to within a tolerance. For example:
 
 # math provides an is_close function that compares two floats to within a
 # specified tolerance. The below statement returns True if result2 is within 
@@ -444,21 +480,22 @@ assert result2 == 0.5   # this one is correct
 assert math.isclose(result2, 0.5, abs_tol=1e-10)
 # ****************************************************************************
 
+# Do Gateway assignment tasks 6-9 here!
 
 # ********* type() ***********************************************************
 # Python has dynamic typing - meaning a variable might hold anything!
 #   When you are not sure what a variable is you can use built-in function
 #   type() to find out!
-assert type(my_int) == int
-assert type(my_float) == float
-assert type(my_boolean) == bool
-assert type(6.1) == float
-assert type(6) == int
-assert type(True) == bool
-assert type('hello world') == str
+assert type(my_int) is int
+assert type(my_float) is float
+assert type(my_boolean) is bool
+assert type(6.1) is float
+assert type(6) is int
+assert type(True) is bool
+assert type('hello world') is str
 
 # None is a special type called NoneType
-assert type(None) == type(empty)
+assert type(None) is type(empty)
 # ****************************************************************************
 
 
@@ -466,6 +503,7 @@ assert type(None) == type(empty)
 # variables can be coerced to other types! this is also called "type casting"
 # to attempt a coercion use the type name as a function!
 assert int(6.1) == 6  # for example float -> int loses the decimal
+assert float(6) == 6.0  # and int -> float adds a decimal
 
 # but be careful! if you try to cast a string to an int, it will fail!
 # int('hello') -> this will error out because it's meaningless!
@@ -490,7 +528,7 @@ demo_str = str(lesson)
 
 # when you divide two integers you get a float!
 assert 4/3 == (1 + 1/3)
-assert type( int(4) / int(3) ) == float
+assert type(int(4) / int(3)) == float
 
 # unless you do integer (aka floor) division
 assert 4 // 3 == 1
@@ -517,6 +555,26 @@ assert my_list == [0, 2, 3, 4, 5]
 # you can slice lists to get a sub-list
 assert my_list[1:3] == [2, 3]
 
+# when a slice index is omitted it defaults to None, which for the first
+# slice index means 0 and the last slice index means the length of the list
+assert my_list[:3] == my_list[None:3] == [0, 2, 3]
+assert my_list[1:] == my_list[1:None] == [2, 3, 4, 5]
+assert my_list[:] == [0, 2, 3, 4, 5]
+
+# you can also slice with a step size, e.g. take every 2nd element:
+assert my_list[::2] == [0, 3, 5]
+
+# slicing is forgiving! This means that if you take a slice
+# larger than the list, it will just return as much as it can:
+assert my_list[:100] == [0, 2, 3, 4, 5]
+assert my_list[100:] == []
+assert my_list[-100:] == [0, 2, 3, 4, 5]
+
+# Indexing is not forgiving! If you try to access an index that does not exist
+# you will get an error:
+# my_list[100] -> this will error out with an IndexError
+# my_list[-100] -> this will error out with an IndexError
+
 # you can concatenate lists together with +
 my_list = [1] + my_list[1:]
 assert my_list == [1, 2, 3, 4, 5]
@@ -535,7 +593,14 @@ assert \
     [1, 2, 3, 4, 5]
 
 # lists can contain elements of multiple different types
-multi_type_list = [1, 'hello', 3.0, True, None, [1, 2, 3]]
+multi_type_list = [
+    1,
+    'hello',
+    3.0,
+    True,
+    None,
+    [1, 2, 3]
+] # lists can also be multi-line without using \
 assert len(multi_type_list) == 6
 assert multi_type_list[-2] is None
 assert multi_type_list[-1] == [1, 2, 3]  # including other lists!
@@ -545,7 +610,7 @@ matrix = [
     [1, 2, 3], 
     [4, 5, 6], 
     [7, 8, 9]
-]  # lists can also be multi-line without using \
+]
 assert matrix[0][0] == 1
 assert matrix[1][1] == 5
 assert matrix[2][2] == 9
@@ -564,14 +629,32 @@ assert bool(my_empty_list) is False
 if my_list:
     pass  # do something with my_list because it is not empty!
 
-# the in operator checks if a value is in a sequence
+# the "in" operator checks if a value is in a sequence
 assert 1 in my_list
 assert 15 not in my_list  # use "not in" instead of not (x in y)
 # but this will still work
-assert not 15 in my_list
+assert not (15 in my_list)
 
 # what happens when you multiply a list by an integer? 
 #   Probably not what you think if you do a lot of math!
+
+# the sorted() built-in function gives us a quick an easy way to sort an
+# iterable (like a list) in ascending order, sorted will work on any iterable
+# that contains elements that can be compared to each other using the < operator
+assert sorted([3, 2, 1]) == [1, 2, 3]
+
+# what happens when we try to sort a list with multiple types that cannot be
+# compared to each other?
+
+# this will error out! Try it!
+#   sorted([3, 2, 1, 'hello'])
+
+# reversed() is another built-in function that gives us a quick and easy way
+# to reverse the order of an iterable (like a list) - note reversed() does
+# not sort the list, it just reverses it! reversed will work on any iterable
+# but it does not return a list - it returns a special object that can be
+# converted to a list using the list() function
+assert list(reversed([4, 7, 2])) == [2, 7, 4]
 # ****************************************************************************
 
 # ********* Tuples ***********************************************************
@@ -588,13 +671,13 @@ assert type(my_tuple) == tuple
 assert my_tuple[0] == 1
 assert my_tuple[-1] == 3
 
-# tuples are slicable like lists
+# tuples are sliceable like lists
 assert my_tuple[1:3] == (2, 3)
 
 # but you cannot change their elements!
 # my_tuple[0] = 0 -> this will error out!
 
-# tuples are perfered to lists in situations where the number of elements are 
+# tuples are preferred to lists in situations where the number of elements are 
 # small, fixed and unchanging
 
 # they are also preferable because "unpacking" a tuple is safer than unpacking 
@@ -609,9 +692,12 @@ def my_function():
     return 1, 2, 3
 
 a, b, c = my_function()
-assert a == 1
-assert b == 2
-assert c == 3
+assert a == 1 and b == 2 and c == 3
+
+# our functions that return multiple values are actually returning a tuple!
+returned_value = my_function()
+assert type(returned_value) == tuple
+assert returned_value == (1, 2, 3)
 # ****************************************************************************
 
 # ********* Strings **********************************************************
@@ -645,7 +731,7 @@ assert 'hello' + ' ' + 'world' == 'hello world'
 my_string += '!'
 assert my_string == 'hello world!'
 
-# what else can you do with string opertors? hint try to multiply a string by
+# what else can you do with string operators? hint try to multiply a string by
 # an integer!
 
 # f-strings are a convenient way to combine strings with variables using
@@ -700,8 +786,24 @@ if my_string:
 # you can specify a set like this
 my_set = {1, 2, 3}
 assert type(my_set) == set
-# any duplicate values will be ommitted!
+# any duplicate values will be omitted!
 assert my_set == {1, 2, 3} == {1, 2, 3, 1, 2, 3}
+
+# you can construct a set from a list to remove duplicates!
+assert set([1, 2, 3, 1, 2, 3]) == {1, 2, 3}
+
+# sets are handy for set operations like:
+#    |  (union):                combine two lists into one list with no duplicates
+#    &  (intersection):         get only the shared elements of two lists
+#    ^  (symmetric difference): get only the elements that are in one list or the other but not both
+#    -  (difference):           get only the elements of one list that are not in the other
+
+assert {1, 2, 3, 6} | {2, 3, 4, 5} == {1, 2, 3, 4, 5, 6}
+assert {1, 2, 3, 6} & {2, 3, 4, 5} == {2, 3}
+assert {1, 2, 3, 6} - {2, 3, 4, 5} == {1, 6}
+assert {1, 2, 3, 6} ^ {2, 3, 4, 5} == {1, 4, 5, 6}
+
+# ****************************************************************************
 
 # ********* Functions vs Operators *******************************************
 # data types have a bunch of functions that can be called on them
@@ -711,7 +813,7 @@ assert my_512_bit_integer.bit_length() == 512
 #   think of the variable as the first argument to the function 
 #   (e.g. function(variable) ) - more on this when we talk about classes!
 # 
-# when a function is invoked on a variable like this it may be refered to
+# when a function is invoked on a variable like this it may be referred to
 #  as a "method"
 
 # string has a bunch of very useful functions!

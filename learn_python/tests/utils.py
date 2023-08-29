@@ -1,6 +1,7 @@
 import importlib
 import inspect
 import ast
+from math import isclose
 
 
 def import_string(str_to_import):
@@ -79,39 +80,31 @@ def num_statements(func):
     ) - 1 if is_function(tree) or is_class(tree) else 0
 
 
-def has_ternary(func):
+def has_statement(func, statement):
     for node in ast.walk(parse_ast(func)):
-        if isinstance(node, ast.IfExp):
+        if isinstance(node, statement):
             return True
     return False
+
+
+def has_ternary(func):
+    return has_statement(func, ast.IfExp)
 
 
 def has_list_comprehension(func):
-    for node in ast.walk(parse_ast(func)):
-        if isinstance(node, ast.ListComp):
-            return True
-    return False
+    return has_statement(func, ast.ListComp)
 
 
 def has_set_comprehension(func):
-    for node in ast.walk(parse_ast(func)):
-        if isinstance(node, ast.SetComp):
-            return True
-    return False
+    return has_statement(func, ast.SetComp)
 
 
 def has_dict_comprehension(func):
-    for node in ast.walk(parse_ast(func)):
-        if isinstance(node, ast.DictComp):
-            return True
-    return False
+    return has_statement(func, ast.DictComp)
 
 
 def has_pass(func):
-    for node in ast.walk(parse_ast(func)):
-        if isinstance(node, ast.Pass):
-            return True
-    return False
+    return has_statement(func, ast.Pass)
 
 
 def has_and(func):
@@ -143,6 +136,22 @@ def has_logical_operator(func):
     return has_and(tree) or has_or(tree) or has_not(tree)
 
 
+def has_while_loop(func):
+    return has_statement(func, ast.While)
+
+
+def has_for_loop(func):
+    return has_statement(func, ast.For)
+
+
+def has_break(func):
+    return has_statement(func, ast.Break)
+
+
+def has_continue(func):
+    return has_statement(func, ast.Continue)
+
+
 def is_unimplemented(func):
     """
     A function is considered unimplemented if it has only a doctstring, only a pass
@@ -153,3 +162,24 @@ def is_unimplemented(func):
         (num_statements(tree) == 1 and (has_pass(tree) or has_docstring(tree))) or
         (num_statements(tree) == 2 and has_docstring(tree) and has_pass(tree))
     )
+
+def compare_floats(list1, list2, tolerance=1e-9):
+    if len(list1) == len(list2):
+        for a, b in zip(list1, list2):
+            if not isclose(a, b, abs_tol=tolerance):
+                return False
+        return True
+    return False
+
+
+def float_range(start, stop, step):
+    """
+    Like range(), but with floats and stop is inclusive.
+    """
+    step = abs(step) * (-1 if start > stop else 1)
+    # we use step/2 to account for floating point precision error, using any value less than
+    # the step size will always work
+    stop = stop + step/2
+    while (step > 0 and start < stop) or (step < 0 and start > stop):
+        yield start
+        start += step
