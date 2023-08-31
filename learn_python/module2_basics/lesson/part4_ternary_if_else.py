@@ -54,5 +54,3 @@ my_int = 3 if my_int != 3 else my_int
 # you might notice that the above statement is just a more complicated way of
 #  writing:
 my_int = 3
-
-

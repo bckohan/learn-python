@@ -1,4 +1,7 @@
 """
+Integers
+========
+
 Integers are whole numbers (they do not have fractional components).
 
 type: int
