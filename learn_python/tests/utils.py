@@ -80,6 +80,14 @@ def num_statements(func):
     ) - 1 if is_function(tree) or is_class(tree) else 0
 
 
+def count_statements(func, statement):
+    statements = 0
+    for node in ast.walk(parse_ast(func)):
+        if isinstance(node, statement):
+            statements += 1
+    return statements
+
+
 def has_statement(func, statement):
     for node in ast.walk(parse_ast(func)):
         if isinstance(node, statement):
@@ -150,6 +158,14 @@ def has_break(func):
 
 def has_continue(func):
     return has_statement(func, ast.Continue)
+
+
+def has_func_definition(func):
+    return has_statement(func, ast.FunctionDef)
+
+
+def has_slice(func):
+    return has_statement(func, ast.Slice)
 
 
 def is_unimplemented(func):

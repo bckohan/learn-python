@@ -7,26 +7,7 @@ import pytest
 from pprint import pformat
 import ast
 import inspect
-from learn_python.tests.utils import (
-    import_string,
-    is_function_called,
-    has_pass,
-    has_docstring,
-    num_statements,
-    is_unimplemented,
-    has_ternary,
-    has_list_comprehension,
-    has_set_comprehension,
-    has_dict_comprehension,
-    has_and,
-    has_or,
-    has_not,
-    has_logical_operator,
-    count_calls,
-    compare_floats,
-    has_while_loop,
-    has_break
-)
+from learn_python.tests.utils import *
 from functools import partial
 import platform
 
@@ -84,7 +65,7 @@ def test_gateway2_is_odd():
     for val in range(-1000, 0):
         assert gateway_is_odd(val) == is_odd(val), f'is_odd({val}) should return {is_odd(val)}, but returns {gateway_is_odd(val)}'
 
-    assert is_function_called(gateway_is_odd, is_even), f'is_odd() does not call is_even() - you must use is_even() to impelment is_odd()'
+    assert is_function_called(gateway_is_odd, is_even), f'is_odd() does not call is_even() - you must use is_even() to implement is_odd()'
 
 
 @pytest.mark.skipif(
@@ -234,6 +215,22 @@ def test_gateway2_default_args():
     test4 = {**default_params, args[3]: differing_params[args[3]]}
     assert default_args(**test4) == (True, True, True, False), f'default_args({call_str(test4)}) should return [True, True, True, False], but returns {default_args(**test4)}'
 
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('get_delegate'),
+    reason='get_delegate not implemented yet.'
+)
+def test_gateway2_get_delegate():
+    from learn_python.module2_basics.gateway2 import get_delegate
+    
+    delegate = get_delegate(None)
+    assert delegate() == 0, f'get_delegate(None)() should return 0, but returns {delegate()}'
+    def six():
+        return 6
+    assert get_delegate(six)() == 6, f'get_delegate(function)() should return function(), but returns {get_delegate(six)()}'
+    assert has_func_definition(get_delegate), f'You must define the default delegate function inside get_delegate()'
+
+
 @pytest.mark.skipif(
     not gateway2.exists() or unimplemented('is_close'),
     reason='is_close not implemented yet.'
@@ -379,6 +376,62 @@ def test_gateway2_get_decimal():
 
 
 @pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('get_element'),
+    reason='get_element not implemented yet.'
+)
+def test_gateway2_get_element():
+    from learn_python.module2_basics.gateway2 import get_element
+
+    test_list = [0, 1, 2, 3, 4]
+
+    assert get_element(test_list, 0) == 0, f'get_element({test_list}, 0) should return 0 but returned {get_element(test_list, 0)}'
+    assert get_element(test_list, -5) == 0, f'get_element({test_list}, -5) should return 0 but returned {get_element(test_list, -5)}'
+
+    assert get_element(test_list, 1) == 1, f'get_element({test_list}, 1) should return 1 but returned {get_element(test_list, 1)}'
+    assert get_element(test_list, -4) == 1, f'get_element({test_list}, -4) should return 1 but returned {get_element(test_list, -4)}'
+
+    assert get_element(test_list, 2) == 2, f'get_element({test_list}, 2) should return 2 but returned {get_element(test_list, 2)}'
+    assert get_element(test_list, -3) == 2, f'get_element({test_list}, -3) should return 2 but returned {get_element(test_list, -3)}'
+
+    assert get_element(test_list, 3) == 3, f'get_element({test_list}, 3) should return 3 but returned {get_element(test_list, 3)}'
+    assert get_element(test_list, -2) == 3, f'get_element({test_list}, -2) should return 3 but returned {get_element(test_list, -2)}'
+
+    assert get_element(test_list, 4) == 4, f'get_element({test_list}, 4) should return 4 but returned {get_element(test_list, 4)}'
+    assert get_element(test_list, -1) == 4, f'get_element({test_list}, -1) should return 4 but returned {get_element(test_list, -1)}'
+
+    assert get_element(test_list, 5) is None, f'get_element({test_list}, 5) should return None but returned {get_element(test_list, 5)}'
+    assert get_element(test_list, -6) is None, f'get_element({test_list}, -6) should return None but returned {get_element(test_list, -6)}'
+    
+    assert get_element(test_list, 25) is None, f'get_element({test_list}, 25) should return None but returned {get_element(test_list, 25)}'
+    assert get_element(test_list, -26) is None, f'get_element({test_list}, -26) should return None but returned {get_element(test_list, -26)}'
+
+
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('get_slices'),
+    reason='get_slices not implemented yet.'
+)
+def test_gateway2_get_slices():
+    from learn_python.module2_basics.gateway2 import get_slices
+
+    test_list = [0, 1, 2, 3, 4]
+    slices = [(0, 2), (3, None)]
+    result = [0, 1, 3, 4]
+    assert get_slices(test_list, [(0,2), (3,None)]) == result, f'get_slices({test_list}, {slices}) should return {result} but returns {get_slices(test_list, slices)}'
+
+    slices = [(0, None), (2, -1)]
+    result = [0, 1, 2, 3, 4, 2, 3]
+    assert get_slices(test_list, slices) == result, f'get_slices({test_list}, {slices}) should return {result} but returns {get_slices(test_list, slices)}'
+
+    slices = [(3, -1), (1, 4), (None, 100)]
+    result = [3, 1, 2, 3, 0, 1, 2, 3, 4]
+    assert get_slices(test_list, slices) == result, f'get_slices({test_list}, {slices}) should return {result} but returns {get_slices(test_list, slices)}'
+
+    assert has_slice(get_slices), 'get_slices() must use a slice expression'
+    
+    assert has_for_loop(get_slices), 'get_slices() must use a for loop'
+    assert has_statement(get_slices, ast.AugAssign), 'get_slices() must use the += operator'
+
+@pytest.mark.skipif(
     not gateway2.exists() or unimplemented('float_range'),
     reason='float_range not implemented yet.'
 )
@@ -514,16 +567,12 @@ def test_gateway2_approximate_integral():
         (normal, ({'σ': 2, 'μ': 2}, (-8, 12, 0.1))),      # normal(σ=2, μ=2)
     ]:
         xy = xy_values(partial(pdf, **kwargs), start=x_min, stop=x_max, step=step)
-        if len(xy) % 2 != 0:
-            try:
-                approximate_integral(xy)
-                assert False, 'approximate_integral() should raise an AssertionError if the list of xy values has an odd number of elements'
-            except AssertionError:
-                pass
-            xy = xy[:-1]
         area = approximate_integral(xy)
         assert isclose(area, 1.0, abs_tol=.01), f'approximate_integral() should return ~1.0 for any normal distribution, but returns {area}'
-
+        assert num_statements(approximate_integral) == 2 or (num_statements(approximate_integral) == 3 and has_docstring(approximate_integral)), 'approximate_integral() should only require 2 statements'
+        assert count_statements(approximate_integral, ast.ListComp) == 2, 'approximate_integral() implementation should use 2 list comprehensions'
+        assert count_statements(approximate_integral, ast.Slice) == 2, 'approximate_integral() implementation should use 2 slices'
+        assert count_calls(approximate_integral, sum) == 2, 'approximate_integral() implementation should use 2 calls to sum()'
 
 @pytest.mark.skipif(
     not gateway2.exists() or unimplemented('deduplicate'),
@@ -733,6 +782,7 @@ def test_gateway2_identity_matrix():
     assert is_identity(identity_matrix(3), 3), f'identity_matrix(3) is not correct: {pformat(identity_matrix(3))}'
     assert is_identity(identity_matrix(4), 4), f'identity_matrix(4) is not correct: {pformat(identity_matrix(4))}'
     assert is_identity(identity_matrix(26), 26), f'identity_matrix(26) is not correct: {pformat(identity_matrix(26))}'
+    assert has_for_loop(identity_matrix), 'identity_matrix() does not use any for loops'
 
 
 @pytest.mark.skipif(
@@ -785,6 +835,26 @@ def test_gateway2_is_identity():
     assert is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]]) is False, f'is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]]) should return True, but returns {is_identity([[1, 0, 0], [0, 0, 1], [0, 1, 0]])}'
 
 
+@pytest.mark.skipif(
+    not gateway2.exists() or unimplemented('time_function'),
+    reason="time_function not implemented yet."
+)
+def test_gateway2_time_function():
+    from learn_python.module2_basics.gateway2 import time_function
+    from time import perf_counter
+
+    def func_to_time(*args, **kwargs):
+        return args, kwargs
+    
+    start = perf_counter()
+    seconds, result = time_function(func_to_time, 1, 2, 3, a=4, b=5, c=6)
+    test_time = perf_counter() - start
+    
+    assert seconds > 0, f'time_function(func_to_time, 1, 2, 3, a=4, b=5, c=6) should return a positive number of seconds, but returns {seconds}'
+    assert test_time > seconds, f'time_function(func_to_time, 1, 2, 3, a=4, b=5, c=6) should return a number of seconds less than the time it took to run the test {test_time}, but returns {seconds}'
+    assert result == ((1, 2, 3), {'a': 4, 'b': 5, 'c': 6}), f'time_function(func_to_time, 1, 2, 3, a=4, b=5, c=6) should return ((1, 2, 3), {{\'a\': 4, \'b\': 5, \'c\': 6}}), but returns {result}'
+
+
 # test scenario
 candidates = {
     0: 'Ada Lovelace',
@@ -828,7 +898,6 @@ def test_gateway2_ranked_choice():
     assert round1['ranking'] == round1_result, f"Round 1 ranking is not correct: {round1['ranking']} - expected: {round1_result}" 
     assert round2['ranking'] == round2_result, f"Round 2 ranking is not correct: {round2['ranking']} - expected: {round2_result}" 
     assert round3['ranking'] == round3_result, f"Round 3 ranking is not correct: {round3['ranking']} - expected: {round3_result}" 
-
 
 
 

@@ -5,10 +5,11 @@ This assignment is designed to exercise your knowledge of the basics of
 Python covered in the module 2 lesson. Take your time and if you get
 frustrated ask for help! Some of these tasks can be tricky and some of
 the later ones especially are designed to challenge your handle of 
-looping, conditionals and sequence indexing. This is the hard part, but
+looping, conditionals, sequence indexing and the syntactic sugar that
+python provides around iteration. This is the hard part, but
 it is the gateway to the fun part! If you get intimidated looking at 
 a large block of hard to understand code, take a breath and focus on
-each line one by one. 
+each line one by one - and test them in ipython to see what they do!
 
 To run these tests from the command line:
 
@@ -17,10 +18,14 @@ To run these tests from the command line:
 The tests will run for each task as you attempt to do the task - if no
 implementation is found the test will be skipped. Once you have completed
 the gateway assignment you should see that all tests pass with no skipped
-tests!
+tests (but tests from other modules will be "deselected")!
 
-Remember, if you want to run one of your functions outside of the pytest
-environment you can do so like this:
+To run a specific test use its full name:
+
+    poetry run pytest -k test_gateway2_is_even
+
+Remember, if you want to run one of your functions outside of a pytest
+run you can do so like this:
 
     poetry run ipython
     >> from learn_python.module2.gateway2 import my_function
@@ -90,13 +95,16 @@ def logic_play(first, second):
 # use any logical operators (and, or, not) and you may make a maximum
 # of three function calls. Your implementation should not exceed 5 
 # statements.
+# hint: you will need an if statement inside of another if statement
+# hint: remember that when a function does not explicitly return 
+#   anything it returns None
 def logic_play2(first, second):
     if is_even(first):
         if is_even(second):
             return first * second
     elif is_odd(second):
         return first / second
-    
+
 
 # Which version of logic_play is more clear? Which is more efficient?
 # Which is more readable? Which is more maintainable?
@@ -115,6 +123,27 @@ def default_args(w=0, x=1.0, y='2', z=None):
 
 
 # TODO Task 8
+# define a function called get_delegate that accepts a function as
+# an argument and returns that function if it is not None, if it is None
+# get_delegate should define and return a nested function called
+# default_delegate that itself returns 0
+# 
+# For example: 
+#   delegate = get_delegate(None)
+#   assert delegate() == 0
+#   def five():
+#       return 5
+#   assert get_delegate(five)() == 5
+#
+def get_delegate(delegate):
+    if delegate is None:
+        def default_delegate():
+            return 0
+        return default_delegate
+    return delegate
+
+
+# TODO Task 9
 # Define a function called is_close that takes two floats as arguments
 # and a third argument that is a tolerance. The function should return
 # True if the difference between the two floats is less than the tolerance
@@ -122,11 +151,11 @@ def default_args(w=0, x=1.0, y='2', z=None):
 # You may not call math.isclose()
 #  hint: checkout the python built-in function abs()
 def is_close(x, y, tol=1e-9):
-    return abs(x - y) < tol
+    return abs(x - y) < abs(tol)
 
 
-# TODO Task 9 - implement this function
-def normal_distribution(x, σ=1, μ=0):  # did you know python code is unicode by default? 🤯
+# TODO Task 10 - implement this function according to its docstring
+def normal_distribution(x, σ=1, μ=0):  # did you know python is unicode by default? 🤯
     """
     Compute the value of the normal distribution at x given σ and μ.
 
@@ -134,7 +163,7 @@ def normal_distribution(x, σ=1, μ=0):  # did you know python code is unicode b
     distribution.
 
     Hint: you will need to import three things from math
-    Hint: its possible to write this in a single line (not including the imports)
+    Hint: its possible to write this in a single statement (not including the imports)
 
     .. note:
         The test for this task will display a plot of your normal distribution,
@@ -150,11 +179,11 @@ def normal_distribution(x, σ=1, μ=0):  # did you know python code is unicode b
     :param μ: float - the mean of the normal distribution (x = μ is the peak 
         of the distribution), default: 0
     """
-    #from math import pi, sqrt, exp
-    #return 1 / (σ * sqrt(2 * pi)) * exp(-0.5 * ((x - μ) / σ) ** 2)
+    from math import pi, sqrt, exp
+    return 1 / (σ * sqrt(2 * pi)) * exp(-0.5 * ((x - μ) / σ) ** 2)
 
 
-# TODO Task 9
+# TODO Task 11
 # Define a function called divide that takes two arguments and returns
 # the result of dividing the first by the second using floor division
 # if both arguments are integers and regular division otherwise.
@@ -167,7 +196,7 @@ def divide(x, y):
     return x / y
 
 
-# TODO Task 10
+# TODO Task 12
 # Implement a function called get_decimal that takes a float or an
 # integer as an argument and returns decimal portion of the number. 
 # For example:
@@ -181,6 +210,37 @@ def divide(x, y):
 # Hint: use type coercion
 def get_decimal(x):
     return float(x) - int(x)
+
+
+# TODO Task 13
+# Define a function called get_element() that accepts two arguments.
+# The first will be a list and the second will be an index. The function
+# should return the element at that index if the index exists and None
+# if the index does not exist. Index may be negative or positive!
+# hint: you will need to use the built-in function len()
+def get_element(vector, index):
+    if abs(index + (1 if index > 0 else 0)) <= len(vector):
+        return vector[index]
+    return None
+
+
+# TODO Task 14
+# Define a function called get_slices() that accepts two arguments.
+# The first argument will be a list and the second argument will be a
+# list of 2-tuples. The first element of each 2-tuple will be a slice
+# start index and the second element will be a slice stop index. Return
+# a single list composed of the concatenation of all of the given slice
+# indices of the first list argument. For example:
+# 
+# assert get_slices([0, 1, 2, 3, 4], [(0, 2), (3, None)]) == [0, 1, 3, 4]
+# assert get_slices([0, 1, 2, 3, 4], [(0, None), (2, -1)]) == [0, 1, 2, 3, 4, 2, 3]
+#
+# Requirement: Use a for-loop and the += list operator
+def get_slices(vector, slices):
+    all_slices = []
+    for slice in slices:
+        all_slices += vector[slice[0]:slice[1]]
+    return all_slices
 
 
 def float_range(start, stop, step):
@@ -300,16 +360,18 @@ def approximate_integral(curve):
 
     ∫f(x)dx = (xₙ - x₀)/(3n) * (f(x₀) + 4f(x₁) + 2f(x₂) + 4f(x₃) + ... + 4f(xₙ₋₁) + f(xₙ))
 
-    Simpson's rule requires that len(curve) be even - assert that len(curve) is even
-    and non-zero.
-
     :param curve: list - a list of 2-tuple xy-values representing a curve
     :return float: - the area under the curve as computed by simpson's rule
 
     hint: use the built-in function sum() with even/odd list slices, and dont forget
         about the x/y tuple indexing!
+
+    Requirement: assert that the length of the curve is non-zero
+    Requirement: You must use sum(), two list slices in your implementation and
+        two list comprehensions in your implementation. Your implementation may not
+        be more than 2 statements.
     """
-    assert len(curve) and len(curve) % 2 == 0, 'The length of curve must be even!'
+    assert len(curve), 'The curve must not be empty!'
     return (curve[-1][0] - curve[0][0]) / (3*len(curve)) * (
         curve[0][1] + 
         curve[-1][1] + 
@@ -489,6 +551,8 @@ def identity_matrix(size):
     :param size: int - the number of rows and columns
     :return list of lists - the identity matrix of dimensions size x size
         if size is 0, return an empty list, if size is < 0 return None
+
+    Requirement: your implementation must use for loops
     """
     matrix = []
     for i in range(size):
@@ -543,6 +607,28 @@ def is_identity(matrix):
     return True
 
 
+# TODO - variadic arguments
+def time_function(function, *args, **kwargs):
+    """
+    Invokes the given function with the given arguments and keyword arguments while
+    timing how many seconds the given function call takes to complete.
+
+    hint: use time.perf_counter() to get the current time in seconds before and after
+    hint: recall - what type is args? what type is kwargs? how do you expand those
+        types into function arguments?
+
+    :param function: function - the function to time
+    :param *args: positional arguments to pass to the function
+    :param **kwargs: keyword arguments to pass to the function
+    :return 2-tuple: the first value is the number of seconds the function took to
+        complete and the second value is the return value of the function
+    """
+    from time import perf_counter
+    start = perf_counter()
+    ret = function(*args, **kwargs)
+    return perf_counter() - start, ret
+
+
 # Test Election Scenario
 ELECTION_CANDIDATES = {
     0: 'Ada Lovelace',
@@ -550,6 +636,8 @@ ELECTION_CANDIDATES = {
     2: 'Annie Easley',
     3: 'Katherine Johnson'
 }
+
+# unpacking makes the specification of our test ballots very compact!
 ELECTION_BALLOTS = [
     *([[0, 2, 3]] * 6),  # 6 ballots look like [Ada, Annie, Katherine]
     *([[1, 3, 2]] * 4),  # 4 ballots look like [Grace, Katherine, Annie]
@@ -618,13 +706,15 @@ def ranked_choice(candidates, ballots):
                 'winner': 'Candidate Name'  # the name of the winning candidate
             }
 
-    hint: break your code into smaller functions. You might have one function called determine_ranking
-        that takes a list of ballots and returns a list of tuples where the first element is the candidate
-        id and the second element is the number of votes that candidate received in the round. You might 
-        have another function called eliminate_candidate that takes a list of ballots and removes all votes
+    hint: break your code into smaller functions. You might have one function called 
+        determine_ranking that takes a list of ballots and returns a list of tuples 
+        where the first element is the candidate id and the second element is the number
+        of votes that candidate received in the round. You might have another function 
+        called eliminate_candidate that takes a list of ballots and removes all votes
         for the given candidate id - thus returning the cleaned ballots for the next round.
 
-        Using these functions from within a while loop will make what the while loop is doing more clear!
+        Using these functions from within a while loop will make what the while loop is 
+        doing more clear!
     """
     report = {
         'rounds': [],
