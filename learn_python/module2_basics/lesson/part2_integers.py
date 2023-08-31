@@ -1,55 +1,52 @@
 """
-Integers
-========
-
 Integers are whole numbers (they do not have fractional components).
 
-type: int
+type: ``int``
 
 Here are the common numerical operators (also look at the cheat sheets from above!):
 
 +---------+---------------------------------------------------------------------------------------+
 | Operator| Description                                                                           |
 +---------+---------------------------------------------------------------------------------------+
-| +       | Arithmetic addition: Adds two integers.                                               |
+| ``+``   | Arithmetic addition: Adds two integers.                                               |
 +---------+---------------------------------------------------------------------------------------+
-| -       | Arithmetic subtraction: Subtracts right operand from the left.                        |
+| ``-``   | Arithmetic subtraction: Subtracts right operand from the left.                        |
 +---------+---------------------------------------------------------------------------------------+
-| *       | Multiplication: Multiplies two integers.                                              |
+| ``*``   | Multiplication: Multiplies two integers.                                              |
 +---------+---------------------------------------------------------------------------------------+
-| /       | Division: Divides left operand by the right one (always returns a float).             |
+| ``/``   | Division: Divides left operand by the right one (always returns a float).             |
 +---------+---------------------------------------------------------------------------------------+
-| //      | Floor Division: Divides and returns the integer value of the quotient.                |
+| ``//``  | Floor Division: Divides and returns the integer value of the quotient.                |
 +---------+---------------------------------------------------------------------------------------+
-| %       | Modulus: Returns the remainder when left operand is divided by the right operand.     |
+| ``%``   | Modulus: Returns the remainder when left operand is divided by the right operand.     |
 +---------+---------------------------------------------------------------------------------------+
-| **      | Exponentiation: Raises the left operand to the power of the right operand.            |
+| ``**``  | Exponentiation: Raises the left operand to the power of the right operand.            |
 +---------+---------------------------------------------------------------------------------------+
-| <<      | Left shift: Shifts the bits of the number to the left by the specified number of      |
+| ``<<``  | Left shift: Shifts the bits of the number to the left by the specified number of      |
 |         | positions.                                                                            |
 +---------+---------------------------------------------------------------------------------------+
-| >>      | Right shift: Shifts the bits of the number to the right by the specified number of    |
+| ``>>``  | Right shift: Shifts the bits of the number to the right by the specified number of    |
 |         | positions.                                                                            |
 +---------+---------------------------------------------------------------------------------------+
-| &       | Bitwise AND: Performs a bitwise AND on two integers.                                  |
+| ``&``   | Bitwise AND: Performs a bitwise AND on two integers.                                  |
 +---------+---------------------------------------------------------------------------------------+
-| |       | Bitwise OR: Performs a bitwise OR on two integers.                                    |
+| ``|``   | Bitwise OR: Performs a bitwise OR on two integers.                                    |
 +---------+---------------------------------------------------------------------------------------+
-| ^       | Bitwise XOR: Performs a bitwise exclusive OR on two integers.                         |
+| ``^``   | Bitwise XOR: Performs a bitwise exclusive OR on two integers.                         |
 +---------+---------------------------------------------------------------------------------------+
-| ~       | Bitwise NOT: Inverts all the bits of the integer.                                     |
+| ``~``   | Bitwise NOT: Inverts all the bits of the integer.                                     |
 +---------+---------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two integers are equal.                                           |
+| ``==``  | Equality: Checks if two integers are equal.                                           |
 +---------+---------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two integers are not equal.                                     |
+| ``!=``  | Inequality: Checks if two integers are not equal.                                     |
 +---------+---------------------------------------------------------------------------------------+
-| <       | Less than: Checks if left integer is less than the right one.                         |
+| ``<``   | Less than: Checks if left integer is less than the right one.                         |
 +---------+---------------------------------------------------------------------------------------+
-| >       | Greater than: Checks if left integer is greater than the right one.                   |
+| ``>``   | Greater than: Checks if left integer is greater than the right one.                   |
 +---------+---------------------------------------------------------------------------------------+
-| <=      | Less than or equal to: Checks if left integer is less than or equal to the right one. |
+| ``<=``  | Less than or equal to: Checks if left integer is less than or equal to the right one. |
 +---------+---------------------------------------------------------------------------------------+
-| >=      | Greater than or equal to: Checks if left integer is greater than or equal to the      |
+| ``>=``  | Greater than or equal to: Checks if left integer is greater than or equal to the      |
 |         | right one.                                                                            |
 +---------+---------------------------------------------------------------------------------------+
 """
