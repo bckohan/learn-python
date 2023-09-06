@@ -67,9 +67,8 @@ equivalent values in a set
 | set.update       | Updates the set with elements from another set or iterable.                            |
 +------------------+----------------------------------------------------------------------------------------+
 
-
 """
-from learn_python.module2_basics.lesson.part12_strings import *
+from learn_python.module2_basics.lesson.part13_looping import *
 
 
 # you can specify a set like this

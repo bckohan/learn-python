@@ -42,7 +42,7 @@ assert {
 # notice that the second dictionary overwrote the value of 'b' in the first
 
 # we've been using literals - but you can also use variables:
-assert (*my_list,) == (1, 2, 3, 4, 5)  
+assert (*my_list,) == (1, 2, 3, 4)
 # ^ recall, a single value tuple needs a trailing comma
 
 # Unpacking into function call arguments.
@@ -146,4 +146,8 @@ assert wrapper(d=4, e=5) == {}
 # this particular pattern enables some pretty fancy stuff in python - for example
 # decorators which we will cover in a later module
 
+
+# ****************************************************************************
+# Do Gateway 2 tasks 22-40 before proceeding to the next module!             *
+# ****************************************************************************
 

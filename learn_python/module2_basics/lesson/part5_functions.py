@@ -1,8 +1,6 @@
 """
-Functions
-
 We talked about basic function definitions last time - but here's a few more
- things to know about python functions.
+things to know about python functions.
 """
 from learn_python.module2_basics.lesson.part4_ternary_if_else import *
 
@@ -101,8 +99,7 @@ assert apply_function(add) == 3
 
 # this is a technique or pattern called "inversion of control" or delegation
 # it can be very powerful in situations where you want to plug-in different
-# specifics to the business logic of your program - we will see an example of
-# this in our gateway assignment.
+# specific behavior to the overall business logic of your program.
 
 # when we store a function in a variable, we can "bind" some or all of its
 # arguments, using the partial function from the functools package in the
@@ -133,7 +130,7 @@ assert function_args(arg4=4, arg3=3, arg2=2, arg1=1) == (1, 2, 3, 4)
 def get_delegate(var):
     
     def handle_none():
-        return var
+        return 0
     
     def handle_other():
         return var
@@ -143,7 +140,5 @@ def get_delegate(var):
     return handle_other
 
 # get a delegate function and then call it!
-assert get_delegate(None)() == None
+assert get_delegate(None)() == 0
 assert get_delegate(1)() == 1
-
-# ****************************************************************************

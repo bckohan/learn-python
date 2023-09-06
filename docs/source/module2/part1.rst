@@ -10,3 +10,4 @@ Part 1: None
 .. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part1_none.py
    :language: python
    :start-after: import
+   :linenos:

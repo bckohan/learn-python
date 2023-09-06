@@ -52,7 +52,7 @@ dictionaries are collections of key-value pairs
 
 
 """
-from learn_python.module2_basics.lesson.part14_methods import *
+from learn_python.module2_basics.lesson.part14_sets import *
 
 
 my_dict = {

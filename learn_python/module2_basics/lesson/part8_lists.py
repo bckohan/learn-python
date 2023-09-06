@@ -1,72 +1,89 @@
 """
 Lists are sequences of values in a contiguous chunk of memory
 
-+---------+----------------------------------------------------------------------------------------+
-| Operator| Description                                                                            |
-+---------+----------------------------------------------------------------------------------------+
-| +       | Concatenation: Combines two lists.                                                     |
-+---------+----------------------------------------------------------------------------------------+
-| *       | Repetition: Replicates the list a given number of times.                               |
-+---------+----------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two lists have the same elements in the same order.                |
-+---------+----------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two lists are different.                                         |
-+---------+----------------------------------------------------------------------------------------+
-| <       | Less than: Compares lists lexicographically.                                           |
-+---------+----------------------------------------------------------------------------------------+
-| >       | Greater than: Compares lists lexicographically.                                        |
-+---------+----------------------------------------------------------------------------------------+
-| <=      | Less than or equal to: Compares lists lexicographically.                               |
-+---------+----------------------------------------------------------------------------------------+
-| >=      | Greater than or equal to: Compares lists lexicographically.                            |
-+---------+----------------------------------------------------------------------------------------+
-| in      | Membership: Checks if an item is present in the list.                                  |
-+---------+----------------------------------------------------------------------------------------+
-| not in  | Non-membership: Checks if an item is not present in the list.                          |
-+---------+----------------------------------------------------------------------------------------+
-| del     | Delete: Remove the given element or slice from the list                                |
-+---------+----------------------------------------------------------------------------------------+
++------------+------------------------------------------------------------------------------------+----------------------+
+| Operator   | Description                                                                        | Example              |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``+``      | Concatenation: Combines two lists.                                                 | [0] + [1] == [0, 1]  |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``*``      | Repetition: Replicates the list a given number of times.                           | [0] * 3 == [0, 0, 0] |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``==``     | Equality: Checks if two lists have the same elements in the same order.            | [0, 1] == [0, 1]     |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``!=``     | Inequality: Checks if two lists are different.                                     | [0, 1] != [0, 2]     |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``<``      | Less than: Compares lists lexicographically.                                       | [0, 1] < [0, 2]      |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``>``      | Greater than: Compares lists lexicographically.                                    | [0, 2] > [0, 1]      |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``<=``     | Less than or equal to: Compares lists lexicographically.                           | [0, 1] <= [0, 2]     |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``>=``     | Greater than or equal to: Compares lists lexicographically.                        | [2, 2] >= [2, 1]     |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``in``     | Membership: Checks if an item is present in the list.                              | 0 in [0, 1]          |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``not in`` | Non-membership: Checks if an item is not present in the list.                      | 2 not in [0, 1]      |
++------------+------------------------------------------------------------------------------------+----------------------+
+| ``del``    | Delete: Remove the given element or slice from the list                            | del my_list[0]       |
++------------+------------------------------------------------------------------------------------+----------------------+
 
-+----------------+----------------------------------------------------------------------------------------+
-| Method         | Description                                                                            |
-+----------------+----------------------------------------------------------------------------------------+
-| list.append    | Adds an element at the end of the list.                                                |
-+----------------+----------------------------------------------------------------------------------------+
-| list.clear     | Removes all elements from the list.                                                    |
-+----------------+----------------------------------------------------------------------------------------+
-| list.copy      | Returns a shallow copy of the list.                                                    |
-+----------------+----------------------------------------------------------------------------------------+
-| list.count     | Returns the number of elements with the specified value.                               |
-+----------------+----------------------------------------------------------------------------------------+
-| list.extend    | Adds the elements of a list (or any iterable) to the end of the current list.          |
-+----------------+----------------------------------------------------------------------------------------+
-| list.index     | Returns the index of the first element with the specified value.                       |
-+----------------+----------------------------------------------------------------------------------------+
-| list.insert    | Adds an element at a specified position.                                               |
-+----------------+----------------------------------------------------------------------------------------+
-| list.pop       | Removes and returns the element at a specified position (default is the last item).    |
-+----------------+----------------------------------------------------------------------------------------+
-| list.remove    | Removes the first item with the specified value.                                       |
-+----------------+----------------------------------------------------------------------------------------+
-| list.reverse   | Reverses the order of the list.                                                        |
-+----------------+----------------------------------------------------------------------------------------+
-| list.sort      | Sorts the list in place.                                                               |
-+----------------+----------------------------------------------------------------------------------------+
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| Method         | Description                                                                            | Example                |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **append**     | Adds an element at the end of the list.                                                | my_list.append(2)      |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **clear**      | Removes all elements from the list.                                                    | my_list.clear()        |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **copy**       | Returns a shallow copy of the list.                                                    | my_list.copy()         |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **count**      | Returns the number of elements with the specified value.                               | [1, 1].count(1) == 2   |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **extend**     | Adds the elements of a list (or any iterable) to the end of the current list.          | my_list.extend([0, 1]) |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **index**      | Returns the index of the first element with the specified value.                       | [1, 2].index(2) == 1   |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **insert**     | Adds an element at a specified position.                                               | my_list.insert(0, -1)  |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **pop**        | Removes and returns the element at a specified position (default is the last item).    | [0, 1].pop() == 1      |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **remove**     | Removes the first item with the specified value.                                       | my_list.remove(1)      |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **reverse**    | Reverses the order of the list.                                                        | my_list.reverse()      |
++----------------+----------------------------------------------------------------------------------------+------------------------+
+| **sort**       | Sorts the list in place.                                                               | my_list.sort()         |
++----------------+----------------------------------------------------------------------------------------+------------------------+
 
+.. image:: ../../../../learn-python/learn_python/module2_basics/resources/SequenceIndexing.svg
+   :alt: Python Sequence Indexing
+   :width: 100%
+   :align: center
+
+|
 """
 from learn_python.module2_basics.lesson.part7_type_casting import *
 
 my_list = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 # you can access elements of a list by index (starting at 0)
+# element indexing is done using brackets: list[expression] where the expression
+# is any python expression that produces a value that can be used as an index
 assert my_list[0] == my_list[-10] == 0
 assert my_list[1] == my_list[-9] == 1
 # python also supports negative indexing (i.e. count from the end, starting at -1)
+
+# remember - any expression that produces an integer can be used to index a list!
+def one():
+    return 1
+
+multiplier = 6
+assert my_list[one() * multiplier] == 8
 
 # lists are mutable, meaning we can change their elements!
 my_list[9] = -1
 assert my_list == [0, 1, 1, 2, 3, 5, 8, 13, 21, -1]
 
-# you can slice lists to get a sub-list
+# you can slice lists to get a sub-list, to slice use:
+# list[start:stop:step] where start, stop and step are all expressions that produce
+# integers or None!
 assert my_list[1:3] == [1, 1]
 
 # when a slice index is omitted it defaults to None, which for the first
@@ -177,4 +194,3 @@ assert sorted([3, 2, 1]) == [1, 2, 3]
 # but it does not return a list - it returns a special object that can be
 # converted to a list using the list() function
 assert list(reversed([4, 7, 2])) == [2, 7, 4]
-# ****************************************************************************

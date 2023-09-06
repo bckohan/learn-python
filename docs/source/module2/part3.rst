@@ -1,7 +1,7 @@
 .. _part3:
 
-Part 3: Booleans
-================
+Part 3: Booleans (`bool <https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not>`_)
+============================================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part3_booleans
 	:members:
@@ -10,3 +10,4 @@ Part 3: Booleans
 .. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part3_booleans.py
    :language: python
    :start-after: import
+   :linenos:

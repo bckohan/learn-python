@@ -1,9 +1,7 @@
 """
 Integers are whole numbers (they do not have fractional components).
 
-type: ``int``
-
-Here are the common numerical operators (also look at the cheat sheets from above!):
+Here are the common numerical operators (also look at the :ref:`cheat sheets <external-resources>`!):
 
 +---------+---------------------------------------------------------------------------------------+
 | Operator| Description                                                                           |
@@ -53,7 +51,8 @@ Here are the common numerical operators (also look at the cheat sheets from abov
 from learn_python.module2_basics.lesson.part1_none import *
 
 
-my_int = 3
+my_int = 3  # assignment - my_int now holds the value of 3
+assert my_int == 3
 
 # integers in Python are not limited to the word size of your processor 
 #  (i.e. 64 bits)! They can be as large as your computer's memory can hold!
@@ -65,7 +64,7 @@ assert my_int + 1 == 4
 assert my_int - 1 == 2  # this is not 3 because my_int + 1 did not modify my_int!
 
 # operators can be combined with assignment by combining the mathematical and
-#   assignment operator (=)
+# assignment operator (=)
 my_int += 1  # this is equivalent to my_int = my_int + 1
 assert my_int == 4
 my_int -= 1
@@ -75,4 +74,3 @@ assert my_int == 6
 my_int /= 2
 assert my_int == 3
 
-my_int = 3

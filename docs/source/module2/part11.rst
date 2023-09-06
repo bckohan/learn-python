@@ -1,0 +1,13 @@
+.. _part11:
+
+Part 11: Immutability & Memory
+==============================
+
+.. automodule:: learn_python.module2_basics.lesson.part11_methods
+	:members:
+	:inherited-members:
+
+.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part11_methods.py
+   :language: python
+   :start-after: import
+   :linenos:

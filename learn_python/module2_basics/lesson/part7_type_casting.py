@@ -1,9 +1,8 @@
 """
-type()
-
 Python has dynamic typing - meaning a variable might hold anything!
-  When you are not sure what a variable is you can use built-in function
-  type() to find out!
+When you are not sure what a variable is you can use built-in function
+`type() <https://docs.python.org/3/library/functions.html#type>`_ to 
+find out!
 """
 from learn_python.module2_basics.lesson.part6_floating_point import *
 
@@ -73,3 +72,18 @@ assert type(4 * 3) == int
 # but when you multiply an int and a float, you get a float
 assert type(4 * 3.0) == float
 
+# whenever an expression is used as a condition of an if/else statement or used with
+# a logical operator, the expression is implicitly cast to a bool. For example:
+
+if not my_int:
+    assert False  # shouldn't happen b/c my_int == 3 and bool(my_int) == True
+
+# the above is equivalent to:
+if not bool(my_int):
+    assert False
+    
+# this will be important when we talk about empty lists next!
+
+# ****************************************************************************
+# Do Gateway 2 tasks 10-11 before proceeding!                                *
+# ****************************************************************************

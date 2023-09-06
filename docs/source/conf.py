@@ -30,8 +30,10 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
     'sphinx_rtd_theme',
-    'sphinxcontrib.youtube'
+    'sphinxcontrib.youtube',
+    'sphinxcontrib.jquery'
 ]
 
 master_doc = 'index'
@@ -41,5 +43,11 @@ html_theme = "sphinx_rtd_theme"
 html_css_files = [
     'learn_python.css',
 ]
+html_js_files = [
+    'learn_python.js'
+]
 
 html_static_path = ['_static']
+
+todo_include_todos = True
+source_encoding = 'utf-8-sig'

@@ -1,13 +1,20 @@
 """
+This module covers the basics of the Python language. You
+will be emersed in code and the code itself will be used to illustrate how
+the syntax works. The best way to learn how to code is to read lots of code!
+The point of these lessons is not to exhaustively document the language - high
+quality documentation already exists and you should use it. The goal here is
+to expose you to lots of code in-situ in a way in which a professional Python
+project might be organized and then to drill through gateway exercises that give
+you immediate pass/fail feedback. 
 
-This module covers the basics of python data types, operators and looping. We 
-use assertion statements to verify that the statements are accurate. 
-assert <expression> is a special statement in python that will error out if 
-the <expression> is False. When executed this file should produce no output 
-because all the assertions are True!
+The lessons in this module consist of commented code containing assertion 
+statements that verify that the statements of how the language behaves are accurate. 
 
-You can also add an optional human readable reason after an assert expression, 
-try this:
+assert <expression> is a special statement in Python that will error out if 
+the <expression> is False. When executed this module should produce no output 
+because all the assertions are True! You can also add an optional human 
+readable reason after an assert expression, try this:
 
     .. code-block:: python
     
@@ -16,6 +23,16 @@ try this:
 Assertion statements are used to test your gateway assignments! Check them out
 in ./tests
 
+The lessons are organized into parts. Each part covers a different topic. Read
+the code line by line and try to understand what it is doing. If you don't you
+can always run the code in the Python interactive shell or debugger and play 
+around with it. At certain points you will be asked to complete a set of gateway
+exercises.
+
+Documentation
+-------------
+
+The code is documented in a way that a professional Python project might be.
 This multi-line string - delineated by triple quotes - is called a docstring 
 when it appears at the top of a module like this. It will be put in a special
 variable called __doc__. Try this:
@@ -28,25 +45,26 @@ variable called __doc__. Try this:
         help(lesson)  # look familiar?
 
 Tools exist to convert docstrings to html or pdf documentation - much of the
-python standard library is documented this way, so help() may look very familiar
-to what you read on the internet!
+python standard library is documented this way, so `help() <https://docs.python.org/3/library/functions.html#help>`_ may look very familiar
+to what you read on the internet! `Sphinx-doc <https://www.sphinx-doc.org/en/master/>`_
+is the tool used to generate html documentation from these docstrings. `You can view
+the html documentation for this module here. <TODO>`_ Sphinx-doc helps keep our documentation
+DRY!
 
-The walkthrough in this lesson is designed to immerse you in code, but
-as a quick reference these resources are better:
+.. _external-resources:
+
+External Resources
+------------------
+
+The walkthrough in this lesson is designed to immerse you in code, but as a quick reference these resources are better:
 
     * `A nice 2-page pdf cheat sheet <http://sixthresearcher.com/wp-content/uploads/2016/12/Python3_reference_cheat_sheet.pdf>`_
     * `An extremely well organized cheat sheet web page <https://www.pythoncheatsheet.org/cheatsheet/basics>`_
     * `Extensive cheat sheet w/ popular data science packages <https://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf>`_
     * `Python standard library built-in function documentation <https://docs.python.org/3/library/functions.html>`_
-
-If in the course of playing around with this file, you would like to revert it to the
-original version without your edits you can use git:
-
-    .. code-block:: bash
+    * `Python standard library built-in data types documentation <https://docs.python.org/3/library/stdtypes.html>`_
+    * `Quick ref for common f-string formatting <https://fstring.help/cheat/>`_
     
-        git checkout -- learn_python/module2_basics/lesson.py
-
-
 What are data types?
 --------------------
 
@@ -54,9 +72,8 @@ Data types are both:
     1. Information (values, i.e. bits & bytes stored in memory)
     2. Behavior (cpu instructions - also stored in memory)
 
-Operators & Functions
-     Operators are special functions the language supports to make code more readable
-       i.e. multiply(2, 3) can be more clearly written 2 * 3
+Operators are special functions the language supports to make code more readable.
+    - multiply(2, 3) can be more clearly written 2 * 3
 
 We can define our own data types!
     - Most custom data types are composites of the standard Python data types - meaning
@@ -71,7 +88,7 @@ We can define our own data types!
 
 
 Terminology
-~~~~~~~~~~~
+-----------
 
 #. **Literal**: When you see a primitive type specified directly as its value it is called a "literal":
 
@@ -85,7 +102,7 @@ Terminology
         True                  # boolean literals
 
         
-#. **Expression**: An expression is a combination of literals, variables, operators and functions. Expression must evaluate to a value:
+#. **Expression**: An expression is a combination of literals, variables, operators and functions. Expressions must evaluate to a value. Anywhere in a program where a value literal can appear, you may also use an expression!:
       
     .. code-block:: python
         
@@ -95,7 +112,7 @@ Terminology
         sqrt(4)    # is an expression that calls a function that evaluates to 2
 
         
-#. **Statement**: A statement differs from an expression in that it does not typically evaluate to a value, but instead performs some action:
+#. **Statement**: A statement differs from an expression in that it does not evaluate to a value, but instead performs some action:
       
     .. code-block:: python
 
@@ -114,22 +131,25 @@ Terminology
         3 + 2 * 4   # in this expression + and * are operators
         not False   # in this expression not is a unary operator
 
+    .. note::
+        When an operator only operates on a single value it is called a *unary operator*.
       
 Debugging
-~~~~~~~~~
+---------
 
 You are already familiar with the Python interactive shell. Python also comes
-with a debugger (Python de-bugger aka pdb). You can use the debugger to set
-"breakpoints" that will allow you to run the script and stop at a given point
-inside the python interactive shell. Here's how to do that:
+with a `debugger (Python DeBugger aka pdb). <https://docs.python.org/3/library/pdb.html>`_
+You can use the debugger to set "breakpoints" that will allow you to run the script and 
+stop at a given point inside the Python interactive shell. Here's how to do that:
 
 .. code-block:: python
 
     import pdb
     pdb.set_trace()  # the script will pause execution here, try it!
 
-Like ipython there is also an ipdb that is a little easier to work with - let's
-use that one instead, it should be installed when you run poetry install.
+Like ipython there is also an `ipdb <https://pypi.org/project/ipdb/>`_ that is a little 
+easier to work with - let's use that one instead, it should be installed when you run 
+poetry install.
 
 .. code-block:: python
 
@@ -144,7 +164,14 @@ You can run all of the code in these emersion lessons using:
 
     poetry run module2
 
-    
+
+If in the course of playing around with these lessons, you would like to revert a file
+to its original version without your edits you can use git:
+
+.. code-block:: bash
+
+    git checkout -- learn_python/module2_basics/lesson/<filename>.py
+
 """
 
 

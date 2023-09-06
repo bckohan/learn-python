@@ -4,7 +4,7 @@ Looping, Iteration & Comprehensions
 There are two types of loops in python, for loops and while loops
 loops let you do something repeatedly until a condition is met.
 """
-from learn_python.module2_basics.lesson.part10_tuples import *
+from learn_python.module2_basics.lesson.part12_immutability import *
 
 
 # while loops are the most basic type of loop, they repeat until a condition

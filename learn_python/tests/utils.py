@@ -7,7 +7,7 @@ from math import isclose
 def import_string(str_to_import):
     module_name, attr_name = str_to_import.rsplit('.', 1)
     module = importlib.import_module(module_name)
-    return getattr(module, attr_name)
+    return getattr(module, attr_name, None)
 
 
 def is_function_called(calling_func, called_func):
@@ -142,6 +142,13 @@ def has_not(func):
 def has_logical_operator(func):
     tree = parse_ast(func)
     return has_and(tree) or has_or(tree) or has_not(tree)
+
+
+def has_format_specifier(func):
+    for node in ast.walk(parse_ast(func)):
+        if isinstance(node, ast.FormattedValue) and node.format_spec is not None:
+            return node.format_spec.values[0].value
+    return False
 
 
 def has_while_loop(func):

@@ -1,23 +1,31 @@
 """
-Methods vs Operators
+There are three types of functions in Python:
+    * functions
+    * operators
+    * methods
 
-Data types have a bunch of functions that can be called on them
-look at the standard library docs for all the details!
+Basic functions can be defined anywhere and called wherever a reference to the
+function or a variable holding the function can be accessed. We have also seen 
+examples of many operators - which are just special functions the language binds 
+to specific symbols like "*". The final type of function is a method. Methods are 
+functions that are bound to, and called on, a specific type of data.
+
+Lets take a look!
 """
-from learn_python.module2_basics.lesson.part13_sets import *
+from learn_python.module2_basics.lesson.part10_strings import *
 
 assert my_512_bit_integer.bit_length() == 512
 # when you see a function invoked like above (e.g. variable.function() )
-#   think of the variable as the first argument to the function 
-#   (e.g. function(variable) ) - more on this when we talk about classes!
+# think of the variable as the first argument to the function 
+# (e.g. function(variable) ) - more on this when we talk about classes!
 # 
 # when a function is invoked on a variable like this it may be referred to
-#  as a "method"
+# as a "method"
 
-# string has a bunch of very useful functions!
+# string has a bunch of very useful methods!
 assert my_string.upper() == 'HELLO WORLD'
 
-# you can chain functions together, .lower() is called on the return value of 
+# you can chain methods together, .lower() is called on the return value of 
 # .upper()!
 assert my_string.upper().lower() == 'hello world'
 
@@ -44,12 +52,8 @@ assert ' '.join(
 # read all about the string methods here: 
 #   https://docs.python.org/3/library/stdtypes.html#string-methods
 
-# container types like lists, sets and dictionaries also have a bunch of
-# functions, many involve adding or removing elements from the container
-my_set.add(5)
-assert my_set == {1, 2, 3, 5}
-my_set.remove(5)
-assert my_set == {1, 2, 3}
+# container types like lists also have a bunch of functions, many involve adding 
+# or removing elements from the container
 
 my_list = [1, 2, 3, 4, 5]
 my_list.append(6)  # add 6 to the end of my_list
@@ -70,3 +74,4 @@ assert (my_int > 2) == my_int.__gt__(2)
 # we'll talk more about this and why it's important when we discuss classes!
 #  hint: its because when we define our own custom types we can define these
 #  special functions to make our types usable with operators!
+

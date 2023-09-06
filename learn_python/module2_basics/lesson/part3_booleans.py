@@ -8,21 +8,21 @@ Booleans are either True or False.
 +---------+---------------------------------------------------------------------------------------+
 | Operator| Description                                                                           |
 +---------+---------------------------------------------------------------------------------------+
-| and     | Logical AND: Returns True if both the operands are true.                              |
+| ``and`` | Logical AND: Returns True if both the operands are true.                              |
 +---------+---------------------------------------------------------------------------------------+
-| or      | Logical OR: Returns True if either of the operands is true.                           |
+| ``or``  | Logical OR: Returns True if either of the operands is true.                           |
 +---------+---------------------------------------------------------------------------------------+
-| not     | Logical NOT: Returns True if the operand is false, and False if it's true.            |
+| ``not`` | Logical NOT: Returns True if the operand is false, and False if it's true.            |
 +---------+---------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two booleans are equal.                                           |
+| ``==``  | Equality: Checks if two booleans are equal.                                           |
 +---------+---------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two booleans are not equal.                                     |
+| ``!=``  | Inequality: Checks if two booleans are not equal.                                     |
 +---------+---------------------------------------------------------------------------------------+
-| &       | Bitwise AND: Equivalent to logical AND for booleans.                                  |
+| ``&``   | Bitwise AND: Equivalent to logical AND for booleans.                                  |
 +---------+---------------------------------------------------------------------------------------+
-| |       | Bitwise OR: Equivalent to logical OR for booleans.                                    |
+| ``|``   | Bitwise OR: Equivalent to logical OR for booleans.                                    |
 +---------+---------------------------------------------------------------------------------------+
-| ^       | Bitwise XOR: Returns True if exactly one of the operands is true.                     |
+| ``^``   | Bitwise XOR: Returns True if exactly one of the operands is true.                     |
 +---------+---------------------------------------------------------------------------------------+
 """
 from learn_python.module2_basics.lesson.part2_integers import *
@@ -32,20 +32,20 @@ my_boolean = True
 assert my_boolean
 
 #  logical operators are "and", "or" and "not"
-#
+
 #       and
-#  (True and True) is True
-#  (False and True) is False
-#  (False and False) is False
-#
+assert (True and True) is True
+assert (False and True) is False
+assert (False and False) is False
+
 #       or
-#  (True or True) is True
-#  (False or True) is True
-#  (False or False) is False
-#
+assert (True or True) is True
+assert (False or True) is True
+assert (False or False) is False
+
 #       not
-#  not True is False
-#  not False is True
+assert not True is False
+assert not False is True
 
 assert not not my_boolean
 

@@ -1,59 +1,65 @@
 """
-Floating Point Numbers
+Floating point numbers are numbers with fractions (e.g. 2.99792458)!
 
-Numbers with fractions (e.g. 2.99792458)!
+It is impossible to represent all arbitrary real numbers using a finite number of 1s and 0s!
 
-It is impossible to represent all arbitrary real numbers using a finite
-  number of 1s and 0s!
+Python uses the 64 bit IEEE-754 specification for floating point numbers. For all the gory 
+details checkout this video.
 
-Python uses the 64 bit IEEE-754 specification for floating point numbers. 
-  For all the gory details checkout this video (at 3/4 speed):
-      https://www.youtube.com/watch?v=dQhj5RGtag0&ab_channel=janMisali
+..  youtube:: dQhj5RGtag0
+   :width: 40%
+   :align: left
 
-It’s called “floating point” because its a binary version of scientific 
-  notation where some bits are reserved for the exponent - which allows us
-  to manipulate where the “point” resides and thus control at which magnitude
-  our precision resides. We run into trouble when we expect a single float to
-  be precise at two wildly different magnitudes
+We call them "floating point" numbers because we use a binary version of scientific 
+notation where some bits are reserved for the exponent - which allows us
+to manipulate where the “point” resides and thus control at which magnitude
+our precision resides. We run into trouble when we expect a single float to
+be precise at two wildly different magnitudes.
+
+Most processors have a Floating Point Unit (FPU) composed of transistor circuits
+optimized for floating point arithmetic. For this reason the size of floats in most computing
+systems are determined by the hardware and are typically 64-80 bits long. We do not have 
+arbitrarily large floats in Python as we do with integers.
 
 You do not need to know the details! Except to understand that not all numbers
- are representable and this can introduce small precision errors in mathematics
- that are almost but not always inconsequential:
-     https://blog.esciencecenter.nl/floating-point-butterfly-effect-62ebe004200f
+are representable and this can introduce small precision errors in mathematics
+that are almost `but not always inconsequential. <https://blog.esciencecenter.nl/floating-point-butterfly-effect-62ebe004200f>`_
 
-What every scientist should know about floating point numbers:
-   https://dl.acm.org/doi/10.1145/103162.103163
+`This classic paper explains "What every scientist should know about floating point numbers". <https://dl.acm.org/doi/10.1145/103162.103163>`_
+   
+|
 
+-------------------------
 
 +---------+----------------------------------------------------------------------------------------+
 | Operator| Description                                                                            |
 +---------+----------------------------------------------------------------------------------------+
-| +       | Arithmetic addition: Adds two floats.                                                  |
+| ``+``   | Arithmetic addition: Adds two floats.                                                  |
 +---------+----------------------------------------------------------------------------------------+
-| -       | Arithmetic subtraction: Subtracts right operand from the left.                         |
+| ``-``   | Arithmetic subtraction: Subtracts right operand from the left.                         |
 +---------+----------------------------------------------------------------------------------------+
-| *       | Multiplication: Multiplies two floats.                                                 |
+| ``*``   | Multiplication: Multiplies two floats.                                                 |
 +---------+----------------------------------------------------------------------------------------+
-| /       | Division: Divides left operand by the right one.                                       |
+| ``/``   | Division: Divides left operand by the right one.                                       |
 +---------+----------------------------------------------------------------------------------------+
-| //      | Floor Division: Divides and returns the largest whole number not greater than the      |
+| ``//``  | Floor Division: Divides and returns the largest whole number not greater than the      |
 |         | result (as a float).                                                                   |
 +---------+----------------------------------------------------------------------------------------+
-| %       | Modulus: Returns the remainder when left operand is divided by the right operand.      |
+| ``%``   | Modulus: Returns the remainder when left operand is divided by the right operand.      |
 +---------+----------------------------------------------------------------------------------------+
-| **      | Exponentiation: Raises the left operand to the power of the right operand.             |
+| ``**``  | Exponentiation: Raises the left operand to the power of the right operand.             |
 +---------+----------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two floats are exactly equal (be careful with this b/c precision). |                                                                     |
+| ``==``  | Equality: Checks if two floats are exactly equal (be careful with this b/c precision). |
 +---------+----------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two floats are not exactly equal.                                |
+| ``!=``  | Inequality: Checks if two floats are not exactly equal.                                |
 +---------+----------------------------------------------------------------------------------------+
-| <       | Less than: Checks if left float is less than the right one.                            |
+| ``<``   | Less than: Checks if left float is less than the right one.                            |
 +---------+----------------------------------------------------------------------------------------+
-| >       | Greater than: Checks if left float is greater than the right one.                      |
+| ``>``   | Greater than: Checks if left float is greater than the right one.                      |
 +---------+----------------------------------------------------------------------------------------+
-| <=      | Less than or equal to: Checks if left float is less than or equal to the right one.    |
+| ``<=``  | Less than or equal to: Checks if left float is less than or equal to the right one.    |
 +---------+----------------------------------------------------------------------------------------+
-| >=      | Greater than or equal to: Checks if left float is greater than or equal to the         |
+| ``>=``  | Greater than or equal to: Checks if left float is greater than or equal to the         |
 |         | right one.                                                                             |
 +---------+----------------------------------------------------------------------------------------+
 """
@@ -123,6 +129,7 @@ assert result2 == 0.5   # this one is correct
 # specified tolerance. The below statement returns True if result2 is within 
 # 1e-10 of 0.5
 assert math.isclose(result2, 0.5, abs_tol=1e-10)
-# ****************************************************************************
 
-# Do Gateway assignment tasks 1-10 before proceeding!
+# ****************************************************************************
+# Do Gateway 2 tasks 0-9 before proceeding!                                  *
+# ****************************************************************************
