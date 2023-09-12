@@ -163,4 +163,4 @@ cython_debug/
 .python-version
 .vscode/
 
-tutor/api.key
+**/api.key
