@@ -1,7 +1,4 @@
 """
-split_name()
-============
-
 .. todo::
     Implement the split_name() function according to its docstring.
 

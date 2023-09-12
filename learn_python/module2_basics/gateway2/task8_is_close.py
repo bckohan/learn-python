@@ -1,7 +1,4 @@
 """
-is_close()
-==========
-
 .. todo::
     Define a function called is_close that takes two floats as arguments
     and a third argument that is a tolerance. The function should return

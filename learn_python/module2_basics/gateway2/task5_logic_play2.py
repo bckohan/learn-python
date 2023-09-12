@@ -1,7 +1,4 @@
 """
-logic_play2()
-=============
-
 .. todo::
     Reimplement logic_play and call it logic_play2. This time you cannot
     use any logical operators (and, or, not) and you may make a maximum

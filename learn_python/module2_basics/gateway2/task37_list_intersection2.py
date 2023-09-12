@@ -1,7 +1,4 @@
 """
-list_intersection2()
-====================
-
 .. todo::
     Implement list_intersection2() according to its docstring.
 

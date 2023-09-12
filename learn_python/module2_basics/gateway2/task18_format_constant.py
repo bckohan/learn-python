@@ -1,7 +1,4 @@
 """
-format_constant()
-=================
-
 .. todo::
     Implement the format_constant() function according to its docstring.
 

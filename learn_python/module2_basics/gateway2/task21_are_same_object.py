@@ -1,7 +1,4 @@
 """
-are_same_object()
-=================
-
 .. todo:: Implement are_same_object() according to its docstring.
 """
 

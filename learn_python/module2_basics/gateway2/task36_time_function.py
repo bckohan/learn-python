@@ -1,7 +1,4 @@
 """
-time_function()
-===============
-
 .. todo::
     Implement a function called time_function that invokes the a function (1st argument) 
     with the given arguments and keyword arguments (variable number of args and kwargs) 

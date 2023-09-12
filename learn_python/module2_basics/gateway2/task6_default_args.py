@@ -1,7 +1,4 @@
 """
-default_args()
-==============
-
 .. todo::
     Define a function called default_args that accepts 4 arguments, each 
     with a default value of your choosing. The function must return 4

@@ -1,7 +1,4 @@
 """
-ranked_choice()
-===============
-
 .. todo::
     It's finally time to make something useful! Implement ranked_choice() according to 
     its docstring.

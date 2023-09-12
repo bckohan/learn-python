@@ -1,7 +1,4 @@
 """
-type_divide()
-=============
-
 .. todo::
     Define a function called type_divide that takes two arguments and returns
     the result of dividing the first by the second using floor division

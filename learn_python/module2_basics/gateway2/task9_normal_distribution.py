@@ -1,7 +1,4 @@
 """
-normal_distribution()
-=====================
-
 .. todo::
     Implement normal_distribution according to its docstring.
 

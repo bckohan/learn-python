@@ -1,7 +1,4 @@
 """
-is_odd()
-========
-
 .. todo::
     Write a function called "is_odd" that returns True if an integer is odd
     and False if it is not. You must use the is_even function you wrote above

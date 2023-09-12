@@ -2,6 +2,8 @@
 Gateway 2 - Part 4
 ==================
 
+list_difference()
+=================
 
 .. automodule:: learn_python.module2_basics.gateway2.task22_list_difference
     :members: list_difference
@@ -9,6 +11,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+deduplicate()
+=============
 
 .. automodule:: learn_python.module2_basics.gateway2.task23_deduplicate
     :members: deduplicate
@@ -16,6 +20,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+separate()
+==========
 
 .. automodule:: learn_python.module2_basics.gateway2.task24_separate
     :members: separate
@@ -24,6 +30,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+get_slices()
+============
 
 .. automodule:: learn_python.module2_basics.gateway2.task25_get_slices
 	:members:
@@ -32,6 +40,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+list_intersection()
+===================
 
 .. automodule:: learn_python.module2_basics.gateway2.task26_list_intersection
     :members: list_intersection
@@ -39,6 +49,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+fibonacci()
+===========
 
 .. automodule:: learn_python.module2_basics.gateway2.task27_fibonacci
     :members: fibonacci
@@ -46,6 +58,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+identity_matrix()
+=================
 
 .. automodule:: learn_python.module2_basics.gateway2.task28_identity_matrix
     :members: identity_matrix
@@ -53,12 +67,17 @@ Gateway 2 - Part 4
 
 ------------------
 
+is_identity()
+=============
+
 .. automodule:: learn_python.module2_basics.gateway2.task29_is_identity
     :members: is_identity
     :noindex:
 
 ------------------
 
+identity_matrix2()
+==================
 
 .. automodule:: learn_python.module2_basics.gateway2.task30_identity_matrix2
     :members: identity_matrix2
@@ -66,6 +85,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+fibonacci_gr()
+==============
 
 .. automodule:: learn_python.module2_basics.gateway2.task31_fibonacci_gr
     :members: fibonacci_gr
@@ -73,6 +94,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+float_range()
+=============
 
 .. automodule:: learn_python.module2_basics.gateway2.task32_float_range
     :members: float_range
@@ -80,6 +103,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+xy_values()
+===========
 
 .. automodule:: learn_python.module2_basics.gateway2.task33_xy_values
     :members: xy_values
@@ -87,6 +112,8 @@ Gateway 2 - Part 4
 
 ------------------
 
+approximate_integral()
+======================
 
 .. automodule:: learn_python.module2_basics.gateway2.task34_approximate_integral
     :members: approximate_integral
@@ -94,11 +121,17 @@ Gateway 2 - Part 4
 
 ------------------
 
+add_to_list()
+=============
+
 .. automodule:: learn_python.module2_basics.gateway2.task35_add_to_list
 	:members:
 	:inherited-members:
 
 ------------------
+
+time_function()
+===============
 
 .. automodule:: learn_python.module2_basics.gateway2.task36_time_function
 	:members:
@@ -106,17 +139,26 @@ Gateway 2 - Part 4
 
 ------------------
 
+list_intersection2()
+====================
+
 .. automodule:: learn_python.module2_basics.gateway2.task37_list_intersection2
     :members: list_intersection2
     :noindex:
 
 ------------------
 
+ranked_choice()
+===============
+
 .. automodule:: learn_python.module2_basics.gateway2.task38_ranked_choice
     :members: ranked_choice
     :noindex:
 
 ------------------
+
+print_report()
+==============
 
 .. automodule:: learn_python.module2_basics.gateway2.task39_print_report
     :members: print_report

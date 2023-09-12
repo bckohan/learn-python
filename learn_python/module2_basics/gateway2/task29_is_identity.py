@@ -1,7 +1,4 @@
 """
-is_identity()
-=============
-
 .. todo::
     Implement the is_identity() function according to its docstring.
 

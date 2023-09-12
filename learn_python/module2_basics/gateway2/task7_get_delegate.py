@@ -1,7 +1,4 @@
 """
-get_delegate()
-==============
-
 .. todo::
     Define a function called get_delegate that accepts a function as
     an argument and returns that function if it is not None, if it is None

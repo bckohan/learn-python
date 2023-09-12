@@ -1,7 +1,4 @@
 """
-is_even_safe()
-==============
-
 .. todo::
     Because None is a special value in Python that is commonly used to 
     represent uninitialized variables, it is sometimes a good idea to

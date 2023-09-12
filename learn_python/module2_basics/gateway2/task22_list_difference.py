@@ -1,7 +1,4 @@
 """
-list_difference()
-=================
-
 .. todo::
     Implement the list_difference() function according to its docstring.
 

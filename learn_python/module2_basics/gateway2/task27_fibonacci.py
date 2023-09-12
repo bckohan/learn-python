@@ -1,7 +1,4 @@
 """
-fibonacci()
-===========
-
 .. todo::
     Implement the fibonacci() function according to its docstring.
 

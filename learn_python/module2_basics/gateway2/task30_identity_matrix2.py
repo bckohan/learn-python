@@ -1,7 +1,4 @@
 """
-identity_matrix2()
-===============================
-
 .. todo::
     Implement the identity_matrix2() function according to its docstring.
 

@@ -1,7 +1,4 @@
 """
-logic_play()
-============
-
 .. todo::
     Implement a function called logic_play that accepts two integers as
     arguments and returns their product (the result of multiplying them together)

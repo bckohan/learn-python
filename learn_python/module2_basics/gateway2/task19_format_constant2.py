@@ -1,7 +1,4 @@
 """
-format_constant2()
-==================
-
 .. todo::
     Implement the format_constant2() function according to its docstring. This is a 
     re-implementation of format_constant(), but with different requirements!

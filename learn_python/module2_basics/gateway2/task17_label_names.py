@@ -1,7 +1,4 @@
 """
-label_names()
-=============
-
 .. todo::
     Implement the label_names() function according to its docstring.
 

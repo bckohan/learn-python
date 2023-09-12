@@ -1,7 +1,4 @@
 """
-get_slices()
-============
-
 .. todo::
     Define a function called get_slices() that accepts two arguments.
     The first argument will be a list and the second argument will be a

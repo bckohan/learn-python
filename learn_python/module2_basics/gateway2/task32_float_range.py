@@ -1,7 +1,4 @@
 """
-float_range()
-=============
-
 .. todo::
     Implement float_range() according to its docstring. You may assume that the 
     step argument will never be zero. If stop is < start the range should be in 

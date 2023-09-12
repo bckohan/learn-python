@@ -1,7 +1,4 @@
 """
-approximate_integral()
-======================
-
 .. todo::
     Implement approximate_integral() according to its docstring.
 

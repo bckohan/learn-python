@@ -1,27 +1,24 @@
 """
-print_report()
-==============
-
 .. todo::
     Implement print_report() according to its docstring.
 
-The output for the test scenario should look like this::
+    The output for the test scenario should look like this::
 
-    --------------------------------
-    Round 0
-           Ada Lovelace:  6 (33.33%)
-           Annie Easley:  5 (27.78%)
-           Grace Hopper:  4 (22.22%)
-      Katherine Johnson:  3 (16.67%)
-    --------------------------------
-    Round 1
-           Ada Lovelace:  6 (35.29%)
-           Grace Hopper:  6 (35.29%)
-           Annie Easley:  5 (29.41%)
-    --------------------------------
-    Round 2 (Winner: Ada Lovelace)
-           Ada Lovelace:  8 (53.33%)
-           Grace Hopper:  7 (46.67%)
+        --------------------------------
+        Round 0
+            Ada Lovelace:  6 (33.33%)
+            Annie Easley:  5 (27.78%)
+            Grace Hopper:  4 (22.22%)
+        Katherine Johnson:  3 (16.67%)
+        --------------------------------
+        Round 1
+            Ada Lovelace:  6 (35.29%)
+            Grace Hopper:  6 (35.29%)
+            Annie Easley:  5 (29.41%)
+        --------------------------------
+        Round 2 (Winner: Ada Lovelace)
+            Ada Lovelace:  8 (53.33%)
+            Grace Hopper:  7 (46.67%)
 """
 
 def print_report(report):

@@ -1,7 +1,4 @@
 """
-xy_values()
-===========
-
 .. todo:: Implement xy_values() according to its docstring.
 
 .. admonition:: Requirement

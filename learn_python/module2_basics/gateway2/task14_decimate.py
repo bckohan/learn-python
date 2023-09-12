@@ -28,12 +28,3 @@ def decimate(vector, factor=10):
     :param factor: int - the factor to reduce the size of the list by
     """
     return vector[::factor]
-
-
-class MyClass:
-    """This is my docstring"""
-
-    def method(self):
-        """
-        This is my method docstring.
-        """

@@ -1,7 +1,4 @@
 """
-fibonacci_gr()
-==============
-
 .. todo::
     Implement the fibonacci_gr() function according to its docstring.
 

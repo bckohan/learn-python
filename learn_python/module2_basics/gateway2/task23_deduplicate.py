@@ -1,7 +1,4 @@
 """
-deduplicate()
-=============
-
 .. todo::
     Implement deduplicate() according to its docstring.
 

@@ -1,7 +1,4 @@
 """
-separate()
-==========
-
 .. todo::
     Implement separate() according to its docstring.
 """
