@@ -10,6 +10,7 @@ def import_string(str_to_import):
     return getattr(module, attr_name, None)
 
 
+
 def is_function_called(calling_func, called_func):
     """
     Check if the calling_func calls the called_func.

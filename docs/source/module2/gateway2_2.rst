@@ -24,7 +24,7 @@ decimate()
 ==========
 
 .. automodule:: learn_python.module2_basics.gateway2.task14_decimate
-    :members: decimate
+    :members: decimate, MyClass
     :noindex:
 
 ------------------

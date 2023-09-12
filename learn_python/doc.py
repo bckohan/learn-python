@@ -3,6 +3,7 @@ import os
 import typer
 from contextlib import contextmanager
 from learn_python.tests.tests import tasks as task_tests
+from learn_python.tests.utils import import_string
 from learn_python.tests.tasks import TaskStatus
 import re
 from functools import cached_property
@@ -18,6 +19,11 @@ from os import PathLike
 from termcolor import colored
 from sphinx.ext.todo import Todo
 from sphinx.addnodes import desc
+from typing import List, Dict, Union
+from types import FunctionType, ModuleType
+from enum import Enum, auto
+from warnings import warn
+import inspect
 
 
 _mapper = None
@@ -52,6 +58,122 @@ doc_dir = Path(__file__).parent.parent / 'docs'
 
 class DocError(Exception):
     pass
+
+
+class NodeType(Enum):
+
+    FUNCTION = auto()
+    CLASS = auto()
+    MODULE = auto()
+
+
+class AutodocTree(GenericNodeVisitor):
+
+    class AutodocNode:
+
+        name: str
+        object: Union[ModuleType, FunctionType, type]
+        node: desc
+        node_type: NodeType
+
+        children: list
+
+        def __init__(self, name, object, node, node_type):
+            self.name = name
+            self.object = object
+            self.node = node
+            self.node_type = node_type
+
+            self.children = []
+
+        def append(self, node):
+            self.children.append(node)
+
+        @property
+        def docstring(self):
+            return getattr(self.object, '__doc__', '')
+        
+        @property
+        def file(self):
+            return Path(inspect.getfile(self.object))
+
+
+    root_nodes: list[AutodocNode]
+    stack: list[desc]
+
+    class_re = re.compile('^class (?P<import_string>[\w.]+)')
+    function_re = re.compile('^(?P<import_string>[\w.]+)[(]{1}')
+    module_re = re.compile('^(?P<import_string>[\w.]+)')  # todo
+
+    def __bool__(self):
+        return bool(self.root_nodes)
+
+    def __init__(self):
+        self.root_nodes = []
+
+    def default_visit(self, node):
+        if isinstance(node, desc):
+            # what is this? - string name matching seems brittle, but
+            # the doctree does not appear to save references to the python constructs
+            # so we have to do it this way
+            match = self.class_re.search(node[0].astext())
+            node_type = None
+            import_str = ''
+            if match:
+                import_str = match.groupdict()['import_string']
+                node_type = NodeType.CLASS
+            else:
+                match = self.function_re.search(node[0].astext())
+                if match:
+                    import_str = match.groupdict()['import_string']
+                    node_type = NodeType.FUNCTION
+                else:
+                    match = self.module_re.search(node[0].astext())
+                    if match:
+                        import_str = match.groupdict()['import_string']
+                        node_type = NodeType.MODULE
+            
+            if not import_str or node_type is None:
+                warn(f'Unable to resolve autodoc node: {node[0].astext()}')
+                raise SkipChildren()
+            
+            parent = self.stack[-1] if self.stack else None
+            if parent:
+                obj = getattr(parent.object, import_str, None)
+            else:
+                obj = import_string(import_str)
+            if obj is None:
+                warn(f'Unable to resolve autodoc node: {import_str}')
+                raise SkipChildren()
+
+            tree_node = self.AutodocNode(
+                name=import_str.split('.')[-1],
+                object=obj,
+                node=node,
+                node_type=node_type
+            )
+            if self.stack:
+                # if we've got a node on the stack, record this new one as its child
+                self.stack[-1].append(tree_node)
+            else:
+                self.root_nodes.append(tree_node)
+            self.stack.append(tree_node)
+
+    def default_departure(self, node):
+        if self.stack and self.stack[-1].node is node:
+            self.stack.pop()
+
+    # no reason to fail on unknown nodes
+    def unknown_visit(self, node):
+        pass
+    
+    def unknown_departure(self, node):
+        pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.root_nodes = []
+        self.stack = []
 
 
 # build section to task mapping
@@ -114,13 +236,27 @@ class TaskMapper:
 
         autodoc_nodes: list
 
+        # the functions that are autodoc-ed
+        functions: List[FunctionType]
+
+        # the modules that are autodoc-ed
+        modules: List[ModuleType]
+
+        # the classes that are autodoc-ed, and their methods
+        # and subclasses that are as well
+        classes: Dict[type, List[Union[type, FunctionType]]]
+
+        # the autodoc tree 
+        autodoc: AutodocTree
+
         def __init__(
             self,
             name,
             node,
             gateway_node,
             source,
-            gateway_source
+            gateway_source,
+            document
         ):
             self.name = name
             self.node = node
@@ -152,7 +288,8 @@ class TaskMapper:
 
             self.todo = '\n'.join(todos)
 
-            self.autodoc_nodes = [node for node in self.node.traverse(desc)]
+            self.autodoc = AutodocTree(document)
+            self.node.walkabout(self.autodoc)
 
 
     class AssignmentCollector(GenericNodeVisitor):
@@ -173,6 +310,13 @@ class TaskMapper:
         def default_departure(self, node):
             """Base class requires that this be implemented - but we don't need to do anything"""
 
+        # no reason to fail on unknown nodes
+        def unknown_visit(self, node):
+            pass
+        
+        def unknown_departure(self, node):
+            pass
+
         def visit_section(self, node):
             if not isinstance(node, section):
                 return
@@ -185,7 +329,8 @@ class TaskMapper:
                     node=node,
                     gateway_node=self.gateway_section,
                     source=node.source,
-                    gateway_source=self.gateway_section.source
+                    gateway_source=self.gateway_section.source,
+                    document=self.document
                 )
                 self.assignment_section = node
                 raise SkipChildren()  # no need to traverse into the task section
