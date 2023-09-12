@@ -1,7 +1,4 @@
 """
-combine()
-=========
-
 .. todo::
     Implement combine() according to its docstring.
 

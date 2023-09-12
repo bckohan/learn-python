@@ -1,7 +1,7 @@
 .. _part12:
 
-Part 12: Tuples
-===============
+Part 12: Immutability & Memory
+==============================
 
 .. automodule:: learn_python.module2_basics.lesson.part12_immutability
 	:members:

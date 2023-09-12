@@ -1,28 +1,23 @@
 import io
-from contextlib import redirect_stdout, redirect_stderr
-import subprocess
+from contextlib import redirect_stdout
 from pathlib import Path
-import sys
 import pytest
 from pprint import pformat
 import ast
 import inspect
 from learn_python.tests.utils import *
+from learn_python.tests.tasks import *
 from functools import partial
-import os
-import platform
 import glob
 import re
-from collections import namedtuple
 
 
 modules = Path(__file__).parent.parent 
 gateway2_dir = modules / 'module2_basics' / 'gateway2'
 
-Task = namedtuple('Task', ['number', 'name', 'path'])
 task_re = re.compile(r'task(?P<number>\d+)_(?P<name>\w+).py')
 
-tasks = []
+module2_tasks = []
 task_map = {}
 
 
@@ -43,14 +38,18 @@ for task in glob.glob(str(gateway2_dir / 'task*.py')):
     task_path = Path(task)
     mtch = task_re.match(task_path.name)
     if mtch:
+        task_name = mtch.groupdict()['name']
         task = Task(
             number=int(mtch.groupdict()['number']),
-            name=mtch.groupdict()['name'],
-            path=task_path
+            name=task_name,
+            path=task_path,
+            test=f'learn_python.tests.module2.test_gateway2_{task_name}',
+            function=import_task(task_name) or task_name,
+            module='module2'
         )
-        while len(tasks) <= task.number:
-            tasks.append(None)
-        tasks[task.number] = task
+        while len(module2_tasks) <= task.number:
+            module2_tasks.append(None)
+        module2_tasks[task.number] = task
         task_map[task.name] = task
 
 
@@ -331,7 +330,7 @@ def test_gateway2_normal_distribution():
 
 
 @pytest.mark.skipif(unimplemented('type_divide'), reason='divide not implemented yet.')
-def test_gateway2_divide():
+def test_gateway2_type_divide():
     type_divide = import_task('type_divide')
     import math
 
@@ -839,9 +838,9 @@ def test_gateway2_approximate_integral():
     except AssertionError:
         pass
     for pdf, (kwargs, (x_min, x_max, step)) in [
-        (normal, ({'σ': 1, 'μ': 0}, (-6, 6, 0.04))),     # normal(σ=1, μ=0)
-        (normal, ({'σ': 1, 'μ': 2}, (-4, 8, 0.04))),     # normal(σ=1, μ=2)
-        (normal, ({'σ': 0.5, 'μ': 0}, (-4, 4, 0.005))),  # normal(σ=0.5, μ=0)
+        (normal, ({'σ': 1, 'μ': 0}, (-6, 6, 0.04))),      # normal(σ=1, μ=0)
+        (normal, ({'σ': 1, 'μ': 2}, (-4, 8, 0.04))),      # normal(σ=1, μ=2)
+        (normal, ({'σ': 0.5, 'μ': 0}, (-4, 4, 0.005))),   # normal(σ=0.5, μ=0)
         (normal, ({'σ': 2, 'μ': 2}, (-8, 12, 0.1))),      # normal(σ=2, μ=2)
     ]:
         xy = xy_values(partial(pdf, **kwargs), start=x_min, stop=x_max, step=step)
@@ -946,7 +945,7 @@ def test_gateway2_ranked_choice():
 
 
 @pytest.mark.skipif(unimplemented('ranked_choice') or unimplemented('print_report'), reason="ranked_choice and/or print_report not implemented yet.")
-def test_gateway2_print_result():
+def test_gateway2_print_report():
     ranked_choice, print_report = import_task('ranked_choice'), import_task('print_report')
 
     f = io.StringIO()

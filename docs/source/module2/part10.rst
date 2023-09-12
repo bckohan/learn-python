@@ -1,7 +1,7 @@
 .. _part10:
 
-Part 10: Methods vs Functions vs Operators
-==========================================
+Part 10: Strings
+================
 
 .. automodule:: learn_python.module2_basics.lesson.part10_strings
 	:members:

@@ -1,7 +1,7 @@
 .. _part16:
 
-Part 16: Unpacking
-==================
+Part 16: Unpacking & Variadic Functions
+=======================================
 
 .. automodule:: learn_python.module2_basics.lesson.part16_unpacking
 	:members:

@@ -4,6 +4,7 @@ import subprocess
 from pathlib import Path
 import sys
 import pytest
+from learn_python.tests.tasks import Task
 
 
 modules = Path(__file__).parent.parent 
@@ -11,10 +12,15 @@ gateway1 = modules / 'module1' / 'gateway1.py'
 
 @pytest.mark.skipif(not gateway1.exists(), reason="Gateway1 exercise does not exist.")
 def test_gateway1_part1():
-
+    import importlib
+    from learn_python.module1 import gateway1
+    
     f = io.StringIO()
     with redirect_stdout(f):
-        from learn_python.module1 import gateway1
+        # depending on how the tests are called the module may have already
+        # been imported - we need to make sure the code inside is executed
+        # on import, so we use importlib to reload it
+        importlib.reload(gateway1)
 
     lines = f.getvalue().splitlines()
     assert lines[0].strip().lower() == 'print 1', 'Line 1 should be "print 1"'
@@ -41,3 +47,21 @@ def test_gateway1_part2():
         pytest.fail(f'Lines 2 through {len(lines)-1} are not a list of paths:\n{e}')
     
     assert lines[-1].strip().lower() == 'print 3', 'Last line should be "print 3"'
+
+
+module1_tasks = [
+    Task(
+        number=1,
+        name='part1',
+        path=gateway1,
+        test='learn_python.tests.module1.test_gateway1_part1',
+        module='module1'
+    ),
+    Task(
+        number=2,
+        name='part2',
+        path=gateway1,
+        test='learn_python.tests.module1.test_gateway1_part1',
+        module='module1'
+    )
+]

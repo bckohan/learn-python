@@ -1,7 +1,4 @@
 """
-decimate()
-==========
-
 .. todo:: 
     Implement decimate according to its docstring.
 

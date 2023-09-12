@@ -1,4 +1,7 @@
 """
+split_name()
+============
+
 .. todo::
     Implement the split_name() function according to its docstring.
 
@@ -7,7 +10,6 @@
     * You must use the `str.split <https://docs.python.org/3/library/stdtypes.html?highlight=split#str.split>`_ method.
     * You must use the `str.title <https://docs.python.org/3/library/stdtypes.html?highlight=split#str.title>`_ method.
     * You must use the `str.join <https://docs.python.org/3/library/stdtypes.html?highlight=split#str.join>`_ method.
-
 
 """
 

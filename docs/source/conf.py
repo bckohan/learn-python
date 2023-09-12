@@ -28,12 +28,14 @@ html_static_path = ['_static']
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx_rtd_theme',
     'sphinxcontrib.youtube',
-    'sphinxcontrib.jquery'
+    'sphinxcontrib.jquery',
+    'learn_python.doc'
 ]
 
 master_doc = 'index'

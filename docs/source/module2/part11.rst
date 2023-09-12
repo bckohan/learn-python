@@ -1,7 +1,7 @@
 .. _part11:
 
-Part 11: Immutability & Memory
-==============================
+Part 11: Methods
+================
 
 .. automodule:: learn_python.module2_basics.lesson.part11_methods
 	:members:

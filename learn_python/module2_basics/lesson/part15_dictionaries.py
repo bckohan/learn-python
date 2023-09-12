@@ -1,53 +1,51 @@
 """
-Dictionaries
-
-dictionaries are collections of key-value pairs
+Dictionaries are collections of key-value pairs:
     * values may be anything! including other dictionaries!
     * keys can be any python type that is "hashable" - we'll talk about this
       later but for now just know that most builtin primitive types are 
       hashable
 
-+---------+---------------------------------------------------------------------------------------------+
-| Operator| Description                                                                                 |
-+---------+---------------------------------------------------------------------------------------------+
-| [key]   | Accesses the item with the specified key. Raises KeyError if the key is not found.          |
-+---------+---------------------------------------------------------------------------------------------+
-| in      | Membership: Checks if a key is present in the dictionary.                                   |
-+---------+---------------------------------------------------------------------------------------------+
-| not in  | Non-membership: Checks if a key is not present in the dictionary.                           |
-+---------+---------------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two dictionaries have the same key-value pairs.                         |
-+---------+---------------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two dictionaries have different key-value pairs.                      |
-+---------+---------------------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------------------+
+| Operator    | Description                                                                                 |
++-------------+---------------------------------------------------------------------------------------------+
+| ``[]``      | Accesses the item with the specified key. Raises KeyError if the key is not found.          |
++-------------+---------------------------------------------------------------------------------------------+
+| ``in``      | Membership: Checks if a key is present in the dictionary.                                   |
++-------------+---------------------------------------------------------------------------------------------+
+| ``not in``  | Non-membership: Checks if a key is not present in the dictionary.                           |
++-------------+---------------------------------------------------------------------------------------------+
+| ``==``      | Equality: Checks if two dictionaries have the same key-value pairs.                         |
++-------------+---------------------------------------------------------------------------------------------+
+| ``!=``      | Inequality: Checks if two dictionaries have different key-value pairs.                      |
++-------------+---------------------------------------------------------------------------------------------+
 
 +------------------+----------------------------------------------------------------------------------------+
 | Method           | Description                                                                            |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.clear       | Removes all items from the dictionary.                                                 |
+| **clear**        | Removes all items from the dictionary.                                                 |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.copy        | Returns a shallow copy of the dictionary.                                              |
+| **copy**         | Returns a shallow copy of the dictionary.                                              |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.fromkeys    | Creates a new dictionary with keys from an iterable and values set to a specified      |
+| **fromkeys**     | Creates a new dictionary with keys from an iterable and values set to a specified      |
 |                  | value.                                                                                 |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.get         | Returns the value for a key if it exists in the dictionary.                            |
+| **get**          | Returns the value for a key if it exists in the dictionary.                            |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.items       | Returns a view object that displays a list of dictionary's key-value tuple pairs.      |
+| **items**        | Returns a view object that displays a list of dictionary's key-value tuple pairs.      |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.keys        | Returns a view object that displays a list of all the keys in the dictionary.          |
+| **keys**         | Returns a view object that displays a list of all the keys in the dictionary.          |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.pop         | Removes and returns the value of the key specified.                                    |
+| **pop**          | Removes and returns the value of the key specified.                                    |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.popitem     | Removes the last inserted key-value pair from the dictionary and returns it.           |
+| **popitem**      | Removes the last inserted key-value pair from the dictionary and returns it.           |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.setdefault  | Returns the value of a specified key. If the key does not exist: inserts the key, with |
+| **setdefault**   | Returns the value of a specified key. If the key does not exist: inserts the key, with |
 |                  | the specified value.                                                                   |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.update      | Updates the dictionary with the specified key-value pairs from another dictionary or   |
+| **update**       | Updates the dictionary with the specified key-value pairs from another dictionary or   |
 |                  | iterable.                                                                              |
 +------------------+----------------------------------------------------------------------------------------+
-| dict.values      | Returns a view object that displays a list of all the values in the dictionary.        |
+| **values**       | Returns a view object that displays a list of all the values in the dictionary.        |
 +------------------+----------------------------------------------------------------------------------------+
 
 

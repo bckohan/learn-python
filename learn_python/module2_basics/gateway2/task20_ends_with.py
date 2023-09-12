@@ -1,4 +1,7 @@
 """
+ends_with()
+===========
+
 .. todo::
     Implement the ends_with() function according to its docstring.
 

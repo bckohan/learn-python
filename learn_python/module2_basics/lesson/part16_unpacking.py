@@ -1,6 +1,4 @@
 """
-Unpacking Sequences & Variadic Functions
-
 The * and ** operators can be used as unary operators to unpack sequences.
 
 This is shorthand that can be used to avoid writing additional loops.

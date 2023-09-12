@@ -4,68 +4,68 @@ Sets
 Sets are unordered collections of **unique** values, you cannot have multiple 
 equivalent values in a set
 
-+---------+---------------------------------------------------------------------------------------------+
-| Operator| Description                                                                                 |
-+---------+---------------------------------------------------------------------------------------------+
-| |       | Union: Returns a set containing all elements from both sets.                                |
-+---------+---------------------------------------------------------------------------------------------+
-| &       | Intersection: Returns a set containing only elements that exist in both sets.               |
-+---------+---------------------------------------------------------------------------------------------+
-| -       | Difference: Returns a set containing elements that exist in the first set but not in the    |
-|         | second set.                                                                                 |
-+---------+---------------------------------------------------------------------------------------------+
-| ^       | Symmetric Difference: Returns a set containing elements that exist in either of the sets,   |
-|         | but not in both.                                                                            |
-+---------+---------------------------------------------------------------------------------------------+
-| <=      | Subset: Returns True if the first set is a subset of the second set.                        |
-+---------+---------------------------------------------------------------------------------------------+
-| <       | Proper Subset: Returns True if the first set is a proper subset of the second set.          |
-+---------+---------------------------------------------------------------------------------------------+
-| >=      | Superset: Returns True if the first set is a superset of the second set.                    |
-+---------+---------------------------------------------------------------------------------------------+
-| >       | Proper Superset: Returns True if the first set is a proper superset of the second set.      |
-+---------+---------------------------------------------------------------------------------------------+
-| ==      | Equality: Checks if two sets have the same elements.                                        |
-+---------+---------------------------------------------------------------------------------------------+
-| !=      | Inequality: Checks if two sets have different elements.                                     |
-+---------+---------------------------------------------------------------------------------------------+
-| in      | Membership: Checks if an item is present in the set.                                        |
-+---------+---------------------------------------------------------------------------------------------+
-| not in  | Non-membership: Checks if an item is not present in the set.                                |
-+---------+---------------------------------------------------------------------------------------------+
++-------------+---------------------------------------------------------------------------------------------+
+| Operator    | Description                                                                                 |
++-------------+---------------------------------------------------------------------------------------------+
+| ``|``       | Union: Returns a set containing all elements from both sets.                                |
++-------------+---------------------------------------------------------------------------------------------+
+| ``&``       | Intersection: Returns a set containing only elements that exist in both sets.               |
++-------------+---------------------------------------------------------------------------------------------+
+| ``-``       | Difference: Returns a set containing elements that exist in the first set but not in the    |
+|             | second set.                                                                                 |
++-------------+---------------------------------------------------------------------------------------------+
+| ``^``       | Symmetric Difference: Returns a set containing elements that exist in either of the sets,   |
+|             | but not in both.                                                                            |
++-------------+---------------------------------------------------------------------------------------------+
+| ``<=``      | Subset: Returns True if the first set is a subset of the second set.                        |
++-------------+---------------------------------------------------------------------------------------------+
+| ``<``       | Proper Subset: Returns True if the first set is a proper subset of the second set.          |
++-------------+---------------------------------------------------------------------------------------------+
+| ``>=``      | Superset: Returns True if the first set is a superset of the second set.                    |
++-------------+---------------------------------------------------------------------------------------------+
+| ``>``       | Proper Superset: Returns True if the first set is a proper superset of the second set.      |
++-------------+---------------------------------------------------------------------------------------------+
+| ``==``      | Equality: Checks if two sets have the same elements.                                        |
++-------------+---------------------------------------------------------------------------------------------+
+| ``!=``      | Inequality: Checks if two sets have different elements.                                     |
++-------------+---------------------------------------------------------------------------------------------+
+| ``in``      | Membership: Checks if an item is present in the set.                                        |
++-------------+---------------------------------------------------------------------------------------------+
+| ``not in``  | Non-membership: Checks if an item is not present in the set.                                |
++-------------+---------------------------------------------------------------------------------------------+
 
-+------------------+----------------------------------------------------------------------------------------+
-| Method           | Description                                                                            |
-+------------------+----------------------------------------------------------------------------------------+
-| set.add          | Adds an element to the set.                                                            |
-+------------------+----------------------------------------------------------------------------------------+
-| set.clear        | Removes all elements from the set.                                                     |
-+------------------+----------------------------------------------------------------------------------------+
-| set.copy         | Returns a shallow copy of the set.                                                     |
-+------------------+----------------------------------------------------------------------------------------+
-| set.difference   | Returns the difference of two or more sets as a new set.                               |
-+------------------+----------------------------------------------------------------------------------------+
-| set.discard      | Removes a specified element from the set. Does not raise an error if the element is    |
-|                  | not found.                                                                             |
-+------------------+----------------------------------------------------------------------------------------+
-| set.intersection | Returns the intersection of two sets as a new set.                                     |
-+------------------+----------------------------------------------------------------------------------------+
-| set.isdisjoint   | Returns True if two sets have no elements in common.                                   |
-+------------------+----------------------------------------------------------------------------------------+
-| set.issubset     | Returns True if another set contains this set.                                         |
-+------------------+----------------------------------------------------------------------------------------+
-| set.issuperset   | Returns True if this set contains another set.                                         |
-+------------------+----------------------------------------------------------------------------------------+
-| set.pop          | Removes and returns an arbitrary set element. Raises KeyError if the set is empty.     |
-+------------------+----------------------------------------------------------------------------------------+
-| set.remove       | Removes a specified element from the set. Raises KeyError if the element is not found. |
-+------------------+----------------------------------------------------------------------------------------+
-| set.symmetric_difference | Returns the symmetric difference of two sets as a new set.                     |
-+------------------+----------------------------------------------------------------------------------------+
-| set.union        | Returns the union of sets in a new set.                                                |
-+------------------+----------------------------------------------------------------------------------------+
-| set.update       | Updates the set with elements from another set or iterable.                            |
-+------------------+----------------------------------------------------------------------------------------+
++--------------------------+----------------------------------------------------------------------------------------+
+| Method                   | Description                                                                            |
++--------------------------+----------------------------------------------------------------------------------------+
+| **add**                  | Adds an element to the set.                                                            |
++--------------------------+----------------------------------------------------------------------------------------+
+| **clear**                | Removes all elements from the set.                                                     |
++--------------------------+----------------------------------------------------------------------------------------+
+| **copy**                 | Returns a shallow copy of the set.                                                     |
++--------------------------+----------------------------------------------------------------------------------------+
+| **difference**           | Returns the difference of two or more sets as a new set.                               |
++--------------------------+----------------------------------------------------------------------------------------+
+| **discard**              | Removes a specified element from the set. Does not raise an error if the element is    |
+|                          | not found.                                                                             |
++--------------------------+----------------------------------------------------------------------------------------+
+| **intersection**         | Returns the intersection of two sets as a new set.                                     |
++--------------------------+----------------------------------------------------------------------------------------+
+| **isdisjoint**           | Returns True if two sets have no elements in common.                                   |
++--------------------------+----------------------------------------------------------------------------------------+
+| **issubset**             | Returns True if another set contains this set.                                         |
++--------------------------+----------------------------------------------------------------------------------------+
+| **issuperset**           | Returns True if this set contains another set.                                         |
++--------------------------+----------------------------------------------------------------------------------------+
+| **pop**                  | Removes and returns an arbitrary set element. Raises KeyError if the set is empty.     |
++--------------------------+----------------------------------------------------------------------------------------+
+| **remove**               | Removes a specified element from the set. Raises KeyError if the element is not found. |
++--------------------------+----------------------------------------------------------------------------------------+
+| **symmetric_difference** | Returns the symmetric difference of two sets as a new set.                             |
++--------------------------+----------------------------------------------------------------------------------------+
+| **union**                | Returns the union of sets in a new set.                                                |
++--------------------------+----------------------------------------------------------------------------------------+
+| **update**               | Updates the set with elements from another set or iterable.                            |
++--------------------------+----------------------------------------------------------------------------------------+
 
 """
 from learn_python.module2_basics.lesson.part13_looping import *

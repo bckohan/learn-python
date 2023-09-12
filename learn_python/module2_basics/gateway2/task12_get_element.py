@@ -1,7 +1,4 @@
 """
-get_element()
-=============
-
 .. todo::
     Define a function called get_element() that accepts two arguments.
     The first will be a list and the second will be an index. The function

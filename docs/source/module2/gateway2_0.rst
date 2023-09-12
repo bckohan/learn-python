@@ -58,6 +58,6 @@ Gateway 2 - Part 0
 ------------------
 
 .. automodule:: learn_python.module2_basics.gateway2.task9_normal_distribution
-.. autofunction:: learn_python.module2_basics.gateway2.task9_normal_distribution.normal_distribution
+    :members: normal_distribution
     :noindex:
 

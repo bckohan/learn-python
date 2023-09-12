@@ -1,7 +1,4 @@
 """
-get_element()
-=============
-
 .. todo::
     Define a function called split() that accepts two arguments.
     The first will be a list and the second will be an optional index that

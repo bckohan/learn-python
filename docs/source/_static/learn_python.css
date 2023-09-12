@@ -3,11 +3,11 @@
 }
 
 .admonition-requirement .admonition-title {
-    background-color: darkred;
+    background-color: #f75252; /*darkred;*/
 }
 
 div.admonition-requirement.admonition {
-    background-color: #faa7a7;
+    background-color: #fcd2d2; /*#faa7a7;*/
 }
 
 div.admonition-todo.admonition p.admonition-title {

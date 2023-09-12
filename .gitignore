@@ -162,3 +162,5 @@ cython_debug/
 .DS_Store
 .python-version
 .vscode/
+
+tutor/api.key

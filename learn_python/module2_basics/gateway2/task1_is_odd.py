@@ -13,5 +13,5 @@ is_odd()
 from .task0_is_even import is_even
 
 
-def is_odd(x):
-    return not is_even(x)
+# def is_odd(x):
+#     return not is_even(x)

@@ -2,6 +2,8 @@
 Gateway 2 - Part 2
 ==================
 
+get_element()
+=============
 
 .. automodule:: learn_python.module2_basics.gateway2.task12_get_element
 	:members:
@@ -9,18 +11,27 @@ Gateway 2 - Part 2
 
 ------------------
 
+split()
+=======
+
 .. automodule:: learn_python.module2_basics.gateway2.task13_split
 	:members:
 	:inherited-members:
 
 ------------------
-	
+
+decimate()
+==========
+
 .. automodule:: learn_python.module2_basics.gateway2.task14_decimate
-.. autofunction:: learn_python.module2_basics.gateway2.task14_decimate.decimate
+    :members: decimate
     :noindex:
 
 ------------------
 
+combine()
+=========
+
 .. automodule:: learn_python.module2_basics.gateway2.task15_combine
-.. autofunction:: learn_python.module2_basics.gateway2.task15_combine.combine
+    :members: combine
     :noindex:
