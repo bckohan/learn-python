@@ -14,7 +14,7 @@ Which is more efficient? Which is more readable? Which is more maintainable? Cle
 always a virtue in programming and there are always tradeoffs!
 """
 # from .task1_is_odd import is_odd
-from .task0_is_even import is_even
+# from .task0_is_even import is_even
 
 # def logic_play2(first, second):
 #     if is_even(first):

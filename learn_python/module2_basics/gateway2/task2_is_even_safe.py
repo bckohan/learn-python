@@ -7,9 +7,9 @@
     if the value is None first and if it is returns None
 """
 
-from .task0_is_even import is_even
+# from .task0_is_even import is_even
 
-def is_even_safe(x):
-    if x is not None:
-        return is_even(x)
-    return None
+# def is_even_safe(x):
+#     if x is not None:
+#         return is_even(x)
+#     return None

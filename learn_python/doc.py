@@ -13,13 +13,15 @@ from docutils.nodes import (
     GenericNodeVisitor,
     SkipChildren,
     Admonition,
-    paragraph
+    paragraph,
+    reference,
+    list_item
 )
 from os import PathLike
 from termcolor import colored
 from sphinx.ext.todo import Todo
-from sphinx.addnodes import desc
-from typing import List, Dict, Union
+from sphinx.addnodes import desc, toctree, compact_paragraph
+from typing import List, Dict, Union, Optional
 from types import FunctionType, ModuleType
 from enum import Enum, auto
 from warnings import warn
@@ -190,6 +192,8 @@ class TaskMapper:
     task_sections: dict
 
     test_status = None
+
+    _app: Optional[Sphinx] = None
 
     def __init__(self):
         self.tasks = {}
@@ -365,6 +369,7 @@ class TaskMapper:
         process. This means we need to edit our doctree with the results of the
         test runs because the documentation is being written!
         """
+        self.process_toctree(app)  # all toctrees will be processed on the first doc
         module, tasks = self.read_tasks(tree, doc_name)
 
         for task in tasks:
@@ -373,8 +378,12 @@ class TaskMapper:
             task_test.run()
             if task_test.status is TaskStatus.PASSED:
                 task_doc.node.attributes.setdefault('classes', []).append('passed')
-            elif task_test.status is TaskStatus.FAILED:
+            elif task_test.status in [TaskStatus.FAILED, TaskStatus.ERROR]:
                 task_doc.node.attributes.setdefault('classes', []).append('failed')
+            elif task_test.status is TaskStatus.SKIPPED:
+                task_doc.node.attributes.setdefault('classes', []).append('skipped')
+        
+        self.process_toctree(doc_name)
 
 
     def read_tasks(self, tree, doc_name):
@@ -394,6 +403,123 @@ class TaskMapper:
                 return module, visitor.assignments
             return module, []
         return None, []
+
+    def process_toctree(self, app):
+        """
+        Annoyingly sphinx doc writes each document out as the doctree-resolved hook is
+        called. This means we have to process *all* of the toctrees in every document
+        when the first document is processed. We do this here. It involves:
+            1) Running on all the tests
+            2) Walking all of the toctrees and adding the appropriate test status classes
+               to the gateway assignment nav bar trees
+        """
+        if self._app is None:
+            self._app = app
+            # run all of our tasks
+            for _, tasks in task_tests.items():
+                for _, task in tasks.items():
+                    task.run()
+            
+            # build the task hierarchy
+            hierarchy = self.get_gateway_hierarchy()
+
+            # annotate the tree with css status classes
+            for _, mod_parts in hierarchy.items():
+                for node in mod_parts['nodes']:
+                    node['classes'].extend(['module', mod_parts['status'].css])
+                for _, gtwy_parts in mod_parts['gateways'].items():
+                    for node in gtwy_parts['nodes']:
+                        node['classes'].extend(['gateway', gtwy_parts['status'].css])
+                    for _, task_parts in gtwy_parts['tasks'].items():
+                        for node in task_parts['nodes']:
+                            node['classes'].extend(['task', task_parts['status'].css])
+
+
+    def get_gateway_hierarchy(self):
+        """
+        Get the gateway task hierarchy from the toctree.
+        """
+        # module -> gateway -> task
+        hierarchy = {}
+        module_rgx = re.compile(r'(?P<module>module[\d]+)')
+        anchor_rgx = re.compile('^#(.*(?P<module>module[\d]+)(?:_[\w]+)?[.](?P<gateway>gateway[\d]+)(?:_[\w]+)?[.](?:task(?P<task_num>[\d]*)_)?)?(?P<task>[\w-]+)')
+        # its really annoying to traverse toc trees, because the link data are not
+        # discoverable via parent/child relationships because they are buried in leaf nodes off the parents
+        # our strategy here is to try to infer if a given node is a leaf task reference by matching its anchor to known task
+        # names for the module it is in
+        # this is an insane amount of work to do this... if you're having trouble understanding this code, one of the complexities
+        # is that there is not a unified toctree - there is a toctree for each document, and each tree is partial!
+        # all this can be a bit brittle and it depends on naming conventions - so stick to the rules!
+        for doc_name, toctree in self.app.env.tocs.items():
+            match = module_rgx.search(doc_name)
+            if match:
+                module = match.groupdict()['module']
+                hierarchy.setdefault(module, {'gateways': {}, 'nodes': set(), 'status': TaskStatus.NOT_RUN})
+                mod_hierarchy = hierarchy[module]
+                task_names = set(task_tests.get(module, {}).keys())
+                for ref in toctree.traverse(reference):
+                    match = anchor_rgx.match(ref.get('anchorname', ''))
+                    if match:
+                        parts = match.groupdict()
+
+                        # some sanity checks
+                        if parts['module'] and parts['module'] != module:
+                            continue
+
+                        # spaces and _s may have been permuted to - by the anchor
+                        if not (
+                            ((task_name := parts['task']) in task_names) or 
+                            ((task_name := parts['task'].replace('-', '')) in task_names) or
+                            ((task_name := parts['task'].replace('-', '_')) in task_names)
+                        ):
+                            continue
+
+                        # we have a gateway task reference
+                        # walk up the tree and find our list nodes, should be module -> gateway -> task
+                        branch = ref
+                        while (branch := branch.parent) and not isinstance(branch, list_item):
+                            pass
+                        task_node = branch
+                        assert task_node
+
+                        while (branch := branch.parent) and not isinstance(branch, list_item):
+                            pass
+                        gateway_node = branch
+
+                        while (branch := branch.parent) and not isinstance(branch, list_item):
+                            pass
+
+                        # some partial trees will not have a top level module item
+                        if branch:
+                            mod_hierarchy['nodes'].add(branch)
+
+                        gateway_name = gateway_node[0][0].astext()
+                        mod_hierarchy['gateways'].setdefault(gateway_name, {'nodes': set(), 'tasks': {}, 'status': TaskStatus.NOT_RUN})
+                        gtwy_hierarchy = mod_hierarchy['gateways'][gateway_name]
+                        if gateway_node:
+                            gtwy_hierarchy['nodes'].add(gateway_node)
+                        gtwy_hierarchy['tasks'].setdefault(task_name, {'nodes': set(), 'status': TaskStatus.NOT_RUN})
+                        gtwy_hierarchy['tasks'][task_name]['nodes'].add(task_node)
+                        gtwy_hierarchy['tasks'][task_name]['status'] = task_tests[module][task_name].status
+                    elif ref['refuri'] in hierarchy:
+                        # we might have a dangling top node, without sub anchors to key off of, in these cases we need to map
+                        # to the correct module
+                        branch = ref
+                        while (branch := branch.parent) and not isinstance(branch, list_item):
+                            pass
+                        hierarchy[ref['refuri']]['nodes'].add(branch)
+
+
+        for module, mod_parts in hierarchy.items():
+            for _, gtwy_parts in mod_parts['gateways'].items():
+                for task_name, task_parts in gtwy_parts['tasks'].items():
+                    if gtwy_parts['status'] < task_parts['status']:
+                        gtwy_parts['status'] = task_parts['status']
+
+                if mod_parts['status'] < gtwy_parts['status']:
+                    mod_parts['status'] = gtwy_parts['status']
+
+        return hierarchy
 
     def check(self):
         """
@@ -438,7 +564,7 @@ class TaskMapper:
     @cached_property
     def app(self):
         """Get a sphinx app for parsing the documentation, that will use our doc's configuration."""
-        return Sphinx(
+        return self._app or Sphinx(
             srcdir=DOC_SRC_DIR,
             confdir=DOC_SRC_DIR,
             outdir=DOC_BLD_DIR,
@@ -446,6 +572,58 @@ class TaskMapper:
             buildername='dummy'
         )
 
+
+# Sphinx does not provide official hooks to manage the toctree generation, so we resort to monkey
+# patching some internals to add some classes to our toctree navbars so we can style them based
+# on gateway assignment status. This may break in the future!
+
+# from sphinx.environment.adapters import toctree
+# internal_add_classes = toctree._toctree_add_classes
+
+# anchor_rgx = re.compile('(?P<module>module[\d]+)(?:_[\w]+)?[.](?P<gateway>gateway[\d]+)(?:_[\w]+)?[.](?:task(?P<task_num>[\d]*)_)?(?P<task>[\w]+)')
+
+# def add_gateway_status_classes(node, depth, docname):
+#     internal_add_classes(node, depth, docname)
+    # for subnode in node.children:
+    #     if isinstance(subnode, reference):
+    #         ref = subnode['refuri']
+    #         if 'gateway' in ref and 'module' in ref:
+    #             import ipdb
+    #             ipdb.set_trace()
+            # anchor = subnode['anchorname']
+            # print(ref)
+            # task_mtch = anchor_rgx.search(subnode['anchorname'])
+            # if task_mtch:
+            #     print(task_mtch.groupdict())
+            #     subnode['classes'].append(f'found')
+            # else:
+            #     branchnode = subnode
+            #     while branchnode:
+            #         branchnode['classes'].append('current')
+            #         branchnode = branchnode.parent
+                    # import ipdb
+                    # ipdb.set_trace()
+            # # for <a>, identify which entries point to the current
+            # # document and therefore may not be collapsed
+            # if subnode['refuri'] == docname:
+            #     if not subnode['anchorname']:
+            #         # give the whole branch a 'current' class
+            #         # (useful for styling it differently)
+            #         branchnode: Element = subnode
+            #         while branchnode:
+            #             branchnode['classes'].append('current')
+            #             branchnode = branchnode.parent
+            #     # mark the list_item as "on current page"
+            #     if subnode.parent.parent.get('iscurrent'):
+            #         # but only if it's not already done
+            #         return
+            #     while subnode:
+            #         subnode['iscurrent'] = True
+            #         subnode = subnode.parent
+
+# toctree._toctree_add_classes = add_gateway_status_classes
+
+# end monkey patch ***************************************
 
 @contextmanager
 def doc_context():

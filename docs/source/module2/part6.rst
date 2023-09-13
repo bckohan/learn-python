@@ -1,6 +1,6 @@
 .. _part6:
 
-Part 6: Floating Point (`float <https://docs.python.org/3/library/functions.html#float>`_)
+Part 6: `Floating Point Numbers <https://docs.python.org/3/library/functions.html#float>`_
 ==========================================================================================
 
 

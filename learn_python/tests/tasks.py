@@ -1,5 +1,5 @@
 from os import PathLike
-from enum import Enum
+from enum import IntEnum
 import pytest
 from pathlib import Path
 import sys
@@ -14,16 +14,20 @@ PACKAGE_DIR = Path(__file__).parent.parent.parent
 running_task = None
 
 
-class TaskStatus(Enum):
+class TaskStatus(IntEnum):
     """
     The test states a task can be in.
     """
 
     NOT_RUN = 0
-    SKIPPED = 1
-    FAILED = 2
-    PASSED = 3
+    PASSED = 1
+    SKIPPED = 2
+    FAILED = 3
     ERROR = 4
+
+    @property
+    def css(self):
+        return self.name.lower().replace('_', '-')
 
 
 class Task:
@@ -82,19 +86,21 @@ class Task:
     def run(self):
         """Run the test for the task"""
         global running_task
-        running_task = self
-        exit_code = pytest.main(
-            [self.identifier, '-s'],
-            # register this module as a plugin so our hook will be called
-            plugins=[sys.modules[__name__]]
-        )
-        running_task = None
-        if exit_code not in [pytest.ExitCode.OK, pytest.ExitCode.TESTS_FAILED]:
-            warn(f'Unable to run test for task {self.module}::{self.name}: {exit_code}')
-            self.status = TaskStatus.ERROR
-        
-        if self.status == TaskStatus.NOT_RUN:
-            warn(f'Task status for {self.module}::{self.name} was not updated after run!')
+        # only run if we have not run already!
+        if self.status is TaskStatus.NOT_RUN:
+            running_task = self
+            exit_code = pytest.main(
+                [self.identifier, '-s'],
+                # register this module as a plugin so our hook will be called
+                plugins=[sys.modules[__name__]]
+            )
+            running_task = None
+            if exit_code not in [pytest.ExitCode.OK, pytest.ExitCode.TESTS_FAILED]:
+                warn(f'Unable to run test for task {self.module}::{self.name}: {exit_code}')
+                self.status = TaskStatus.ERROR
+            
+            if self.status == TaskStatus.NOT_RUN:
+                warn(f'Task status for {self.module}::{self.name} was not updated after run!')
 
     @property
     def implementation(self):
@@ -115,10 +121,10 @@ def pytest_report_teststatus(report, config):
     This is hook that pytest calls after a test is executed with its outcome.
     """
     global running_task
-    if report.outcome == 'passed':
+    if report.outcome == 'passed' and report.when == 'teardown':
         running_task.status = TaskStatus.PASSED
     elif report.outcome == 'failed':
         running_task.status = TaskStatus.FAILED
-    elif report.outcome == 'skipped':
+    elif report.outcome == 'skipped' and report.when == 'setup':
         running_task.status = TaskStatus.SKIPPED
     return None

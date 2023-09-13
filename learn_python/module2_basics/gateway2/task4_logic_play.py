@@ -11,7 +11,7 @@
     You must use the logical operator **and** in your function!
 
 """
-from .task0_is_even import is_even
+# from .task0_is_even import is_even
 # from .task1_is_odd import is_odd
 
 # def logic_play(first, second):
