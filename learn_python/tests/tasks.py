@@ -4,11 +4,15 @@ import pytest
 from pathlib import Path
 import sys
 from warnings import warn
-from typing import Optional, Union
-from types import FunctionType
+from typing import Optional, Union, List
+from types import FunctionType, ModuleType
 import inspect
+from contextlib import redirect_stdout
 from io import StringIO
+import importlib
 import contextlib
+import re
+import io
 
 
 PACKAGE_DIR = Path(__file__).parent.parent.parent
@@ -53,10 +57,14 @@ class Task:
     name: str
     path: PathLike[str]
     function: Optional[Union[FunctionType, str]] = None
+    modules: Optional[List[Union[ModuleType, str]]] = None
     test: str
     module: str
     status: TaskStatus = TaskStatus.NOT_RUN
     error: Optional[str] = None
+    timeout: int = 5
+
+    ERROR_MSG_RGX = re.compile('^E\s+AssertionError[:]\s+(?P<msg>.+)\n\n', re.M)
 
     def __init__(
         self,
@@ -66,7 +74,9 @@ class Task:
         test,
         module,
         status=status,
-        function=function
+        function=function,
+        modules=modules,
+        timeout=timeout
     ):
         self.number = number
         self.name = name
@@ -75,7 +85,17 @@ class Task:
         self.module = module
         self.status = status
         self.function = function
+        self.modules = modules
+        self.timeout = timeout
 
+        f = io.StringIO()
+        with redirect_stdout(f):  # silence!
+            for idx, mod in enumerate(self.modules):
+                if isinstance(mod, str):
+                    try:
+                        self.modules[idx] = importlib.import_module(mod)
+                    except Exception:
+                        pass
 
     @property
     def identifier(self):
@@ -84,18 +104,43 @@ class Task:
         test_file, test_func = '/'.join(parts[:-1]), parts[-1]
         return f'{PACKAGE_DIR / test_file}.py::{test_func}'
 
+    @property
+    def error_msg(self):
+        """The short, specific error reported by the test"""
+        if self.error:
+            mtch = self.ERROR_MSG_RGX.search(self.error, re.M)
+            if mtch:
+                return mtch.groupdict()['msg']
+        return None
 
-    def run(self):
+    def run(self, force=False):
         """Run the test for the task"""
         global running_task
-        # only run if we have not run already!
+
+        # only run if we have not run already, unless we are forced!
+        if force and self.status is not TaskStatus.NOT_RUN:
+            # force reload of code from disk, this is likely happening as part
+            # of a tutor workflow
+            f = io.StringIO()
+            with redirect_stdout(f):  # silence!
+                for idx, mod in enumerate(self.modules):
+                    try:
+                        if isinstance(mod, str):
+                            self.modules[idx] = importlib.import_module(mod)
+                        else:
+                            self.modules[idx] = importlib.reload(mod)
+                    except Exception:
+                        pass
+            self.status = TaskStatus.NOT_RUN
+            self.error = None
+
         if self.status is TaskStatus.NOT_RUN:
             running_task = self
             out = StringIO()
 
             with contextlib.redirect_stdout(out):
                 exit_code = pytest.main(
-                    [self.identifier, '-s'],
+                    [f'--timeout={self.timeout}', self.identifier, '-s'],
                     # register this module as a plugin so our hook will be called
                     plugins=[sys.modules[__name__]]
                 )

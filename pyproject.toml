@@ -10,6 +10,7 @@ packages = [{include = "learn_python"}]
 [tool.poetry.scripts]
 module2 = 'learn_python.module2_basics.lesson:run'
 doc = 'learn_python.doc:app'
+delphi = 'learn_python.delphi.tutor:main'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
@@ -23,6 +24,8 @@ typer = "^0.9.0"
 rich = "^13.5.2"
 openai = "^0.28.0"
 termcolor = "^2.3.0"
+python-dateutil = "^2.8.2"
+pytest-timeout = "^2.1.0"
 
 
 [tool.poetry.group.dev.dependencies]

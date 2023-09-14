@@ -173,6 +173,22 @@ to its original version without your edits you can use git:
 
     git checkout -- learn_python/module2_basics/lesson/<filename>.py
 
+    
+AI Tutor
+--------
+
+learn-python comes equipped with an AI Tutor named Delphi. The tutor is completely
+optional, but she may prove helpful with the gateway assignments or for general Q&A.
+To enable Delphi you will need to acquire an OpenAI API token, create the file 
+learn_python/tutor/api.key and paste the token into that file. If you are taking this
+class under my direction, reach out to me and I will provide you with a token.
+
+To run Delphi:
+
+    .. code-block:: bash
+
+        poetry run delphi
+
 """
 
 

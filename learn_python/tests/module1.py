@@ -55,13 +55,15 @@ module1_tasks = [
         name='part1',
         path=gateway1,
         test='learn_python.tests.module1.test_gateway1_part1',
-        module='module1'
+        module='module1',
+        modules=['learn_python.module1.gateway1']
     ),
     Task(
         number=2,
         name='part2',
         path=gateway1,
         test='learn_python.tests.module1.test_gateway1_part1',
-        module='module1'
+        module='module1',
+        modules=['learn_python.module1.gateway1']
     )
 ]

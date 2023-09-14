@@ -392,6 +392,9 @@ class TaskMapper:
                 err_section = section(ids=[f'{task_test.name}-error'])
                 err_section['classes'].append('error-output')
                 title_text = 'Error'
+                err_msg = task_test.error_msg
+                if err_msg:
+                    title_text += f': {err_msg}'
                 title_node = title(title_text, title_text)
                 err_section += title_node
                 para_text = task_test.error
