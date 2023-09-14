@@ -119,7 +119,7 @@ class Task:
         elif self.function:
             return inspect.getsource(self.function)
         
-        source_file = Path(self.path0)
+        source_file = Path(self.path)
         if source_file.is_file():
             return source_file.read_text()
         return None

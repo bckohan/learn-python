@@ -90,5 +90,5 @@ section.error-output > h5 {
 }
 
 section.error-output pre {
-    border: 3px solid darkred;
+    border: 3px solid #db0000;
 }

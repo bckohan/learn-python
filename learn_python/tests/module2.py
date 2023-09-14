@@ -26,25 +26,29 @@ def lists_compare(list1, list2):
     return compare_floats(sorted(list1), sorted(list2))
 
 
-def import_task(task_name):
-    task = task_map.get(task_name, None)
-    if task:
-        return import_string(
-            f'learn_python.module2_basics.gateway2.task{task.number}_{task.name}.{task.name}'
-        )
-    return None
+def import_task(task_name, number=None):
+    if number is None:
+        task = task_map.get(task_name, None)
+        if not task:
+            return None
+        number = task.number
+    return import_string(
+        f'learn_python.module2_basics.gateway2.task{number}_{task_name}.{task_name}'
+    )
+
 
 for task in glob.glob(str(gateway2_dir / 'task*.py')):
     task_path = Path(task)
     mtch = task_re.match(task_path.name)
     if mtch:
         task_name = mtch.groupdict()['name']
+        number = int(mtch.groupdict()['number'])
         task = Task(
-            number=int(mtch.groupdict()['number']),
+            number=number,
             name=task_name,
             path=task_path,
             test=f'learn_python.tests.module2.test_gateway2_{task_name}',
-            function=import_task(task_name) or task_name,
+            function=import_task(task_name, number) or task_name,
             module='module2'
         )
         while len(module2_tasks) <= task.number:

@@ -9,12 +9,14 @@ import re
 from functools import cached_property
 from sphinx.application import Sphinx
 from docutils.nodes import (
+    document,
     section,
     GenericNodeVisitor,
     SkipChildren,
     Admonition,
     paragraph,
     title,
+    Text,
     reference,
     list_item,
     literal_block
@@ -197,6 +199,9 @@ class TaskMapper:
 
     _app: Optional[Sphinx] = None
 
+    # the toctree gateway assignment hierarchy
+    hierarchy = None
+    
     def __init__(self):
         self.tasks = {}
         self.task_sections = {}
@@ -370,6 +375,9 @@ class TaskMapper:
         This is the callback registered to hook into the documentation build
         process. This means we need to edit our doctree with the results of the
         test runs because the documentation is being written!
+
+        This function adds a bunch of information about the student's task code
+        into the doctree, including errors if there are any.
         """
         self.process_toctree(app)  # all toctrees will be processed on the first doc
         module, tasks = self.read_tasks(tree, doc_name)
@@ -383,13 +391,29 @@ class TaskMapper:
             if task_test.error:
                 err_section = section(ids=[f'{task_test.name}-error'])
                 err_section['classes'].append('error-output')
-                title_text = 'Test Output'
+                title_text = 'Error'
                 title_node = title(title_text, title_text)
                 err_section += title_node
                 para_text = task_test.error
                 para_node = literal_block(para_text, para_text)
                 err_section += para_node
                 task_doc.node += err_section
+                
+            if task_test.implementation:
+                impl_section = section(ids=[f'{task_test.name}-implementation'])
+                impl_section['classes'].append('task-implementation')
+                title_text = 'Implementation'
+                title_node = title(title_text, title_text)
+                impl_section += title_node
+                para_text = task_test.implementation
+                para_node = literal_block(para_text, para_text)
+                impl_section += para_node
+                task_doc.node += impl_section
+            
+            # change todo's to completed's because we can!
+            if task_test.status == TaskStatus.PASSED:
+                for todo in task_doc.node.traverse(Todo.node_class):
+                    todo[0].children[0] = Text('Completed')
 
             if 'gateway' not in task_doc.gateway_node['classes']:
                 task_doc.gateway_node['classes'].extend(['gateway'])
@@ -405,6 +429,15 @@ class TaskMapper:
             task_doc.gateway_node['classes'].append(task_doc.gateway_node._task_status.css)
 
         self.process_toctree(doc_name)
+
+        # annotate any top level module sections
+        if module and module in self.hierarchy:
+            for sect in tree.traverse(section):
+                if (
+                    isinstance(sect.parent, document) and 
+                    any([module in ident.lower() for ident in sect['ids']])
+                ):
+                    sect['classes'].extend(['module-section', self.hierarchy[module]['status'].css])
 
 
     def read_tasks(self, tree, doc_name):
@@ -442,10 +475,10 @@ class TaskMapper:
                     task.run()
             
             # build the task hierarchy
-            hierarchy = self.get_gateway_hierarchy()
+            self.hierarchy = self.get_gateway_hierarchy()
 
             # annotate the tree with css status classes
-            for _, mod_parts in hierarchy.items():
+            for _, mod_parts in self.hierarchy.items():
                 for node in mod_parts['nodes']:
                     node['classes'].extend(['module', mod_parts['status'].css])
                 for _, gtwy_parts in mod_parts['gateways'].items():
@@ -454,7 +487,7 @@ class TaskMapper:
                     for _, task_parts in gtwy_parts['tasks'].items():
                         for node in task_parts['nodes']:
                             node['classes'].extend(['task', task_parts['status'].css])
-
+        return self.hierarchy
 
     def get_gateway_hierarchy(self):
         """
