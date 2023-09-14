@@ -25,3 +25,70 @@ div.admonition-todo.admonition {
 hr.docutils {
     border-top: 1px solid #000 !important;
 }
+
+li.gateway {
+    background-color: #6ab0de;
+}
+
+li.gateway.current a {
+
+    background: #5995bd !important;
+}
+
+li.gateway a {
+    color: whitesmoke !important;
+}
+
+section.failed > h3::before,
+section.failed > h2::before,
+section.failed > h1::before,
+li.failed > a::before {
+    content: "\f06a";
+    font-family: FontAwesome;
+    margin-right: 5px;
+    color: #db0000;
+}
+
+section.error > h3::before,
+section.error > h2::before,
+section.error > h1::before,
+li.error > a::before {
+    content: "\f188";
+    font-family: FontAwesome;
+    margin-right: 5px;
+    color: #db0000;
+}
+
+section.passed > h3::before,
+section.passed > h2::before,
+section.passed > h1::before,
+li.passed > a::before {
+    content: "\f14a";
+    font-family: FontAwesome;
+    margin-right: 5px;
+    color: green;
+}
+
+li.skipped > a::before {
+    content: "\f12e";
+    font-family: FontAwesome;
+    margin-right: 5px;
+    color: transparent;
+}
+
+div.toctree-wrapper.compound li.gateway > a {
+    color: whitesmoke;
+    padding-left: 5px;
+}
+
+section.error-output > h1,
+section.error-output > h2,
+section.error-output > h3,
+section.error-output > h4,
+section.error-output > h5 {
+    color: #db0000;
+}
+
+section.error-output pre {
+    border: 3px solid darkred;
+}

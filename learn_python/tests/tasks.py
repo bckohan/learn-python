@@ -7,6 +7,8 @@ from warnings import warn
 from typing import Optional, Union
 from types import FunctionType
 import inspect
+from io import StringIO
+import contextlib
 
 
 PACKAGE_DIR = Path(__file__).parent.parent.parent
@@ -89,11 +91,15 @@ class Task:
         # only run if we have not run already!
         if self.status is TaskStatus.NOT_RUN:
             running_task = self
-            exit_code = pytest.main(
-                [self.identifier, '-s'],
-                # register this module as a plugin so our hook will be called
-                plugins=[sys.modules[__name__]]
-            )
+            out = StringIO()
+
+            with contextlib.redirect_stdout(out):
+                exit_code = pytest.main(
+                    [self.identifier, '-s'],
+                    # register this module as a plugin so our hook will be called
+                    plugins=[sys.modules[__name__]]
+                )
+
             running_task = None
             if exit_code not in [pytest.ExitCode.OK, pytest.ExitCode.TESTS_FAILED]:
                 warn(f'Unable to run test for task {self.module}::{self.name}: {exit_code}')
@@ -101,6 +107,9 @@ class Task:
             
             if self.status == TaskStatus.NOT_RUN:
                 warn(f'Task status for {self.module}::{self.name} was not updated after run!')
+
+            if self.status in [TaskStatus.ERROR, TaskStatus.FAILED]:
+                self.error = out.getvalue()
 
     @property
     def implementation(self):
@@ -121,10 +130,11 @@ def pytest_report_teststatus(report, config):
     This is hook that pytest calls after a test is executed with its outcome.
     """
     global running_task
-    if report.outcome == 'passed' and report.when == 'teardown':
-        running_task.status = TaskStatus.PASSED
-    elif report.outcome == 'failed':
-        running_task.status = TaskStatus.FAILED
-    elif report.outcome == 'skipped' and report.when == 'setup':
-        running_task.status = TaskStatus.SKIPPED
+    if running_task.status == TaskStatus.NOT_RUN:
+        if report.outcome == 'passed' and report.when == 'teardown':
+            running_task.status = TaskStatus.PASSED
+        elif report.outcome == 'failed':
+            running_task.status = TaskStatus.FAILED
+        elif report.outcome == 'skipped' and report.when == 'setup':
+            running_task.status = TaskStatus.SKIPPED
     return None

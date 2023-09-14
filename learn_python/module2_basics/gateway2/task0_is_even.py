@@ -6,11 +6,6 @@
 .. hint::
     Use the modulus operator
 
-.. admonition:: Requirement
-
-    * requirement 1
-    * requirement 2
-
 """
 def is_even(x):
     return x % 2 == 1

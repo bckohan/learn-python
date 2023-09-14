@@ -14,13 +14,15 @@ from docutils.nodes import (
     SkipChildren,
     Admonition,
     paragraph,
+    title,
     reference,
-    list_item
+    list_item,
+    literal_block
 )
 from os import PathLike
 from termcolor import colored
 from sphinx.ext.todo import Todo
-from sphinx.addnodes import desc, toctree, compact_paragraph
+from sphinx.addnodes import desc
 from typing import List, Dict, Union, Optional
 from types import FunctionType, ModuleType
 from enum import Enum, auto
@@ -376,13 +378,32 @@ class TaskMapper:
             task_test = self.get_task_test(module, task)
             task_doc = self.get_task_doc(module, task)
             task_test.run()
-            if task_test.status is TaskStatus.PASSED:
-                task_doc.node.attributes.setdefault('classes', []).append('passed')
-            elif task_test.status in [TaskStatus.FAILED, TaskStatus.ERROR]:
-                task_doc.node.attributes.setdefault('classes', []).append('failed')
-            elif task_test.status is TaskStatus.SKIPPED:
-                task_doc.node.attributes.setdefault('classes', []).append('skipped')
+            task_doc.node['classes'].extend(['task', task_test.status.css])
+
+            if task_test.error:
+                err_section = section(ids=[f'{task_test.name}-error'])
+                err_section['classes'].append('error-output')
+                title_text = 'Test Output'
+                title_node = title(title_text, title_text)
+                err_section += title_node
+                para_text = task_test.error
+                para_node = literal_block(para_text, para_text)
+                err_section += para_node
+                task_doc.node += err_section
+
+            if 'gateway' not in task_doc.gateway_node['classes']:
+                task_doc.gateway_node['classes'].extend(['gateway'])
+            
+            if not hasattr(task_doc.gateway_node, '_task_status'):
+                task_doc.gateway_node._task_status = TaskStatus.NOT_RUN
+            
+            if task_doc.gateway_node._task_status < task_test.status:
+                task_doc.gateway_node._task_status = task_test.status
         
+        for task in tasks:
+            task_doc = self.get_task_doc(module, task)
+            task_doc.gateway_node['classes'].append(task_doc.gateway_node._task_status.css)
+
         self.process_toctree(doc_name)
 
 
@@ -501,6 +522,7 @@ class TaskMapper:
                         gtwy_hierarchy['tasks'].setdefault(task_name, {'nodes': set(), 'status': TaskStatus.NOT_RUN})
                         gtwy_hierarchy['tasks'][task_name]['nodes'].add(task_node)
                         gtwy_hierarchy['tasks'][task_name]['status'] = task_tests[module][task_name].status
+
                     elif ref['refuri'] in hierarchy:
                         # we might have a dangling top node, without sub anchors to key off of, in these cases we need to map
                         # to the correct module
@@ -572,58 +594,6 @@ class TaskMapper:
             buildername='dummy'
         )
 
-
-# Sphinx does not provide official hooks to manage the toctree generation, so we resort to monkey
-# patching some internals to add some classes to our toctree navbars so we can style them based
-# on gateway assignment status. This may break in the future!
-
-# from sphinx.environment.adapters import toctree
-# internal_add_classes = toctree._toctree_add_classes
-
-# anchor_rgx = re.compile('(?P<module>module[\d]+)(?:_[\w]+)?[.](?P<gateway>gateway[\d]+)(?:_[\w]+)?[.](?:task(?P<task_num>[\d]*)_)?(?P<task>[\w]+)')
-
-# def add_gateway_status_classes(node, depth, docname):
-#     internal_add_classes(node, depth, docname)
-    # for subnode in node.children:
-    #     if isinstance(subnode, reference):
-    #         ref = subnode['refuri']
-    #         if 'gateway' in ref and 'module' in ref:
-    #             import ipdb
-    #             ipdb.set_trace()
-            # anchor = subnode['anchorname']
-            # print(ref)
-            # task_mtch = anchor_rgx.search(subnode['anchorname'])
-            # if task_mtch:
-            #     print(task_mtch.groupdict())
-            #     subnode['classes'].append(f'found')
-            # else:
-            #     branchnode = subnode
-            #     while branchnode:
-            #         branchnode['classes'].append('current')
-            #         branchnode = branchnode.parent
-                    # import ipdb
-                    # ipdb.set_trace()
-            # # for <a>, identify which entries point to the current
-            # # document and therefore may not be collapsed
-            # if subnode['refuri'] == docname:
-            #     if not subnode['anchorname']:
-            #         # give the whole branch a 'current' class
-            #         # (useful for styling it differently)
-            #         branchnode: Element = subnode
-            #         while branchnode:
-            #             branchnode['classes'].append('current')
-            #             branchnode = branchnode.parent
-            #     # mark the list_item as "on current page"
-            #     if subnode.parent.parent.get('iscurrent'):
-            #         # but only if it's not already done
-            #         return
-            #     while subnode:
-            #         subnode['iscurrent'] = True
-            #         subnode = subnode.parent
-
-# toctree._toctree_add_classes = add_gateway_status_classes
-
-# end monkey patch ***************************************
 
 @contextmanager
 def doc_context():
