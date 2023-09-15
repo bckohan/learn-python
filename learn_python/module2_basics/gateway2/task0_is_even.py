@@ -8,4 +8,4 @@
 
 """
 def is_even(x):
-    return x % 2 == 1
+    return x % 2 == 0

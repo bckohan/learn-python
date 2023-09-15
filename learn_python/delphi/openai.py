@@ -1,10 +1,11 @@
 import os
 import openai
 from pathlib import Path
-from learn_python.delphi.tutor import Tutor
+from learn_python.delphi.tutor import Tutor, ConfigurationError
 from uuid import uuid1
+import json
 
-API_KEY_FILE = Path(__file__).parent / 'openapi.key'
+API_KEY_FILE = Path(__file__).parent / 'openai_api.key'
 
 
 class OpenAITutor(Tutor):
@@ -38,7 +39,7 @@ class OpenAITutor(Tutor):
         if not self.api_key:
             with open(API_KEY_FILE, 'a'):
                 os.utime(API_KEY_FILE, None)
-            raise RuntimeError(
+            raise ConfigurationError(
                 'The tutor requires an api key to be installed. '
                 f'Please paste your OpenAI API key into the file: {API_KEY_FILE.relative_to(os.getcwd())}. '
                 'See https://platform.openai.com/account/api-keys for details, or inquire with the instructor.'
@@ -46,59 +47,60 @@ class OpenAITutor(Tutor):
         
         openai.api_key = self.api_key
 
-    @property
-    def model(self):
+    def get_model(self, messages):
+        # todo - return 32k model for large messages
         return self.model_priority[0]
 
-    def prompt(self, task=None):
-        use_tutor = input(f'Would you like assistance from {self.me}? (y/n): ')
-        if use_tutor.lower() in ['y', 'yes', 'true']:
-            print('Starting tutor session...')
-            self.start_session(task=task)
-
-    def start_session(self, task=None):
-
-        import ipdb
-        ipdb.set_trace()
-    
-    def init_agent(self, question):
-        response = openai.ChatCompletion.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": self.directive},
-                {"role": "user", "content": question}
-            ]
+    async def send(self):
+        messages=[
+            {'role': 'system', 'content': self.directive},
+            *self.messages
+        ]
+        return await openai.ChatCompletion.acreate(
+            model=self.get_model(messages),
+            messages=messages,
+            functions=self.functions
         )
 
-    def format_message(self, question):
-        pass
-    
-    def send(self, message):
-        if message and isinstance(message, str):
-            self.messages.append({'role': 'user', 'content': message})
-        elif message and hasattr(message, '__iter__'):
-            self.messages.extend(message)
-        return openai.ChatCompletion.create(
-            model=self.model,
-            messages=self.messages
-        )
-
-    def get_reply(self, response):
-        return response['choices'][0]['message']['content']
-
-    def process_response(self, response):
-        pass
+    def handle_response(self, response):
+        # todo run any functions that were called out
+        resp = response['choices'][0]['message']
+        to_call = {
+            'terminate': self.terminate,
+            'rerun': self.rerun
+        }.get(resp.get('function_call', {}).get('name', None), None)
+        if to_call:
+            to_call(**json.loads(resp['function_call'].get('arguments', {})))
+        return resp['content']
 
     @property
     def functions(self):
         funcs = [{
             'name': 'terminate',
-            'description': 'Terminate the tutoring session.'
+            'description': 'Terminate the tutoring session.',
+            'parameters': {
+                'type': 'object',
+                'properties': {},
+                'required': []
+            },
+        }, {
+            'name': 'set_task',
+            'description': 'Determine which of the tasks .',
+            'parameters': {
+                'type': 'object',
+                'properties': {},
+                'required': []
+            }
         }]
         if self.task_test:
             funcs.append({
                 'name': 'rerun',
-                'description': 'Re-execute the test for the task we are working on.'
+                'description': 'Re-execute the test for the task we are working on.',
+                'parameters': {
+                    'type': 'object',
+                    'properties': {},
+                    'required': []
+                }
             }
         )
         return funcs

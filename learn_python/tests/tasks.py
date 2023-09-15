@@ -136,8 +136,8 @@ class Task:
 
         if self.status is TaskStatus.NOT_RUN:
             running_task = self
+            
             out = StringIO()
-
             with contextlib.redirect_stdout(out):
                 exit_code = pytest.main(
                     [f'--timeout={self.timeout}', self.identifier, '-s'],
@@ -158,7 +158,7 @@ class Task:
 
     @property
     def implementation(self):
-        """The student's code for this task"""
+        """The student's code for this task - todo this will need to be enhanced for more complex tasks"""
         if isinstance(self.function, str):
             return None
         elif self.function:
