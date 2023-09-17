@@ -61,12 +61,11 @@ Fork & Clone the Course
 
 The course repository is located `here <https://github.com/bckohan/learn-python>`_.
 
-Gateway 1
-=========
+:code-ref:`Gateway 1 <learn_python/module1/gateway1.py>`
+========================================================
 
-
-Part 1
-------
+:code-ref:`Part 1 <learn_python/module1/gateway1.py>`
+-----------------------------------------------------
 
 .. todo::
    In learn_python/module1 create a python module called gateway1. Write code such that when imported 
@@ -113,8 +112,8 @@ If your part 1 is implemented correctly you will see that 1 test has passed::
 The code that runs our tests lives in learn_python/tests/
 
 
-Part 2
-------
+:code-ref:`Part 2 <learn_python/module1/gateway1.py>`
+-----------------------------------------------------
 
 .. todo::
    Adapt module gateway1 so that when it is run as an executable the “print 2” line is replaced by 

@@ -11,6 +11,9 @@ import re
 
 ROOT_DIR = Path(__file__).parent.parent
 
+# todo move config into a file
+GITHUB_ROOT = Path('https://github.com/bckohan/learn-python')
+
 
 class ConeOfSilence(redirect_stdout, redirect_stderr):
     """

@@ -6,7 +6,7 @@
 
     * You must use your implementation of get_decimal from task 11.
     * You may not use a string format specifier (i.e. the part after : in f'{3.14:.2f}')
-    * You must use the built-in `round() <https://docs.python.org/3/library/functions.html#round>_` function.
+    * You must use the built-in `round() <https://docs.python.org/3/library/functions.html#round>`_ function.
     * Your implementation must be no more than 3 statements.
 
 .. hint::

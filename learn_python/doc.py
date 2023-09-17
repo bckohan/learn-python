@@ -30,9 +30,49 @@ from types import FunctionType, ModuleType
 from enum import Enum, auto
 from warnings import warn
 import inspect
+from learn_python.utils import ROOT_DIR, GITHUB_ROOT
+from docutils.parsers.rst import Directive
 
 
 _mapper = None
+DETACHED_DEFAULT = False
+
+
+CODE_REF_RE = re.compile(r'(?:(?P<name>.+)\s*\<(?P<link1>[^>.]+)[.](?P<ext1>.+)\>)|(?:(?P<link2>[^>.]+)[.](?P<ext2>.+))')
+
+
+def code_ref_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    """
+    This code ref generates a vscode open link when built locally and a github code link when
+    built in detached mode.
+
+    Usage::
+
+        :code-ref:`file_name <path/to/file.py>`
+    
+    """
+    env = inliner.document.settings.env
+    match = CODE_REF_RE.match(text)
+    if not match:
+        raise Directive.error(
+            msg=f'{text} is not a valid code-ref. Should be: "link_name <path/to/file.py>"'
+        )
+    match = match.groupdict()
+    if match['link1']:
+        pth = Path(f"{match['link1']}.{match['ext1']}")
+        name = match['name']
+    else:
+        pth = Path(f"{match['link2']}.{match['ext2']}")
+        name = pth.name
+
+    node = reference('', '', internal=False)
+    if env.config.detached:
+        node['refuri'] = str(GITHUB_ROOT / 'blob/main' / pth)
+    else:
+        node['refuri'] = f'vscode://file/{ROOT_DIR / pth}'
+    node['reftitle'] = name.strip()
+    node += Text(name)
+    return [node], []
 
 
 def task_map():
@@ -45,6 +85,9 @@ def task_map():
 
 def setup(app):
     global _mapper
+    global DETACHED_DEFAULT
+    app.add_config_value('detached', DETACHED_DEFAULT, 'env', types=[bool])
+    app.add_role('code-ref', code_ref_role)
     if not _mapper:
         # if the mapper already exists we're not hooking into a documentation build
         # process, therefore we shouldn't register our event callback because the
@@ -356,7 +399,10 @@ class TaskMapper:
             if not self.gateway_section and 'gateway' in node[0].astext().lower():
                 self.gateway_section = node
             elif self.gateway_section and not self.assignment_section:
-                name = node[0].astext().rstrip('()').lower().replace(' ', '')
+                name = node[0].astext()
+                if '()' in name:
+                    name = name[:name.index('()')]
+                name = name.lower().replace(' ', '')
                 self.assignments[name] = TaskMapper.AssignmentDocs(
                     name=name,
                     node=node,
@@ -663,11 +709,17 @@ def doc_context():
 
 
 @app.command()
-def build():
+def build(
+    detached: bool = typer.Option(
+        DETACHED_DEFAULT,
+        '--detached',
+        help='Generate the docs with no references to the local filesystem.'
+    )
+):
     """Build the documentation - this will always clean it first."""
     clean()
     with doc_context():
-        os.system('make html')
+        os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
 
 
 @app.command()
