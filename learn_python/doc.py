@@ -567,7 +567,7 @@ class TaskMapper:
         # module -> gateway -> task
         hierarchy = {}
         module_rgx = re.compile(r'(?P<module>module[\d]+)')
-        anchor_rgx = re.compile('^#(.*(?P<module>module[\d]+)(?:_[\w]+)?[.](?P<gateway>gateway[\d]+)(?:_[\w]+)?[.](?:task(?P<task_num>[\d]*)_)?)?(?P<task>[\w-]+)')
+        anchor_rgx = re.compile(r'^#(.*(?P<module>module[\d]+)(?:_[\w]+)?[.-](?:(?P<gateway>gateway[\d]+)(?:_[\w]+)?[.-])?(?:task(?P<task_num>[\d]*)_)?)?(?P<task>[\w-]+)')
         # its really annoying to traverse toc trees, because the link data are not
         # discoverable via parent/child relationships because they are buried in leaf nodes off the parents
         # our strategy here is to try to infer if a given node is a leaf task reference by matching its anchor to known task
