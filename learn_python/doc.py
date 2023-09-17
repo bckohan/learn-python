@@ -24,8 +24,8 @@ from docutils.nodes import (
 from os import PathLike
 from termcolor import colored
 from sphinx.ext.todo import Todo
-from sphinx.addnodes import desc
-from typing import List, Dict, Union, Optional
+from sphinx.addnodes import desc, pending_xref
+from typing import List, Dict, Union, Optional, Tuple
 from types import FunctionType, ModuleType
 from enum import Enum, auto
 from warnings import warn
@@ -260,6 +260,9 @@ class TaskMapper:
         # the autodoc tree 
         autodoc: AutodocTree
 
+        # other tasks that are dependencies
+        dependencies: List[Tuple[str, str]]
+
         def __init__(
             self,
             name,
@@ -274,15 +277,34 @@ class TaskMapper:
             self.gateway_node = gateway_node
             self.source = source
             self.gateway_source = gateway_source
+            self.dependencies = []
 
             self.requirements = []
             self.hints = []
 
+            def find_dependencies(node):
+                replacements = {}
+                for ref in node.traverse(lambda x: isinstance(x, (reference, pending_xref))):
+                    target = 'refid' if 'refid' in ref else 'reftarget'
+                    ref_id = ref.get(target, '')
+                    if ref_id.startswith('module'):
+                        parts = ref_id.split('-')
+                        if len(parts) > 1:
+                            module = parts[0]
+                            task_name = '_'.join(parts[1:])
+                            self.dependencies.append((module, task_name))
+                            replacements[ref_id] = task_name
+                return replacements
+            
             def parse_admonition(admonition):
                 parts = []
+                replacements = find_dependencies(admonition)
                 for node in admonition.traverse():
                     if isinstance(node, paragraph):
                         parts.append(node.astext())
+                for ref, task_name in replacements.items():
+                    for idx, part in enumerate(parts):
+                        parts[idx] = part.replace(ref, task_name)
                 return parts
 
             todos = []

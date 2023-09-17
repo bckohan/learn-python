@@ -2,6 +2,8 @@
 Gateway 2.0
 ===========
 
+.. _module2-is_even:
+
 is_even()
 =========
 
@@ -10,6 +12,8 @@ is_even()
 	:inherited-members:
 
 ------------------
+
+.. _module2-is_odd:
 
 is_odd()
 ========
@@ -20,6 +24,8 @@ is_odd()
 
 ------------------
 
+.. _module2-is_even_safe:
+
 is_even_safe()
 ==============
 
@@ -28,6 +34,8 @@ is_even_safe()
 	:inherited-members:
 
 ------------------
+
+.. _module2-is_even_safe_ternary:
 
 is_even_safe_ternary()
 ======================
@@ -38,6 +46,8 @@ is_even_safe_ternary()
 
 ------------------
 
+.. _module2-logic_play:
+
 logic_play()
 ============
 
@@ -46,6 +56,8 @@ logic_play()
 	:inherited-members:
 
 ------------------
+
+.. _module2-logic_play2:
 
 logic_play2()
 =============
@@ -56,6 +68,8 @@ logic_play2()
 
 ------------------
 
+.. _module2-default_args:
+
 default_args()
 ==============
 
@@ -64,6 +78,8 @@ default_args()
 	:inherited-members:
 
 ------------------
+
+.. _module2-get_delegate:
 
 get_delegate()
 ==============
@@ -74,6 +90,8 @@ get_delegate()
 
 ------------------
 
+.. _module2-is_close:
+
 is_close()
 ==========
 
@@ -82,6 +100,8 @@ is_close()
 	:inherited-members:
 
 ------------------
+
+.. _module2-normal_distribution:
 
 normal_distribution()
 =====================

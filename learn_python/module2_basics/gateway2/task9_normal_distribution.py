@@ -13,9 +13,13 @@
     is open, and only resume after you close the window.
 """
 
-def normal_distribution(x, σ=1, μ=0):  # did you know python is unicode by default? 🤯
+def normal_distribution(x, σ=1, μ=0):
     """
-    Compute the value of the normal distribution at x given σ and μ.
+    Compute the value of the normal distribution at x given σ and μ. 
+    
+    .. note::
+        Python is `unicode <https://home.unicode.org/>`_ by default. This means it can contain 
+        all kinds of craaaazy characters! 🤯
     
     .. image:: ../../../../learn-python/learn_python/module2_basics/resources/normal_distrib.svg
         :alt: Definition of the normal distribution.

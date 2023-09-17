@@ -2,16 +2,22 @@ import typer
 import re
 from pathlib import Path
 import os
-from contextlib import contextmanager, redirect_stdout, redirect_stderr
+from contextlib import contextmanager
 import subprocess
 from functools import cached_property
 from enum import Enum
 from termcolor import colored
 from typing import Optional, Union, List
+from types import FunctionType
 from uuid import uuid1, UUID
 from learn_python.tests.tasks import Task, TaskStatus
 from learn_python.tests.tests import tasks
-from learn_python.doc import task_map, TaskMapper
+from learn_python.doc import (
+    task_map,
+    TaskMapper,
+    clean as clean_docs,
+    build as build_docs
+)
 import gzip
 import json
 from datetime import datetime
@@ -22,28 +28,62 @@ import asyncio
 import sys
 from rich.console import Console
 from rich.markdown import Markdown
-from io import StringIO
+from learn_python.utils import (
+    ConeOfSilence,
+    GzipFileHandler,
+    localize_identifier,
+    ROOT_DIR,
+    strip_colors
+)
+import logging
+
+# don't remove this - adds additional editing features to input()
+import readline
 
 
-ROOT_DIR = Path(__file__).parent.parent.parent
-LOG_DIR = ROOT_DIR / 'logs'
+LOG_DIR = ROOT_DIR / 'learn_python/delphi/logs'
 
 
 def now():
+    """Get the current time in the system's current timezone"""
     return datetime.now(tz=tzlocal())
 
 
+
 class TerminateSession(Exception):
-    pass
+    """Thrown if the tutor determines the session should end"""
 
 
 class RestartSession(Exception):
-    pass
+    """Thrown if the tutor determines the session should be restarted - possibly for a new task"""
 
 
 class ConfigurationError(Exception):
-    pass
-    
+    """Thrown if there's something wrong with the setup of the Tutor such that it can't start properly"""
+
+
+class RePrompt(Exception):
+    """
+    Thrown when we need to break the response cycle and get the AI to respond to a different message,
+    the string representation of the exception will be used as the new prompt. The session will not be
+    broken.
+    """
+
+
+class LLMBackends(Enum):
+    """
+    The LLM backends currently supported to run Delphi.
+    """
+
+    OPEN_AI = 'openai'
+
+    def instantiate(self):
+        if self is self.OPEN_AI:
+            from learn_python.delphi.openai import OpenAITutor
+            return OpenAITutor()
+        else:
+            raise NotImplementedError(f'{self} tutor backend is not implemented!')
+
 
 class Tutor:
     """
@@ -53,10 +93,14 @@ class Tutor:
     from this class.
 
     todo:
-        1) silence sphinx
         2) function for selecting task to get help with
-        3) reload task when going from unimplemented to implemented
         4) log to web server
+
+    The base class will attempt to render all tutor text to the terminal as markdown.
+
+    For a backend to fully work it needs to also provide a mechanism to make function calls and
+    pass arguments to those functions, though this is not strictly required as users can manually
+    indicate which tasks they need help with and ctrl-D out of the session.
     """
 
     # each session is given a unique identifier
@@ -76,6 +120,47 @@ class Tutor:
 
     # accept tasks specified as their singular names, their pytest identifiers or the pytest function name
     TASK_NAME_RGX = re.compile('^((?:test_gateway[\d]*_)|(.*[:]{2}))?(?P<task_name>[\w]+)$')
+
+    logger = logging.getLogger('delphi')
+    file_handler: GzipFileHandler
+
+    BACKEND: LLMBackends
+
+    # some guards against recursive loops
+    last_function: Optional[FunctionType] = None
+    last_function_kwargs: Optional[dict] = None
+    no_prompt_rounds: int = 0
+    NO_PROMPT_ROUNDS_LIMIT: int = 4
+
+    INITIAL_NOTICE = """
+---
+Hi, I'm **Delphi**! \U0001F44B
+
+- To **terminate the session**, you can:
+  - Type `ctrl-D`
+  - Or kindly tell me you're finished.
+
+- Need **help with an assignment** or curious about **Python and programming**? Just ask!
+
+- I can also **build the docs** for you and **re-evaluate assignments** after you've made changes. Let's get started!
+---
+    """
+
+    closed: bool = True
+
+    def __init__(self):
+        self.engagement_id = uuid1()
+        logging.basicConfig()
+        self.file_handler = GzipFileHandler(str(LOG_DIR / f'delphi_{self.engagement_id}.log'))
+
+        # setup delphi logging to a unique file for each engagement
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        self.file_handler.setFormatter(formatter)
+        self.logger.addHandler(self.file_handler)
+        self.logger.setLevel(logging.DEBUG)
+        self.file_handler.setLevel(logging.DEBUG)
+        self.logger.propagate = False
+        self.no_prompt_rounds = 0
 
     @property
     def me(self):
@@ -134,13 +219,52 @@ class Tutor:
             f'of approach. Please address me by my name.'
         )
 
-    def prompt(self, task=None):
+    def is_help_needed(self, task: Optional[Union[Task, str]] = None):
+        """Check if the student needs help, if they do launch the tutor, if not return"""
         use_tutor = input(f'Would you like assistance from {self.me}? (y/n): ')
-        if use_tutor.lower() in ['y', 'yes', 'true']:
-            print('Starting tutor session...')
-            self.start_session(task=task)
+        for word in use_tutor.lower().split():
+            if word in ['yes', 'y', 'help', 'please', 'thank', 'thanks', 'thankyou', 'ok', 'affirmative']:
+                with delphi_context():
+                    self.init(task=task)
+                    self.submit_logs()
+                return
     
+    def prompt(self, msg: Optional[str] = None):
+        """
+        The prompt/response cycle. If a msg is passed in, the user will
+        not be given a chance to input text and the message will be immediately
+        sent to the tutor backend.
+        """
+        self.logger.info('prompt()')
+        if msg is None:
+            self.no_prompt_rounds = 0
+            msg = input('> ')
+        else:
+            self.no_prompt_rounds += 1
+
+        if self.no_prompt_rounds > self.NO_PROMPT_ROUNDS_LIMIT:
+            # we might be caught in some kind of loop - must guard against this!
+            raise TerminateSession(
+                f'{self.me} has gotten confused and exceeded the number of rounds without user input.'
+            )
+        
+        Console().print(  # render as markdown to the terminal.
+            Markdown(
+                self.push(  # log the response message
+                    'assistant',
+                    self.handle_response(  # call any functions
+                        asyncio.run(self.get_response(msg))  # asynchronously send the message
+                    )   
+                ) or ''  # response may have been null if certain functions were called
+            )
+        )
+
     async def spinner(self):
+        """
+        Asynchronously display a spinner on the terminal. The responses from LLMs can take
+        seconds, so its important to give the user a visual cue that something is happening
+        and they should wait.
+        """
         symbols = ['|', '/', '-', '\\']
         while True:
             for symbol in symbols:
@@ -154,6 +278,7 @@ class Tutor:
         on the messages stack. This will display a progress spinner on the terminal
         until send completes and a response is available.
         """
+        self.logger.info(f'get_response()')
         if message:
             self.push('user', message)
         spinner_task = asyncio.create_task(self.spinner())
@@ -168,7 +293,7 @@ class Tutor:
         Send the message chain and return a response.
         """
         raise NotImplementedError(
-            f'Extending LLM backends must implement send according to its docstring.'
+            f'Extending LLM backends must implement send.'
         )
     
     def handle_response(self, response):
@@ -177,100 +302,227 @@ class Tutor:
         to be called, they should be executed here.
         """
         raise NotImplementedError(
-            f'Extending LLM backends must implement handle_response according to its docstring.'
+            f'Extending LLM backends must implement handle_response.'
         )
     
-    def possible_tasks(self, task_name: str):
-        mtch = self.TASK_NAME_RGX.match(task_name)
-        if not mtch:
-            raise RuntimeError(f'{task_name} is not a valid task name or identifier.')
-        task_name = mtch.groupdict()['task_name']
-        possibles = []
-        for module, mod_tasks in tasks.items():
-            if task_name in mod_tasks:
-                possibles.append((module, mod_tasks[task_name]))
-        return possibles
-    
+    def get_task_description(
+        self,
+        test,
+        docs,
+        hints=False,
+        requirements=False,
+        code=False
+    ):
+        """
+        Get a natural language description for the task.
+
+        :param test: The Task object holding information regarding the test.
+        :param docs: The AssignmentDocs object holding information about the task assignment.
+        :param hints: If true, include the hints in the description (default: false)
+        :param requirements: If true, include the requirements in the description (default: false)
+        :param code: If true, include the current task implementation code in the description (default: false)
+        :return: A string containing the natural language description of the task.
+        """
+        test.run()
+        description = f'The task {docs.name} asks me to:\n{docs.todo}\n'
+        if self.task_test.status == TaskStatus.PASSED:
+            description += f'The test for {docs.name} is passing!\n'
+        elif self.task_test.status in [TaskStatus.ERROR, TaskStatus.FAILED]:
+            description += f'The test for {docs.name} is failing with this error: {test.error_msg}\n'
+        elif self.task_test.status == TaskStatus.SKIPPED:
+            description += f'I have not attempted to implement {docs.name} yet.\n'
+        if requirements and docs.requirements:
+            reqs = "\n".join(docs.requirements)
+            description += f'It has the following requirements:\n{reqs}\n'
+        if hints and docs.hints:
+            hnts = "\n".join(docs.hints)
+            description += f'I have been given the following hints: \n{hnts}\n'
+        if code and test.implementation:
+            description += f'My current implementation of {docs.name} looks like:\n{test.implementation}'
+        return description
+
     def init_for_task(self):
         """Reinitialize AI tutor context for help with the set tasks"""
         # sanity check
         assert self.task_test and self.task_docs, f'Cannot initialize {self.me} for a task without a test and documentation to rely on.'
+        self.logger.info('init_for_task(%s)', self.task_test.name)
         self.task_test.run()
-        message = f'I have been assigned the following task:\n{self.task_docs.todo}\n'
-        if self.task_docs.requirements:
-            reqs = "\n".join(self.task_docs.requirements)
-            message += f'It has the following requirements:\n{reqs}\n'
-        if self.task_docs.hints:
-            hints = "\n".join(self.task_docs.hints)
-            message += f'I have been given the following hints: \n{hints}\n'
-        message += f'My current implementation looks like:\n{self.task_test.implementation}'
-        self.push('user', message.strip())
+        message = f'I have set the task I need help with to "{self.task_test.name}". '
+        message += self.get_task_description(
+            self.task_test,
+            self.task_docs,
+            hints=True,
+            requirements=True,
+            code=True
+        )
+
+        dependency_set = set()
+        def get_all_dependencies(test_docs):
+            for module_dep, task_dep in test_docs.dependencies:
+                module, test, docs = self.get_task_info(task_dep, module_dep)
+                if module and test and docs:
+                    dependency_set.add((module, test, docs))
+                    get_all_dependencies(docs)
         
+        get_all_dependencies(self.task_docs)
+
+        for module, test, docs in dependency_set:
+            if module and test and docs:
+                message += self.get_task_description(test, docs, code=True)
+
+        # todo send implementations for associated tasks?
+        self.push('user', message.strip())
 
     def push(self, role, message=''):
         """Add message to history"""
+        self.logger.info('push(role=%s, message=%s)', role, message)
         if message:
             self.messages.append({'role': role, 'content': message})
         return message
+    
+    def possible_tasks(self, task_name: str, module: Optional[str] = None):
+        """
+        Get a list of possible tasks based on the task_name. The list will be
+        a 2-tuple where the first element is the module name string and the second
+        element is the Task instance.
+
+        :param task_name" The name of the task
+        """
+        possibles = []
+        mtch = self.TASK_NAME_RGX.match(task_name)
+        to_search = {module: tasks.get(module, {})} if module else tasks
+        if mtch:
+            task_name = mtch.groupdict()['task_name']
+            possibles = []
+            for module, mod_tasks in to_search.items():
+                if task_name in mod_tasks:
+                    possibles.append((module, mod_tasks[task_name]))
+        self.logger.info('possible_tasks(%s) = %s', task_name, possibles)
+        return possibles
+    
+    def try_select_task(self, task_name):
+        """
+        Given a task_name which may or may not match a real task, try to select the task to get
+        help with. We use a hybrid AI/choices approach. A complicating factor is that different
+        modules may have tasks of the same name.
+
+        :param task_name: The name of the task 
+        """
+        self.logger.info('try_select_task(%s)', task_name)
+        while not (possibles := self.possible_tasks(task_name)):
+            qry = f'{task_name} is not an assignment, the assignments are:\n'
+            not_working = []
+            for module, mod_tasks in tasks.items():
+                qry += f'In {module}: {",".join(mod_tasks.keys())}\n'
+                for task_name, task in mod_tasks.items():
+                    task.run()
+                    if task.status in [TaskStatus.ERROR, TaskStatus.FAILED]:
+                        not_working.append((module, task_name)) 
+
+            for broken in not_working:
+                qry += '\n'.join(f'{broken[1]} in {broken[0]} is not working.')
+            
+            qry += '\nSet which task you think I might be referring to.'
+            self.prompt(qry)
+            task_name = input('? ')
+
+        if len(possibles) == 1:
+            self.task_test = possibles[0][1]
+        else:
+            while self.task_test is None:
+                prompt = f'Which task do you want help with?:\n'
+                for idx, candidate in enumerate(possibles):
+                    prompt += f'[{idx}] {candidate[0]}: {candidate[1].name}'
+                try:
+                    selection = input(prompt)
+                    self.task_test = possibles[int(selection)][1]
+                except (TypeError, ValueError):
+                    self.try_select_task(selection)
+                except IndexError:
+                    print(colored(f'{selection} is not a valid task number.', 'red'))
 
     def init(
-            self,
-            task: Optional[Union[Task, str]] = None,
-            notice: Optional[str] =  colored(
-                f'Waking up, you may terminate the session by typing ctrl-D or kindly asking '
-                f'me to go away.',
-                'green'
-        )
+        self,
+        task: Optional[Union[Task, str]] = None,
+        notice: Optional[str] = INITIAL_NOTICE
     ):
+        """
+        Initialize a tutor engagement. This may contain multiple sessions. See start_session()
+        """
+        os.makedirs(LOG_DIR, exist_ok=True)
+        self.logger.info('%s.init(%s, %s)', self.__class__.__name__, task, strip_colors(notice))
         try:
             self.start_session(task=task, notice=notice)
         except RestartSession as err:
             # a little tail recursion never hurt anybody
             self.init(task=self.task_test, notice=str(err))
+        self.close_session()
+        return self
+    
+    def get_task_info(self, task_name: str, module: Optional[str] = None):
+        module, test = self.get_test(task_name, module=module)
+        if test:
+            return module, test, self.get_docs(module, task_name)
+        return None, None, None
+
+    def get_test(self, task_name: str, module: Optional[str] = None):
+        possibles = self.possible_tasks(task_name, module=module)
+        if len(possibles) == 1:
+            return possibles[0][0], possibles[0][1]
+        return None, None
+
+    def get_docs(self, module: str, task_name: str):
+        with ConeOfSilence():  # this might trigger a doc parse which is very chatty!
+            return task_map().get_task_doc(module, task_name)
+    
+    def close_session(self):
+        if self.session_id > 0 and not self.closed:
+            self.session_end = now()
+            self.log_session()
+            self.closed = True
 
     def start_session(
         self,
         task: Optional[Union[Task, str]] = None,
-        notice: str = ''
+        notice: str = '',
+        initial_prompt: str = ''
     ):
-        self.engagement_id = self.engagement_id or uuid1()
+        """
+        A session can be thought of as a conversation with the LLM. There are tight token (word)
+        limits on how long conversations can be with different LLM backends so during the course
+        of chats it may be necessary or make sense to restart the conversation thread. We use
+        a constant engagement identifier to group sessions together as part of a larger interaction.
+
+        Start a new tutor session. This may be part of a previous engagement chain, if so
+        the engagement ID will not increment.
+
+        As each session ends it will be logged to disk and the server collector if configured to
+        do so.
+
+        :param task: The Task instance or name of the task to get help with. May be null
+        :param notice: An initial notice or prompt to display to the user
+        """
+        self.close_session()
         self.session_id += 1
+        self.closed = False
         self.messages = []
         self.session_start = now()
         self.session_end = None
         self.task_test = None
         self.task_docs = None
+
+        self.logger.info('start_session(%s) = %d', task, self.session_id)
         
         if notice:
-            print(notice)
+            Console().print(Markdown(notice))
         try:
             if isinstance(task, Task):
                 self.task_test = task
             elif task and isinstance(task, str):
-                possibles = self.possible_tasks(task)
-                if not possibles:
-                    raise RuntimeError(f'Unrecognized task: {task}')
-                if len(possibles) == 1:
-                    self.task_test = possibles[0][1]
-                else:
-                    while self.task_test is None:
-                        prompt = f'Which task do you want help with?:\n'
-                        for idx, candidate in enumerate(possibles):
-                            prompt += f'[{idx}] {candidate[0]}: {candidate[1].name}'
-                        try:
-                            self.task_test = possibles[int(input(prompt))][1]
-                        except (TypeError, ValueError, IndexError):
-                            print(f'unrecognized.')
-                            continue
+                self.try_select_task(task)
 
             if self.task_test:
-                out = StringIO()
-
-                print(f'%%%%%%%%%%%%%')
-                with redirect_stdout(out):
-                    with redirect_stderr(out):
-                        self.task_docs = task_map().get_task_doc(self.task_test.module, self.task_test.name)
-                print(f'%%%%%%%%%%%%%')
+                self.task_docs = self.get_docs(self.task_test.module, self.task_test.name)
                 if self.task_docs:
                     self.init_for_task()
                 else:
@@ -282,37 +534,39 @@ class Tutor:
                         f'will not have the needed context.'
                     )
 
+            if initial_prompt:
+                self.push(role='user', message=initial_prompt)
             first = True
-            console = Console()
             while True:
-                console.print(
-                    Markdown(
-                        self.push(
-                            'assistant',
-                            self.handle_response(
-                                asyncio.run(
-                                    self.get_response('' if first and self.messages else input())
-                                )
-                            )
-                        )
-                    )
-                )
+                self.prompt('' if first and self.messages else None)
                 first = False
 
+        except TerminateSession as term:
+            print(colored(str(term) or 'Goodbye.', 'blue'))
         except (TerminateSession, EOFError, KeyboardInterrupt):
-            print(f'Goodbye.')
-        finally:
-            self.session_end = now()
-            self.log_session()
-            self.submit_logs()
+            print(colored(f'Goodbye.', 'blue'))
+        except RePrompt as new_prompt:
+            return self.start_session(task=self.task_test, initial_prompt=str(new_prompt))
+
+        self.close_session()
 
     def terminate(self):
+        """AI invocable function to terminate the engagement."""
+        self.logger.info('terminate()')
         raise TerminateSession()
     
-    def rerun(self):
+    def test(self):
+        """
+        AI invocable function. Re-executes the current task if there is one. If the task is
+        passing the session will be terminated.
+        """
         if not self.task_test:
+            self.logger.info('test(None)')
             return
-        print(colored(f'Checking: {self.task_test.name}', 'blue'))
+        
+        self.logger.info('test(%s)', localize_identifier(self.task_test.identifier))
+        print(colored(f'poetry run pytest {localize_identifier(self.task_test.identifier)}', 'blue'))
+
         self.task_test.run(force=True)
         if self.task_test.status == TaskStatus.PASSED:
             print(colored(
@@ -324,32 +578,69 @@ class Tutor:
         if self.task_test.error:
             print(colored(self.task_test.error_msg, 'red'))
         raise RestartSession()
+    
+    def docs(self, clean=True):
+        """
+        AI invocable function to build or clean the documentation.
+        """
+        self.logger.info('docs(clean=%s)', clean)
+        if clean:
+            print(colored('poetry run doc clean', 'blue'))
+            clean_docs()
+            return
+        print(colored('poetry run doc build', 'blue'))
+        build_docs()
+
+    def set_task(self, task_name: str):
+        """
+        AI invocable function to set the task for which the student needs help.
+        The session will be restarted with the task in question.
+        """
+        self.logger.info('set_task(%s)', task_name)
+        if self.task_test and self.task_test.name == task_name:
+            # Guard against the AI mistakenly trying to reset the task - if this happens
+            # we need to tell it what to do.
+            raise RePrompt(
+                f'No, the {task_name} task is already set. I am asking for help about how to approach solving it!'
+            )
+        self.task_test = task_name
+        raise RestartSession()
 
     def log_session(self):
         try:
             with gzip.open(
-                LOG_DIR / f'delphi_{self.session_id}.json.gz',
+                LOG_DIR / f'delphi_{self.engagement_id}_{self.session_id}.json.gz',
                 'wt',
                 encoding='utf-8'
             ) as f:
+                task = self.task_test
+                if isinstance(self.task_test, Task):
+                    task = localize_identifier(self.task_test.identifier)
+
                 json.dump({
-                    'engagement': self.engagement_id,
+                    'engagement': str(self.engagement_id),
                     'session': self.session_id,
                     'origin': self.origin,
                     'student': self.student,
-                    'email': self.email,
+                    'email': self.student_email,
                     'start': self.session_start.isoformat(),
                     'end': self.session_end.isoformat(),
                     'tz_name': now().strftime('%Z'),
                     'tz_offset': now().utcoffset().total_seconds() // 3600,
-                    'task': self.task_test.identifier if self.task_test else None,
-                    'log': self.session_history
+                    'task': task,
+                    'log': self.messages,
+                    'backend': self.BACKEND.value,
+                    'backend_log': self.backend_log
                 }, f)
-        except Exception:
+        except Exception as err:
             # this logging is not crucial - lets not confuse students if any errors pop up
-            pass
+            self.logger.exception(f'Exception encountered logging the session.')
 
     def submit_logs(self):
+        """
+        Submit logs to the lesson server - this will also delete them if submission
+        is successful
+        """
         logs = glob(str(LOG_DIR / 'delphi_*.json*'))
         log_by_id = {}
         for log in logs:
@@ -364,26 +655,123 @@ class Tutor:
 
         # todo get whichever sessions have not been recorded and submit them
 
+    @property
+    def function_map(self):
+        """
+        A map of function names to function callables. Useful for turning an AI directed
+        call into an actual function call
+        """
+        return {
+            'terminate': self.terminate,
+            'test': self.test,
+            'docs': self.docs,
+            'set_task': self.set_task
+        }
+    
+    def call_function(self, function_name, **kwargs):
+        """
+        Attempt to invoke the function of the given name with the given arguments.
+        """
+        if not function_name:
+            return
+        def no_op(**kwargs):
+            return None
+        func = self.function_map.get(function_name, no_op)
+        if func == no_op:
+            self.logger.info('unrecognized call %s == no_op()', function_name)
+        else:
+            self.logger.info('call %s', function_name)
+        try:
+            return func(**kwargs)
+        except RePrompt:
+            # give our function a chance to salvage the session!
+            func = None
+            raise
+        finally:
+            if func != no_op and func == self.last_function and kwargs == self.last_function_kwargs:
+                def kwarg_str():
+                    pairs = []
+                    for key, value in kwargs.items():
+                        pairs.append(f'{key}={value}')
+                    return ', '.join(pairs)
+                # guard against a recursive function loop!
+                raise TerminateSession(
+                    f'{self.me} is confused and has called {function_name}({kwarg_str()}) twice in row!'
+                )
+            self.last_function = func
+            self.last_function_kwargs = kwargs
+
+    @property
+    def functions(self):
+        """
+        Data structure that describes the functions the AI should know how to call. This is in the
+        OpenAI format.
+        """
+        funcs = [{
+            'name': 'terminate',
+            'description': 'Terminate the tutoring session.',
+            'parameters': {
+                'type': 'object',
+                'properties': {},
+                'required': []
+            },
+        }, {
+            'name': 'set_task',
+            'description': 'Set the task the user wants help with.',
+            'parameters': {
+                'type': 'object',
+                'properties': {
+                    'task_name': {
+                        'type': 'string',
+                        'description': 'The name of the task the user is asking for help with.',
+                    },
+                },
+                'required': ['task_name']
+            }
+        }, {
+            'name': 'docs',
+            'description': 'Build the documentation, optionally just clean it.',
+            'parameters': {
+                'type': 'object',
+                'properties': {
+                    'clean': {
+                        'type': 'boolean',
+                        'description': 'Do not build the docs, just clean them',
+                    }
+                }
+            }
+        }]
+        if self.task_test:
+            funcs.append({
+                'name': 'test',
+                'description': 'Check the student\'s solution by executing the test for '
+                                'the task they are working on.',
+                'parameters': {
+                    'type': 'object',
+                    'properties': {},
+                    'required': []
+                }
+            }
+        )
+        return funcs
+
+    @property
+    def backend_log(self):
+        """Any json serializable structure that a backend would like to be part of the log."""
+        return None
+
 
 @contextmanager
 def delphi_context():
+    """
+    A context manager for a Delphi engagement - sets the current working directory
+    to to the root of the repository. Probably unnecessary.
+    """
     assert ROOT_DIR.is_dir()
     start_dir = os.getcwd()
     os.chdir(ROOT_DIR)
     yield
     os.chdir(start_dir)
-
-
-class LLMBackends(Enum):
-
-    OPEN_AI = 'openai'
-
-    def instantiate(self):
-        if self is self.OPEN_AI:
-            from learn_python.delphi.openai import OpenAITutor
-            return OpenAITutor()
-        else:
-            raise NotImplementedError(f'{self} tutor backend is not implemented!')
 
 
 _tutor = None
@@ -415,7 +803,7 @@ def delphi(
     """I need some help! Wake Delphi up!"""
     with delphi_context():
         try:
-            tutor().init(task)
+            tutor().init(task).submit_logs()
         except ConfigurationError as err:
             print(colored(str(err), 'red'))
 

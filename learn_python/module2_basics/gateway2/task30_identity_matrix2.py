@@ -4,7 +4,7 @@
 
 .. admonition:: Requirement
 
-    * Your implementation must use list comprehension.
+    * Your implementation must use list comprehension
     * Your implementation must be a single statement
 
     

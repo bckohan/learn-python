@@ -3,7 +3,7 @@
     Define a function called get_delegate that accepts a function as
     an argument and returns that function if it is not None, if it is None
     get_delegate should define and return a nested function called
-    default_delegate that itself returns 0
+    default_delegate that itself returns 0.
 
 For example:
 

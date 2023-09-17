@@ -2,6 +2,8 @@
 Gateway 2.4
 ===========
 
+.. _module2-list_difference:
+
 list_difference()
 =================
 
@@ -11,6 +13,8 @@ list_difference()
 
 ------------------
 
+.. _module2-deduplicate:
+
 deduplicate()
 =============
 
@@ -19,6 +23,8 @@ deduplicate()
     :noindex:
 
 ------------------
+
+.. _module2-separate:
 
 separate()
 ==========
@@ -30,6 +36,8 @@ separate()
 
 ------------------
 
+.. _module2-get_slices:
+
 get_slices()
 ============
 
@@ -40,6 +48,8 @@ get_slices()
 
 ------------------
 
+.. _module2-list_intersection:
+
 list_intersection()
 ===================
 
@@ -48,6 +58,8 @@ list_intersection()
     :noindex:
 
 ------------------
+
+.. _module2-fibonacci:
 
 fibonacci()
 ===========
@@ -58,6 +70,8 @@ fibonacci()
 
 ------------------
 
+.. _module2-identity_matrix:
+
 identity_matrix()
 =================
 
@@ -66,6 +80,8 @@ identity_matrix()
     :noindex:
 
 ------------------
+
+.. _module2-is_identity:
 
 is_identity()
 =============
@@ -76,6 +92,8 @@ is_identity()
 
 ------------------
 
+.. _module2-identity_matrix2:
+
 identity_matrix2()
 ==================
 
@@ -84,6 +102,8 @@ identity_matrix2()
     :noindex:
 
 ------------------
+
+.. _module2-fibonacci_gr:
 
 fibonacci_gr()
 ==============
@@ -94,6 +114,8 @@ fibonacci_gr()
 
 ------------------
 
+.. _module2-float_range:
+
 float_range()
 =============
 
@@ -102,6 +124,8 @@ float_range()
     :noindex:
 
 ------------------
+
+.. _module2-xy_values:
 
 xy_values()
 ===========
@@ -112,6 +136,8 @@ xy_values()
 
 ------------------
 
+.. _module2-approximate_integral:
+
 approximate_integral()
 ======================
 
@@ -120,6 +146,8 @@ approximate_integral()
     :noindex:
 
 ------------------
+
+.. _module2-add_to_list:
 
 add_to_list()
 =============
@@ -130,6 +158,8 @@ add_to_list()
 
 ------------------
 
+.. _module2-time_function:
+
 time_function()
 ===============
 
@@ -138,6 +168,8 @@ time_function()
 	:inherited-members:
 
 ------------------
+
+.. _module2-list_intersection2:
 
 list_intersection2()
 ====================
@@ -148,6 +180,8 @@ list_intersection2()
 
 ------------------
 
+.. _module2-ranked_choice:
+
 ranked_choice()
 ===============
 
@@ -156,6 +190,8 @@ ranked_choice()
     :noindex:
 
 ------------------
+
+.. _module2-print_report:
 
 print_report()
 ==============

@@ -164,4 +164,4 @@ cython_debug/
 .vscode/
 
 **/*api.key
-logs/
+**/logs/

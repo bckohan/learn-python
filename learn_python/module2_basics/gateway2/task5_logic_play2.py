@@ -1,9 +1,12 @@
 """
 .. todo::
-    Reimplement logic_play and call it logic_play2. This time you cannot
-    use any logical operators (and, or, not) and you may make a maximum
-    of three function calls. Your implementation should not exceed 5 
-    statements.
+    Reimplement :ref:`module2-logic_play` and call it "logic_play2".
+
+.. admonition:: Requirement
+
+    * You cannot use any logical operators (and, or not)
+    * You may make a maximum of three function calls
+    * Your implementation should not exceed 5 statements.
 
 .. hint::
     * You will need an if statement inside of another if statement.

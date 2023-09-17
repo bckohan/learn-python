@@ -2,6 +2,8 @@
 Gateway 2.3
 ===========
 
+.. _module2-split_name:
+
 split_name()
 ============
 
@@ -12,6 +14,8 @@ split_name()
 
 ------------------
 
+.. _module2-label_names:
+
 label_names()
 =============
 
@@ -20,6 +24,8 @@ label_names()
     :noindex:
 
 ------------------
+
+.. _module2-format_constant:
 
 format_constant()
 =================
@@ -30,6 +36,8 @@ format_constant()
 
 ------------------
 
+.. _module2-format_constant2:
+
 format_constant2()
 ==================
 
@@ -39,6 +47,8 @@ format_constant2()
 
 ------------------
 
+.. _module2-ends_with:
+
 ends_with()
 ===========
 
@@ -47,6 +57,8 @@ ends_with()
     :noindex:
 
 ------------------
+
+.. _module2-are_same_object:
 
 are_same_object()
 =================

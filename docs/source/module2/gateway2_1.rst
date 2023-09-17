@@ -2,6 +2,8 @@
 Gateway 2.1
 ===========
 
+.. _module2-type_divide:
+
 type_divide()
 =============
 
@@ -10,6 +12,8 @@ type_divide()
 	:inherited-members:
 
 ------------------
+
+.. _module2-get_decimal:
 
 get_decimal()
 =============

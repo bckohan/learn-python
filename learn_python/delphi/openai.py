@@ -1,9 +1,10 @@
 import os
 import openai
 from pathlib import Path
-from learn_python.delphi.tutor import Tutor, ConfigurationError
+from learn_python.delphi.tutor import Tutor, ConfigurationError, LLMBackends
 from uuid import uuid1
 import json
+from pprint import pformat
 
 API_KEY_FILE = Path(__file__).parent / 'openai_api.key'
 
@@ -31,8 +32,9 @@ class OpenAITutor(Tutor):
 
     messages = []
 
-    def __init__(self, api_key=api_key):
+    BACKEND = LLMBackends.OPEN_AI
 
+    def __init__(self, api_key=api_key):
         if api_key is None and API_KEY_FILE.is_file():
             self.api_key = API_KEY_FILE.read_text().strip()
         
@@ -46,16 +48,20 @@ class OpenAITutor(Tutor):
             )
         
         openai.api_key = self.api_key
+        super().__init__()
 
     def get_model(self, messages):
         # todo - return 32k model for large messages
-        return self.model_priority[0]
+        model = self.model_priority[0]
+        self.logger.info('get_model() = %s', model)
+        return model
 
     async def send(self):
         messages=[
             {'role': 'system', 'content': self.directive},
             *self.messages
         ]
+        self.logger.info('send(), with directive')
         return await openai.ChatCompletion.acreate(
             model=self.get_model(messages),
             messages=messages,
@@ -64,43 +70,10 @@ class OpenAITutor(Tutor):
 
     def handle_response(self, response):
         # todo run any functions that were called out
+        self.logger.info('handle_response(%s)', response)
         resp = response['choices'][0]['message']
-        to_call = {
-            'terminate': self.terminate,
-            'rerun': self.rerun
-        }.get(resp.get('function_call', {}).get('name', None), None)
-        if to_call:
-            to_call(**json.loads(resp['function_call'].get('arguments', {})))
-        return resp['content']
-
-    @property
-    def functions(self):
-        funcs = [{
-            'name': 'terminate',
-            'description': 'Terminate the tutoring session.',
-            'parameters': {
-                'type': 'object',
-                'properties': {},
-                'required': []
-            },
-        }, {
-            'name': 'set_task',
-            'description': 'Determine which of the tasks .',
-            'parameters': {
-                'type': 'object',
-                'properties': {},
-                'required': []
-            }
-        }]
-        if self.task_test:
-            funcs.append({
-                'name': 'rerun',
-                'description': 'Re-execute the test for the task we are working on.',
-                'parameters': {
-                    'type': 'object',
-                    'properties': {},
-                    'required': []
-                }
-            }
+        self.call_function(
+            resp.get('function_call', {}).get('name', None),
+            **json.loads(resp.get('function_call', {}).get('arguments', '{}'))
         )
-        return funcs
+        return resp['content']

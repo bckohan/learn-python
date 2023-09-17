@@ -2,6 +2,8 @@
 Gateway 2.2
 ===========
 
+.. _module2-get_element:
+
 get_element()
 =============
 
@@ -10,6 +12,8 @@ get_element()
 	:inherited-members:
 
 ------------------
+
+.. _module2-split:
 
 split()
 =======
@@ -20,6 +24,8 @@ split()
 
 ------------------
 
+.. _module2-decimate:
+
 decimate()
 ==========
 
@@ -28,6 +34,8 @@ decimate()
     :noindex:
 
 ------------------
+
+.. _module2-combine:
 
 combine()
 =========

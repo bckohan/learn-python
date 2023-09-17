@@ -9,6 +9,7 @@ from types import FunctionType, ModuleType
 import inspect
 from contextlib import redirect_stdout
 from io import StringIO
+from learn_python.tests.utils import import_string
 import importlib
 import contextlib
 import re
@@ -114,7 +115,10 @@ class Task:
         return None
 
     def run(self, force=False):
-        """Run the test for the task"""
+        """
+        Run the test for the task. If the test was previously run it will not
+        run again unless force is set to true.
+        """
         global running_task
 
         # only run if we have not run already, unless we are forced!
@@ -129,6 +133,16 @@ class Task:
                             self.modules[idx] = importlib.import_module(mod)
                         else:
                             self.modules[idx] = importlib.reload(mod)
+
+                        # todo - need a more formal assignment structure, perhaps utilizing ast?
+                        # this kinda thing is fairly brittle
+                        func_name = self.function if isinstance(self.function, str) else self.function.__name__
+                        func_reload = getattr(self.modules[idx], func_name, None)
+                        if func_reload and isinstance(func_reload, FunctionType):
+                            self.function = func_reload
+
+                        # we also need to reload the test because its imports may be stale
+                        importlib.reload(inspect.getmodule(import_string(self.test)))
                     except Exception:
                         pass
             self.status = TaskStatus.NOT_RUN
@@ -136,7 +150,7 @@ class Task:
 
         if self.status is TaskStatus.NOT_RUN:
             running_task = self
-            
+
             out = StringIO()
             with contextlib.redirect_stdout(out):
                 exit_code = pytest.main(

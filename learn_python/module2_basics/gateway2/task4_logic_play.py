@@ -3,8 +3,8 @@
     Implement a function called logic_play that accepts two integers as
     arguments and returns their product (the result of multiplying them together)
     if both are even, their quotient (the result of dividing the first by the
-    second) if both are odd, and None otherwise. You must use "and" in your
-    implementation of this function. You may assume all inputs will be integers.
+    second) if both are odd, and None otherwise. You may assume all inputs will 
+    be integers.
 
 .. admonition:: Requirement
     
