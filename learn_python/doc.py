@@ -727,6 +727,7 @@ def structure():
     """Spit out a json representation of the course structure."""
     structure = {}
     with ConeOfSilence():
+        # todo - ConeOfSilence not entirely effective - still prints some stuff about downloading youtube thumbnails
         for module, tasks in task_map().task_sections.items():
             for task_name, task in tasks.items():
                 test = task_map().get_task_test(module, task_name)
