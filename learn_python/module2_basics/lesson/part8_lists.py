@@ -53,7 +53,7 @@ Lists are sequences of values in a contiguous chunk of memory
 | **sort**       | Sorts the list in place.                                                               | my_list.sort()         |
 +----------------+----------------------------------------------------------------------------------------+------------------------+
 
-.. image:: ../../../../learn-python/learn_python/module2_basics/resources/SequenceIndexing.svg
+.. image:: ../../../learn_python/module2_basics/resources/SequenceIndexing.svg
    :alt: Python Sequence Indexing
    :width: 100%
    :align: center

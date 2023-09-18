@@ -82,7 +82,7 @@ We can define our own data types!
     - Custom data types will be covered in the module on Object Oriented Programming
 
 
-.. image:: ../../../learn-python/learn_python/module2_basics/resources/DataTypes.svg
+.. image:: ../../learn_python/module2_basics/resources/DataTypes.svg
    :alt: Python's basic data types
    :width: 75%
    :align: center
