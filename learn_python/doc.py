@@ -102,7 +102,6 @@ DOC_BLD_DIR = DOC_DIR / 'build'
 
 
 app = typer.Typer()
-doc_dir = Path(__file__).parent.parent / 'docs'
 
 
 class DocError(Exception):

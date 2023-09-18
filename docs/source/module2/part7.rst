@@ -7,7 +7,7 @@ Part 7: Type Casting
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part7_type_casting.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part7_type_casting.py
    :language: python
    :start-after: import
    :linenos:

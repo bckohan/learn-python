@@ -21,11 +21,11 @@ def normal_distribution(x, σ=1, μ=0):
         Python is `unicode <https://home.unicode.org/>`_ by default. This means it can contain 
         all kinds of craaaazy characters! 🤯
     
-    .. image:: ../../../../learn-python/learn_python/module2_basics/resources/normal_distrib.svg
+    .. image:: ../../../learn_python/module2_basics/resources/normal_distrib.svg
         :alt: Definition of the normal distribution.
         :width: 30%
 
-    .. image:: ../../../../learn-python/learn_python/module2_basics/resources/normal_plot.svg
+    .. image:: ../../../learn_python/module2_basics/resources/normal_plot.svg
         :alt: Plot of the normal distribution.
         :width: 50%
 

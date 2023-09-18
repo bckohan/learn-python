@@ -7,7 +7,7 @@ Part 10: Strings
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part10_strings.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part10_strings.py
    :language: python
    :start-after: import
    :linenos:

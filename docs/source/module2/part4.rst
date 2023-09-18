@@ -7,7 +7,7 @@ Part 4: Ternary If/Else
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part4_ternary_if_else.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part4_ternary_if_else.py
    :language: python
    :start-after: import
    :linenos:

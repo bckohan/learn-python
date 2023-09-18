@@ -7,7 +7,7 @@ Part 12: Immutability & Memory
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part12_immutability.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part12_immutability.py
    :language: python
    :start-after: import
    :linenos:

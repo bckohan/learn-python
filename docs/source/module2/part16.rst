@@ -7,7 +7,7 @@ Part 16: Unpacking & Variadic Functions
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part16_unpacking.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part16_unpacking.py
    :language: python
    :start-after: import
    :linenos:

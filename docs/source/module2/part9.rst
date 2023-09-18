@@ -7,7 +7,7 @@ Part 9: Tuples
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part9_tuples.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part9_tuples.py
    :language: python
    :start-after: import
    :linenos:

@@ -7,7 +7,7 @@ Part 11: Methods
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part11_methods.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part11_methods.py
    :language: python
    :start-after: import
    :linenos:

@@ -7,7 +7,7 @@ Part 3: `Booleans <https://docs.python.org/3/library/stdtypes.html#boolean-opera
 	:members:
 	:inherited-members:
 
-.. literalinclude:: ../../../../learn-python/learn_python/module2_basics/lesson/part3_booleans.py
+.. literalinclude:: ../../../learn_python/module2_basics/lesson/part3_booleans.py
    :language: python
    :start-after: import
    :linenos:
