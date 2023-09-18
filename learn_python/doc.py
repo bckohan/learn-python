@@ -32,6 +32,8 @@ from warnings import warn
 import inspect
 from learn_python.utils import ROOT_DIR, GITHUB_ROOT
 from docutils.parsers.rst import Directive
+import json
+from learn_python.utils import ConeOfSilence
 
 
 _mapper = None
@@ -719,6 +721,24 @@ def build(
     clean()
     with doc_context():
         os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
+
+@app.command()
+def structure():
+    """Spit out a json representation of the course structure."""
+    structure = {}
+    with ConeOfSilence():
+        for module, tasks in task_map().task_sections.items():
+            for task_name, task in tasks.items():
+                test = task_map().get_task_test(module, task_name)
+                if test:
+                    structure.setdefault(module, {})[task_name] = {
+                        'number': test.number,
+                        'test': test.identifier,
+                        'todo': task.todo,
+                        'hints': task.hints,
+                        'requirements': task.requirements
+                    }
+    print(json.dumps(structure, indent=4))
 
 
 @app.command()
