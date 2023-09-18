@@ -721,6 +721,7 @@ def build(
     clean()
     with doc_context():
         os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
+    print(DOC_BLD_DIR / 'html')
 
 @app.command()
 def structure():
