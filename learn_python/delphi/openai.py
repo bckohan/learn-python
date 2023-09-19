@@ -20,7 +20,7 @@ class OpenAITutor(Tutor):
     """
 
     api_key = None
-    model_priority = ['gpt-4', 'gpt-3.5-turbo']
+    model_priority = ['gpt-4', 'gpt-3.5-turbo-instruct']
 
     # this is a gpt parameter, None will use the default
     # Lower values for temperature result in more consistent
@@ -77,3 +77,8 @@ class OpenAITutor(Tutor):
             **json.loads(resp.get('function_call', {}).get('arguments', '{}'))
         )
         return resp['content']
+
+    def write_key(self, key=None):
+        with open(API_KEY_FILE, 'w') as key_f:
+            key_f.write(key if isinstance(key, str) else key.encode('utf-8'))
+        self.api_key = key

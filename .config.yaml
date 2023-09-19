@@ -1,0 +1,10 @@
+# this is the configuration file for the course, please don't delete me!
+
+server: https://learn-python.demoply.org
+
+registered: False
+
+enrollment: null
+
+tutor: null
+

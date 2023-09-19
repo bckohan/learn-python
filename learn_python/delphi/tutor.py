@@ -759,6 +759,10 @@ Hi, I'm **Delphi**! \U0001F44B
     def backend_log(self):
         """Any json serializable structure that a backend would like to be part of the log."""
         return None
+    
+    def write_key(self, key=None):
+        if key is not None:
+            raise NotImplementedError(f'Tutor backend {self.BACKEND} does not support write_key().')
 
 
 @contextmanager

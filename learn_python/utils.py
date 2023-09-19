@@ -69,3 +69,29 @@ def localize_identifier(identifier):
 
 def strip_colors(s):
     return re.sub(r'\x1B[@-_][0-?]*[ -/]*[@-~]', '', s)
+
+
+class _Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+    @classmethod
+    def is_instantiated(cls, typ):
+        return typ in cls._instances
+
+    @classmethod
+    def destroy(cls, typ):
+        if typ in cls._instances:
+            del cls._instances[typ]
+
+
+class Singleton(_Singleton('SingletonMeta', (object,), {})):
+    """
+    Inherit from this class first, to make an object a singleton. The object can be accessed anywhere
+    using YourObject( ).instance_function( ). If initialization with a configuration is attempted more
+    than once an exception is thrown.
+    """
