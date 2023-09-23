@@ -35,6 +35,7 @@ from learn_python.utils import (
     ROOT_DIR,
     strip_colors
 )
+from learn_python import main
 import logging
 
 # don't remove this - adds additional editing features to input()
@@ -150,7 +151,6 @@ Hi, I'm **Delphi**! \U0001F44B
 
     def __init__(self):
         self.engagement_id = uuid1()
-        logging.basicConfig()
         self.file_handler = GzipFileHandler(str(LOG_DIR / f'delphi_{self.engagement_id}.log'))
 
         # setup delphi logging to a unique file for each engagement
@@ -794,7 +794,7 @@ def tutor(llm = LLMBackends.OPEN_AI):
             raise err
     return _tutor
 
-
+@main(catch=True)
 def delphi(
     task: Optional[str] = typer.Argument(
         None,
@@ -811,6 +811,3 @@ def delphi(
         except ConfigurationError as err:
             print(colored(str(err), 'red'))
 
-
-def main():
-    typer.run(delphi)
