@@ -131,10 +131,10 @@ def git_push_file(file: PathLike) -> bool:
         ('git', 'commit', '-m', 'learn_python.utils.git_push_file()'),
         ('git', 'push')
     ]:
-        logger.info('Running: %s', ' '.join(command))
+        lp_logger.info('Running: %s', ' '.join(command))
         output = subprocess.run(command, capture_output=True, text=True).stdout.strip()
         if output:
-            logger.info('\n\t%s', '\n\t'.join(output.split('\n')))
+            lp_logger.info('\n\t%s', '\n\t'.join(output.split('\n')))
 
 
 _logging_configured = False
