@@ -1,4 +1,3 @@
-import logging
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 import warnings
@@ -9,7 +8,10 @@ from pathlib import Path
 import re
 from os import PathLike
 import subprocess
+import json
+from datetime import datetime
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 
 ROOT_DIR = Path(__file__).parent.parent
@@ -69,7 +71,7 @@ class GzipFileHandler(logging.FileHandler):
         os.remove(self.baseFilename)
 
 
-class GzipRotatingFileHandler(logging.handlers.TimedRotatingFileHandler):
+class GzipRotatingFileHandler(TimedRotatingFileHandler):
 
     def rotate(self, source, dest):
         if os.path.exists(source):
@@ -165,3 +167,10 @@ def configure_logging(level=logging.INFO):
         lp_logger.propagate = False
 
     _logging_configured = True
+
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super(DateTimeEncoder, self).default(obj)

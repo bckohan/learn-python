@@ -1,11 +1,13 @@
 from learn_python.register import Config
+from learn_python.utils import lp_logger, DateTimeEncoder
 import requests
 import time
 import base64
+import os
+import json
 
 
 class CourseClient:
-
 
     def signature(self):
         ts = str(int(time.time()))
@@ -24,7 +26,6 @@ class CourseClient:
         }).write()
     
     def get_tutor_auth(self):
-        # todo signature scheme?
         resp = requests.get(
             f'{Config().server}/api/authorize_tutor',
             headers=self.signature()
@@ -34,9 +35,24 @@ class CourseClient:
 
     def post_engagement(self, engagement):
         resp = requests.post(
-            f'{Config().server}/api/engagement',
-            json=engagement,
+            f'{Config().server}/api/engagements/',
+            data=json.dumps(engagement, cls=DateTimeEncoder),
+            headers={
+                **self.signature(),
+                'Content-Type': 'application/json'
+            }
+        )
+        resp.raise_for_status()
+        lp_logger.info('Submitted engagement %s to server.', engagement.get('id', None))
+        return resp.json()
+
+    def post_engagement_log(self, engagement_id, log_path):
+        assert log_path and os.path.exists(log_path)
+        resp = requests.put(
+            f'{Config().server}/api/engagement_logs/{engagement_id}/',
+            files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
             headers=self.signature()
         )
         resp.raise_for_status()
+        lp_logger.info('Submitted engagement log %s to server.', engagement_id)
         return resp.json()

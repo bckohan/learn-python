@@ -1,7 +1,9 @@
 import os
 import openai
 from pathlib import Path
-from learn_python.delphi.tutor import Tutor, ConfigurationError, LLMBackends
+from learn_python.delphi.tutor import Tutor, ConfigurationError
+from learn_python.register import LLMBackends
+from learn_python.utils import lp_logger
 from uuid import uuid1
 import json
 from pprint import pformat
@@ -41,6 +43,8 @@ class OpenAITutor(Tutor):
         if not self.api_key:
             with open(API_KEY_FILE, 'a'):
                 os.utime(API_KEY_FILE, None)
+            
+            lp_logger.info('No key available to launch OpenAI Tutor.')
             raise ConfigurationError(
                 'The tutor requires an api key to be installed. '
                 f'Please paste your OpenAI API key into the file: {API_KEY_FILE.relative_to(os.getcwd())}. '
@@ -49,6 +53,7 @@ class OpenAITutor(Tutor):
         
         openai.api_key = self.api_key
         super().__init__()
+        lp_logger.info('Initialized OpenAI Tutor.')
 
     def get_model(self, messages):
         # todo - return 32k model for large messages
@@ -59,7 +64,7 @@ class OpenAITutor(Tutor):
     async def send(self):
         messages=[
             {'role': 'system', 'content': self.directive},
-            *self.messages
+            *[{'role': msg['role'], 'content': msg['content']} for msg in self.messages]
         ]
         self.logger.info('send(), with directive')
         return await openai.ChatCompletion.acreate(
@@ -71,6 +76,7 @@ class OpenAITutor(Tutor):
     def handle_response(self, response):
         # todo run any functions that were called out
         self.logger.info('handle_response(%s)', response)
+        self.resp_json.append(response.to_dict_recursive())
         resp = response['choices'][0]['message']
         self.call_function(
             resp.get('function_call', {}).get('name', None),

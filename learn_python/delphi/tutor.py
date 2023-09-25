@@ -12,12 +12,15 @@ from types import FunctionType
 from uuid import uuid1, UUID
 from learn_python.tests.tasks import Task, TaskStatus
 from learn_python.tests.tests import tasks
+from learn_python.client import CourseClient
+from learn_python.register import LLMBackends
 from learn_python.doc import (
     task_map,
     TaskMapper,
     clean as clean_docs,
     build as build_docs
 )
+from learn_python.register import Config
 import gzip
 import json
 from datetime import datetime
@@ -33,9 +36,12 @@ from learn_python.utils import (
     GzipFileHandler,
     localize_identifier,
     ROOT_DIR,
-    strip_colors
+    strip_colors,
+    lp_logger,
+    DateTimeEncoder
 )
 from learn_python import main
+import shutil
 import logging
 
 # don't remove this - adds additional editing features to input()
@@ -71,21 +77,6 @@ class RePrompt(Exception):
     """
 
 
-class LLMBackends(Enum):
-    """
-    The LLM backends currently supported to run Delphi.
-    """
-
-    OPEN_AI = 'openai'
-
-    def instantiate(self):
-        if self is self.OPEN_AI:
-            from learn_python.delphi.openai import OpenAITutor
-            return OpenAITutor()
-        else:
-            raise NotImplementedError(f'{self} tutor backend is not implemented!')
-
-
 class Tutor:
     """
     A base class for Tutor implementations. This class is responsible for the common tutoring tasks
@@ -108,8 +99,11 @@ class Tutor:
     engagement_id: UUID = None
     session_id: int = -1
 
+    log: dict = None
+
     # the session message chain
     messages: List[str] = None
+    resp_json: List[str] = None  # optional extra backend response data
     session_start: datetime = None
     session_end: datetime = None
 
@@ -117,7 +111,7 @@ class Tutor:
     task_test: Task = None
     task_docs: TaskMapper.AssignmentDocs = None
 
-    LOG_RGX = re.compile('^delphi_(?P<id>[\w-]+)_(?P<session>[\d]+)[.]json(?:[.](?P<ext>gz))?$')
+    LOG_RGX = re.compile('delphi_(?P<id>[\w-]+)[.]json(?:[.](?P<ext>gz))?$')
 
     # accept tasks specified as their singular names, their pytest identifiers or the pytest function name
     TASK_NAME_RGX = re.compile('^((?:test_gateway[\d]*_)|(.*[:]{2}))?(?P<task_name>[\w]+)$')
@@ -151,6 +145,9 @@ Hi, I'm **Delphi**! \U0001F44B
 
     def __init__(self):
         self.engagement_id = uuid1()
+        self.resp_json = []
+        if not LOG_DIR.is_dir():
+            os.makedirs(LOG_DIR, exist_ok=True)
         self.file_handler = GzipFileHandler(str(LOG_DIR / f'delphi_{self.engagement_id}.log'))
 
         # setup delphi logging to a unique file for each engagement
@@ -161,59 +158,17 @@ Hi, I'm **Delphi**! \U0001F44B
         self.file_handler.setLevel(logging.DEBUG)
         self.logger.propagate = False
         self.no_prompt_rounds = 0
+        self.log = {}
 
     @property
     def me(self):
         return 'Delphi'
-    
-    @cached_property
-    def origin(self):
-        """The forked github repository - this will be used as the unique ID for the student"""
-        try:
-            return subprocess.run(
-                ['git', 'remote', 'get-url', 'origin'],
-                capture_output=True,
-                text=True
-            ).stdout
-        except Exception:
-            pass
-        return None
-    
-    @cached_property
-    def student(self):
-        """The student's name is fetched from their git config install"""
-        try:
-            result = subprocess.run(
-                ['git', 'config', 'user.name'],
-                capture_output=True,
-                text=True
-            )
-            if result.stdout:
-                name = result.stdout.split()[0]
-                if len(name) > 1:
-                    return name
-            # if no name, use email instead
-            if self.student_email:
-                return self.student_email.split('@')[0]
-        except Exception:
-            pass
-        return 'Student'
-    
-    @cached_property
-    def student_email(self):
-        """The student's email is fetched from their git config install"""
-        try:
-            result = subprocess.run(['git', 'config', 'user.email'], capture_output=True, text=True)
-            return result.stdout
-        except Exception:
-            pass
-        return None
 
     @property
     def directive(self):
         """Who is the tutor?"""
         return (
-            f'Your name is {self.me}. My name is {self.student}. You are a friendly and encouraging tutor who '
+            f'Your name is {self.me}. My name is {Config().student}. You are a friendly and encouraging tutor who '
             f'will help me learn the Python programming language. You will not write any code for me even '
             f'if I ask, instead you will use natural language to explain any errors and suggest avenues '
             f'of approach. Please address me by my name.'
@@ -377,8 +332,18 @@ Hi, I'm **Delphi**! \U0001F44B
         """Add message to history"""
         self.logger.info('push(role=%s, message=%s)', role, message)
         if message:
-            self.messages.append({'role': role, 'content': message})
+            self.messages.append({
+                'role': role,
+                'content': message,
+                'timestamp': now(),
+                'backend_extra': self.pop_resp_json()
+            })
         return message
+    
+    def pop_resp_json(self):
+        if self.resp_json:
+            self.resp_json.pop()
+        return {}
     
     def possible_tasks(self, task_name: str, module: Optional[str] = None):
         """
@@ -449,6 +414,8 @@ Hi, I'm **Delphi**! \U0001F44B
         """
         Initialize a tutor engagement. This may contain multiple sessions. See start_session()
         """
+        if not Config().is_registered():
+            Config().register()
         os.makedirs(LOG_DIR, exist_ok=True)
         self.logger.info('%s.init(%s, %s)', self.__class__.__name__, task, strip_colors(notice))
         try:
@@ -476,7 +443,7 @@ Hi, I'm **Delphi**! \U0001F44B
             return task_map().get_task_doc(module, task_name)
     
     def close_session(self):
-        if self.session_id > 0 and not self.closed:
+        if self.session_id >= 0 and not self.closed:
             self.session_end = now()
             self.log_session()
             self.closed = True
@@ -607,54 +574,99 @@ Hi, I'm **Delphi**! \U0001F44B
         raise RestartSession()
 
     def log_session(self):
+        if not self.log:
+            self.log = {
+                'id': str(self.engagement_id),
+                'sessions': [],
+                'start': self.session_start.isoformat(),
+                'end': None,
+                'tz_name': now().strftime('%Z'),
+                'tz_offset': now().utcoffset().total_seconds() // 3600,
+                'backend': self.BACKEND.value,
+                'backend_log': {},
+                'log_path': self.file_handler.baseFilename,
+                'repository': {
+                    'uri': Config().origin,
+                    'git_hash': Config().commit_hash(),
+                    'git_branch': Config().cloned_branch(),
+                    'timestamp': now(),
+                    'commit_count': Config().commit_count()
+                }
+            }
+        
+        task = self.task_test
+        if isinstance(self.task_test, Task):
+            task = localize_identifier(self.task_test.identifier)
+
+        self.log['sessions'].append({
+            'session_id': self.session_id,
+            'start': self.session_start.isoformat(),
+            'end': self.session_end.isoformat(),
+            'task': task,
+            'exchanges': self.messages
+        })
         try:
             with gzip.open(
-                LOG_DIR / f'delphi_{self.engagement_id}_{self.session_id}.json.gz',
+                LOG_DIR / f'delphi_{self.engagement_id}.json.gz',
                 'wt',
                 encoding='utf-8'
             ) as f:
-                task = self.task_test
-                if isinstance(self.task_test, Task):
-                    task = localize_identifier(self.task_test.identifier)
-
-                json.dump({
-                    'engagement': str(self.engagement_id),
-                    'session': self.session_id,
-                    'origin': self.origin,
-                    'student': self.student,
-                    'email': self.student_email,
-                    'start': self.session_start.isoformat(),
-                    'end': self.session_end.isoformat(),
-                    'tz_name': now().strftime('%Z'),
-                    'tz_offset': now().utcoffset().total_seconds() // 3600,
-                    'task': task,
-                    'log': self.messages,
-                    'backend': self.BACKEND.value,
-                    'backend_log': self.backend_log
-                }, f)
+                self.log['end'] = self.session_end.isoformat()
+                self.log['backend_log'] = self.backend_log
+                json.dump(self.log, f, cls=DateTimeEncoder, indent=4)
         except Exception as err:
             # this logging is not crucial - lets not confuse students if any errors pop up
             self.logger.exception(f'Exception encountered logging the session.')
 
-    def submit_logs(self):
+    @staticmethod
+    def submit_logs():
         """
         Submit logs to the lesson server - this will also delete them if submission
         is successful
         """
-        logs = glob(str(LOG_DIR / 'delphi_*.json*'))
+        logs = [
+            *glob(str(LOG_DIR / 'delphi_*.json')),
+            *glob(str(LOG_DIR / 'delphi_*.json.gz'))
+        ]
         log_by_id = {}
         for log in logs:
-            mtch = self.LOG_RGX.match(log)
+            mtch = Tutor.LOG_RGX.search(log)
             if mtch:
-                log_by_id[(mtch.groupdict()['id'], mtch.groupdict()['session'])] = {
+                log_by_id[mtch.groupdict()['id']] = {
                     'path': LOG_DIR / log,
                     'ext': mtch.groupdict().get('ext')
                 }
         
-        ids = list(log_by_id.keys())
+        submit_count = 0
+        errors = 0
+        for eng_id, log in log_by_id.items():
+            try:
+                engagement_data = {}
 
-        # todo get whichever sessions have not been recorded and submit them
+                if log['ext'].lower() == 'gz':
+                    with gzip.open(log['path'], 'rt', encoding='utf-8') as f:
+                        engagement_data = json.load(f)
+                else:
+                    with open(log['path'], 'rt', encoding='utf-8') as f:
+                        engagement_data = json.load(f)
 
+                log_path = engagement_data.pop('log_path', None)
+                if log_path and not os.path.exists(log_path):
+                    log_path = None
+
+                if engagement_data:
+                    CourseClient().post_engagement(engagement_data)
+                    if log_path:
+                        CourseClient().post_engagement_log(eng_id, log_path)
+                        os.remove(log_path)
+                    os.remove(log['path'])
+                    submit_count += 1
+            except Exception:
+                lp_logger.exception(f'Exception encountered submitting log {log["path"]} to server.')
+                errors += 1
+
+        return submit_count, errors
+    
     @property
     def function_map(self):
         """
@@ -788,7 +800,11 @@ def tutor(llm = LLMBackends.OPEN_AI):
     if _tutor and _tutor.backend is llm:
         return _tutor
     try:
-        _tutor = llm.instantiate()
+        if llm is LLMBackends.OPEN_AI:
+            from learn_python.delphi.openai import OpenAITutor
+            _tutor = OpenAITutor()
+        else:
+            raise NotImplementedError(f'{llm} tutor backend is not implemented!')
     except Exception as err:
         if _explicitly_invoked:
             raise err
@@ -800,6 +816,16 @@ def delphi(
         None,
         help="The gateway task you need help with."
     ),
+    submit_logs: Optional[bool] = typer.Option(
+        False,
+        '--submit-logs',
+        help="Submit logs to the lesson server."
+    ),
+    clean_logs: Optional[bool] = typer.Option(
+        False,
+        '--clean-logs',
+        help="Delete the logs directory."
+    ),
     llm: LLMBackends = LLMBackends.OPEN_AI.value
 ):
     global _explicitly_invoked
@@ -807,6 +833,17 @@ def delphi(
     """I need some help! Wake Delphi up!"""
     with delphi_context():
         try:
+            if submit_logs:
+                submitted, errors = Tutor.submit_logs()
+                if submitted:
+                    print(colored(f'Submitted {submitted} logs to the lesson server.', 'green'))
+                if errors:
+                    print(colored(f'Encountered {errors} errors submitting logs to the lesson server.', 'red'))
+                return
+            if clean_logs:
+                if LOG_DIR.is_dir():
+                    shutil.rmtree(LOG_DIR)
+                return
             tutor().init(task).submit_logs()
         except ConfigurationError as err:
             print(colored(str(err), 'red'))

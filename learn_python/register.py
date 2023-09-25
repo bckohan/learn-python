@@ -1,6 +1,6 @@
 import typer
 import yaml
-from learn_python.delphi.tutor import LLMBackends
+from enum import Enum
 from typing import Optional
 from learn_python.utils import ROOT_DIR, Singleton, git_push_file
 from cryptography.hazmat.backends import default_backend
@@ -18,6 +18,7 @@ from functools import cached_property
 from requests import HTTPError
 from termcolor import colored
 from learn_python import main
+from learn_python.utils import lp_logger
 import time
 import re
 import warnings
@@ -25,6 +26,17 @@ import warnings
 
 PRIVATE_KEY_FILE = ROOT_DIR / '.private_key.pem'
 PUBLIC_KEY_FILE = ROOT_DIR / 'public_keys.pem'
+
+
+class LLMBackends(Enum):
+    """
+    The LLM backends currently supported to run Delphi.
+    """
+
+    OPEN_AI = 'openai'
+
+    def __str__(self):
+        return self.value
 
 
 class Config(Singleton):
@@ -52,6 +64,36 @@ class Config(Singleton):
             warnings.warn(
                 f'Unrecognized tutor driver: {value}. Defaulting to {self.tutor.value}'
             )
+            
+    @cached_property
+    def student(self):
+        """The student's name is fetched from their git config install"""
+        try:
+            result = subprocess.run(
+                ['git', 'config', 'user.name'],
+                capture_output=True,
+                text=True
+            )
+            if result.stdout:
+                name = result.stdout.split()[0]
+                if len(name) > 1:
+                    return name
+            # if no name, use email instead
+            if self.student_email:
+                return self.student_email.split('@')[0]
+        except Exception:
+            pass
+        return 'Student'
+    
+    @cached_property
+    def student_email(self):
+        """The student's email is fetched from their git config install"""
+        try:
+            result = subprocess.run(['git', 'config', 'user.email'], capture_output=True, text=True)
+            return result.stdout
+        except Exception:
+            pass
+        return None
 
     def __init__(self):
         if self.CONFIG_FILE.is_file():
@@ -70,10 +112,43 @@ class Config(Singleton):
             return subprocess.run(
                 ['git', 'remote', 'get-url', 'origin'],
                 capture_output=True,
-                text=True
+                text=True,
+                cwd=ROOT_DIR
             ).stdout.strip()
         except Exception:
-            pass
+            lp_logger.exception('Unable to determine origin of repository.')
+        return None
+
+    def commit_count(self):
+        try:
+            return int(
+                subprocess.check_output(
+                    ['git', 'rev-list', '--all', '--count'],
+                    cwd=ROOT_DIR
+                ).strip()
+            )
+        except Exception:
+            lp_logger.exception('Unable to determine commit count.')
+        return None
+    
+    def commit_hash(self):
+        try:
+            return subprocess.check_output(
+                ['git', 'rev-parse', 'HEAD'],
+                cwd=ROOT_DIR
+            ).strip().decode('utf-8')
+        except Exception:
+            lp_logger.exception('Unable to determine commit hash.')
+        return None
+
+    def cloned_branch(self):
+        try:
+            return subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                cwd=ROOT_DIR
+            ).strip().decode('utf-8')
+        except Exception:
+            lp_logger.exception('Unable to determine cloned branch.')
         return None
     
     def is_registered(self):
@@ -206,13 +281,16 @@ class Config(Singleton):
 
         try:
             client.register()
+            lp_logger.info('Registered with course.')
         except HTTPError as err:
+            lp_logger.exception('Unable to register with course.')
             return False
         
         try:
             self.try_authorize_tutor()
         except HTTPError as err:
-            pass
+            lp_logger.info('Tutor: %s authorized.', self.tutor)
+            lp_logger.exception('Unable to authorize tutor.')
         return True
 
     def sign_message(self, message: str | bytes):
