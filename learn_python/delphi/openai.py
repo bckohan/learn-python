@@ -2,7 +2,7 @@ import os
 import openai
 from pathlib import Path
 from learn_python.delphi.tutor import Tutor, ConfigurationError
-from learn_python.register import LLMBackends
+from learn_python.register import LLMBackends, Config
 from learn_python.utils import lp_logger
 from uuid import uuid1
 import json
@@ -37,14 +37,17 @@ class OpenAITutor(Tutor):
     BACKEND = LLMBackends.OPEN_AI
 
     def __init__(self, api_key=api_key):
+
         if api_key is None and API_KEY_FILE.is_file():
             self.api_key = API_KEY_FILE.read_text().strip()
         
         if not self.api_key:
+
             with open(API_KEY_FILE, 'a'):
                 os.utime(API_KEY_FILE, None)
             
             lp_logger.info('No key available to launch OpenAI Tutor.')
+
             raise ConfigurationError(
                 'The tutor requires an api key to be installed. '
                 f'Please paste your OpenAI API key into the file: {API_KEY_FILE.relative_to(os.getcwd())}. '
@@ -64,7 +67,11 @@ class OpenAITutor(Tutor):
     async def send(self):
         messages=[
             {'role': 'system', 'content': self.directive},
-            *[{'role': msg['role'], 'content': msg['content']} for msg in self.messages]
+            *[
+                {'role': msg['role'], 'content': msg['content']}
+                for msg in self.messages
+                if msg['content'] and not msg.get('is_function_call', False)
+            ]
         ]
         self.logger.info('send(), with directive')
         return await openai.ChatCompletion.acreate(
@@ -84,7 +91,7 @@ class OpenAITutor(Tutor):
         )
         return resp['content']
 
-    def write_key(self, key=None):
+    @staticmethod
+    def write_key(key=None):
         with open(API_KEY_FILE, 'w') as key_f:
             key_f.write(key if isinstance(key, str) else key.encode('utf-8'))
-        self.api_key = key

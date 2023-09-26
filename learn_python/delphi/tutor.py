@@ -184,7 +184,7 @@ Hi, I'm **Delphi**! \U0001F44B
                     self.submit_logs()
                 return
     
-    def prompt(self, msg: Optional[str] = None):
+    def prompt(self, msg: Optional[str] = None, role='user'):
         """
         The prompt/response cycle. If a msg is passed in, the user will
         not be given a chance to input text and the message will be immediately
@@ -208,8 +208,8 @@ Hi, I'm **Delphi**! \U0001F44B
                 self.push(  # log the response message
                     'assistant',
                     self.handle_response(  # call any functions
-                        asyncio.run(self.get_response(msg))  # asynchronously send the message
-                    )   
+                        asyncio.run(self.get_response(msg, role=role))  # asynchronously send the message
+                    )
                 ) or ''  # response may have been null if certain functions were called
             )
         )
@@ -227,7 +227,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 sys.stdout.flush()
                 await asyncio.sleep(0.1)
 
-    async def get_response(self, message=''):
+    async def get_response(self, message='', role='user'):
         """
         Get the response to the message from the user. If no message, rely on whats
         on the messages stack. This will display a progress spinner on the terminal
@@ -235,7 +235,7 @@ Hi, I'm **Delphi**! \U0001F44B
         """
         self.logger.info(f'get_response()')
         if message:
-            self.push('user', message)
+            self.push(role, message)
         spinner_task = asyncio.create_task(self.spinner())
         response = await self.send()
         spinner_task.cancel()
@@ -255,6 +255,9 @@ Hi, I'm **Delphi**! \U0001F44B
         """
         Process the response object and return the message from it. If the response asks for any functions
         to be called, they should be executed here.
+
+        :return: A 2-tuple where the first element is the message and the second is a boolean indicating
+            set to true if this response called a function and false if it did not.
         """
         raise NotImplementedError(
             f'Extending LLM backends must implement handle_response.'
@@ -325,10 +328,9 @@ Hi, I'm **Delphi**! \U0001F44B
             if module and test and docs:
                 message += self.get_task_description(test, docs, code=True)
 
-        # todo send implementations for associated tasks?
-        self.push('user', message.strip())
+        self.push('system', message.strip())
 
-    def push(self, role, message=''):
+    def push(self, role, message='', function_call=False):
         """Add message to history"""
         self.logger.info('push(role=%s, message=%s)', role, message)
         if message:
@@ -336,6 +338,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 'role': role,
                 'content': message,
                 'timestamp': now(),
+                'function_call': function_call,
                 'backend_extra': self.pop_resp_json()
             })
         return message
@@ -387,8 +390,8 @@ Hi, I'm **Delphi**! \U0001F44B
             for broken in not_working:
                 qry += '\n'.join(f'{broken[1]} in {broken[0]} is not working.')
             
-            qry += '\nSet which task you think I might be referring to.'
-            self.prompt(qry)
+            qry += '\nSet which task you think the user might be referring to.'
+            self.prompt(qry, role='system')
             task_name = input('? ')
 
         if len(possibles) == 1:
@@ -502,7 +505,7 @@ Hi, I'm **Delphi**! \U0001F44B
                     )
 
             if initial_prompt:
-                self.push(role='user', message=initial_prompt)
+                self.push(role='system', message=initial_prompt)
             first = True
             while True:
                 self.prompt('' if first and self.messages else None)
@@ -594,17 +597,21 @@ Hi, I'm **Delphi**! \U0001F44B
                 }
             }
         
-        task = self.task_test
-        if isinstance(self.task_test, Task):
-            task = localize_identifier(self.task_test.identifier)
+        task = {}
+        if isinstance(self.task_test, Task) and self.task_test.module_number:
+            task = {
+                'module': self.task_test.module_number,
+                'identifier': localize_identifier(self.task_test.identifier)
+            }
 
         self.log['sessions'].append({
             'session_id': self.session_id,
             'start': self.session_start.isoformat(),
             'end': self.session_end.isoformat(),
-            'task': task,
             'exchanges': self.messages
         })
+        if task:
+            self.log['sessions'][-1]['assignment'] = task
         try:
             with gzip.open(
                 LOG_DIR / f'delphi_{self.engagement_id}.json.gz',
@@ -633,7 +640,7 @@ Hi, I'm **Delphi**! \U0001F44B
             mtch = Tutor.LOG_RGX.search(log)
             if mtch:
                 log_by_id[mtch.groupdict()['id']] = {
-                    'path': LOG_DIR / log,
+                    'record': LOG_DIR / log,
                     'ext': mtch.groupdict().get('ext')
                 }
         
@@ -643,15 +650,27 @@ Hi, I'm **Delphi**! \U0001F44B
             try:
                 engagement_data = {}
 
-                if log['ext'].lower() == 'gz':
-                    with gzip.open(log['path'], 'rt', encoding='utf-8') as f:
+                # be robust to students decompressing logs
+                if log['ext'] and log['ext'].lower() == 'gz':
+                    with gzip.open(log['record'], 'rt', encoding='utf-8') as f:
                         engagement_data = json.load(f)
                 else:
-                    with open(log['path'], 'rt', encoding='utf-8') as f:
+                    with open(log['record'], 'rt', encoding='utf-8') as f:
                         engagement_data = json.load(f)
 
                 log_path = engagement_data.pop('log_path', None)
-                if log_path and not os.path.exists(log_path):
+                if log_path:
+                    # be robust to students decompressing logs
+                    for file in [
+                        *glob(f'{log_path}.gz'),  # prioritize the gzipped log
+                        *glob(log_path),
+                        *glob(f'{log_path}*')
+                    ]:
+                        if os.path.exists(file):
+                            log_path = Path(file)
+                            break
+
+                if not log_path.is_file():
                     log_path = None
 
                 if engagement_data:
@@ -659,10 +678,10 @@ Hi, I'm **Delphi**! \U0001F44B
                     if log_path:
                         CourseClient().post_engagement_log(eng_id, log_path)
                         os.remove(log_path)
-                    os.remove(log['path'])
+                    os.remove(log['record'])
                     submit_count += 1
             except Exception:
-                lp_logger.exception(f'Exception encountered submitting log {log["path"]} to server.')
+                lp_logger.exception(f'Exception encountered submitting log {log["record"]} to server.')
                 errors += 1
 
         return submit_count, errors
@@ -688,12 +707,20 @@ Hi, I'm **Delphi**! \U0001F44B
             return
         def no_op(**kwargs):
             return None
+        
+        def kwarg_str():
+            pairs = []
+            for key, value in kwargs.items():
+                pairs.append(f'{key}={value}')
+            return ', '.join(pairs)
+        
         func = self.function_map.get(function_name, no_op)
         if func == no_op:
             self.logger.info('unrecognized call %s == no_op()', function_name)
         else:
             self.logger.info('call %s', function_name)
         try:
+            self.push('assistant', f'{function_name}({kwarg_str()})', function_call=True)
             return func(**kwargs)
         except RePrompt:
             # give our function a chance to salvage the session!
@@ -701,11 +728,6 @@ Hi, I'm **Delphi**! \U0001F44B
             raise
         finally:
             if func != no_op and func == self.last_function and kwargs == self.last_function_kwargs:
-                def kwarg_str():
-                    pairs = []
-                    for key, value in kwargs.items():
-                        pairs.append(f'{key}={value}')
-                    return ', '.join(pairs)
                 # guard against a recursive function loop!
                 raise TerminateSession(
                     f'{self.me} is confused and has called {function_name}({kwarg_str()}) twice in row!'
@@ -799,15 +821,23 @@ def tutor(llm = LLMBackends.OPEN_AI):
     global _tutor
     if _tutor and _tutor.backend is llm:
         return _tutor
-    try:
+    
+    def try_instantiate():
         if llm is LLMBackends.OPEN_AI:
             from learn_python.delphi.openai import OpenAITutor
-            _tutor = OpenAITutor()
+            return OpenAITutor()
         else:
             raise NotImplementedError(f'{llm} tutor backend is not implemented!')
-    except Exception as err:
+    try:
+        _tutor = try_instantiate()
+    except ConfigurationError:
+        if Config().try_authorize_tutor():
+            _tutor = try_instantiate()
+        elif _explicitly_invoked:
+            raise
+    except Exception:
         if _explicitly_invoked:
-            raise err
+            raise
     return _tutor
 
 @main(catch=True)

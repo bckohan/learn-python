@@ -38,6 +38,13 @@ class LLMBackends(Enum):
     def __str__(self):
         return self.value
 
+    @property
+    def backend_class(self):
+        if self.value == 'openai':
+            from learn_python.delphi.openai import OpenAITutor
+            return OpenAITutor
+        raise ValueError(f'Unrecognized backend: {self.value}')
+
 
 class Config(Singleton):
 
@@ -212,8 +219,7 @@ class Config(Singleton):
         if 'tutor' in tutor_auth:
             self.tutor = tutor_auth['tutor']
             if 'secret' in tutor_auth:
-                from learn_python.delphi.tutor import tutor
-                tutor(self.tutor).write_key(tutor_auth['secret'])
+                self.tutor.backend_class.write_key(tutor_auth['secret'])
                 typer.echo('Delphi has been authorized!')
                 return True
         return False

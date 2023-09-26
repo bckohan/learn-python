@@ -66,6 +66,7 @@ class Task:
     timeout: int = 5
 
     ERROR_MSG_RGX = re.compile('^E\s+AssertionError[:]\s+(?P<msg>.+)\n\n', re.M)
+    MODULE_NUM_RGX = re.compile(r'module(?P<num>\d+)')
 
     def __init__(
         self,
@@ -104,6 +105,14 @@ class Task:
         parts = self.test.split('.')
         test_file, test_func = '/'.join(parts[:-1]), parts[-1]
         return f'{PACKAGE_DIR / test_file}.py::{test_func}'
+    
+    @property
+    def module_number(self):
+        if self.module:
+            mtch = self.MODULE_NUM_RGX.search(self.module)
+            if mtch:
+                return int(mtch.groupdict()['num'])
+            return None
 
     @property
     def error_msg(self):
