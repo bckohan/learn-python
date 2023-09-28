@@ -215,7 +215,13 @@ class Config(Singleton):
     def try_authorize_tutor(self):
         from learn_python.client import CourseClient
         client = CourseClient()
-        tutor_auth = client.get_tutor_auth() or {}
+        try:
+            tutor_auth = client.get_tutor_auth() or {}
+        except HTTPError as err:
+            if err.response.status_code == 403:
+                tutor_auth = {}
+            else:
+                raise
         if 'tutor' in tutor_auth:
             self.tutor = tutor_auth['tutor']
             if 'secret' in tutor_auth:
@@ -339,3 +345,9 @@ def register(
         typer.echo(
             colored('Course registration failed. If this is in error, contact your instructor.', 'red')
         )
+
+@main(catch=True)
+def report():
+    """
+    Report all status and logs to the course server.
+    """

@@ -151,7 +151,7 @@ Hi, I'm **Delphi**! \U0001F44B
         self.file_handler = GzipFileHandler(str(LOG_DIR / f'delphi_{self.engagement_id}.log'))
 
         # setup delphi logging to a unique file for each engagement
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelno)s]%(levelname)s - %(message)s')
         self.file_handler.setFormatter(formatter)
         self.logger.addHandler(self.file_handler)
         self.logger.setLevel(logging.DEBUG)
@@ -587,14 +587,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 'tz_offset': now().utcoffset().total_seconds() // 3600,
                 'backend': self.BACKEND.value,
                 'backend_log': {},
-                'log_path': self.file_handler.baseFilename,
-                'repository': {
-                    'uri': Config().origin,
-                    'git_hash': Config().commit_hash(),
-                    'git_branch': Config().cloned_branch(),
-                    'timestamp': now(),
-                    'commit_count': Config().commit_count()
-                }
+                'log_path': self.file_handler.baseFilename
             }
         
         task = {}
@@ -676,7 +669,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 if engagement_data:
                     CourseClient().post_engagement(engagement_data)
                     if log_path:
-                        CourseClient().post_engagement_log(eng_id, log_path)
+                        CourseClient().post_log(log_path)
                         os.remove(log_path)
                     os.remove(log['record'])
                     submit_count += 1

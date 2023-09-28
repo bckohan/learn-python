@@ -46,13 +46,13 @@ class CourseClient:
         lp_logger.info('Submitted engagement %s to server.', engagement.get('id', None))
         return resp.json()
 
-    def post_engagement_log(self, engagement_id, log_path):
+    def post_log(self, log_path):
         assert log_path and os.path.exists(log_path)
-        resp = requests.put(
-            f'{Config().server}/api/engagement_logs/{engagement_id}/',
+        resp = requests.post(
+            f'{Config().server}/api/logs/',
             files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
             headers=self.signature()
         )
         resp.raise_for_status()
-        lp_logger.info('Submitted engagement log %s to server.', engagement_id)
+        lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))
         return resp.json()

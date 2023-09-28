@@ -150,7 +150,7 @@ def configure_logging(level=logging.INFO):
             when='midnight',
             backupCount=0,  # never delete old logs
         )
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelno)s]%(levelname)s - %(message)s')
         file_handler.setFormatter(formatter)
         file_handler.setLevel(level)
         root_logger = logging.getLogger()
