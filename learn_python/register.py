@@ -347,7 +347,7 @@ def register(
     elif Config().register(reset=reset):
         typer.echo(colored('Your course is now registered!', 'green'))
         if Config().enrollment is not None:
-            typer.echo(colored(f'You have been enrolled in course: {Config().enrollment}'), 'green')
+            typer.echo(colored(f'You have been enrolled in course: {Config().enrollment}', 'green'))
     else:
         typer.echo(
             colored('Course registration failed. If this is in error, contact your instructor.', 'red')
