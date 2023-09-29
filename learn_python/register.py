@@ -352,6 +352,22 @@ def register(
         typer.echo(
             colored('Course registration failed. If this is in error, contact your instructor.', 'red')
         )
+    report()
+
+
+# guard against excessive reporting
+_report_lock = False
+
+
+def lock_reporting(lock=True):
+    global _report_lock
+    _report_lock = lock
+
+
+def can_report():
+    global _report_lock
+    return not _report_lock
+
 
 @main(catch=True)
 def report(
@@ -371,6 +387,8 @@ def report(
     Report all status and logs to the course server. Logs for dates before now will be
     deleted.
     """
+    if not can_report():
+        return
     from learn_python.client import CourseClient
     from learn_python.delphi.tutor import Tutor
     Tutor.submit_logs()

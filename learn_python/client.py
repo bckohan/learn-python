@@ -9,6 +9,8 @@ import json
 
 class CourseClient:
 
+    TIMEOUT_SECONDS = 20
+
     def signature(self):
         ts = str(int(time.time()))
         return {
@@ -18,7 +20,11 @@ class CourseClient:
         }
 
     def register(self):
-        resp = requests.get(f'{Config().server}/register/{Config().origin}', headers=self.signature())
+        resp = requests.get(
+            f'{Config().server}/register/{Config().origin}',
+            headers=self.signature(),
+            timeout=self.TIMEOUT_SECONDS
+        )
         resp.raise_for_status()
         return Config().update({
             **resp.json(),
@@ -28,7 +34,8 @@ class CourseClient:
     def get_tutor_auth(self):
         resp = requests.get(
             f'{Config().server}/api/authorize_tutor',
-            headers=self.signature()
+            headers=self.signature(),
+            timeout=self.TIMEOUT_SECONDS
         )
         resp.raise_for_status()
         return resp.json()
@@ -40,7 +47,8 @@ class CourseClient:
             headers={
                 **self.signature(),
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout=self.TIMEOUT_SECONDS
         )
         resp.raise_for_status()
         lp_logger.info('Submitted engagement %s to server.', engagement.get('id', None))
@@ -52,7 +60,8 @@ class CourseClient:
         resp = requests.post(
             f'{Config().server}/api/logs/',
             files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
-            headers=self.signature()
+            headers=self.signature(),
+            timeout=self.TIMEOUT_SECONDS
         )
         resp.raise_for_status()
         lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))

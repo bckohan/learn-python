@@ -718,10 +718,14 @@ def build(
     )
 ):
     """Build the documentation - this will always clean it first."""
+    from learn_python.register import lock_reporting, report
+    lock_reporting()
     clean()
     with doc_context():
         os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
     print(DOC_BLD_DIR / 'html')
+    lock_reporting(False)
+    report()
 
 @app.command()
 def structure():

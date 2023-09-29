@@ -15,3 +15,8 @@ def pytest_runtest_logreport(report):
         test_name = report.nodeid
         # Log the test outcome
         test_logger.info('[%s] %s', outcome.upper(), test_name)
+
+
+def pytest_sessionfinish(session, exitstatus):
+    from learn_python.register import report
+    report()
