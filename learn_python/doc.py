@@ -723,8 +723,13 @@ def build(
     """Build the documentation - this will always clean it first."""
     configure_logging()
     clean()
-    with doc_context():
-        os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
+    try:
+        import logging
+        logging.getLogger('testing').info('[START] docs')
+        with doc_context():
+            os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
+    finally:
+        logging.getLogger('testing').info('[STOP] docs')
     print(DOC_BLD_DIR / 'html')
     from learn_python.register import do_report
     do_report()

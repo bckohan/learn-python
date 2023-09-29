@@ -68,10 +68,14 @@ class GzipFileHandler(logging.FileHandler):
         super().close()
         
         # Gzip the log file
-        with open(self.baseFilename, 'rb') as log_file, gzip.open(self.baseFilename + '.gz', 'wb') as gzipped_log:
-            shutil.copyfileobj(log_file, gzipped_log)
+        if os.path.exists(self.baseFilename):
+            with (
+                open(self.baseFilename, 'rb') as log_file,
+                gzip.open(self.baseFilename + '.gz', 'wb') as gzipped_log
+            ):
+                shutil.copyfileobj(log_file, gzipped_log)
 
-        os.remove(self.baseFilename)
+            os.remove(self.baseFilename)
 
 
 class GzipRotatingFileHandler(TimedRotatingFileHandler):

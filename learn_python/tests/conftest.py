@@ -17,6 +17,14 @@ def pytest_runtest_logreport(report):
         test_logger.info('[%s] %s', outcome.upper(), test_name)
 
 
+def pytest_configure(config):
+    # we're using this instead of pytest_sessionstart because the later appears
+    # to not be called before the first session?
+    configure_logging()
+    test_logger.info('[START] pytest')
+
+
 def pytest_sessionfinish(session, exitstatus):
     from learn_python.register import do_report
+    test_logger.info('[STOP] pytest')
     do_report()

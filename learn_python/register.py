@@ -327,12 +327,6 @@ class Config(Singleton):
 
 @main(catch=True)
 def register(
-    force: bool = typer.Option(
-        False,
-        '-f',
-        '--force',
-        help='Re-register with the course.'
-    ),
     reset: bool = typer.Option(
         False,
         '--reset',
@@ -342,7 +336,7 @@ def register(
         )
     )
 ):
-    if Config().is_registered() and not force:
+    if Config().is_registered():
         Config().try_authorize_tutor()
     elif Config().register(reset=reset):
         typer.echo(colored('Your course is now registered!', 'green'))
@@ -352,7 +346,7 @@ def register(
         typer.echo(
             colored('Course registration failed. If this is in error, contact your instructor.', 'red')
         )
-    report()
+    do_report()
 
 
 # guard against excessive reporting
