@@ -8,8 +8,6 @@ from uuid import uuid1
 import json
 from pprint import pformat
 
-API_KEY_FILE = Path(__file__).parent / 'openai_api.key'
-
 
 class OpenAITutor(Tutor):
     """
@@ -36,26 +34,21 @@ class OpenAITutor(Tutor):
 
     BACKEND = LLMBackends.OPEN_AI
 
+    API_KEY_FILE = Path(__file__).parent / 'openai_api.key'
+
     def __init__(self, api_key=api_key):
-
-        if api_key is None and API_KEY_FILE.is_file():
-            self.api_key = API_KEY_FILE.read_text().strip()
-        
+        super().__init__(api_key=api_key)
         if not self.api_key:
-
-            with open(API_KEY_FILE, 'a'):
-                os.utime(API_KEY_FILE, None)
-            
             lp_logger.info('No key available to launch OpenAI Tutor.')
-
             raise ConfigurationError(
                 'The tutor requires an api key to be installed. '
-                f'Please paste your OpenAI API key into the file: {API_KEY_FILE.relative_to(os.getcwd())}. '
-                'See https://platform.openai.com/account/api-keys for details, or inquire with the instructor.'
+                f'Please paste your OpenAI API key into the file: ' 
+                f'{self.API_KEY_FILE.relative_to(os.getcwd())}. '
+                'See https://platform.openai.com/account/api-keys for details, or '
+                'inquire with the instructor.'
             )
         
         openai.api_key = self.api_key
-        super().__init__()
         lp_logger.info('Initialized OpenAI Tutor.')
 
     def get_model(self, messages):

@@ -16,12 +16,13 @@ After you've implemented logic_play2 think about which version of logic_play is 
 Which is more efficient? Which is more readable? Which is more maintainable? Cleverness is not
 always a virtue in programming and there are always tradeoffs!
 """
-# from .task1_is_odd import is_odd
-# from .task0_is_even import is_even
+from .task1_is_odd import is_odd
+from .task0_is_even import is_even
 
-# def logic_play2(first, second):
-#     if is_even(first):
-#         if is_even(second):
-#             return first * second
-#     elif is_odd(second):
-#         return first / second
+def logic_play2(first, second):
+    if is_even(first):
+        if is_even(second):
+            return first * second
+    elif is_odd(first):
+        if is_odd(second):
+            return first / second

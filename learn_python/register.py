@@ -18,10 +18,13 @@ from functools import cached_property
 from requests import HTTPError
 from termcolor import colored
 from learn_python import main
-from learn_python.utils import lp_logger
+from learn_python.utils import lp_logger, get_log_date
 import time
 import re
 import warnings
+from datetime import date
+from learn_python.utils import LOG_DIR
+import os
 
 
 PRIVATE_KEY_FILE = ROOT_DIR / '.private_key.pem'
@@ -32,7 +35,7 @@ class LLMBackends(Enum):
     """
     The LLM backends currently supported to run Delphi.
     """
-
+    TEST    = 'test'
     OPEN_AI = 'openai'
 
     def __str__(self):
@@ -43,6 +46,9 @@ class LLMBackends(Enum):
         if self.value == 'openai':
             from learn_python.delphi.openai import OpenAITutor
             return OpenAITutor
+        elif self.value == 'test':
+            from learn_python.delphi.test import TestAITutor
+            return TestAITutor
         raise ValueError(f'Unrecognized backend: {self.value}')
 
 
@@ -347,7 +353,36 @@ def register(
         )
 
 @main(catch=True)
-def report():
+def report(
+    keep: bool = typer.Option(
+        False,
+        '-k',
+        '--keep',
+        help='Do not delete finished log files.'
+    ),
+    no_active: bool = typer.Option(
+        False,
+        '--no-active',
+        help='Do not report active log file.'
+    ),
+):
     """
-    Report all status and logs to the course server.
+    Report all status and logs to the course server. Logs for dates before now will be
+    deleted.
     """
+    from learn_python.client import CourseClient
+    course = CourseClient()
+    date.today()
+    for log_file in os.listdir(LOG_DIR):
+        log_file = LOG_DIR / log_file
+        dt = get_log_date(log_file)
+        is_active = dt is None or dt == date.today()
+        if is_active and no_active:
+            continue
+        
+        try:
+            course.post_log(log_file)
+            if not keep and not is_active:
+                os.remove(log_file)
+        except HTTPError as err:
+            lp_logger.exception('Unable to post log file: %s', log_file)

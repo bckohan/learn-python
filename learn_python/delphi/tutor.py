@@ -127,6 +127,8 @@ class Tutor:
     no_prompt_rounds: int = 0
     NO_PROMPT_ROUNDS_LIMIT: int = 4
 
+    API_KEY_FILE = None
+
     INITIAL_NOTICE = """
 ---
 Hi, I'm **Delphi**! \U0001F44B
@@ -143,7 +145,7 @@ Hi, I'm **Delphi**! \U0001F44B
 
     closed: bool = True
 
-    def __init__(self):
+    def __init__(self, api_key=None):
         self.engagement_id = uuid1()
         self.resp_json = []
         if not LOG_DIR.is_dir():
@@ -159,6 +161,28 @@ Hi, I'm **Delphi**! \U0001F44B
         self.logger.propagate = False
         self.no_prompt_rounds = 0
         self.log = {}
+
+        if api_key is None and self.API_KEY_FILE and self.API_KEY_FILE.is_file():
+            self.api_key = self.API_KEY_FILE.read_text().strip()
+        if not self.api_key and self.API_KEY_FILE is not None:
+            with open(self.API_KEY_FILE, 'a'):
+                os.utime(self.API_KEY_FILE, None)
+
+
+    def input(self, prompt):
+        """
+        A wrapper around input() to allow for mocking during testing.
+        """
+        return input(prompt)
+    
+    @classmethod
+    def write_key(cls, key=None):
+        if cls.API_KEY_FILE is None and key is not None:
+            raise NotImplementedError(
+                f'Tutor backend {cls.BACKEND} does not support write_key().'
+            )
+        with open(cls.API_KEY_FILE, 'w') as key_f:
+            key_f.write(key if isinstance(key, str) else key.encode('utf-8'))
 
     @property
     def me(self):
@@ -176,7 +200,7 @@ Hi, I'm **Delphi**! \U0001F44B
 
     def is_help_needed(self, task: Optional[Union[Task, str]] = None):
         """Check if the student needs help, if they do launch the tutor, if not return"""
-        use_tutor = input(f'Would you like assistance from {self.me}? (y/n): ')
+        use_tutor = self.input(f'Would you like assistance from {self.me}? (y/n): ')
         for word in use_tutor.lower().split():
             if word in ['yes', 'y', 'help', 'please', 'thank', 'thanks', 'thankyou', 'ok', 'affirmative']:
                 with delphi_context():
@@ -193,7 +217,7 @@ Hi, I'm **Delphi**! \U0001F44B
         self.logger.info('prompt()')
         if msg is None:
             self.no_prompt_rounds = 0
-            msg = input('> ')
+            msg = self.input('> ')
         else:
             self.no_prompt_rounds += 1
 
@@ -392,7 +416,7 @@ Hi, I'm **Delphi**! \U0001F44B
             
             qry += '\nSet which task you think the user might be referring to.'
             self.prompt(qry, role='system')
-            task_name = input('? ')
+            task_name = self.input('? ')
 
         if len(possibles) == 1:
             self.task_test = possibles[0][1]
@@ -402,7 +426,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 for idx, candidate in enumerate(possibles):
                     prompt += f'[{idx}] {candidate[0]}: {candidate[1].name}'
                 try:
-                    selection = input(prompt)
+                    selection = self.input(prompt)
                     self.task_test = possibles[int(selection)][1]
                 except (TypeError, ValueError):
                     self.try_select_task(selection)
@@ -787,10 +811,6 @@ Hi, I'm **Delphi**! \U0001F44B
         """Any json serializable structure that a backend would like to be part of the log."""
         return None
     
-    def write_key(self, key=None):
-        if key is not None:
-            raise NotImplementedError(f'Tutor backend {self.BACKEND} does not support write_key().')
-
 
 @contextmanager
 def delphi_context():
@@ -819,6 +839,9 @@ def tutor(llm = LLMBackends.OPEN_AI):
         if llm is LLMBackends.OPEN_AI:
             from learn_python.delphi.openai import OpenAITutor
             return OpenAITutor()
+        elif llm is LLMBackends.TEST:
+            from learn_python.delphi.test import TestAITutor
+            return TestAITutor()
         else:
             raise NotImplementedError(f'{llm} tutor backend is not implemented!')
     try:
@@ -849,11 +872,11 @@ def delphi(
         '--clean-logs',
         help="Delete the logs directory."
     ),
-    llm: LLMBackends = LLMBackends.OPEN_AI.value
+    llm: Optional[LLMBackends] = Config().tutor.value
 ):
+    """I need some help! Wake Delphi up!"""
     global _explicitly_invoked
     _explicitly_invoked = True
-    """I need some help! Wake Delphi up!"""
     with delphi_context():
         try:
             if submit_logs:
@@ -867,7 +890,7 @@ def delphi(
                 if LOG_DIR.is_dir():
                     shutil.rmtree(LOG_DIR)
                 return
-            tutor().init(task).submit_logs()
+            tutor(llm).init(task).submit_logs()
         except ConfigurationError as err:
             print(colored(str(err), 'red'))
 

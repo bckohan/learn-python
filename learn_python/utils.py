@@ -12,6 +12,7 @@ import json
 from datetime import datetime
 import logging
 from logging.handlers import TimedRotatingFileHandler
+from dateutil import parser as date_parser
 
 
 ROOT_DIR = Path(__file__).parent.parent
@@ -19,6 +20,8 @@ LOG_DIR = ROOT_DIR / 'logs'
 
 # todo move config into a file
 GITHUB_ROOT = Path('https://github.com/bckohan/learn-python')
+
+LOG_DATE_RGX = re.compile(r'(?P<date>(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2}))')
 
 
 lp_logger = logging.getLogger('learn_python')
@@ -86,6 +89,16 @@ def localize_identifier(identifier):
 
 def strip_colors(s):
     return re.sub(r'\x1B[@-_][0-?]*[ -/]*[@-~]', '', s)
+
+
+def get_log_date(log_path):
+    if log_path:
+        match = LOG_DATE_RGX.search(str(log_path))
+        if match:
+            try:
+                return date_parser.parse(match.group('date')).date()
+            except date_parser.ParserError:
+                pass
 
 
 class _Singleton(type):
@@ -165,6 +178,17 @@ def configure_logging(level=logging.INFO):
         lp_logger.addHandler(file_handler)
         lp_logger.setLevel(level)
         lp_logger.propagate = False
+        test_logger = logging.getLogger('testing')
+        test_handler = GzipRotatingFileHandler(
+            str(LOG_DIR / f'testing.log'),
+            when='midnight',
+            backupCount=0,  # never delete old logs
+        )
+        test_handler.setFormatter(formatter)
+        test_handler.setLevel(level)
+        test_logger.addHandler(test_handler)
+        test_logger.setLevel(level)
+        test_logger.propagate = False
 
     _logging_configured = True
 

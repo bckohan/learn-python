@@ -47,6 +47,7 @@ class CourseClient:
         return resp.json()
 
     def post_log(self, log_path):
+        log_path = str(log_path)
         assert log_path and os.path.exists(log_path)
         resp = requests.post(
             f'{Config().server}/api/logs/',
