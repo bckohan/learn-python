@@ -372,6 +372,8 @@ def report(
     deleted.
     """
     from learn_python.client import CourseClient
+    from learn_python.delphi.tutor import Tutor
+    Tutor.submit_logs()
     course = CourseClient()
     date.today()
     for log_file in os.listdir(LOG_DIR):

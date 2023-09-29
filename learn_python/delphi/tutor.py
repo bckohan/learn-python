@@ -204,8 +204,7 @@ Hi, I'm **Delphi**! \U0001F44B
         for word in use_tutor.lower().split():
             if word in ['yes', 'y', 'help', 'please', 'thank', 'thanks', 'thankyou', 'ok', 'affirmative']:
                 with delphi_context():
-                    self.init(task=task)
-                    self.submit_logs()
+                    self.init(task=task).submit_logs()
                 return
     
     def prompt(self, msg: Optional[str] = None, role='user'):
@@ -451,6 +450,8 @@ Hi, I'm **Delphi**! \U0001F44B
             # a little tail recursion never hurt anybody
             self.init(task=self.task_test, notice=str(err))
         self.close_session()
+        if self.file_handler:
+            self.file_handler.close()
         return self
     
     def get_task_info(self, task_name: str, module: Optional[str] = None):
