@@ -230,6 +230,7 @@ class Config(Singleton):
                 raise
         if 'tutor' in tutor_auth:
             self.tutor = tutor_auth['tutor']
+            self.write()
             if 'secret' in tutor_auth:
                 self.tutor.backend_class.write_key(tutor_auth['secret'])
                 typer.echo('Delphi has been authorized!')

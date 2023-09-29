@@ -83,8 +83,3 @@ class OpenAITutor(Tutor):
             **json.loads(resp.get('function_call', {}).get('arguments', '{}'))
         )
         return resp['content']
-
-    @staticmethod
-    def write_key(key=None):
-        with open(API_KEY_FILE, 'w') as key_f:
-            key_f.write(key if isinstance(key, str) else key.encode('utf-8'))
