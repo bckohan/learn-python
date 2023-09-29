@@ -878,6 +878,8 @@ def delphi(
     """I need some help! Wake Delphi up!"""
     global _explicitly_invoked
     _explicitly_invoked = True
+    from learn_python.register import report, lock_reporting
+    lock_reporting()
     with delphi_context():
         try:
             if submit_logs:
@@ -894,4 +896,5 @@ def delphi(
             tutor(llm).init(task).submit_logs()
         except ConfigurationError as err:
             print(colored(str(err), 'red'))
-
+    lock_reporting(False)
+    report()
