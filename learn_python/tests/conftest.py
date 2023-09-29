@@ -18,5 +18,5 @@ def pytest_runtest_logreport(report):
 
 
 def pytest_sessionfinish(session, exitstatus):
-    from learn_python.register import report
-    report()
+    from learn_python.register import do_report
+    do_report()

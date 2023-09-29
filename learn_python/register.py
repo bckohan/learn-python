@@ -387,23 +387,30 @@ def report(
     Report all status and logs to the course server. Logs for dates before now will be
     deleted.
     """
+    do_report(keep=keep, no_active=no_active)
+
+
+def do_report(keep=False, no_active=False):
     if not can_report():
         return
-    from learn_python.client import CourseClient
-    from learn_python.delphi.tutor import Tutor
-    Tutor.submit_logs()
-    course = CourseClient()
-    date.today()
-    for log_file in os.listdir(LOG_DIR):
-        log_file = LOG_DIR / log_file
-        dt = get_log_date(log_file)
-        is_active = dt is None or dt == date.today()
-        if is_active and no_active:
-            continue
-        
-        try:
-            course.post_log(log_file)
-            if not keep and not is_active:
-                os.remove(log_file)
-        except HTTPError as err:
-            lp_logger.exception('Unable to post log file: %s', log_file)
+    try:
+        from learn_python.client import CourseClient
+        from learn_python.delphi.tutor import Tutor
+        Tutor.submit_logs()
+        course = CourseClient()
+        date.today()
+        for log_file in os.listdir(LOG_DIR):
+            log_file = LOG_DIR / log_file
+            dt = get_log_date(log_file)
+            is_active = dt is None or dt == date.today()
+            if is_active and no_active:
+                continue
+            
+            try:
+                course.post_log(log_file)
+                if not keep and not is_active:
+                    os.remove(log_file)
+            except HTTPError as err:
+                lp_logger.exception('Unable to post log file: %s', log_file)
+    except Exception:
+        lp_logger.exception('Unable to report logs to course server.')

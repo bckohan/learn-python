@@ -33,8 +33,7 @@ import inspect
 from learn_python.utils import ROOT_DIR, GITHUB_ROOT
 from docutils.parsers.rst import Directive
 import json
-from learn_python.utils import ConeOfSilence
-
+from learn_python.utils import ConeOfSilence, configure_logging
 
 _mapper = None
 DETACHED_DEFAULT = False
@@ -88,6 +87,10 @@ def task_map():
 def setup(app):
     global _mapper
     global DETACHED_DEFAULT
+    from learn_python.register import lock_reporting
+    # lots of tests are run individually during doc build - this avoids reporting 
+    # after each one!
+    lock_reporting()
     app.add_config_value('detached', DETACHED_DEFAULT, 'env', types=[bool])
     app.add_role('code-ref', code_ref_role)
     if not _mapper:
@@ -718,14 +721,13 @@ def build(
     )
 ):
     """Build the documentation - this will always clean it first."""
-    from learn_python.register import lock_reporting, report
-    lock_reporting()
+    configure_logging()
     clean()
     with doc_context():
         os.system(f'make html SPHINXOPTS="-D detached={int(detached)}"')
     print(DOC_BLD_DIR / 'html')
-    lock_reporting(False)
-    report()
+    from learn_python.register import do_report
+    do_report()
 
 @app.command()
 def structure():
