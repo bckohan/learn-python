@@ -41,28 +41,30 @@ class CourseClient:
         return resp.json()
 
     def post_engagement(self, engagement):
-        resp = requests.post(
-            f'{Config().server}/api/engagements/',
-            data=json.dumps(engagement, cls=DateTimeEncoder),
-            headers={
-                **self.signature(),
-                'Content-Type': 'application/json'
-            },
-            timeout=self.TIMEOUT_SECONDS
-        )
-        resp.raise_for_status()
-        lp_logger.info('Submitted engagement %s to server.', engagement.get('id', None))
-        return resp.json()
+        if Config().enrollment:
+            resp = requests.post(
+                f'{Config().server}/api/engagements/',
+                data=json.dumps(engagement, cls=DateTimeEncoder),
+                headers={
+                    **self.signature(),
+                    'Content-Type': 'application/json'
+                },
+                timeout=self.TIMEOUT_SECONDS
+            )
+            resp.raise_for_status()
+            lp_logger.info('Submitted engagement %s to server.', engagement.get('id', None))
+            return resp.json()
 
     def post_log(self, log_path):
-        log_path = str(log_path)
-        assert log_path and os.path.exists(log_path)
-        resp = requests.post(
-            f'{Config().server}/api/logs/',
-            files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
-            headers=self.signature(),
-            timeout=self.TIMEOUT_SECONDS
-        )
-        resp.raise_for_status()
-        lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))
-        return resp.json()
+        if Config().enrollment:
+            log_path = str(log_path)
+            assert log_path and os.path.exists(log_path)
+            resp = requests.post(
+                f'{Config().server}/api/logs/',
+                files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
+                headers=self.signature(),
+                timeout=self.TIMEOUT_SECONDS
+            )
+            resp.raise_for_status()
+            lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))
+            return resp.json()

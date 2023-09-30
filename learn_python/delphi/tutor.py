@@ -39,7 +39,8 @@ from learn_python.utils import (
     strip_colors,
     lp_logger,
     DateTimeEncoder,
-    configure_logging
+    configure_logging,
+    formatter
 )
 from learn_python import main
 import shutil
@@ -154,7 +155,6 @@ Hi, I'm **Delphi**! \U0001F44B
         self.file_handler = GzipFileHandler(str(LOG_DIR / f'delphi_{self.engagement_id}.log'))
 
         # setup delphi logging to a unique file for each engagement
-        formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelno)s]%(levelname)s - %(message)s')
         self.file_handler.setFormatter(formatter)
         self.logger.addHandler(self.file_handler)
         self.logger.setLevel(logging.DEBUG)

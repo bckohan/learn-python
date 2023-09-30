@@ -26,6 +26,22 @@ LOG_DATE_RGX = re.compile(r'(?P<date>(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d
 
 lp_logger = logging.getLogger('learn_python')
 
+class MicrosecondFormatter(logging.Formatter):
+
+    local_tz = datetime.now().astimezone().tzinfo
+
+    def formatTime(self, record, datefmt=None):
+        ct = datetime.fromtimestamp(record.created, tz=self.local_tz)
+        if datefmt:
+            s = ct.strftime(datefmt)
+        else:
+            s = ct.strftime('%Y-%m-%d %H:%M:%S.%f%z')
+        return s
+    
+formatter = MicrosecondFormatter(
+    '%(asctime)s - %(name)s - [%(levelno)s]%(levelname)s - %(message)s'
+)
+
 
 class ConeOfSilence(redirect_stdout, redirect_stderr):
     """
@@ -167,7 +183,6 @@ def configure_logging(level=logging.INFO):
             when='midnight',
             backupCount=0,  # never delete old logs
         )
-        formatter = logging.Formatter('%(asctime)s - %(name)s - [%(levelno)s]%(levelname)s - %(message)s')
         file_handler.setFormatter(formatter)
         file_handler.setLevel(level)
         root_logger = logging.getLogger()
