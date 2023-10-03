@@ -441,6 +441,7 @@ Hi, I'm **Delphi**! \U0001F44B
         """
         Initialize a tutor engagement. This may contain multiple sessions. See start_session()
         """
+        self.engagement_start = now()
         if not Config().is_registered():
             Config().register()
         os.makedirs(LOG_DIR, exist_ok=True)
@@ -607,8 +608,8 @@ Hi, I'm **Delphi**! \U0001F44B
             self.log = {
                 'engagement_id': str(self.engagement_id),
                 'sessions': [],
-                'start': self.session_start.isoformat(),
-                'end': None,
+                'timestamp': self.engagement_start.isoformat(),
+                'stop': None,
                 'tz_name': now().strftime('%Z'),
                 'tz_offset': now().utcoffset().total_seconds() // 3600,
                 'backend': self.BACKEND.value,
@@ -625,8 +626,8 @@ Hi, I'm **Delphi**! \U0001F44B
 
         self.log['sessions'].append({
             'session_id': self.session_id,
-            'start': self.session_start.isoformat(),
-            'end': self.session_end.isoformat(),
+            'timestamp': self.session_start.isoformat(),
+            'stop': self.session_end.isoformat(),
             'exchanges': self.messages
         })
         if task:
@@ -637,7 +638,7 @@ Hi, I'm **Delphi**! \U0001F44B
                 'wt',
                 encoding='utf-8'
             ) as f:
-                self.log['end'] = self.session_end.isoformat()
+                self.log['stop'] = now().isoformat()
                 self.log['backend_log'] = self.backend_log
                 json.dump(self.log, f, cls=DateTimeEncoder, indent=4)
         except Exception as err:

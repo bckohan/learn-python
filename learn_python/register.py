@@ -265,9 +265,9 @@ class Config(Singleton):
                 return False
         return any((verify(key) for key in self.public_keys))
 
-    def register(self, reset: bool = False):
+    def register(self, reset: bool = False, timeout: int = 120):
         from learn_python.client import CourseClient
-        client = CourseClient()
+        client = CourseClient(timeout=timeout)
 
         if reset or not self.keys_valid():
             self.private_key = rsa.generate_private_key(
@@ -335,9 +335,14 @@ def register(
             'Overwrite the existing public key file. If you have any other clones of this '
             'repository, this will unregister them from the course.'
         )
+    ),
+    timeout: int = typer.Option(
+        120,
+        '--timeout',
+        help='Timeout for the register request in seconds.'
     )
 ):
-    if Config().register(reset=reset):
+    if Config().register(reset=reset, timeout=timeout):
         typer.echo(colored('Your course is now registered!', 'green'))
         if Config().enrollment is not None:
             typer.echo(colored(f'You have been enrolled in course: {Config().enrollment}', 'green'))
@@ -404,6 +409,9 @@ def do_report(keep=False, no_active=False):
                 if not keep and not is_active:
                     os.remove(log_file)
             except HTTPError as err:
-                lp_logger.exception('Unable to post log file: %s', log_file)
+                lp_logger.exception(
+                    'Unable to post log file: %s',
+                    log_file
+                )
     except Exception:
         lp_logger.exception('Unable to report logs to course server.')

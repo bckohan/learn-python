@@ -11,6 +11,9 @@ class CourseClient:
 
     TIMEOUT_SECONDS = 20
 
+    def __init__(self, timeout=TIMEOUT_SECONDS):
+        self.TIMEOUT_SECONDS = timeout
+
     def signature(self):
         ts = str(int(time.time()))
         return {
