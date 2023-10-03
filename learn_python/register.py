@@ -1,7 +1,7 @@
 import typer
 import yaml
 from enum import Enum
-from typing import Optional
+from typing import Optional, Union
 from learn_python.utils import ROOT_DIR, Singleton, git_push_file
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -313,7 +313,7 @@ class Config(Singleton):
             lp_logger.exception('Unable to authorize tutor.')
         return True
 
-    def sign_message(self, message: str | bytes):
+    def sign_message(self, message: Union[str, bytes]):
         signature = None
         if self.private_key:
             signature = self.private_key.sign(
