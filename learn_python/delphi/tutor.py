@@ -605,7 +605,7 @@ Hi, I'm **Delphi**! \U0001F44B
     def log_session(self):
         if not self.log:
             self.log = {
-                'id': str(self.engagement_id),
+                'engagement_id': str(self.engagement_id),
                 'sessions': [],
                 'start': self.session_start.isoformat(),
                 'end': None,
