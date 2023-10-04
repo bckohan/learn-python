@@ -106,6 +106,7 @@ class Tutor:
     # the session message chain
     messages: List[str] = None
     resp_json: List[str] = None  # optional extra backend response data
+    engagement_start: datetime = None
     session_start: datetime = None
     session_end: datetime = None
 
@@ -441,7 +442,7 @@ Hi, I'm **Delphi**! \U0001F44B
         """
         Initialize a tutor engagement. This may contain multiple sessions. See start_session()
         """
-        self.engagement_start = now()
+        self.engagement_start = self.engagement_start or now()
         if not Config().is_registered():
             Config().register()
         os.makedirs(LOG_DIR, exist_ok=True)
