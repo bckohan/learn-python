@@ -321,7 +321,7 @@ Hi, I'm **Delphi**! \U0001F44B
             hnts = "\n".join(docs.hints)
             description += f'I have been given the following hints: \n{hnts}\n'
         if code and test.implementation:
-            description += f'My current implementation of {docs.name} looks like:\n{test.implementation}'
+            description += f'My current implementation of {docs.name} looks like:\n```python\n{test.implementation}```'
         return description
 
     def init_for_task(self):

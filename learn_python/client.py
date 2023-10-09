@@ -62,12 +62,13 @@ class CourseClient:
         if Config().enrollment:
             log_path = str(log_path)
             assert log_path and os.path.exists(log_path)
-            resp = requests.post(
-                f'{Config().server}/api/logs/',
-                files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
-                headers=self.signature(),
-                timeout=self.TIMEOUT_SECONDS
-            )
-            resp.raise_for_status()
-            lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))
-            return resp.json()
+            if os.path.getsize(log_path):
+                resp = requests.post(
+                    f'{Config().server}/api/logs/',
+                    files={'log': (os.path.basename(log_path), open(log_path, 'rb'))},
+                    headers=self.signature(),
+                    timeout=self.TIMEOUT_SECONDS
+                )
+                resp.raise_for_status()
+                lp_logger.info('Submitted log %s to server.', os.path.basename(log_path))
+                return resp.json()

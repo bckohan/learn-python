@@ -95,11 +95,33 @@ class GzipFileHandler(logging.FileHandler):
 
 
 class GzipRotatingFileHandler(TimedRotatingFileHandler):
+    """
+    This handler rotates log files on a configurable time based basis, and gzips the old 
+    log file. We modify it however to only allow rollover on startup. This will keep logs
+    from the same tool runs within the same log file across day boundaries which is necessary
+    for log processing to work correctly on the server side.
+    """
+
+    first_record: bool = False
 
     def rotate(self, source, dest):
         if os.path.exists(source):
             os.rename(source, dest)
             subprocess.Popen(['gzip', dest])
+
+    def __init__(self, *args, **kwargs):
+        self.first_record = True
+        super().__init__(*args, **kwargs)
+        
+
+    def shouldRollover(self, record):
+        """
+        Override shouldRollover to always return False since we only want to roll on startup.
+        """
+        if self.first_record:
+            self.first_record = False
+            return super().shouldRollover(record)
+        return False
 
 
 def localize_identifier(identifier):
