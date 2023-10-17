@@ -1895,21 +1895,23 @@ test = ["pytest"]
 
 [[package]]
 name = "sphinxcontrib-youtube"
-version = "1.2.0"
-description = "Sphinx \"youtube\" extension"
+version = "1.4.1"
+description = "Sphinx \"youtube\" extension."
 optional = false
 python-versions = "*"
 files = [
-    {file = "sphinxcontrib-youtube-1.2.0.tar.gz", hash = "sha256:f468b76550e926c6d918c97b921d6ccc8ec6bc13004746dea309788ea9268991"},
-    {file = "sphinxcontrib_youtube-1.2.0-py3-none-any.whl", hash = "sha256:fcc9301b5df3269597310c1ab41806b25fb7bfe41b0344aa8871dbd820d08ca4"},
+    {file = "sphinxcontrib_youtube-1.4.1-py2.py3-none-any.whl", hash = "sha256:de9cb454f066d580a1e7ad64efae7dd9e12c1b1567a31faa330b1aeaeed40460"},
+    {file = "sphinxcontrib_youtube-1.4.1.tar.gz", hash = "sha256:eb7871c8af47fd2b5c9727615354b7f95bce554be8be45b9fa8e5bc022f88059"},
 ]
 
 [package.dependencies]
 requests = "*"
-Sphinx = ">=0.6"
+Sphinx = ">=6.1"
 
 [package.extras]
-doc = ["furo", "sphinx-copybutton"]
+dev = ["nox"]
+doc = ["pydata-sphinx-theme", "sphinx-copybutton", "sphinx-design"]
+test = ["beautifulsoup4", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
 name = "stack-data"
@@ -2155,4 +2157,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.13"
-content-hash = "5adfeea7361e3f1aaaa648ebc7dd7c450de6f8a8896ebcd4221a6c696a4ad22a"
+content-hash = "055f882fba1b80753dbc50e2f8191c4e106b8dadcc3cd804a8381b42794a83f6"
