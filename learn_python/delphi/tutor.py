@@ -315,10 +315,10 @@ Hi, I'm **Delphi**! \U0001F44B
         elif self.task_test.status == TaskStatus.SKIPPED:
             description += f'I have not attempted to implement {docs.name} yet.\n'
         if requirements and docs.requirements:
-            reqs = "\n".join(docs.requirements)
+            reqs = "\n".join([f'* {req}' for req in docs.requirements])
             description += f'It has the following requirements:\n{reqs}\n'
         if hints and docs.hints:
-            hnts = "\n".join(docs.hints)
+            hnts = "\n".join([ f'* {hint}' for hint in docs.hints])
             description += f'I have been given the following hints: \n{hnts}\n'
         if code and test.implementation:
             description += f'My current implementation of {docs.name} looks like:\n```python\n{test.implementation}```'
