@@ -23,6 +23,5 @@ def logic_play2(first, second):
     if is_even(first):
         if is_even(second):
             return first * second
-    elif is_odd(first):
-        if is_odd(second):
-            return first / second
+    elif is_odd(second):
+        return first / second
