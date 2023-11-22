@@ -17,7 +17,7 @@ report = 'learn_python.register:report'
 [tool.poetry.dependencies]
 python = ">=3.8,<3.13"
 ipython = "^8.14.0"
-pytest = "^7.4.0"
+pytest = "^7.4.2"
 ipdb = "^0.13.13"
 matplotlib = "^3.7.2"
 numpy = "^1.25.2"
