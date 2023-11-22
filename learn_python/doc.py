@@ -154,9 +154,9 @@ class AutodocTree(GenericNodeVisitor):
     root_nodes: list[AutodocNode]
     stack: list[desc]
 
-    class_re = re.compile('^class (?P<import_string>[\w.]+)')
-    function_re = re.compile('^(?P<import_string>[\w.]+)[(]{1}')
-    module_re = re.compile('^(?P<import_string>[\w.]+)')  # todo
+    class_re = re.compile(r'^class (?P<import_string>[\w.]+)')
+    function_re = re.compile(r'^(?P<import_string>[\w.]+)[(]{1}')
+    module_re = re.compile(r'^(?P<import_string>[\w.]+)')  # todo
 
     def __bool__(self):
         return bool(self.root_nodes)
@@ -237,7 +237,7 @@ class TaskMapper:
     and then to query it.
     """
 
-    MODULE_RGX = re.compile('(?P<module>module\d+)')
+    MODULE_RGX = re.compile(r'(?P<module>module\d+)')
 
     tasks: dict
     task_sections: dict
