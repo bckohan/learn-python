@@ -24,3 +24,8 @@ def deduplicate(sequence, preserve_order=False):
         will be preserved, if False the order of the original sequence is not
     :return: the list with duplicates removed
     """
+    return (
+        sorted(list(set(sequence)), key=sequence.index)
+        if preserve_order else
+        list(set(sequence))
+    )

@@ -31,3 +31,7 @@ def list_intersection2(list1, list2):
     :param list2: list - the second list
     :return: a list containing the elements that are in both lists
     """
+    return [
+        *[x for x in list1 if x in list2],
+        *[x for x in list2 if x in list1]
+    ]

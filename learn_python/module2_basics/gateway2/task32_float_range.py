@@ -42,3 +42,12 @@ def float_range(start, stop, step):
     :param step: float - the spacing between values. This value is insensitive to its
         sign
     """
+    step = abs(step) * (-1 if start > stop else 1)
+    stop = stop + step/2
+    rng = []
+    # we use step/2 to account for floating point precision error, using any value less than
+    # the step size will always work
+    while (step > 0 and start < stop) or (step < 0 and start > stop):
+        rng.append(start)
+        start += step
+    return rng

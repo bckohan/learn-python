@@ -13,3 +13,11 @@
 .. hint::
     You will need to use the built-in function `len() <https://docs.python.org/3/library/functions.html#len>`_
 """
+
+def split(vector, at=None):
+    if at is None:
+        at = len(vector) // 2
+    if at < 0:
+        return vector[at*-1:], vector[:at*-1]
+    return vector[:at], vector[at:]
+

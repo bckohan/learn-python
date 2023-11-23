@@ -29,3 +29,14 @@ def split_name(name):
     :return: 3-tuple - the first, middle and last name - if any name is missing None will be
         returned for that name
     """
+    parts = name.split()
+    first = None
+    middle = None
+    last = None
+    if parts:
+        first = parts[0].title()
+    if len(parts) > 1:
+        last = parts[-1].title()
+    if len(parts) > 2:
+        middle = ' '.join(parts[1:-1]).title()
+    return first, middle, last

@@ -32,3 +32,4 @@ def identity_matrix2(size):
     :return: the identity matrix of dimensions size x size if size is 0, 
       return an empty list, if size is < 0 return None
     """
+    return [[1 if i == j else 0 for j in range(size)] for i in range(size)] if size >= 0 else None

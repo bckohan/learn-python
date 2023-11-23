@@ -28,3 +28,16 @@ def list_intersection(list1, list2):
     :param list2: list - the second list
     :return: the elements that are in both lists
     """
+    intersection = []
+    for x in list1:
+        if x in list2:
+            intersection.append(x)
+    for x in list2:
+        if x in list1:
+            intersection.append(x)
+    return intersection
+
+    # return [
+    #     *[x for x in list1 if x in list2],
+    #     *[x for x in list2 if x in list1]
+    # ]

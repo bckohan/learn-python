@@ -12,3 +12,10 @@
     * Recall - what type is args? what type is kwargs? how do you expand those
         types into function arguments?
 """
+
+
+def time_function(function, *args, **kwargs):
+    from time import perf_counter
+    start = perf_counter()
+    ret = function(*args, **kwargs)
+    return perf_counter() - start, ret

@@ -37,3 +37,4 @@ def xy_values(pdf, start, stop, step=1e-2):
     :return: list of tuples: - the (x, y) values of the distribution
 
     """
+    return [(x, pdf(x)) for x in float_range(start, stop, step)]

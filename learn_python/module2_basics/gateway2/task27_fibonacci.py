@@ -15,3 +15,7 @@ def fibonacci(length):
     :param length: int - the number of fibonacci numbers to return
     :return: the first fibonacci numbers
     """
+    fib = [0, 1]
+    while len(fib) < length:
+        fib.append(fib[-1] + fib[-2])
+    return fib[:length]

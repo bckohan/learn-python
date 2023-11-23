@@ -8,3 +8,8 @@
 .. hint::
     You will need to use the built-in function `len() <https://docs.python.org/3/library/functions.html#len>`_
 """
+
+def get_element(vector, index):
+    if abs(index + (1 if index > 0 else 0)) <= len(vector):
+        return vector[index]
+    return None

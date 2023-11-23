@@ -34,3 +34,16 @@ def identity_matrix(size):
     :return: the identity matrix of dimensions size x size
         if size is 0, return an empty list, if size is < 0 return None
     """
+    matrix = []
+    for i in range(size):
+        row = []
+        for j in range(size):
+            if i == j:
+                row.append(1)
+            else:
+                row.append(0)
+        matrix.append(row)
+    
+    if size < 0:
+        return None
+    return matrix

@@ -22,3 +22,9 @@ def fibonacci_gr(golden_ratio_tol):
         abs(golden_ratio_tol) of the GOLDEN_RATIO (1.61803398875...)
     :return: a list containing the fibonacci sequence
     """
+    fib = [0, 1]
+    while True:
+        fib.append(fib[-1] + fib[-2])
+        if abs(fib[-1] / fib[-2] - GOLDEN_RATIO) < abs(golden_ratio_tol):
+            break
+    return fib

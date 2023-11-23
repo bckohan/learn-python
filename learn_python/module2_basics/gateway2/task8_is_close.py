@@ -12,3 +12,5 @@
 .. hint::
     Checkout the python built-in function `abs() <https://docs.python.org/3/library/functions.html#abs>`_
 """
+def is_close(x, y, tol=1e-9):
+    return abs(x - y) < abs(tol)

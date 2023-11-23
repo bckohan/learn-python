@@ -17,3 +17,19 @@ def is_identity(matrix):
     :return: True if matrix is an identity matrix, False otherwise if matrix is None 
         or an empty list, return False
     """
+    if not matrix:
+        return False
+    size = len(matrix)
+    for row_idx, row in enumerate(matrix):
+        if not isinstance(row, (tuple, list)):
+            return False
+        if len(row) != size:
+            return False
+        for col_idx, value in enumerate(row):
+            if row_idx == col_idx:
+                if value != 1:
+                    return False
+            elif value != 0:
+                return False
+    return True
+

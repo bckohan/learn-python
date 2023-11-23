@@ -27,3 +27,10 @@ def approximate_integral(curve):
     :param curve: list - a list of 2-tuple xy-values representing a curve
     :return: float - the area under the curve as computed by simpson's rule
     """
+    assert len(curve), 'The curve must not be empty!'
+    return (curve[-1][0] - curve[0][0]) / (3*len(curve)) * (
+        curve[0][1] + 
+        curve[-1][1] + 
+        4 * sum([xy[1] for xy in curve[1:-1:2]]) +
+        2 * sum([xy[1] for xy in curve[2:-1:2]])
+    )

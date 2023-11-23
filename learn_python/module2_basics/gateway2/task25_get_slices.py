@@ -16,3 +16,10 @@
 
     Use a for loop and the += list operator.
 """
+
+
+def get_slices(vector, slices):
+    all_slices = []
+    for slice in slices:
+        all_slices += vector[slice[0]:slice[1]]
+    return all_slices

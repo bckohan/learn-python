@@ -21,3 +21,10 @@
         assert mutated is my_list
     
 """
+
+
+def add_to_list(list1, *elements, mutate=False):
+    if mutate:
+        list1.extend(elements)
+        return list1
+    return list1 + list(elements)

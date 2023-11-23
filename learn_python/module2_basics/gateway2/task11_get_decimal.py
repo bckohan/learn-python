@@ -21,3 +21,10 @@
 .. hint::
     Use type coercion.
 """
+
+
+def get_decimal(x):
+    return float(x) - int(x)
+
+
+# do tasks 10-11 now

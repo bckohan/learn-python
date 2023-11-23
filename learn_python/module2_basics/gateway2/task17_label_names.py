@@ -31,3 +31,11 @@ def label_names(first=None, middle=None, last=None):
     :param last: str - the last name, or None
     :return str: - the first, middle and last names labeled if they are not None
     """
+    labels = []
+    if first:
+        labels.append(f'first={first}')
+    if middle:
+        labels.append(f'middle={middle}')
+    if last:
+        labels.append(f'last={last}')
+    return ', '.join(labels)

@@ -28,3 +28,5 @@ def ends_with(string, search):
     :param search: str - the string to search for on the end of the given string
     :return bool: - True if the string ends with the given search string, False otherwise
     """
+    search = search.lower().rstrip()
+    return string.lower().rstrip()[-len(search):] == search

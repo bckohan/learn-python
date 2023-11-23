@@ -5,3 +5,11 @@
     if both arguments are integers and regular division otherwise.
     If the second argument is zero, return None.
 """
+
+
+def type_divide(x, y):
+    if y == 0:
+        return None
+    if type(x) is int and type(y) is int:
+        return x // y
+    return x / y

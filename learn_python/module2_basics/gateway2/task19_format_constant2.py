@@ -47,3 +47,4 @@ def format_constant2(constant_name=None, constant_value=None, line_length=15, de
         if necessary. If 0, do not include the .
     :return str: - the formatted constant string
     """
+    return f'{constant_name}{constant_value:>{line_length-len(constant_name)}.{decimals}f}'

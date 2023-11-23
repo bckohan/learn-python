@@ -97,3 +97,66 @@ def ranked_choice(candidates, ballots):
                 'winner': 'Candidate Name'  # the name of the winning candidate
             }
     """
+    report = {
+        'rounds': [],
+        'winner': None
+    }
+    name_to_id = {name: id for id, name in candidates.items()}
+
+    def determine_ranking(round):
+        """
+        Determine the ranking of candidates for the given round of voting.
+        """
+        candidate_votes = {id: 0 for id in candidates.keys()}
+        for ballot in round:
+            candidate_votes[ballot[0]] += 1
+        
+        return [
+            (candidates[candidate], votes)
+            for candidate, votes in sorted(
+                candidate_votes.items(),
+                key=lambda candidate: candidate[1],
+                reverse=True
+            )
+            if votes > 0
+        ]
+    
+    def eliminate_candidate(round, eliminated_candidate):
+        """
+        Eliminate the given candidate from the given round of voting. Spent (empty) ballots
+        will also be discarded.
+        """
+        return [
+            ballot for ballot in [
+                [
+                    candidate
+                    for candidate in ballot
+                    if candidate != eliminated_candidate
+                ]
+                for ballot in round
+            ] if ballot
+        ]
+
+    rounds = [ballots]
+    
+    report['rounds'].append({
+        'votes': len(ballots),
+        'ranking': determine_ranking(ballots)
+    })
+
+    while report['rounds'][-1]['ranking'][0][1] / report['rounds'][-1]['votes'] < 0.5:
+        rounds.append(
+            eliminate_candidate(
+                # the previous rounds ballots
+                rounds[-1],
+                # the last place candidate id from the last round
+                name_to_id[report['rounds'][-1]['ranking'][-1][0]]
+            )
+        )
+        report['rounds'].append({
+            'votes': len(rounds[-1]),
+            'ranking': determine_ranking(rounds[-1]),
+        })
+
+    report['winner'] = report['rounds'][-1]['ranking'][0][0]
+    return report

@@ -20,3 +20,4 @@ def list_difference(list1, list2):
     :return: a list containing the elements that are in the first list 
         but not the second
     """
+    return list(set(list1) - set(list2))

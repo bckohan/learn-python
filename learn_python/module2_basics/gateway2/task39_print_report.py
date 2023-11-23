@@ -45,3 +45,15 @@ def print_report(report):
 
     :param report: dict - the report dictionary returned by ranked_choice
     """
+
+    # we can assume the first round has all candidates and the most votes
+    max_name_length = max(len(candidate[0]) for candidate in report['rounds'][0]['ranking'])
+    max_votes = len(str(report['rounds'][0]['votes']))
+    for number, round in enumerate(report['rounds']):
+        print('-' * 32)
+        if number == len(report['rounds']) - 1:
+            print(f'Round {number} (Winner: {report["winner"]})')
+        else:
+            print(f'Round {number}')
+        for candidate, votes in round['ranking']:
+            print(f'  {candidate:>{max_name_length}}: {votes:>{max_votes}} ({votes/round["votes"]:.2%})')

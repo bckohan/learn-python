@@ -48,3 +48,6 @@ def format_constant(constant_name=None, constant_value=None, line_length=15, dec
         if necessary. If 0, do not include the .
     :return str: - the formatted constant string
     """
+    value_str = str(round(get_decimal(constant_value), ndigits=decimals))[2:decimals + 2] if decimals else ''
+    value_str = f'{int(constant_value)}{"." if decimals else ""}{value_str}{"0" * (decimals - len(value_str))}'
+    return f'{constant_name}{" " * (line_length - len(constant_name) - len(value_str))}{value_str}'

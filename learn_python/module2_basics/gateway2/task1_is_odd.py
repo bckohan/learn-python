@@ -18,3 +18,9 @@
     can reuse.
 
 """
+from .task0_is_even import is_even
+
+
+def is_odd(x):
+    return not is_even(x)
+    #return x % 2 == 1

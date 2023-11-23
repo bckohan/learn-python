@@ -37,3 +37,6 @@ def normal_distribution(x, σ=1, μ=0):
     :param μ: float - the mean of the normal distribution (x = μ is the peak 
         of the distribution), default: 0
     """
+    from math import pi, sqrt, exp
+    return 1 / (σ * sqrt(2 * pi)) * exp(-0.5 * ((x - μ) / σ) ** 2)
+

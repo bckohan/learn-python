@@ -6,3 +6,5 @@
     if the argument passed in was equal to the default value and False
     otherwise.
 """
+def default_args(w=0, x=1.0, y='2', z=None):
+    return w == 0, x == 1.0, y == '2', z is None
