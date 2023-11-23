@@ -17,8 +17,3 @@ def separate(list_of_2_tuples):
 
     :param list_of_2_tuples: list of tuples - the list of 2-tuples to expand
     """
-    x, y = [], []
-    for tpl in list_of_2_tuples:
-        x.append(tpl[0])
-        y.append(tpl[1])
-    return x, y

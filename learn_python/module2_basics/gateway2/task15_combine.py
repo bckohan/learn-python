@@ -24,4 +24,3 @@ def combine(list1, list2):
     :param list2: list - the second list
     :return list of tuples: - the combined list of tuples
     """
-    return list(zip(list1, list2))

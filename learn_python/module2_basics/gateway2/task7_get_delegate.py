@@ -16,9 +16,3 @@ For example:
     assert get_delegate(five)() == 5
 
 """
-def get_delegate(delegate):
-    if delegate is None:
-        def default_delegate():
-            return 0
-        return default_delegate
-    return delegate
