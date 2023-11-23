@@ -17,7 +17,7 @@
       the test is failing on the number of statements check, and then see if you can collapse some
       of your statements into a smaller number of lines using f-strings.
 """
-
+from learn_python.module2_basics.gateway2.task11_get_decimal import get_decimal
 
 def format_constant(constant_name=None, constant_value=None, line_length=15, decimals=4):
     """
