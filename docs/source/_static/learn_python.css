@@ -73,11 +73,6 @@ li.skipped > a::before {
     content: "\f12e";
     font-family: FontAwesome;
     margin-right: 5px;
-    color: whitesmoke;
-}
-li.module.skipped.current > a::before,
-li.module.skipped > a.current::before {
-    color: #404040;
 }
 
 div.toctree-wrapper.compound li.gateway > a {
