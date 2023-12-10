@@ -718,6 +718,10 @@ def build(
         DETACHED_DEFAULT,
         '--detached',
         help='Generate the docs with no references to the local filesystem.'
+    ),
+    open: bool = typer.Option(
+        True,
+        help='Open the built documentation in a browser.'
     )
 ):
     """Build the documentation - this will always clean it first."""
@@ -733,6 +737,10 @@ def build(
     print(DOC_BLD_DIR / 'html')
     from learn_python.register import do_report
     do_report()
+    if open:
+        import webbrowser
+        webbrowser.open_new_tab(f"file:///{Path(DOC_BLD_DIR) / 'html' / 'index.html'}")
+
 
 @app.command()
 def structure():

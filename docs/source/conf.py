@@ -1,3 +1,6 @@
+from sphinx.util.docutils import SphinxDirective
+from docutils import nodes
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -25,6 +28,8 @@ exclude_patterns = []
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+html_favicon = 'favicon.ico'
+#html_logo = 'logo.svg'
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -53,3 +58,14 @@ html_static_path = ['_static']
 
 todo_include_todos = True
 source_encoding = 'utf-8-sig'
+
+
+def setup(app):
+    app.add_role('email', email_role)
+
+def email_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+
+    import ipdb
+    ipdb.set_trace()
+    node = nodes.reference(rawtext, text, refuri='mailto:' + text, **options)
+    return [node], []
