@@ -190,7 +190,3 @@ To run Delphi:
         poetry run delphi
 
 """
-
-
-def run():
-    from learn_python.module2_basics.lesson import part16_unpacking

@@ -72,13 +72,13 @@ Do not worry, to get started with Python you will not need to become a terminal 
   Different shells can have slightly different ways of expressing the same intentions (i.e. how the output of one command might be fed into another) but the names of the commands are the same because 
   commands are executable programs that are independent of the shell. Z-shell, which is very similar to Bash, is now the default on OSX platforms and all command line examples in this course will be written 
   for Z-shell. You can think of shells as minimally functional programming languages. They have their own syntax and semantics and they are used to write scripts that run on your computer. The difference is that
-  shells are designed to be used interactively and to run commands rather than to be used to write full featured programs. `Read more here. <https://en.wikipedia.org/wiki/Shell_(computing)>`_
+  shells are designed to be used interactively and to run commands rather than to be used to write full featured programs. `Read more about shells. <https://en.wikipedia.org/wiki/Shell_(computing)>`_
 * **terminal** - the program that runs a shell and provides the textual interface window. The term terminal comes from the
   middle-early days of computing when graphical interfaces did not yet exist and the only way to interact with a computer was textual via a physical device called a terminal. The terminal 
-  program is the modern equivalent of that device that runs as a program within a graphical environment. `Read more here. <https://en.wikipedia.org/wiki/Computer_terminal#Text_terminals>`_
+  program is the modern equivalent of that device that runs as a program within a graphical environment. `Read more about terminals. <https://en.wikipedia.org/wiki/Computer_terminal#Text_terminals>`_
 * **POSIX** - a set of standards that promote compatibility between operating systems. The standards include a set of core commands; therefore POSIX compliant operating 
   systems have textual interfaces that are similar enough to bounce between them and feel at home. OSX is POSIX compliant, and so is Linux, which is why many programmers prefer Mac computers. Windows is 
-  not POSIX compliant. This means that installing the dependencies for this course will be quite different on Windows and OSX. `Read more here. <https://en.wikipedia.org/wiki/POSIX>`_
+  not POSIX compliant. This means that installing the dependencies for this course will be quite different on Windows and OSX. `Read more about POSIX. <https://en.wikipedia.org/wiki/POSIX>`_
 
 Only POSIX commands are documented as part of this course. If you are taking the course on a Windows computer I recommend you install and use a POSIX compliant terminal emulator such as 
 `Git Bash <https://gitforwindows.org/>`_.
@@ -120,29 +120,26 @@ Special Characters
 Nearly all shells respect the following special characters, which can be thought of as shorthand aliases:
 
 .. list-table::
-   :widths: 20 80
+   :widths: 5 80
    :header-rows: 1
 
    * - Symbol
      - Description
-   * - ``.``
+   * - **.**
      - The current working directory
-   * - ``..``
+   * - **..**
      - The parent directory - i.e., one directory up the filesystem hierarchy from the current directory. 
        For example, if your cwd is ``/Users/bckohan`` and you run ``ls ..``, you will see the contents of ``/Users``.
-   * - ``~``
+   * - **~**
      - Your home directory. All operating systems have a concept of a home directory. This is the directory 
        that your user account is associated with and where your personal files are stored. On OSX, this is 
        usually ``/Users/<your username>``. Your cwd when the terminal starts is usually your home directory.
-   * - ``*``
+   * - **\***
      - A wildcard that matches any number of characters. For example, ``*.py`` will match all files that end in ``.py``.
-   * - ``$``
-     - The value of an environment variable. Environment variables are discussed below.
-   * - ``#``
-     - A comment. Everything after this character on a line is ignored by the shell. Comments are not for interactive shell use, but are handy when you
-       combine a bunch of commands into a shell executable file (.sh) files. Comments are useful for documenting your code and for temporarily 
-       disabling lines of code without deleting them.
-   * - ``\``
+   * - **$**
+     - Prefix of environment variables. When the dollar sign appears before a word the shell tries to substitute the value contained in the environment
+       variable of the same name.The value of an environment variable. Environment variables are discussed below.
+   * - **\\**
      - An escape character. If you want to use a special character literally, you can escape it with a backslash. For example, if you want to create a 
        file called ``*.py`` you can do so with ``touch \*.py``.
    
@@ -156,7 +153,7 @@ and options are provided to a command by typing them after the command name sepa
 
 .. code-block:: console
 
-   ?> <command name> <options> <arguments>
+   ?> command_name [options] [arguments]
 
 Options are usually named, and can be specified with a shorthand single dash ``-`` and single character or a double dash ``--`` and a longer form name. Sometimes options take an argument 
 (e.g. ``-o <argument>`` or ``--option <argument>``) and other times they do not (e.g. ``-o`` or ``--option``). When they do not they function as on/off toggles for certain behavior and are sometimes 
@@ -169,9 +166,8 @@ For example, to run the command ``ls`` (list) with the option ``-l`` (print each
 Documents directory as the first positional argument you would type:
 
 .. code-block:: console
-   
+
    ?> ls -l ~/Documents
- 
 
 .. warning::
 
@@ -197,7 +193,7 @@ In Z-shell environment variables are set using the export command:
 
 .. code-block:: console
 
-   ?> export <variable name>=<value>
+   ?> export VARIABLE_NAME=value
 
 System PATH
 ~~~~~~~~~~~
@@ -253,17 +249,46 @@ Most commands will have a standard help option that will print some instructions
 
 .. code-block:: console
 
-   ?> grep --help
+   (delay=250)?> grep --help
+   usage: grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C[num]]
+	        [-e pattern] [-f file] [--binary-files=value] [--color=when]
+	        [--context[=num]] [--directories=action] [--label] [--line-buffered]
+	        [--null] [pattern] [file ...]
+   ?> 
 
 On POSIX operating systems more robust documentation is usually available from the manual pages utility. Try:
 
 .. code-block:: console
 
-   ?> man grep
-
+   (delay=250)?> man grep
+   GREP(1)                     General Commands Manual                    GREP(1)
+   
+   NAME
+      grep, egrep, fgrep, rgrep, bzgrep, bzegrep, bzfgrep, zgrep, zegrep,
+      zfgrep – file pattern searcher
+   
+   SYNOPSIS
+      grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C num]
+            [-e pattern] [-f file] [--binary-files=value] [--color[=when]]
+            [--colour[=when]] [--context=num] [--label] [--line-buffered]
+            [--null] [pattern] [file ...]
+   
+   DESCRIPTION
+      The grep utility searches any given input files, selecting lines that
+      match one or more patterns.  By default, a pattern matches an input line
+      if the regular expression (RE) in the pattern matches the input line
+      without its trailing newline.  An empty expression matches every line.
+      Each input line that matches at least one of the patterns is written to
+      the standard output.
+   
+      grep is used for simple patterns and basic regular expressions (BREs);
+      egrep can handle extended regular expressions (EREs).  See re_format(7)
+      for more information on regular expressions.  fgrep is quicker than both
+   :
+   ?> 
 
 Version Control (git_)
----------------------
+----------------------
 
 The directories that contain the code and other files that comprise a software program are often referred to as code bases.
 Code bases are large collections of code (text files) and sometimes media files (images, etc). Version Control Software (VCS) 
@@ -345,6 +370,10 @@ Some additional repository hosting services are listed in the table below:
 Python Installation (PyEnv_)
 ----------------------------
 
+.. todo::
+
+   Needs video
+
 Python_ is just another software package which means it grows and changes over time and there are always subsequent versions that
 will have different features and capabilities. Sometimes code written for one version of Python will not work in follow on versions.
 Famously, there were breaking changes in the interpreter from the Python_ 2.x series to the 3.x series that required many developers
@@ -377,11 +406,12 @@ The stdlib_ is extensively documented.
    :align: center
    :url_parameters: ?start=667&end=815
 
+|
 
 .. _packages:
 
 Python Package Index (PyPI_)
----------------------------
+----------------------------
 
 Beyond the standard library - Python_'s popularity is due in large part to the fact that it has a huge ecosystem of 
 third party packages that are available for free. These packages are hosted on the Python Package Index (PyPI_) and
@@ -395,6 +425,7 @@ are terrible and some are even malware, so you do need to be discerning about wh
    :align: center
    :url_parameters: ?start=815&end=985
 
+|
 
 .. _venv:
 
@@ -468,7 +499,7 @@ Here are some other popular Python_ build tools:
 
 
 Testing (pytest_)
-----------------
+-----------------
 
 Testing is a critical part of software development. When you build large programs it will be hard to hold the entirety of the program in your head at any
 given time. This means it is difficult to make changes to the program and be confident you did not break any execution paths. This is where automated testing
@@ -574,6 +605,7 @@ completed the core modules. This will avoid the temptation to use the AI as a cr
    :align: center
    :url_parameters: ?start=2267&end=2435
 
+|
 
 .. _install:
 
@@ -597,7 +629,7 @@ by other mechanisms. If you'd rather not use Homebrew, refer to each tools docum
 To install Homebrew open a terminal and run:
 
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -607,14 +639,14 @@ git
 
 git_ can be installed directly using a dmg file from the `git website <https://git-scm.com/downloads>`_ or via homebrew:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> xcode-select --install
    ?> brew install git
 
 Verify that git is installed by running:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> git --version
 
@@ -632,7 +664,7 @@ pyenv_ can be installed via homebrew. Afterwards we need to setup our shell to u
 necessary lines of code to our shell configuration file which set up environment variables that pyenv_ depends on. The 
 following commands work for Z shell which is the default shell on OSX.
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> brew install pyenv
    ?> echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
@@ -641,13 +673,13 @@ following commands work for Z shell which is the default shell on OSX.
 
 Verify that pyenv is installed by running:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> pyenv --version
 
 Install the most recent stable python version. You can list the python versions available to install with:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> pyenv install --list
 
@@ -655,14 +687,14 @@ As you can see there are a lot. There are many different versions of Python pack
 and environments but we are interested in the mainline "vanilla" builds. These will be simply listed as "3.11.4" or "3.10.0".
 Determine whatever the most recent stable sub-version is and install it with:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> pyenv install 3.xx:latest
    ?> pyenv global 3.xx.xx
 
 Verify that the expected version of python is installed by running:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> python --version
 
@@ -671,13 +703,13 @@ Poetry
 
 Poetry_ can be installed via its standalone installer script:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> curl -sSL https://install.python-poetry.org | python3 -
 
 Verify that poetry is installed by running:
 
-.. code-block:: bash
+.. code-block:: console
 
    ?> poetry --version
 
@@ -685,7 +717,7 @@ Verify that poetry is installed by running:
 VSCode
 ------
 
-VSCode_ can be installed directly via its `packages <https://code.visualstudio.com/download>`_
+VSCode_ can be `installed directly <https://code.visualstudio.com/download>`_
 
 VSCode_ requires plugins to add the functionality we need to develop Python code, the course requires the following extension:
 
@@ -707,12 +739,41 @@ something for you that it doesn't, chances are other people have thought the sam
 Fork & Clone the Course
 =======================
 
-The course repository is located `here <https://github.com/bckohan/learn-python>`_.
+The course repository is located `here <https://github.com/bckohan/learn-python>`_. The video below will take you
+through forking and cloning the course repository. You will need a GitHub_ account to do this. If you do not have one
+go make one now. You will need it for the rest of the course.
 
 ..  youtube:: EI1qbU32e5w
    :width: 50%
    :align: center
    :url_parameters: ?start=2437
+
+|
+
+After you've forked and cloned the course repository and you have all the tools above installed you should be ready to go! You should now be able to
+build this documentation that you are reading right now yourself! As you complete gateway assignments you should rebuild the docs - they will be updated to
+track your progress through the course! First make sure you've run poetry's install command to create the project's local virtual environment and install all
+of the course dependencies - then build the docs by running the course's doc command:
+
+.. code-block:: console
+
+   ?> poetry install
+   ?> poetry run doc build
+
+Remember, that `poetry run` means run the command that follows within the virtual environment that poetry installed. See what else the doc command can do 
+by running:
+
+.. code-block:: console
+
+   ?> poetry run doc --help
+   ?> poetry run doc build --help
+
+
+Once you've built the documentation, if you are taking this course as part of a directed class be sure to register! Do that by running the register command:
+
+.. code-block:: console
+
+   ?> poetry run register
 
 
 :code-ref:`Gateway 1 <learn_python/module1/gateway1.py>`
@@ -726,7 +787,7 @@ The course repository is located `here <https://github.com/bckohan/learn-python>
    (import learn_python.module1.gateway1) three lines should be printed to the terminal “print 1” 
    “print 2” and “print 3”:
 
-.. code-block:: bash
+.. code-block:: console
 
    > learn-python % poetry run ipython
    Python 3.11.4 (main, Jul 11 2023, 14:04:39) [Clang 14.0.0 (clang-1400.0.29.202)]
@@ -745,7 +806,7 @@ Testing
 Were going to use pytest to test your gateway exercises! To test your implementation of part 1, 
 in the learn-python root directory run:
 
-.. code-block:: bash
+.. code-block:: console
 
    poetry run pytest -k test_gateway1_part1
 

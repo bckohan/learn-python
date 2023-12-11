@@ -49,23 +49,14 @@ html_theme = "sphinx_rtd_theme"
 
 html_css_files = [
     'learn_python.css',
+    'termynal.css',
 ]
 html_js_files = [
-    'learn_python.js'
+    'learn_python.js',
+    'termynal.js',
 ]
 
 html_static_path = ['_static']
 
 todo_include_todos = True
 source_encoding = 'utf-8-sig'
-
-
-def setup(app):
-    app.add_role('email', email_role)
-
-def email_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-
-    import ipdb
-    ipdb.set_trace()
-    node = nodes.reference(rawtext, text, refuri='mailto:' + text, **options)
-    return [node], []
