@@ -62,6 +62,10 @@ Different flavors of Linux use different package managers. The most common are `
 and `yum <https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified>`_. These package managers are bundled with the operating system
 and you do not need to install them. Most of the tools we will be using can be installed with these package managers.
 
+.. todo::
+
+  Flush this out.
+
 Mac OSX
 -------
 
