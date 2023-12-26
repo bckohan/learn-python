@@ -342,6 +342,9 @@ def register(
         help='Timeout for the register request in seconds.'
     )
 ):
+    """
+    Register for a guided course!
+    """
     if Config().register(reset=reset, timeout=timeout):
         typer.echo(colored('Your course is now registered!', 'green'))
         if Config().enrollment is not None:
@@ -415,3 +418,8 @@ def do_report(keep=False, no_active=False):
                 )
     except Exception:
         lp_logger.exception('Unable to report logs to course server.')
+
+
+# these are needed for the docs, figure out if @main decorator is actually necessary
+(register_app := typer.Typer(add_completion=False)).command()(register.__closure__[-1].cell_contents)
+(report_app := typer.Typer(add_completion=False)).command()(report.__closure__[-1].cell_contents)

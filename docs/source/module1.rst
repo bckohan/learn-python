@@ -6,6 +6,11 @@
 Module 1: Tools
 ===============
 
+.. image:: ./img/PythonHoldingWrench.png
+   :alt: Learn Python!
+   :width: 40%
+   :align: right
+
 All you need to code and run Python is Python installed on your system and a text editor. However, 
 there are lots of petty annoyances involved with writing, running, documenting, distributing, and 
 maintaining Python code. Many tools exist to alleviate these burdens. This module will introduce 
@@ -27,12 +32,65 @@ this course is doing for us and we will have them installed and ready to serve. 
 clone the course repository and complete our first programming assignment! The keynote presentation 
 covered in the video below can be downloaded :download:`here <../../learn_python/module1/resources/Module1.key>`.
 
-|
+.. note::
 
-..  youtube:: EI1qbU32e5w
-   :width: 50%
-   :align: center
-   :url_parameters: ?start=1&end=107
+   The point here is not to invest a lot of time in becoming an expert in any given tool, but to understand
+   the broad classes of problems tools exist to solve for us and to recognize that many tools beyond the
+   ones we use in this course exist. The goal is to know when you're using a tool in this course and what
+   it is doing for you - this should help you be comfortable integrating new tools into your workflow in
+   the future.
+
+Platforms
+=========
+
+**Please proceed in order through the following sections, if a tool has an install section you will need
+to install it to proceed further with the course!** 
+
+Installing software onto a computer is simply the process of putting files in the right place - and in some cases 
+letting the operating system know that the program exists. The files that make up a program consist of executable 
+code, configuration files, documentation and media resources. Most operating systems have a standard way of 
+organizing these files but there are usually multiple ways to install a program and other programs that will help 
+you do so. If you run into errors installing any of the dependencies please refer directly to the tool documentation!
+
+This course is platform-agnostic. That means it should be possible to complete the course on any common operating system.
+That said, there are some platform specific considerations:
+
+Linux
+-----
+
+Different flavors of Linux use different package managers. The most common are `apt <https://en.wikipedia.org/wiki/APT_(software)>`_
+and `yum <https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified>`_. These package managers are bundled with the operating system
+and you do not need to install them. Most of the tools we will be using can be installed with these package managers.
+
+Mac OSX
+-------
+
+Mac users should install the `Xcode application from the app store <https://apps.apple.com/us/app/xcode>`_. 
+A number of compilers are bundled with it that may be required to install some of the tools we will be using. Once you have
+installed Xcode_ open the Terminal_ application and run the following command, to install the Xcode_ command line tools:
+
+.. code-block:: console
+
+   ?> xcode-select --install
+
+Package Managers
+~~~~~~~~~~~~~~~~
+
+A number of Linux-like package managers exist for OSX. The most common is Homebrew_ and many of the tools we use can be installed using
+from Homebrew_ packages. I recommend trying to install the tools we need without it first, but if you run into significant problems 
+Homebrew_ is another option.
+
+Microsoft Windows
+-----------------
+
+**Windows users will need to install a bash-compatible command line interpreter to follow the command line examples in this course**
+
+The best way to do this is to install the `Windows Subsystem for Linux <https://learn.microsoft.com/en-us/windows/wsl/install>`_
+
+
+.. todo::
+
+   More significant hand holding is required here.
 
 
 .. _tools:
@@ -46,6 +104,13 @@ different tomorrow. Its important to not get bogged down in the minutia of each 
 it to do the immediate thing you need it to do. Expertise will come with use and picking up new tools quickly is
 a valuable skill.
 
+..  youtube:: EI1qbU32e5w
+   :width: 50%
+   :align: center
+   :url_parameters: ?start=1&end=107
+
+|
+
 .. _console:
 
 Terminal
@@ -54,7 +119,8 @@ Terminal
 You are probably reading these words in a web browser window. A web browser is a program with a graphical interface. Graphical
 interfaces give us visual cues about what they are doing and what they are capable of. Creating a graphical interface requires lots of work
 and for simple programs that extra work is prohibitive and often unnecessary. That means, for this course we will have to become
-familiar with the other main mode of human/machine interface - the textual interface, aka the command line, aka console, aka terminal.
+familiar with the other main mode of human/machine interface - the textual interface - often referred to as the command line or 
+the console or the terminal.
 
 In textual interfaces, we tell the computer what to do by typing text commands into a terminal window and the computer tells us what it is
 doing by printing text back to us. Textual interfaces can also tell us what they are capable of - but they are limited to text documentation 
@@ -70,8 +136,8 @@ Do not worry, to get started with Python you will not need to become a terminal 
 * **path** - the location of a file or a directory on the filesystem. Paths are expressed as a series of directories separated by slashes and optionally ending with a filename. (e.g. /Users/bckohan/.zshrc)
 * **shell** - the program that executes the commands you type. There are many different shells but the most common are Bash and Bash derivatives.
   Different shells can have slightly different ways of expressing the same intentions (i.e. how the output of one command might be fed into another) but the names of the commands are the same because 
-  commands are executable programs that are independent of the shell. Z-shell, which is very similar to Bash, is now the default on OSX platforms and all command line examples in this course will be written 
-  for Z-shell. You can think of shells as minimally functional programming languages. They have their own syntax and semantics and they are used to write scripts that run on your computer. The difference is that
+  commands are executable programs that are independent of the shell. Z-shell (a bash derivative), is now the default on OSX platforms and all command line examples in this course will be tested on Z-shell.
+  You can think of shells as minimally functional programming languages. They have their own syntax and semantics and they are used to write scripts that run on your computer. The difference is that
   shells are designed to be used interactively and to run commands rather than to be used to write full featured programs. `Read more about shells. <https://en.wikipedia.org/wiki/Shell_(computing)>`_
 * **terminal** - the program that runs a shell and provides the textual interface window. The term terminal comes from the
   middle-early days of computing when graphical interfaces did not yet exist and the only way to interact with a computer was textual via a physical device called a terminal. The terminal 
@@ -80,13 +146,11 @@ Do not worry, to get started with Python you will not need to become a terminal 
   systems have textual interfaces that are similar enough to bounce between them and feel at home. OSX is POSIX compliant, and so is Linux, which is why many programmers prefer Mac computers. Windows is 
   not POSIX compliant. This means that installing the dependencies for this course will be quite different on Windows and OSX. `Read more about POSIX. <https://en.wikipedia.org/wiki/POSIX>`_
 
-Only POSIX commands are documented as part of this course. If you are taking the course on a Windows computer I recommend you install and use a POSIX compliant terminal emulator such as 
-`Git Bash <https://gitforwindows.org/>`_.
 
 Relative and Absolute Paths
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a path is proceeded by a slash it is an absolute path. E.g. ``/Users/bkohan/.zshrc``. This path always refers to the same file no matter where you are in the filesystem. Absolute paths start at the top level or ``root`` 
+If a path is preceded by a slash it is an absolute path. E.g. ``/Users/bkohan/.zshrc``. This path always refers to the same file no matter where you are in the filesystem. Absolute paths start at the top level or ``root`` 
 of the filesystem which is denoted by a ``/``. Sometimes however, *we can't know the absolute path to a file when we want to refer to it*. For example, if I want to direct you to the file you are reading right now, I 
 can't know where you have downloaded it to on your computer's file system. I can only know the relative path to it from the repository root. Relative paths are paths that do not start with a slash. For example, this 
 file, from the repository root, is at ``learn_python/module1/tools.rst``.
@@ -323,6 +387,18 @@ Some other common version control systems are listed in the table below:
    * - `CVS (Concurrent Versions System) <https://www.nongnu.org/cvs/>`_
      - An older version control system that is still used in some projects; it keeps track of all work and changes in a set of files.
 
+Install
+~~~~~~~
+
+git_ can be installed directly using the appropriate package for your operating system from the `git website <https://git-scm.com/downloads>`_.
+
+Verify that git is installed by running:
+
+.. code-block:: console
+
+   (delay=250)?> git --version
+   git version 2.42.1
+   ?>
 
 
 Repository Hosting (GitHub)
@@ -367,7 +443,7 @@ Some additional repository hosting services are listed in the table below:
 
 .. _python_installation:
 
-Python Installation (PyEnv_)
+Python Installation (pyenv_)
 ----------------------------
 
 .. todo::
@@ -381,11 +457,68 @@ to invest significant effort to port their code to the new version. This is why 
 between more than one version of Python_ on your system at any given time. This makes Python_ a little different than most software packages
 where it is completely fine to just install the latest version and forget about it.
 
-PyEnv_ is an excellent tool for managing multiple versions of Python_ on your system. It is a command line tool that allows you to install
+pyenv_ is an excellent tool for managing multiple versions of Python_ on your system. It is a command line tool that allows you to install
 and switch between multiple versions of Python_ easily. It even allows you to mark a directory to use a specific version of Python_ whenever
 you run code in that directory.
 
-PyEnv_ is not strictly required for this course but if you plan on doing any Python_ development beyond this course I strongly recommend it.
+Install
+~~~~~~~
+
+.. note::
+
+   I strongly recommend pyenv_ but it is not necessary to take the course and if you do not think you will ever need more 
+   than one version of Python on your system you may always install python directly from the 
+   `python website <https://www.python.org/downloads/>`_. This also does not preclude installing pyenv_ later.
+
+pyenv_ can be installed via homebrew. Afterwards we need to setup our shell to use pyenv_. The echo commands will add the
+necessary lines of code to our shell configuration file which set up environment variables that pyenv_ depends on. The 
+following commands work for Z shell which is the default shell on OSX.
+
+.. code-block:: console
+
+   ?> brew install pyenv
+   ?> echo 'export pyenv_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+   ?> echo '[[ -d $pyenv_ROOT/bin ]] && export PATH="$pyenv_ROOT/bin:$PATH"' >> ~/.zshrc
+   ?> echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+
+Verify that pyenv is installed by running:
+
+.. code-block:: console
+
+   ?> pyenv --version
+
+Install the most recent stable python version. You can list the python versions available to 
+install with:
+
+.. code-block:: console
+
+   (delay=250)?> pyenv install --list | grep "^\s*3"
+   ...
+   3.11.4
+   3.11.5
+   3.11.6
+   3.12.0
+   ?>
+
+Try also running the above command without piping the output through grep. As you can see there 
+are a lot of installs to choose from. There are many different versions of Python packaged for 
+different kinds of systems and environments but we are interested in the mainline "vanilla" 
+builds. These will be simply listed as "3.11.4" or "3.10.0". Determine whatever the most recent
+stable sub-version is and install it with:
+
+.. code-block:: console
+
+   ?> pyenv install 3.xx:latest
+   ?> pyenv global 3.xx.xx
+   ?>
+
+Verify that the expected version of python is installed by running:
+
+.. code-block:: console
+
+   (delay=250)?> python --version
+   Python 3.xx.xx
+   ?>
 
 .. _standard_library:
 
@@ -497,6 +630,120 @@ Here are some other popular Python_ build tools:
      - A simple, correct PEP 517 build frontend, using `pyproject.toml` to build source archives and wheels. Focused on being a lightweight building tool with minimal dependencies.
 
 
+Install
+~~~~~~~
+
+Poetry_ can be installed via its standalone installer script:
+
+.. code-block:: console
+
+   ?> curl -sSL https://install.python-poetry.org | python3 -
+
+Verify that poetry is installed by running:
+
+.. code-block:: console
+
+   (delay=250)?> poetry --version
+   Poetry (version 1.7.0)
+   ?>
+
+
+Documentation (Sphinx_)
+-----------------------
+
+.. todo::
+
+   Needs video
+
+If you would like other human beings (or your future self!) to understand what your software does
+and how to use it, you need to write documentation. Software documentation primarily presents in
+three different modalities:
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Modality
+     - Description
+   * - README Files
+     - Brief overviews or introductions to the software, typically found in the root directory of 
+       source code repositories. They provide quick start guides, installation instructions, and
+       basic usage examples. When you look at a project on GitHub_ the splash page you see is the
+       README file rendered for the web.
+   * - Source Level
+     - Inline explanations within the source code itself, often used to explain the purpose and
+       logic of hard to understand blocks of code. We will see examples of source level 
+       documentation in module 2.
+   * - Standalone Documents
+     - Most standalone documents are built for the web, but PDFs are not uncommon. Standalone 
+       documents can be comprehensive and may include user or developer level guides and tutorials
+       or architectural descriptions and `API specifications (how other software uses your software) <https://en.wikipedia.org/wiki/API>`_.
+       Sometimes portions of standalone documents are generated from source level documentation -
+       this is especially common when documenting APIs.
+
+Source level documentation, with some exceptions, tends to be plain text - but READMEs and 
+standalone documents are usually written in a markup language. Markup languages are a way to write
+text that can be compiled into other formats. For example, you can write a README in a markup 
+language and then compile it into a web page or a PDF. 
+
+The documentation for this course - the words you are reading right now - is written in a markup
+language called reStructuredText_ and built using Sphinx_. Sphinx_ is a Python_ package used
+throughout the Python_ ecosystem to turn markup into compiled documentation for the web, PDFs
+or other formats. As you proceed through this course you will be running Sphinx_ (using the 
+course's own `doc` command) to build the documentation as you complete gateway assignments to
+track your progress!
+
+.. note::
+   
+   You will often encounter Python_ package documentation hosted on https://readthedocs.org
+   which is a free service that builds and hosts Sphinx_ documentation for open source 
+   projects.
+
+The tables below list the most relevant and markup languages and documentation build tools.
+
+.. list-table:: Markup Languages
+   :widths: 20 80
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - `reStructuredText`_
+     - A plain text markup language used primarily in the Python community. It's simple, readable,
+       and can be extended with custom directives and roles.
+   * - `Markdown`_
+     - A lightweight markup language with plain-text formatting syntax. It's designed for mostly
+       generating content for the web.
+   * - `AsciiDoc`_
+     - A human-readable document format, semantically equivalent to DocBook XML, but using 
+       plain-text mark-up conventions.
+
+.. list-table:: Documentation Build Tools
+   :widths: 20 80
+   :header-rows: 1
+
+   * - Name
+     - Description
+   * - `Sphinx`_
+     - A tool that makes it easy to create intelligent and beautiful documentation for Python
+       projects (or other documents consisting of multiple reStructuredText sources), initially
+       created for the Python documentation.
+   * - `MkDocs`_
+     - A fast, simple and downright gorgeous static site generator that's geared towards 
+       building project documentation with Markdown.
+   * - `Read the Docs`_
+     - A hosting service for Sphinx-generated documentation. It takes care of the automatic
+       building, versioning, and hosting of your docs for you.
+   * - `Doxygen`_
+     - A documentation generator, mainly used for documenting software written in C++ but also
+       has support for other popular programming languages including Python. Primarily, it is
+       used for auto-generating API documentation.
+   * - `Pandoc`_
+     - A "universal document converter" capable of converting files from a multitude of markup
+       formats into another. While not a direct documentation tool, it's often used in
+       documentation workflows.
+
+Writing documentation well is an entire subject area unto itself and is beyond the scope of this
+course. I highly recommend Daniele Procida's Diataxis_ framework for guidance.
 
 Testing (pytest_)
 -----------------
@@ -586,6 +833,26 @@ Some other popular IDEs for Python are:
      - A terminal based text editor. Has a rich feature set but with a high learning curve.
 
 
+Install
+~~~~~~~
+
+VSCode_ can be `installed directly <https://code.visualstudio.com/download>`_
+
+VSCode_ requires plugins to add the functionality we need to develop Python code, the course requires the following extension:
+
+* `Python extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_
+
+And these extensions are also nice to have:
+
+* `TOML <https://marketplace.visualstudio.com/items?itemName=be5invis.toml>`_
+* `HTML & CSS Support <https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css>`_
+* `Sphinx Ext <https://marketplace.visualstudio.com/items?itemName=leonhard-s.python-sphinx-highlight>`_
+* `RST Support <https://marketplace.visualstudio.com/items?itemName=trond-snekvik.simple-rst>`_
+* `SVG Viewer <https://marketplace.visualstudio.com/items?itemName=vitaliymaz.vscode-svg-previewer>`_
+
+There are many extensions available for VSCode_ and you may find others that you like. If you wish VSCode did
+something for you that it doesn't, chances are other people have thought the same thing and written an extension for it.
+
 .. _generative_ai:
 
 Generative AI
@@ -606,133 +873,6 @@ completed the core modules. This will avoid the temptation to use the AI as a cr
    :url_parameters: ?start=2267&end=2435
 
 |
-
-.. _install:
-
-Install Tools
-=============
-
-Four of the tools we covered need to be installed on your local laptop or desktop to run the course. Installing software
-onto a computer is simply the process of putting files in the right place - and in some cases letting the operating system
-know that the program exists. The files that make up a program consist of executable code, configuration files, documentation 
-and media resources. Most operating systems have a standard way of organizing these files but there are usually multiple ways 
-to install a program and other programs that will help you do so. If you run into errors installing any of the dependencies please 
-refer directly to the tool documentation or ask me!
-
-Mac OSX - Homebrew
-------------------
-
-For Mac users I recommend installing the `Homebrew package manager <https://brew.sh/>`_. Homebrew is a command line tool that 
-makes installing software packages and updates for programs with lots of interconnected dependencies easy. It will allow us to
-install more than one of the tools we need with a single command. Occasionally homebrew packages might conflict with software installed
-by other mechanisms. If you'd rather not use Homebrew, refer to each tools documentation for alternative installation instructions.
-To install Homebrew open a terminal and run:
-
-
-.. code-block:: console
-
-   ?> /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-
-git
----
-
-git_ can be installed directly using a dmg file from the `git website <https://git-scm.com/downloads>`_ or via homebrew:
-
-.. code-block:: console
-
-   ?> xcode-select --install
-   ?> brew install git
-
-Verify that git is installed by running:
-
-.. code-block:: console
-
-   ?> git --version
-
-pyenv
------
-
-.. note::
-
-   I strongly recommend pyenv_ but it is not necessary to take the course and if you do not think you will ever need more 
-   than one version of Python on your system you may always install python directly from the 
-   `python website <https://www.python.org/downloads/>`_ or via homebrew (brew install python). This also does not preclude
-   installing pyenv_ later.
-
-pyenv_ can be installed via homebrew. Afterwards we need to setup our shell to use pyenv_. The echo commands will add the
-necessary lines of code to our shell configuration file which set up environment variables that pyenv_ depends on. The 
-following commands work for Z shell which is the default shell on OSX.
-
-.. code-block:: console
-
-   ?> brew install pyenv
-   ?> echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-   ?> echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-   ?> echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-
-Verify that pyenv is installed by running:
-
-.. code-block:: console
-
-   ?> pyenv --version
-
-Install the most recent stable python version. You can list the python versions available to install with:
-
-.. code-block:: console
-
-   ?> pyenv install --list
-
-As you can see there are a lot. There are many different versions of Python packaged for different kinds of systems
-and environments but we are interested in the mainline "vanilla" builds. These will be simply listed as "3.11.4" or "3.10.0".
-Determine whatever the most recent stable sub-version is and install it with:
-
-.. code-block:: console
-
-   ?> pyenv install 3.xx:latest
-   ?> pyenv global 3.xx.xx
-
-Verify that the expected version of python is installed by running:
-
-.. code-block:: console
-
-   ?> python --version
-
-Poetry
-------
-
-Poetry_ can be installed via its standalone installer script:
-
-.. code-block:: console
-
-   ?> curl -sSL https://install.python-poetry.org | python3 -
-
-Verify that poetry is installed by running:
-
-.. code-block:: console
-
-   ?> poetry --version
-
-
-VSCode
-------
-
-VSCode_ can be `installed directly <https://code.visualstudio.com/download>`_
-
-VSCode_ requires plugins to add the functionality we need to develop Python code, the course requires the following extension:
-
-* `Python extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_
-
-And these are nice to have:
-
-* `TOML <https://marketplace.visualstudio.com/items?itemName=be5invis.toml>`_
-* `HTML & CSS Support <https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css>`_
-* `Sphinx <https://marketplace.visualstudio.com/items?itemName=leonhard-s.python-sphinx-highlight>`_
-* `RST Support <https://marketplace.visualstudio.com/items?itemName=trond-snekvik.simple-rst>`_
-* `SVG Viewer <https://marketplace.visualstudio.com/items?itemName=vitaliymaz.vscode-svg-previewer>`_
-
-There are many extensions available for VSCode_ and you may find others that you like. If you wish VSCode did
-something for you that it doesn't, chances are other people have thought the same thing and written an extension for it.
 
 .. gateway:
 

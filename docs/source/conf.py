@@ -40,7 +40,9 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinxcontrib.youtube',
     'sphinxcontrib.jquery',
-    'learn_python.doc'
+    'learn_python.doc',
+    'sphinx_click',
+    'sphinxcontrib.typer',
 ]
 
 master_doc = 'index'

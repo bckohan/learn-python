@@ -906,3 +906,6 @@ def delphi(
         logging.getLogger('testing').info('[STOP] tutor')
         lock_reporting(False)
         do_report()
+
+
+(delphi_app := typer.Typer(add_completion=False)).command()(delphi.__closure__[-1].cell_contents)

@@ -125,7 +125,7 @@ function createTermynals() {
             const termynal = new Termynal(div, {
                 lineData: useLines,
                 noInit: true,
-                startDelay: 300,
+                startDelay: 650,
                 typeDelay: 50,
                 lineDelay: 0
             });

@@ -8,7 +8,7 @@
     
     <a href="https://learn-python.demoply.org">course server</a>
 
-.. _course_repo: https://github.com/bckohan/learn-python
+.. _course repository: https://github.com/bckohan/learn-python
 
 .. _GitHub: https://github.com
 .. _GitLab: https://gitlab.com
@@ -19,3 +19,14 @@
 .. _pytest: https://docs.pytest.org
 .. _stdlib: https://docs.python.org/3/library
 .. _PyPI: https://pypi.org
+.. _Sphinx: https://www.sphinx-doc.org
+.. _reStructuredText: https://docutils.sourceforge.io/rst.html
+.. _Diataxis: https://diataxis.fr/
+.. _Xcode: https://apps.apple.com/us/app/xcode
+.. _Homebrew: https://brew.sh
+.. _Markdown: https://daringfireball.net/projects/markdown/
+.. _AsciiDoc: https://asciidoc.org/
+.. _MkDocs: https://www.mkdocs.org/
+.. _Read the Docs: https://readthedocs.org/
+.. _Doxygen: http://www.doxygen.nl/
+.. _Pandoc: https://pandoc.org/

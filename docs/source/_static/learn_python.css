@@ -95,3 +95,7 @@ section.error-output pre {
 .wy-table-responsive table td, .wy-table-responsive table th {
     white-space: inherit;
 }
+
+svg.rich-terminal {
+    margin-bottom: 30px;
+}

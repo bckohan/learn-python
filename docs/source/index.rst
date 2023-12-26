@@ -5,7 +5,7 @@
 Learn Python!
 =============
 
-.. image:: ./LearnPythonThumbnail.png
+.. image:: ./img/LearnPythonThumbnail.png
    :alt: Learn Python!
    :width: 40%
    :align: right
@@ -49,4 +49,14 @@ content.
    preamble
    module1
    module2
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Course Help:
+
+   help/overview.rst
+   help/course.rst
+   help/delphi.rst
+   help/commands.rst
 
