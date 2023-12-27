@@ -26,7 +26,7 @@ class Termynal {
 	 * @param {number} options.progressPercent - Max percent of progress.
      * @param {string} options.cursor – Character to use for cursor, defaults to ▋.
      * @param {Object[]} lineData - Dynamically loaded line data objects.
-     * @param {boolean} options.noInit - Don't initialise the animation.
+     * @param {boolean} options.noInit - Don't Initialize the animation.
      */
     constructor(container = '#termynal', options = {}) {
         this.container = (typeof container === 'string') ? document.querySelector(container) : container;
@@ -36,7 +36,7 @@ class Termynal {
         this.typeDelay = options.typeDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
         this.lineDelay = options.lineDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
+            || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1000;
         this.outputDelay = options.outputDelay
             || parseFloat(this.container.getAttribute(`${this.pfx}-outputDelay`)) || 250;
         this.progressLength = options.progressLength
@@ -52,7 +52,7 @@ class Termynal {
     }
 
     /**
-     * Initialise the widget, get lines, clear container and start animation.
+     * Initialize the widget, get lines, clear container and start animation.
      */
     init() {
         // Appends dynamically loaded lines to existing line elements.
@@ -78,25 +78,26 @@ class Termynal {
      */
     async start() {
         await this._wait(this.startDelay);
-
+        let first = true;
         for (let line of this.lines) {
             const type = line.getAttribute(this.pfx);
-            const delay = line.getAttribute(`${this.pfx}-delay`) || this.lineDelay;
+            const delay = first ? 0 : line.getAttribute(`${this.pfx}-delay`) || this.lineDelay;
+            if (first) first = false;
 
             if (type == 'input') {
                 line.setAttribute(`${this.pfx}-cursor`, this.cursor);
-                await this.type(line);
                 await this._wait(delay);
+                await this.type(line);
             }
 
             else if (type == 'progress') {
-                await this.progress(line);
                 await this._wait(delay);
+                await this.progress(line);
             }
 
             else {
-                this.container.appendChild(line);
                 await this._wait(delay);
+                this.container.appendChild(line);
             }
 
             line.removeAttribute(`${this.pfx}-cursor`);
@@ -194,7 +195,7 @@ class Termynal {
 }
 
 /**
-* HTML API: If current script has container(s) specified, initialise Termynal.
+* HTML API: If current script has container(s) specified, Initialize Termynal.
 */
 if (document.currentScript.hasAttribute('data-termynal-container')) {
     const containers = document.currentScript.getAttribute('data-termynal-container');

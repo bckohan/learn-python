@@ -43,3 +43,13 @@ sphinxcontrib-typer = "^0.1.3"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+# <--------- Tool Configurations --------->
+
+[tool.pytest.ini_options]
+python_files = [
+    "learn_python/tests/module1.py",
+    "learn_python/tests/module2.py",
+]
+norecursedirs = "*.egg .eggs dist build docs .tox .git __pycache__"

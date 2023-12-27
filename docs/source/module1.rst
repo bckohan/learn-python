@@ -11,56 +11,61 @@ Module 1: Tools
    :width: 40%
    :align: right
 
-All you need to code and run Python is Python installed on your system and a text editor. However, 
+All you need to code and run Python is Python installed on your system and a text editor. However,
 there are lots of petty annoyances involved with writing, running, documenting, distributing, and 
 maintaining Python code. Many tools exist to alleviate these burdens. This module will introduce 
 you to a professional cohort of tools we will be using throughout the course. It is important to
 invest some minimum effort in understanding the tools we use because:
 
-1. We, as programmers, do not need to be tool experts. A chef, generally does not know how a knife is
-   made. They exist to do work for us and ease our suffering. Even a cursory understanding of what 
-   exists and what it does for you will make your programming experience easier and more sustainable.
-   If a tool requires more than a cursory understanding of it to be useful, it is not a good tool.
+1. We, as programmers, do not need to be tool experts. A chef, generally does not know how a knife
+   is made. They exist to do work for us and ease our suffering. Even a cursory understanding of
+   what exists and what it does for you will make your programming experience easier and more
+   sustainable. If a tool requires more than a cursory understanding of it to be useful, it is not
+   a good tool.
 
 2. Bad habits form early. Great tools have a way of forcing good habits on you. Programming at its
    core is the repeated application of patterns seen over and over again. The best way to get good
-   at it fast, is to see early and often how great code is put together and great code always uses 
+   at it fast, is to see early and often how great code is put together and great code always uses
    great tools.
 
 By the end of this module we will understand the basics of what the stack of tools we are using for
-this course is doing for us and we will have them installed and ready to serve. We will also fork and
-clone the course repository and complete our first programming assignment! The keynote presentation 
-covered in the video below can be downloaded :download:`here <../../learn_python/module1/resources/Module1.key>`.
+this course is doing for us and we will have them installed and ready to serve. We will also fork
+and clone the course repository and complete our first programming assignment! The keynote
+presentation covered in the video below can be downloaded 
+:download:`here <../../learn_python/module1/resources/Module1.key>`.
 
 .. note::
 
-   The point here is not to invest a lot of time in becoming an expert in any given tool, but to understand
-   the broad classes of problems tools exist to solve for us and to recognize that many tools beyond the
-   ones we use in this course exist. The goal is to know when you're using a tool in this course and what
-   it is doing for you - this should help you be comfortable integrating new tools into your workflow in
-   the future.
+   The point here is not to invest a lot of time in becoming an expert in any given tool, but to
+   understand the broad classes of problems tools exist to solve for us and to recognize that many
+   tools beyond the ones we use in this course exist. The goal is to know when you're using a tool
+   in this course and what it is doing for you - this should help you be comfortable integrating
+   new tools into your workflow in the future.
 
 Platforms
 =========
 
-**Please proceed in order through the following sections, if a tool has an install section you will need
-to install it to proceed further with the course!** 
+**Please proceed in order through the following sections, if a tool has an install section you will
+need to install it to proceed further with the course!** 
 
-Installing software onto a computer is simply the process of putting files in the right place - and in some cases 
-letting the operating system know that the program exists. The files that make up a program consist of executable 
-code, configuration files, documentation and media resources. Most operating systems have a standard way of 
-organizing these files but there are usually multiple ways to install a program and other programs that will help 
-you do so. If you run into errors installing any of the dependencies please refer directly to the tool documentation!
+Installing software onto a computer is simply the process of putting files in the right place - and
+in some cases letting the operating system know that the program exists. The files that make up a
+program consist of executable code, configuration files, documentation and media resources. Most
+operating systems have a standard way of organizing these files but there are usually multiple ways
+to install a program and other programs that will help you do so. If you run into errors installing
+any of the dependencies please refer directly to the tool documentation!
 
-This course is platform-agnostic. That means it should be possible to complete the course on any common operating system.
-That said, there are some platform specific considerations:
+This course is platform-agnostic. That means it should be possible to complete the course on any
+common operating system. That said, there are some platform specific considerations:
 
 Linux
 -----
 
-Different flavors of Linux use different package managers. The most common are `apt <https://en.wikipedia.org/wiki/APT_(software)>`_
-and `yum <https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified>`_. These package managers are bundled with the operating system
-and you do not need to install them. Most of the tools we will be using can be installed with these package managers.
+Different flavors of Linux use different package managers. The most common are 
+`apt <https://en.wikipedia.org/wiki/APT_(software)>`_ and 
+`yum <https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified>`_. These package managers are
+bundled with the operating system and you do not need to install them. Most of the tools we will be
+using can be installed with these package managers.
 
 .. todo::
 
@@ -70,8 +75,9 @@ Mac OSX
 -------
 
 Mac users should install the `Xcode application from the app store <https://apps.apple.com/us/app/xcode>`_. 
-A number of compilers are bundled with it that may be required to install some of the tools we will be using. Once you have
-installed Xcode_ open the Terminal_ application and run the following command, to install the Xcode_ command line tools:
+A number of compilers are bundled with it that may be required to install some of the tools we will
+be using. Once you have installed Xcode_ open the Terminal_ application and run the following
+command, to install the Xcode_ command line tools:
 
 .. code-block:: console
 
@@ -80,14 +86,15 @@ installed Xcode_ open the Terminal_ application and run the following command, t
 Package Managers
 ~~~~~~~~~~~~~~~~
 
-A number of Linux-like package managers exist for OSX. The most common is Homebrew_ and many of the tools we use can be installed using
-from Homebrew_ packages. I recommend trying to install the tools we need without it first, but if you run into significant problems 
-Homebrew_ is another option.
+A number of Linux-like package managers exist for OSX. The most common is Homebrew_ and many of the
+tools we use can be installed using from Homebrew_ packages. I recommend trying to install the
+tools we need without it first, but if you run into significant problems Homebrew_ is another option.
 
 Microsoft Windows
 -----------------
 
-**Windows users will need to install a bash-compatible command line interpreter to follow the command line examples in this course**
+**Windows users will need to install a bash-compatible command line interpreter to follow the
+command line examples in this course**
 
 The best way to do this is to install the `Windows Subsystem for Linux <https://learn.microsoft.com/en-us/windows/wsl/install>`_
 
@@ -102,11 +109,11 @@ The best way to do this is to install the `Windows Subsystem for Linux <https://
 Tools
 =====
 
-For most of the tools we will be using in this course there are many alternatives. When popular alternatives exist
-they are listed in tables in each section. Tools come and go and what is considered state of the art today may be
-different tomorrow. Its important to not get bogged down in the minutia of each tool and instead focus on getting
-it to do the immediate thing you need it to do. Expertise will come with use and picking up new tools quickly is
-a valuable skill.
+For most of the tools we will be using in this course there are many alternatives. When popular
+alternatives exist they are listed in tables in each section. Tools come and go and what is
+considered state of the art today may be different tomorrow. Its important to not get bogged down
+in the minutia of each tool and instead focus on getting it to do the immediate thing you need it
+to do. Expertise will come with use and picking up new tools quickly is a valuable skill.
 
 ..  youtube:: EI1qbU32e5w
    :width: 50%
@@ -120,72 +127,176 @@ a valuable skill.
 Terminal
 --------
 
-You are probably reading these words in a web browser window. A web browser is a program with a graphical interface. Graphical
-interfaces give us visual cues about what they are doing and what they are capable of. Creating a graphical interface requires lots of work
-and for simple programs that extra work is prohibitive and often unnecessary. That means, for this course we will have to become
-familiar with the other main mode of human/machine interface - the textual interface - often referred to as the command line or 
-the console or the terminal.
+.. image:: ./img/terminal.png
+   :alt: The Terminal
+   :width: 40%
+   :align: right
 
-In textual interfaces, we tell the computer what to do by typing text commands into a terminal window and the computer tells us what it is
-doing by printing text back to us. Textual interfaces can also tell us what they are capable of - but they are limited to text documentation 
-which is, by its nature, less universal (many languages) and slower to understand than the visual cues of a graphical interface. For these
-reasons textual interfaces can be intimidating and are often seen in movies whenever the plot requires a character to demonstrate the mystical
-connection "hackers" have with their machines. In reality, textual interfaces are just another tool and they are really quite simple.
+You are probably reading these words in a web browser window. A web browser is a program with a
+graphical interface. Graphical interfaces give us visual cues about what they are doing and what
+they are capable of. Creating a graphical interface requires lots of work and for simple programs
+that extra work is prohibitive and often unnecessary. That means, for this course we will have to
+become familiar with the other main mode of human/machine interface - the textual interface -
+often referred to as the command line or the console or the terminal.
 
-Do not worry, to get started with Python you will not need to become a terminal expert - most programmers aren't. We will only be using a few simple commands. But first - some vocabulary:
+In textual interfaces, we tell the computer what to do by typing text commands into a terminal
+window and the computer tells us what it is doing by printing text back to us. Textual interfaces
+can also tell us what they are capable of - but they are limited to text documentation which is, by
+its nature, less universal (many languages) and slower to understand than the visual cues of a
+graphical interface. For these reasons textual interfaces can be intimidating and are often seen in
+movies whenever the plot requires a character to demonstrate the mystical connection "hackers" have
+with their machines. In reality, textual interfaces are just another tool and they are really quite
+simple.
 
-* **commands** - programs that have textual interfaces that you can execute by typing their name in a terminal. You will create your own commands as part of this course!
-* **options, arguments and parameters** - Pieces of information that commands may be initialized with, when you run them, that have some effect on what the command ends up doing. These 
-  words are often used interchangeably but may have subtly different meanings depending on how they are provided to a command and the context in which they are used.
-* **path** - the location of a file or a directory on the filesystem. Paths are expressed as a series of directories separated by slashes and optionally ending with a filename. (e.g. /Users/bckohan/.zshrc)
-* **shell** - the program that executes the commands you type. There are many different shells but the most common are Bash and Bash derivatives.
-  Different shells can have slightly different ways of expressing the same intentions (i.e. how the output of one command might be fed into another) but the names of the commands are the same because 
-  commands are executable programs that are independent of the shell. Z-shell (a bash derivative), is now the default on OSX platforms and all command line examples in this course will be tested on Z-shell.
-  You can think of shells as minimally functional programming languages. They have their own syntax and semantics and they are used to write scripts that run on your computer. The difference is that
-  shells are designed to be used interactively and to run commands rather than to be used to write full featured programs. `Read more about shells. <https://en.wikipedia.org/wiki/Shell_(computing)>`_
-* **terminal** - the program that runs a shell and provides the textual interface window. The term terminal comes from the
-  middle-early days of computing when graphical interfaces did not yet exist and the only way to interact with a computer was textual via a physical device called a terminal. The terminal 
-  program is the modern equivalent of that device that runs as a program within a graphical environment. `Read more about terminals. <https://en.wikipedia.org/wiki/Computer_terminal#Text_terminals>`_
-* **POSIX** - a set of standards that promote compatibility between operating systems. The standards include a set of core commands; therefore POSIX compliant operating 
-  systems have textual interfaces that are similar enough to bounce between them and feel at home. OSX is POSIX compliant, and so is Linux, which is why many programmers prefer Mac computers. Windows is 
-  not POSIX compliant. This means that installing the dependencies for this course will be quite different on Windows and OSX. `Read more about POSIX. <https://en.wikipedia.org/wiki/POSIX>`_
+Do not worry, to get started with Python you will not need to become a terminal expert - most
+programmers aren't. We will only be using a few simple commands. But first - some vocabulary:
 
+* **commands** - programs that have textual interfaces that you can execute by typing their name in
+  a terminal. You will create your own commands as part of this course!
+* **options, arguments and parameters** - Pieces of information that commands may be initialized
+  with, when you run them, that have some effect on what the command ends up doing. These words are
+  often used interchangeably but may have subtly different meanings depending on how they are
+  provided to a command and the context in which they are used.
+* **path** - the location of a file or a directory on the filesystem. Paths are expressed as a
+  series of directories separated by slashes and optionally ending with a filename. 
+  (e.g. /Users/bckohan/.zshrc)
+* **shell** - the program that executes the commands you type. There are many different shells but
+  the most common are Bash and Bash derivatives. Different shells can have slightly different ways
+  of expressing the same intentions (i.e. how the output of one command might be fed into another)
+  but the names of the commands are the same because commands are executable programs that are
+  independent of the shell. Z-shell (a bash derivative), is now the default on OSX platforms and
+  all command line examples in this course will be tested on Z-shell. You can think of shells as
+  minimally functional programming languages. They have their own syntax and semantics and they are
+  used to write scripts that run on your computer. The difference is that shells are designed to be
+  used interactively and to run commands rather than to be used to write full featured programs.
+  `Read more about shells. <https://en.wikipedia.org/wiki/Shell_(computing)>`_
+* **terminal** - the program that runs a shell and provides the textual interface window. The term
+  terminal comes from the middle-early days of computing when graphical interfaces did not yet exist
+  and the only way to interact with a computer was textual via a physical device called a terminal.
+  The terminal program is the modern equivalent of that device that runs as a program within a
+  graphical environment. 
+  `Read more about terminals. <https://en.wikipedia.org/wiki/Computer_terminal#Text_terminals>`_
+* **POSIX** - a set of standards that promote compatibility between operating systems. The
+  standards include a set of core commands; therefore POSIX compliant operating systems have
+  textual interfaces that are similar enough to bounce between them and feel at home. OSX is POSIX
+  compliant, and so is Linux, which is why many programmers prefer Mac computers. Windows is not
+  POSIX compliant. This means that installing the dependencies for this course will be quite
+  different on Windows and OSX. `Read more about POSIX. <https://en.wikipedia.org/wiki/POSIX>`_
+
+
+Running commands
+~~~~~~~~~~~~~~~~
+
+To run a command you type its name into the terminal and press enter. The shell will then execute
+the command and print the output to the terminal. The shell will also print any errors that occur.
+Arguments and options are provided to a command by typing them after the command name separated by
+spaces:
+
+.. code-block:: console
+
+    ?> command_name
+    command output
+
+
+For example, there is a command called ``echo`` that prints whatever you type after it back to the
+terminal. Try running it:
+
+.. code-block:: console
+
+   ?> echo hello world
+   hello world
+   ?>
 
 Relative and Absolute Paths
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a path is preceded by a slash it is an absolute path. E.g. ``/Users/bkohan/.zshrc``. This path always refers to the same file no matter where you are in the filesystem. Absolute paths start at the top level or ``root`` 
-of the filesystem which is denoted by a ``/``. Sometimes however, *we can't know the absolute path to a file when we want to refer to it*. For example, if I want to direct you to the file you are reading right now, I 
-can't know where you have downloaded it to on your computer's file system. I can only know the relative path to it from the repository root. Relative paths are paths that do not start with a slash. For example, this 
-file, from the repository root, is at ``learn_python/module1/tools.rst``.
+When using a terminal, you are principally concerned with how to access and operate on files and
+directories on your computer's filesystem. We refer to those files and directories by their paths.
+A path is a string of characters that specifies the location of a file or directory on the
+filesystem - you can think of it as an address. On Windows computers a path might look like: 
+``C:\Users\bckohan``. On POSIX operating systems (OSX and Linux) paths use forward slashes: 
+``/Users/bckohan``. 
+
+If a path is preceded by a slash it is an absolute path. E.g. ``/Users/bckohan/development``. This
+path always refers to the same file no matter where you are in the filesystem. Absolute paths start
+at the top level or ``root`` of the filesystem which is denoted by a ``/``. Sometimes however, *we
+can't know the absolute path to a file when we want to refer to it*. For example, if I want to
+direct you to the file you are reading right now, I can't know where you have downloaded it to on
+your computer's file system. I can only know the relative path to it from the repository root.
+Relative paths are paths that do not start with a slash. For example, the text you are reading 
+right now resides in a file at ``learn_python/module1/tools.rst`` relative to the repository root.
+
 
 Basic Navigation
 ~~~~~~~~~~~~~~~~
 
-Most of what you do in the terminal will be navigating the filesystem and running commands that do work on the files and directories that reside at the paths you are concerned with. A terminal window
-is always tied to a current working directory (cwd). All relative paths will be resolved relative to the cwd. For example if my cwd is ``/Users/bckohan`` and I run ``ls`` (list) I will see the contents
-of the ``/Users/bckohan`` directory. If I run ``ls Documents`` I will see the contents of ``/Users/bckohan/Documents``. Below are the basic navigation and file manipulation commands. 
+When using a terminal, you are always "in" a *working directory*. If you use relative paths when
+interfacing with your terminal, your terminal will assume those paths are relative to that *current
+working directory (cwd)*. For example if my cwd is ``/Users/bckohan/development/learn-python`` and I
+run ``ls`` (list) I will see the contents of the ``/Users/bckohan/development/learn-python``
+directory. If I run ``ls docs`` I will see the contents of
+``/Users/bckohan/development/learn-python/docs``. Below are the basic navigation and file
+manipulation commands.
 
 
 * `cd <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/cd.html>`_ - change working directory.
 * `pwd <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/pwd.html>`_ - print working directory.
-* `ls <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/pwd.html>`_ - list directory contents.
+* `ls <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/ls.html>`_ - list directory contents.
+* `mkdir <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/mkdir.html>`_ - make a new directory.
+* `touch <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/touch.html>`_ - make an empty file.
 * `cp <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/cp.html>`_ - copy a file.
 * `mv <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/mv.html>`_ - move a file. Like copy, but the original file is deleted.
 * `rm <https://pubs.opengroup.org/onlinepubs/9699919799/utilities/rm.html>`_ - delete a file or directory. Be careful, there is no undo!
 
+Lets take them for a spin! Assume I have downloaded this course content to a directory at the path
+``/Users/bckohan/development/learn-python``.
+
+.. code-block:: console
+
+   ?> pwd
+   /Users/bckohan
+   ?> cd development/learn-python
+   ?> pwd
+   /Users/bckohan/development/learn-python
+   ?> ls
+   LICENSE         README.md       docs            learn_python    logs            poetry.lock
+   pyproject.toml
+   ?> ls docs/source
+   _static         favicon.ico     img             logo.svg        module2         preamble.rst
+   conf.py         help            index.rst       module1.rst     module2.rst     refs.rst
+   ?> mkdir practice
+   ?> cd practice
+   ?> pwd
+   /Users/bckohan/development/learn-python/practice
+   ?> touch hello_world.txt
+   ?> ls
+   hello_world.txt
+   ?> mv hello_world.txt hello_world.py
+   ?> ls
+   hello_world.py
+   ?> cp hello_world.py hello_world2.py
+   ?> ls
+   hello_world.py  hello_world2.py
+   ?> rm hello_world2.py
+   ?> ls
+   hello_world.py
+
+
 .. warning::
    
-   Errors in specifying paths, or using an absolute path where a relative path should be used or vice-versa are significant sources of errors when using the terminal. If you are encountering errors always
-   first ask yourself:
+   Errors in specifying paths, or using an absolute path where a relative path should be used or
+   vice-versa are significant sources of errors when using the terminal. If you are encountering
+   errors always first ask yourself:
 
-      * Am I in the right working directory to be doing what I'm doing?
-      * If my commands take paths as arguments, are the paths I'm using correctly written given my current working directory and what my commands expect?
+      * Am I in the right working directory to be doing what I'm doing? (type `pwd` to check!)
+      * If my commands take paths as arguments, are the paths I'm using correctly written given
+        my current working directory and what my commands expect?
 
 Special Characters
 ~~~~~~~~~~~~~~~~~~
 
-Nearly all shells respect the following special characters, which can be thought of as shorthand aliases:
+Nearly all shells respect the following special characters, which can be thought of as shorthand
+aliases:
 
 .. list-table::
    :widths: 5 80
@@ -196,42 +307,68 @@ Nearly all shells respect the following special characters, which can be thought
    * - **.**
      - The current working directory
    * - **..**
-     - The parent directory - i.e., one directory up the filesystem hierarchy from the current directory. 
-       For example, if your cwd is ``/Users/bckohan`` and you run ``ls ..``, you will see the contents of ``/Users``.
+     - The parent directory - i.e., one directory up the filesystem hierarchy from the current
+       directory. For example, if your cwd is ``/Users/bckohan`` and you run ``ls ..``, you will
+       see the contents of ``/Users``.
    * - **~**
-     - Your home directory. All operating systems have a concept of a home directory. This is the directory 
-       that your user account is associated with and where your personal files are stored. On OSX, this is 
-       usually ``/Users/<your username>``. Your cwd when the terminal starts is usually your home directory.
+     - Your home directory. All operating systems have a concept of a home directory. This is the
+       directory that your user account is associated with and where your personal files are
+       stored. On OSX, this is usually ``/Users/<your username>``. Your cwd when the terminal
+       starts is usually your home directory.
    * - **\***
-     - A wildcard that matches any number of characters. For example, ``*.py`` will match all files that end in ``.py``.
+     - A wildcard that matches any number of characters. For example, ``*.py`` will match all files
+       that end in ``.py``.
    * - **$**
-     - Prefix of environment variables. When the dollar sign appears before a word the shell tries to substitute the value contained in the environment
-       variable of the same name.The value of an environment variable. Environment variables are discussed below.
+     - Prefix of environment variables. When the dollar sign appears before a word the shell tries
+       to substitute the value contained in the environment variable of the same name.The value of
+       an environment variable. Environment variables are discussed below.
    * - **\\**
-     - An escape character. If you want to use a special character literally, you can escape it with a backslash. For example, if you want to create a 
-       file called ``*.py`` you can do so with ``touch \*.py``.
-   
+     - The escape character. If you want to use a special character literally, you can escape it
+       with a backslash. For example, if you want to create a file called ``*.py`` you can do so
+       with ``touch \*.py``. Without the escape ``touch *.py`` means "touch all files that end in
+       .py" because * is interpreted as the wildcard character. With the escape, ``touch \*.py``
+       means "touch a file called \*.py".
 
 
-Running commands
-~~~~~~~~~~~~~~~~
+.. code-block:: console
 
-To run a command you type its name into the terminal and press enter. The shell will then execute the command and print the output to the terminal. The shell will also print any errors that occur. Arguments
-and options are provided to a command by typing them after the command name separated by spaces:
+  ?> pwd
+  /Users/bckohan/development/learn-python
+  ?> ls .
+  LICENSE         README.md       docs            learn_python    logs            poetry.lock
+  pyproject.toml
+  ?> cd ./docs/source
+  ?> ls *.rst
+  index.rst       module1.rst     module2.rst     preamble.rst    refs.rst
+  ?> ls ../..
+  ?> pwd
+  /Users/bckohan/development/learn-python
+  ?> cd ~
+  ?> pwd
+  /Users/bckohan
+
+
+Command Options & Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: console
 
    ?> command_name [options] [arguments]
 
-Options are usually named, and can be specified with a shorthand single dash ``-`` and single character or a double dash ``--`` and a longer form name. Sometimes options take an argument 
-(e.g. ``-o <argument>`` or ``--option <argument>``) and other times they do not (e.g. ``-o`` or ``--option``). When they do not they function as on/off toggles for certain behavior and are sometimes 
-referred to as flags. Often both a short form and a long form of an option are available. The longer forms are usually more descriptive and can be useful when coding scripts of commands to convey more 
-information about what the command is doing, but the short forms can be more convenient to type when using shells interactively.
+Options are usually named, and can be specified with a shorthand single dash ``-`` and single
+character or a double dash ``--`` and a longer form name. Sometimes options take an argument (e.g. 
+``-o <argument>`` or ``--option <argument>``) and other times they do not (e.g. ``-o`` or 
+``--option``). When they do not they function as on/off toggles for certain behavior and are
+sometimes referred to as flags. Often both a short form and a long form of an option are available
+The longer forms are usually more descriptive and can be useful when coding scripts of commands to
+convey more information about what the command is doing, but the short forms can be more convenient
+to type when using shells interactively.
 
-Arguments are usually not prefixed with a name, but their meanings are inferred from their position in the command string.
+Arguments are usually not prefixed with a name, but their meanings are inferred from their position
+in the command string.
 
-For example, to run the command ``ls`` (list) with the option ``-l`` (print each listing on a new line) and the path to your
-Documents directory as the first positional argument you would type:
+For example, to run the command ``ls`` (list) with the option ``-l`` (print each listing on a new 
+line) and the path to your Documents directory as the first positional argument you would type:
 
 .. code-block:: console
 
@@ -239,19 +376,24 @@ Documents directory as the first positional argument you would type:
 
 .. warning::
 
-   Commands are responsible for parsing their own arguments and options. This means the semantics discussed here are entirely up to the programmer who coded the command. These
-   conventions are just that, conventions, and are therefore common but not universal. When you program your own command you are handed the full command string and can process that
-   string however you wish. Always check the documentation for a command to see how it expects to be used.
-
+   Commands are responsible for parsing their own arguments and options. This means the semantics
+   discussed here are entirely up to the programmer who coded the command. These conventions are
+   just that, conventions, and are therefore common but not universal. When you program your own
+   command you are handed the full command string and can process that string however you wish.
+   Always check the documentation for a command to see how it expects to be used.
 
 
 Environment Variables
 ~~~~~~~~~~~~~~~~~~~~~
 
-Environment variables are variables that are set in the shell environment and are available to all commands that are run in that shell. Environment variables are usually set by the shell configuration
-file. On OSX, the default shell is Z-shell and the configuration file is ``~/.zshrc``. You can open this file in a text editor and see the environment variables that are set there. You can also set your
-own environment variables in this file. Environment variables are useful for storing information that is useful to many commands. Environment variables are prefixed with ``$`` when you intend to use them in
-commands as variables. You can see all the variables currently defined in your shell by running ``env``:
+Environment variables are variables that are set in the shell environment and are available to all
+commands that are run in that shell. Environment variables are usually set by the shell
+configuration file. On OSX, the default shell is Z-shell and the configuration file is 
+``~/.zshrc``. You can open this file in a text editor and see the environment variables that are
+set there. You can also set your own environment variables in this file. Environment variables are
+useful for storing information that is useful to many commands. Environment variables are prefixed
+with ``$`` when you intend to use them in commands as variables. You can see all the variables
+currently defined in your shell by running ``env``:
 
 .. code-block:: console
 
@@ -862,9 +1004,9 @@ something for you that it doesn't, chances are other people have thought the sam
 Generative AI
 -------------
 
-With Petabytes of code to learn from, computers have been getting better and better at writing code. Most IDEs now have extensions
-that you can install that will look at your code as you write it and make very helpful auto-complete style suggestions. These tools
-can write whole functions for you or suggest approaches. When integrated into your workflow appropriately these tools can be a massive
+With petabytes of human-written code to learn from, computers have been getting better and better at writing code. Most IDEs now have 
+extensions that you can install that will look at your code as you write it and make very helpful auto-complete style suggestions. These
+tools can write whole functions for you or suggest approaches. When integrated into your workflow appropriately these tools can be a massive
 productivity boost. We are not going to shy away from these tools in this course and will even use one as a tutor to help you with your
 gateway assignments.
 
