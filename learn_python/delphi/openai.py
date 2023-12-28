@@ -1,5 +1,6 @@
 import os
-import openai
+from openai import AsyncOpenAI
+
 from pathlib import Path
 from learn_python.delphi.tutor import Tutor, ConfigurationError
 from learn_python.register import LLMBackends, Config
@@ -48,7 +49,7 @@ class OpenAITutor(Tutor):
                 'inquire with the instructor.'
             )
         
-        openai.api_key = self.api_key
+        self.client = AsyncOpenAI(api_key=self.api_key)
         lp_logger.info('Initialized OpenAI Tutor.')
 
     def get_model(self, messages):
@@ -67,19 +68,25 @@ class OpenAITutor(Tutor):
             ]
         ]
         self.logger.info('send(), with directive')
-        return await openai.ChatCompletion.acreate(
+        import ipdb
+        ipdb.set_trace()
+        resp = await self.client.chat.completions.create(
             model=self.get_model(messages),
             messages=messages,
             functions=self.functions
         )
+        ipdb.set_trace()
+        return resp
 
     def handle_response(self, response):
         # todo run any functions that were called out
         self.logger.info('handle_response(%s)', response)
-        self.resp_json.append(response.to_dict_recursive())
-        resp = response['choices'][0]['message']
+        self.resp_json.append(response.json())
+        resp = response.choices[0].message
         self.call_function(
-            resp.get('function_call', {}).get('name', None),
-            **json.loads(resp.get('function_call', {}).get('arguments', '{}'))
+            getattr(resp.function_call, 'name', None),
+            **json.loads(getattr(resp.function_call, 'arguments', '{}'))
         )
-        return resp['content']
+        import ipdb
+        ipdb.set_trace()
+        return resp.content
