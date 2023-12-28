@@ -577,7 +577,7 @@ Hi, I'm **Delphi**! \U0001F44B
             print(colored(self.task_test.error_msg, 'red'))
         raise RestartSession()
     
-    def docs(self, clean=True):
+    def docs(self, clean=False):
         """
         AI invocable function to build or clean the documentation.
         """
