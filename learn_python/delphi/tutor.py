@@ -7,7 +7,7 @@ import subprocess
 from functools import cached_property
 from enum import Enum
 from termcolor import colored
-from typing import Optional, Union, List
+from typing import Optional, Union, List, Annotated
 from types import FunctionType
 from uuid import uuid1, UUID
 from learn_python.tests.tasks import Task, TaskStatus
@@ -860,22 +860,26 @@ def tutor(llm = LLMBackends.OPEN_AI):
             raise
     return _tutor
 
-@main(catch=True)
+@main(catch=False)
 def delphi(
-    task: Optional[str] = typer.Argument(
-        None,
-        help="The gateway task you need help with."
-    ),
-    submit_logs: Optional[bool] = typer.Option(
-        False,
-        '--submit-logs',
-        help="Submit logs to the lesson server."
-    ),
-    clean_logs: Optional[bool] = typer.Option(
-        False,
-        '--clean-logs',
-        help="Delete the logs directory."
-    ),
+    task: Annotated[
+        Optional[str],
+        typer.Argument(help="The gateway task you need help with.")
+    ] = None,
+    submit_logs: Annotated[
+        Optional[bool],
+        typer.Option(
+            '--submit-logs',
+            help="Submit logs to the lesson server."
+        )
+    ] = False,
+    clean_logs: Annotated[
+        Optional[bool],
+        typer.Option(
+            '--clean-logs',
+            help="Delete the logs directory."
+        )
+    ] = False,
     llm: Optional[LLMBackends] = Config().tutor.value
 ):
     """I need some help! Wake Delphi up!"""
