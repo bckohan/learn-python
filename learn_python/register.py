@@ -1,7 +1,7 @@
 import typer
 import yaml
 from enum import Enum
-from typing import Optional, Union
+from typing import Optional, Union, Annotated
 from learn_python.utils import ROOT_DIR, Singleton, git_push_file
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -326,21 +326,25 @@ class Config(Singleton):
             )
         return signature
 
-@main(catch=True)
+@main(catch=False)
 def register(
-    reset: bool = typer.Option(
-        False,
-        '--reset',
-        help=(
-            'Overwrite the existing public key file. If you have any other clones of this '
-            'repository, this will unregister them from the course.'
+    reset: Annotated[
+        bool,
+        typer.Option(
+            '--reset',
+            help=(
+                'Overwrite the existing public key file. If you have any other clones of this '
+                'repository, this will unregister them from the course.'
+            )
         )
-    ),
-    timeout: int = typer.Option(
-        120,
-        '--timeout',
-        help='Timeout for the register request in seconds.'
-    )
+    ] = False,
+    timeout: Annotated[
+        int,
+        typer.Option(
+            '--timeout',
+            help='Timeout for the register request in seconds.'
+        )
+    ] = 120
 ):
     """
     Register for a guided course!
@@ -372,17 +376,21 @@ def can_report():
 
 @main(catch=True)
 def report(
-    keep: bool = typer.Option(
-        False,
-        '-k',
-        '--keep',
-        help='Do not delete finished log files.'
-    ),
-    no_active: bool = typer.Option(
-        False,
-        '--no-active',
-        help='Do not report active log file.'
-    ),
+    keep: Annotated[
+        bool,
+        typer.Option(
+            '-k',
+            '--keep',
+            help='Do not delete finished log files.'
+        )
+    ] = False,
+    no_active: Annotated[
+        bool,
+        typer.Option(
+            '--no-active',
+            help='Do not report active log file.'
+        )
+    ] = False,
 ):
     """
     Report all status and logs to the course server. Logs for dates before now will be

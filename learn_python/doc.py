@@ -25,7 +25,7 @@ from os import PathLike
 from termcolor import colored
 from sphinx.ext.todo import Todo
 from sphinx.addnodes import desc, pending_xref
-from typing import List, Dict, Union, Optional, Tuple
+from typing import List, Dict, Union, Optional, Tuple, Annotated
 from types import FunctionType, ModuleType
 from enum import Enum, auto
 from warnings import warn
@@ -717,15 +717,16 @@ def doc_context():
 
 @app.command()
 def build(
-    detached: bool = typer.Option(
-        DETACHED_DEFAULT,
-        '--detached',
-        help='Generate the docs with no references to the local filesystem.'
-    ),
-    open: bool = typer.Option(
-        True,
-        help='Open the built documentation in a browser.'
-    )
+    detached: Annotated[
+        bool,
+        typer.Option(
+            help='Generate the docs with no references to the local filesystem.'
+        )
+    ] = DETACHED_DEFAULT,
+    open: Annotated[
+        bool,
+        typer.Option(help='Open the built documentation in a browser.')
+    ] = True
 ):
     """Build the documentation - this will always clean it first."""
     configure_logging()
