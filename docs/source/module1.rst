@@ -32,7 +32,7 @@ By the end of this module we will understand the basics of what the stack of too
 this course is doing for us and we will have them installed and ready to serve. We will also fork
 and clone the course repository and complete our first programming assignment! The keynote
 presentation covered in the video below can be downloaded 
-:download:`here <../../learn_python/module1/resources/Module1.key>`.
+:download:`here <../../learn_python/module1_tools/resources/Module1.key>`.
 
 .. note::
 
@@ -242,7 +242,7 @@ can't know the absolute path to a file when we want to refer to it*. For example
 direct you to the file you are reading right now, I can't know where you have downloaded it to on
 your computer's file system. I can only know the relative path to it from the repository root.
 Relative paths are paths that do not start with a slash. For example, the text you are reading 
-right now resides in a file at ``learn_python/module1/tools.rst`` relative to the repository root.
+right now resides in a file at ``learn_python/module1.rst`` relative to the repository root.
 
 
 Basic Navigation
@@ -799,7 +799,7 @@ any packages downloaded from PyPi_ will end up in.
 
 The directory structure of a Python_ virtual environment looks like the following:
 
-.. image:: ../../learn_python/module1/resources/PythonVirtualEnvironments.svg
+.. image:: ../../learn_python/module1_tools/resources/PythonVirtualEnvironments.svg
    :alt: Computer Mental Model
    :width: 50%
    :align: center
@@ -1130,11 +1130,11 @@ Once you've built the documentation, if you are taking this course as part of a 
    ?> poetry run register
 
 
-:code-ref:`Gateway 1 <learn_python/module1/gateway1.py>`
-========================================================
+:code-ref:`Gateway 1 <learn_python/module1_tools/gateway1.py>`
+==============================================================
 
-:code-ref:`Part 1 <learn_python/module1/gateway1.py>`
------------------------------------------------------
+:code-ref:`Part 1 <learn_python/module1_tools/gateway1.py>`
+-----------------------------------------------------------
 
 .. todo::
    In learn_python/module1 create a python module called gateway1. Write code such that when imported 
@@ -1181,8 +1181,8 @@ If your part 1 is implemented correctly you will see that 1 test has passed::
 The code that runs our tests lives in learn_python/tests/
 
 
-:code-ref:`Part 2 <learn_python/module1/gateway1.py>`
------------------------------------------------------
+:code-ref:`Part 2 <learn_python/module1_tools/gateway1.py>`
+-----------------------------------------------------------
 
 .. todo::
    Adapt module gateway1 so that when it is run as an executable the “print 2” line is replaced by 
@@ -1190,7 +1190,7 @@ The code that runs our tests lives in learn_python/tests/
    the python path. However, when gateway1 is imported as a module it should still print 3 statements 
    like part 1::
 
-      learn-python> poetry run python ./learn_python/module1/gateway1.py
+      learn-python> poetry run python ./learn_python/module1_tools/gateway1.py
       print 1
       Hello World! Python will look for code in these directories:
       ['/Users/bckohan/Development/learn-python-main/learn-python/learn_python/module1',
