@@ -106,7 +106,10 @@ DOC_SRC_DIR = DOC_DIR / 'source'
 DOC_BLD_DIR = DOC_DIR / 'build'
 
 
-app = typer.Typer(add_completion=False)
+app = typer.Typer(
+    help="A collection of commands that operate on the course documentation.",
+    add_completion=False
+)
 
 
 class DocError(Exception):

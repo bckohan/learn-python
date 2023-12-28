@@ -61,6 +61,12 @@ common operating system. That said, there are some platform specific considerati
 Linux
 -----
 
+.. image:: ./img/linux.svg
+   :alt: Linux
+   :width: 10%
+   :align: right
+
+
 Different flavors of Linux use different package managers. The most common are 
 `apt <https://en.wikipedia.org/wiki/APT_(software)>`_ and 
 `yum <https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified>`_. These package managers are
@@ -73,6 +79,12 @@ using can be installed with these package managers.
 
 Mac OSX
 -------
+
+.. image:: ./img/apple.svg
+   :alt: Apple
+   :width: 10%
+   :align: right
+
 
 Mac users should install the `Xcode application from the app store <https://apps.apple.com/us/app/xcode>`_. 
 A number of compilers are bundled with it that may be required to install some of the tools we will
@@ -92,6 +104,12 @@ tools we need without it first, but if you run into significant problems Homebre
 
 Microsoft Windows
 -----------------
+
+.. image:: ./img/windows.svg
+   :alt: Windows
+   :width: 10%
+   :align: right
+
 
 **Windows users will need to install a bash-compatible command line interpreter to follow the
 command line examples in this course**
@@ -398,24 +416,37 @@ currently defined in your shell by running ``env``:
 .. code-block:: console
 
    ?> env
+   TERM=xterm-256color
+   TERM_PROGRAM=Apple_Terminal
+   SHELL=/bin/zsh
+   HOME=/Users/bckohan
+   LOGNAME=bckohan
+   USER=bckohan
+   PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+   PWD=/Users/bckohan
+   PYENV_SHELL=zsh
 
 In Z-shell environment variables are set using the export command:
 
 .. code-block:: console
 
    ?> export VARIABLE_NAME=value
+   ?> echo $VARIABLE_NAME
+   value
 
 System PATH
 ~~~~~~~~~~~
 
-The PATH environment variable is a list of directories that the shell will search for commands when you type them. When you type a command, the shell will search the directories in the PATH in order
-until it finds a command with the name you typed. If it does not find a command with that name in any of the directories in the PATH it will print an error. The PATH is a colon separated list of
-directories. You can print the PATH by running:
+The PATH environment variable is a list of directories that the shell will search for commands
+when you type them. When you type a command, the shell will search the directories in the PATH
+in order until it finds the executable file for the command with the name you typed. If it does
+not find a command with that name in any of the directories in the PATH it will print an error.
+The PATH is a colon separated list of directories. You can print the PATH by running:
 
 .. code-block:: console
 
    ?> echo $PATH
-
+   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Other Useful commands
 ~~~~~~~~~~~~~~~~~~~~~
@@ -430,32 +461,68 @@ Other Useful commands
 Piping
 ~~~~~~
 
-Piping is passing the output of one command as the input to another command. Piping is done with the pipe character `|`. For example, to list all pdf files in your Documents directory we could pipe the output of
-the `ls` command to the `grep` command and filter on the '.pdf' string:
+Piping is passing the output of one command as the input to another command. Piping is done with
+the pipe character `|`. For example, to list all reStructuredText_ files in your Documents
+directory we could pipe the output of the `ls` command to the `grep` command and filter on the
+'.rst' string:
 
 .. code-block:: console
 
-   ?> ls -l ~/Documents | grep .pdf
+   ?> ls -l ~/development/learn-python/doc/source | grep .rst
+   -rw-r--r--   1 bckohan  staff   2433 Dec 12 11:59 index.rst
+   -rw-r--r--   1 bckohan  staff  52641 Dec 27 22:05 module1.rst
+   -rw-r--r--   1 bckohan  staff    690 Nov 22 09:55 module2.rst
+   -rw-r--r--   1 bckohan  staff   1302 Nov 22 09:55 preamble.rst
+   -rw-r--r--   1 bckohan  staff   1106 Dec 12 11:06 refs.rst
 
-Not all commands support piping but many do and if a command operates on free form text it most likely does. 
+Not all commands support piping but many do and if a command operates on free form text it most
+likely does. 
 
 Argument Substitution
 ~~~~~~~~~~~~~~~~~~~~~
 
-A similar alternative to piping is passing the output of one command as the arguments to another. This is done by positioning the argument generating command in the position of the arguments of the outer command and surrounding it with backticks (`).
-Consider a useful example:
+A similar alternative to piping is passing the output of one command as the arguments to another.
+This is done by positioning the argument generating command in the position of the arguments of
+the outer command and surrounding it with backticks (`). Consider a useful example.
 
-   The ``grep`` command can search for text within files and accepts file paths as arguments. The ``find`` command can be used to find all files that match a certain naming pattern at or below a directory. So we could ask ``grep`` to find all python files under 
-   ``Documents`` that contain the string ``learn_python`` like so:
+The ``grep`` command can search for text within files and accepts file paths as arguments. The
+``find`` command can be used to find all files that match a certain naming pattern at or below a
+directory. So we could ask ``grep`` to find all python files in our learn-python course that 
+that contain the string ``delphi`` (the name of our course tutor) like so, assuming our pwd is
+the repository root
 
    .. code-block:: console
 
-      ?> grep -l learn_python `find ~/Documents -name "*.py"`
+      ?> grep -il delphi `find ./learn_python -name "*.py"`
+      ./learn_python/register.py
+      ./learn_python/delphi/test.py
+      ./learn_python/delphi/openai.py
+      ./learn_python/delphi/tutor.py
+      ./learn_python/module2_basics/lesson/__init__.py
+
+These files are probably the best place to look if we want to see the code that implements
+our course tutor. There is often more than one way to accomplish the same task when interacting
+with the terminal. For instance, the above command could also be written as:
+
+   .. code-block:: console
+
+      ?> grep -il delphi **/*py
+
+.. note::
+
+    The ``-i`` option to ``grep`` tells it to ignore case and the ``-l`` option tells it to print
+    the names of the files that match the search string rather than the lines that match the search
+    string. In the above example we could have also written ``-il`` as ``-i -l``. Most command line
+    argument parsers allow multiple short options to be combined into a single - argument where each
+    character after the dash is assumed to be an option.
+
+
 
 Getting Help
 ~~~~~~~~~~~~
 
-Most commands will have a standard help option that will print some instructions about how to use the command. This option is usually invoked by either ``-h`` or ``--help``. Try:
+Most commands will have a standard help option that will print some instructions about how to use
+the command. This option is usually invoked by either ``-h`` or ``--help``. Try:
 
 .. code-block:: console
 
@@ -466,7 +533,8 @@ Most commands will have a standard help option that will print some instructions
 	        [--null] [pattern] [file ...]
    ?> 
 
-On POSIX operating systems more robust documentation is usually available from the manual pages utility. Try:
+On POSIX operating systems more robust documentation is usually available from the manual pages
+utility. Try:
 
 .. code-block:: console
 
