@@ -3,8 +3,8 @@ Learn Python!
 
 .. image:: docs/source/img/LearnPythonThumbnail.png
    :alt: Learn Python!
-   :width: 90%
-   :align: center
+   :width: 100%
+   :align: right
 
 This is a completely free, self-paced, open-source, online course on the Python programming language. It assumes no prior programming experience, and is appropriate for anyone who wants to learn Python. The course is broken up into modules. Each module will introduce a series of concepts and then end with gateway programming assignments that will develop your understanding of the concepts through practice. The main modules are designed to be completed in order. The special topics have no required order but will only be useful after you have completed the main modules.
 
