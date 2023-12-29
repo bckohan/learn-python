@@ -3,8 +3,8 @@ Learn Python!
 
 .. image:: docs/source/img/LearnPythonThumbnail.png
    :alt: Learn Python!
-   :width: 40%
-   :align: right
+   :width: 90%
+   :align: center
 
 This is a completely free, self-paced, open-source, online course on the Python programming language. It assumes no prior programming experience, and is appropriate for anyone who wants to learn Python. The course is broken up into modules. Each module will introduce a series of concepts and then end with gateway programming assignments that will develop your understanding of the concepts through practice. The main modules are designed to be completed in order. The special topics have no required order but will only be useful after you have completed the main modules.
 
@@ -22,4 +22,4 @@ For Instructors
 
 This course is licensed under the `MIT License <https://opensource.org/license/mit/>`_. Feel free to fork it, modify it, and use it for your own purposes. If you plan to use it to teach a course you may also be interested in the companion server_ that can be used to track student progress and distribute credentials for the AI tutor. The scaffolding of this course is designed to be agnostic to its content and should be useful even if you want to make deep changes to the course content. 
 
-**If you do use it or would like to collaborate, please let** |me| **know! I would love to hear about it!**
+**If you do use it or would like to collaborate, please let** `me <https://github.com/bckohan>`_ **know! I would love to hear about it!**
