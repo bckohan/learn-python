@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Download Python into your brains."
 authors = ["Brian Kohan <bckohan@gmail.com>"]
 license = "LICENSE"
-readme = "README.md"
+readme = "README.rst"
 packages = [{include = "learn_python"}]
 
 [tool.poetry.scripts]
