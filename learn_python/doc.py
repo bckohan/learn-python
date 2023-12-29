@@ -107,7 +107,11 @@ DOC_BLD_DIR = DOC_DIR / 'build'
 
 
 app = typer.Typer(
-    help="A collection of commands that operate on the course documentation.",
+    help=(
+        "A collection of commands that operate on the course documentation. "
+        "When invoked without a subcommand, open the documentation in your "
+        "default web browser if it has been built."
+    ),
     add_completion=False
 )
 
@@ -713,6 +717,16 @@ def doc_context():
     os.chdir(DOC_DIR)
     yield
     os.chdir(start_dir)
+
+
+@app.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        index = Path(DOC_BLD_DIR) / 'html' / 'index.html'
+        if index.is_file():
+            import webbrowser
+            webbrowser.open_new_tab(f"file:///{index}")
+        raise typer.Exit(f'The documentation has not been built yet. Run: `poetry run doc build`.')
 
 
 @app.command()
