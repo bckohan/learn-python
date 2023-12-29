@@ -1,61 +1,25 @@
-# learn-python
-Download python to your brains.
+Learn Python!
+=============
 
+.. image:: docs/source/img/LearnPythonThumbnail.png
+   :alt: Learn Python!
+   :width: 40%
+   :align: right
 
-## Prerequisits
+This is a completely free, self-paced, open-source, online course on the Python programming language. It assumes no prior programming experience, and is appropriate for anyone who wants to learn Python. The course is broken up into modules. Each module will introduce a series of concepts and then end with gateway programming assignments that will develop your understanding of the concepts through practice. The main modules are designed to be completed in order. The special topics have no required order but will only be useful after you have completed the main modules.
 
-1. [pyenv](https://github.com/pyenv/pyenv)
-2. [Poetry](https://python-poetry.org/)
-3. [VSCode](https://code.visualstudio.com/)
-    - [GitHub Extension](https://code.visualstudio.com/docs/sourcecontrol/github)
-    - [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-    - [TOML Extension](https://marketplace.visualstudio.com/items?itemName=be5invis.toml)
-    - [SVG Viewer](https://marketplace.visualstudio.com/items?itemName=vitaliymaz.vscode-svg-previewer)
+The course takes a tools-first approach to learning the language. By installing, downloading and testing the course you will be using many of the tools that professional Python developers use every day. The gateway assignments are tested using tools used to test Python code in the industry. The documentation you are reading right now is part of the course and you will be regenerating it as you work through the course to track your progress.
 
+To get started, `work through the syllabus at your own pace here <https://learn-python.demoply.org/>`_.
 
-## Syllabus
+Getting help
+------------
 
-0. [Preamble](https://www.youtube.com/watch?v=ZhbVGXxVoGk&t=3256s&ab_channel=bckohan)
-    - What is a computer?
-    - What is an operating system?
-    - What is a "process"?
-    - Interpreted vs Compiled Languages
-    - What is Python?
+The course comes with an AI tutor called Delphi that will help you with the gateway assignments. The tutor is not required but can be helpful. If you are taking this course as part of a directed class you will need to register course with the |course server| - this will also activate the tutor. You may also self activate the tutor - read more here.
 
-2. [Module 1 - Getting started with Python](https://www.youtube.com/watch?v=EI1qbU32e5w&ab_channel=bckohan)
-    - Tools
-        - [git](https://git-scm.com/)
-        - [GitHub](https://github.com)
-        - [Python Virtual Environments](https://realpython.com/python-virtual-environments-a-primer/)
-        - [Poetry](https://python-poetry.org/)
-        - [Standard Library](https://docs.python.org/3/library/index.html)
-        - [PyPi](https://pypi.org/)
-        - [VSCode](https://code.visualstudio.com/)
-        - [ChatGPT](https://chat.openai.com/)
-    - Python PATH
-    - Packages and Modules
-    - Importing Code
-    - Running Code
-    - Gateway 1
+For Instructors
+---------------
 
-3. Module 2 - The Basics
-    - builtin types
-        - strings
-        - lists
-        - integers
-        - floats
-    - operators
-        - cheat sheet
-    - loops
-    - Gateway 2
+This course is licensed under the `MIT License <https://opensource.org/license/mit/>`_. Feel free to fork it, modify it, and use it for your own purposes. If you plan to use it to teach a course you may also be interested in the companion server_ that can be used to track student progress and distribute credentials for the AI tutor. The scaffolding of this course is designed to be agnostic to its content and should be useful even if you want to make deep changes to the course content. 
 
-4. Module 3 - Data Structures
-    - Lists, Sets, Dictionaries
-    - Strings
-      - regex
-    - Comprehensions
-    - Complexity Theory
-      - BigO notation
-
-5. Module 4 - Debugging and Exceptions
-    - 
+**If you do use it or would like to collaborate, please let** |me| **know! I would love to hear about it!**

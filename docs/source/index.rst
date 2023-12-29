@@ -17,10 +17,11 @@ develop your understanding of the concepts through practice. The main modules ar
 The special topics have no required order but will only be useful after you have completed the main modules.
 
 The course takes a tools-first approach to learning the language. By installing, downloading and testing the course
-you will be using many of the tools that professional Python programmers use every day. The gateway assignments are
+you will be using many of the tools that professional Python developers use every day. The gateway assignments are
 tested using tools used to test Python code in the industry. The documentation you are reading right now is part of
 the course and you will be regenerating it as you work through the course to track your progress.
 
+To get started, :ref:`work through the syllabus at your own pace here <syllabus>`.
 
 Getting help
 ------------
@@ -41,6 +42,7 @@ content.
 
 **If you do use it or would like to collaborate, please let** |me| **know! I would love to hear about it!**
 
+.. _syllabus:
 
 .. toctree::
    :maxdepth: 2
