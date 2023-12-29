@@ -1,5 +1,6 @@
 """
-Booleans are either True or False.
+`Booleans <https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not>`_
+are either True or False.
 
 .. note::
 

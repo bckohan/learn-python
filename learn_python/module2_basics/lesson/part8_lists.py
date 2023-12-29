@@ -1,5 +1,6 @@
 """
-Lists are sequences of values in a contiguous chunk of memory
+`Lists <https://docs.python.org/3/tutorial/datastructures.html#more-on-lists>`_ are sequences
+of values in a contiguous chunk of memory
 
 +------------+------------------------------------------------------------------------------------+----------------------+
 | Operator   | Description                                                                        | Example              |

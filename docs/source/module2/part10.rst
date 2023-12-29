@@ -1,7 +1,8 @@
 .. _part10:
 
-Part 10: Strings
-================
+
+:code-ref:`Part 10: Strings <learn_python/module2_basics/lesson/part10_strings.py>`
+===================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part10_strings
 	:members:

@@ -1,8 +1,6 @@
 """
-Sets
-
-Sets are unordered collections of **unique** values, you cannot have multiple 
-equivalent values in a set
+`Sets <https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset>`_ are unordered collections 
+of **unique** values, you cannot have multiple equivalent values in a set
 
 +-------------+---------------------------------------------------------------------------------------------+
 | Operator    | Description                                                                                 |

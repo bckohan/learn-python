@@ -1,6 +1,6 @@
 """
-Strings are sequences of characters you can use either ' or " to define a 
-one-line string. Strings in Python are immutable!
+`Strings <https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str>`_ are sequences of
+characters you can use either ' or " to define a one-line string. Strings in Python are immutable!
 
 +-------------+-----------------------------------------------------------------------+-------------------+
 | Operator    | Description                                                           | Example           |

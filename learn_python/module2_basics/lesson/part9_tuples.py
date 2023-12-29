@@ -1,6 +1,6 @@
 """
-Tuples are like lists, but they are immutable (unchanging). Tuples are specified with parenthesis 
-instead of square brackets.
+`Tuples <https://docs.python.org/3/library/stdtypes.html#tuple>`_ are like lists, but they are
+immutable (unchanging). Tuples are specified with parenthesis instead of square brackets.
 
 +------------+----------------------------------------------------------------------------------------+
 | Operator   | Description                                                                            |

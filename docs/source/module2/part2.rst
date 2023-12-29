@@ -1,7 +1,7 @@
 .. _part2:
 
-Part 2: `Integers <https://docs.python.org/3/library/functions.html?highlight=int#int>`_
-========================================================================================
+:code-ref:`Part 2: Integers <learn_python/module2_basics/lesson/part2_integers.py>`
+===================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part2_integers
 	:members:

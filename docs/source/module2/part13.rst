@@ -1,7 +1,8 @@
 .. _part13:
 
-Part 13: Looping & Comprehensions
-=================================
+
+:code-ref:`Part 13: Looping & Comprehensions <learn_python/module2_basics/lesson/part13_looping.py>`
+====================================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part13_looping
 	:members:

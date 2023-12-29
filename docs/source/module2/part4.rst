@@ -1,7 +1,8 @@
 .. _part4:
 
-Part 4: Ternary If/Else
-=======================
+
+:code-ref:`Part 4: Ternary If/Else <learn_python/module2_basics/lesson/part4_ternary_if_else.py>`
+=================================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part4_ternary_if_else
 	:members:

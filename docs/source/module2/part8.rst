@@ -1,7 +1,7 @@
 .. _part8:
 
-Part 8: `Lists <https://docs.python.org/3/tutorial/datastructures.html#more-on-lists>`_
-========================================================================================
+:code-ref:`Part 8: Lists <learn_python/module2_basics/lesson/part8_lists.py>`
+=============================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part8_lists
 	:members:

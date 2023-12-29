@@ -1,7 +1,7 @@
 .. _part15:
 
-Part 15: Dictionaries
-=====================
+:code-ref:`Part 15: Dictionaries <learn_python/module2_basics/lesson/part15_dictionaries.py>`
+=============================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part15_dictionaries
 	:members:

@@ -1,5 +1,6 @@
 """
-Floating point numbers are numbers with fractions (e.g. 2.99792458)!
+`Floating point numbers <https://docs.python.org/3/library/functions.html#float>`_ are 
+numbers with fractions (e.g. 2.99792458)!
 
 It is impossible to represent all arbitrary real numbers using a finite number of 1s and 0s!
 

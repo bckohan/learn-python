@@ -1,5 +1,7 @@
 """
-Dictionaries are collections of key-value pairs:
+`Dictionaries <https://docs.python.org/3/library/stdtypes.html#mapping-types-dict>`_ are 
+collections of key-value pairs:
+
     * values may be anything! including other dictionaries!
     * keys can be any python type that is "hashable" - we'll talk about this
       later but for now just know that most builtin primitive types are 

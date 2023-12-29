@@ -1,8 +1,7 @@
 .. _part6:
 
-Part 6: `Floating Point Numbers <https://docs.python.org/3/library/functions.html#float>`_
-==========================================================================================
-
+:code-ref:`Part 6: Floating Point Numbers <learn_python/module2_basics/lesson/part6_floating_point.py>`
+=======================================================================================================
 
 .. automodule:: learn_python.module2_basics.lesson.part6_floating_point
 	:members:

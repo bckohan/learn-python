@@ -1,5 +1,6 @@
 """
-Integers are whole numbers (they do not have fractional components).
+`Integers <https://docs.python.org/3/library/functions.html?highlight=int#int>`_ are whole numbers
+(they do not have fractional components).
 
 Here are the common numerical operators (also look at the :ref:`cheat sheets <external-resources>`!):
 
