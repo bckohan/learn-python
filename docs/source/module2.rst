@@ -1,3 +1,5 @@
+.. include:: refs.rst
+
 .. _module2:
 
 ====================

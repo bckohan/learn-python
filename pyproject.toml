@@ -12,6 +12,7 @@ doc = 'learn_python.doc:app'
 delphi = 'learn_python.delphi.tutor:delphi'
 register = 'learn_python.register:register'
 report = 'learn_python.register:report'
+module2 = 'learn_python.module2_basics:module2'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"

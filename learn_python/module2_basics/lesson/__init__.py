@@ -1,6 +1,12 @@
 """
+
+.. image:: ./img/eager-python.png
+    :alt: Ready for the basics!
+    :width: 35%
+    :align: right
+
 This module covers the basics of the Python language. You
-will be emersed in code and the code itself will be used to illustrate how
+will be immersed in code and the code itself will be used to illustrate how
 the syntax works. The best way to learn how to code is to read lots of code!
 The point of these lessons is not to exhaustively document the language - high
 quality documentation already exists and you should use it. The goal here is
@@ -21,7 +27,7 @@ readable reason after an assert expression, try this:
         assert False, 'False is not True!'
 
 Assertion statements are used to test your gateway assignments! Check them out
-in ./tests
+in :code-ref:`./learn_python/tests/module2.py <learn_python/tests/module2.py>`
 
 The lessons are organized into parts. Each part covers a different topic. Read
 the code line by line and try to understand what it is doing. If you don't you
@@ -33,23 +39,50 @@ Documentation
 -------------
 
 The code is documented in a way that a professional Python project might be.
-This multi-line string - delineated by triple quotes - is called a docstring 
-when it appears at the top of a module like this. It will be put in a special
-variable called __doc__. Try this:
+:code-ref:`This multi-line string <learn_python/module2_basics/lesson/__init__.py>`
+- delineated by triple quotes - is called a docstring when it appears at the
+top of a module like this. It will be put in a special variable called __doc__.
+Try this, open up an interactive python terminal:
+
+    .. code-block:: console
+
+        ?> poetry run ipython
+        Python 3.11.4 (main, Jul 11 2023, 14:04:39) [Clang 14.0.0 (clang-1400.0.29.202)]
+        Type 'copyright', 'credits' or 'license' for more information
+        IPython 8.18.1 -- An enhanced Interactive Python. Type '?' for help.
+
+        In [1]: 
+
+Then execute these statements:
 
     .. code-block:: python
 
         from learn_python.module2_basics import lesson
+        # remember when packages (directories) are imported like this it
+        # refers to the __init__.py file in the package directory, so this
+        # import statement imports learn_python/module2_basics/lesson/__init__.py
+        
         print(lesson.__doc__)
+        
         # also try:
         help(lesson)  # look familiar?
 
 Tools exist to convert docstrings to html or pdf documentation - much of the
-python standard library is documented this way, so `help() <https://docs.python.org/3/library/functions.html#help>`_ may look very familiar
-to what you read on the internet! `Sphinx-doc <https://www.sphinx-doc.org/en/master/>`_
-is the tool used to generate html documentation from these docstrings. `You can view
-the html documentation for this module here. <TODO>`_ Sphinx-doc helps keep our documentation
-DRY!
+python standard library is documented this way, so 
+`help() <https://docs.python.org/3/library/functions.html#help>`_ may look very
+familiar to what you read on the internet! sphinx-doc_ is the tool used to
+generate html documentation from these docstrings and it helps keep our
+documentation DRY_ (Don't Repeat Yourself)! Users may be browsing the internet
+or writing code when they have the need to understand how your library works -
+the idea behind sphinx-doc_ is to allow that documentation to exist in one
+place and be rendered in multiple formats to multiple locations so that when a
+user needs it, it is there. We talked a little bit about sphinx-doc_ in the
+:ref:`tools module<tools_sphinx-doc>`. sphinx-doc_ renders a markup language
+called reStructuredText_ (.rst) to html, pdf, text, or epub formats. So when
+you look at :code-ref:`the raw text markup <learn_python/module2_basics/lesson/__init__.py>`
+from which this documentation was generated all the weird punctuation is 
+rst_ markup that helps sphinx know what should be rendered as a link or a
+heading, etc.
 
 .. _external-resources:
 
@@ -159,12 +192,28 @@ poetry install.
 
 We will cover debugging in more detail in the next module.
 
-You can run all of the code in these emersion lessons using:
+You can run all of the code in these immersion lessons using:
   
 .. code-block:: bash
 
     poetry run module2
 
+When you do this, nothing should happen because all of the assertion statements
+are True, so no errors are thrown!
+
+If at any point you want to halt the code at a given line and enter into the
+interactive debugger simply add the following statement at the line of code you
+are concerned with:
+
+.. code-block:: python
+
+    # I have already imported ipdb for you in the first part and all subsequent
+    # parts import the part before them, so ipdb is available.
+    ipdb.set_trace()
+
+Then run `poetry run module2`. You will be dropped into the debugger at that line of
+code and will be able to access all the variables in the current scope, and execute
+statements to test your assumptions about the code.
 
 If in the course of playing around with these lessons, you would like to revert a file
 to its original version without your edits you can use git:
@@ -172,21 +221,5 @@ to its original version without your edits you can use git:
 .. code-block:: bash
 
     git checkout -- learn_python/module2_basics/lesson/<filename>.py
-
-    
-AI Tutor
---------
-
-learn-python comes equipped with an AI Tutor named Delphi. The tutor is completely
-optional, but she may prove helpful with the gateway assignments or for general Q&A.
-To enable Delphi you will need to acquire an OpenAI API token, create the file 
-learn_python/tutor/api.key and paste the token into that file. If you are taking this
-class under my direction, reach out to me and I will provide you with a token.
-
-To run Delphi:
-
-    .. code-block:: bash
-
-        poetry run delphi
 
 """

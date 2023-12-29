@@ -861,9 +861,10 @@ Verify that poetry is installed by running:
    Poetry (version 1.7.0)
    ?>
 
+.. _tools_sphinx-doc:
 
-Documentation (Sphinx_)
------------------------
+Documentation (sphinx-doc_)
+---------------------------
 
 .. todo::
 
@@ -901,16 +902,16 @@ text that can be compiled into other formats. For example, you can write a READM
 language and then compile it into a web page or a PDF. 
 
 The documentation for this course - the words you are reading right now - is written in a markup
-language called reStructuredText_ and built using Sphinx_. Sphinx_ is a Python_ package used
+language called reStructuredText_ and built using sphinx-doc_. sphinx-doc_ is a Python_ package used
 throughout the Python_ ecosystem to turn markup into compiled documentation for the web, PDFs
-or other formats. As you proceed through this course you will be running Sphinx_ (using the 
+or other formats. As you proceed through this course you will be running sphinx-doc_ (using the 
 course's own `doc` command) to build the documentation as you complete gateway assignments to
 track your progress!
 
 .. note::
    
    You will often encounter Python_ package documentation hosted on https://readthedocs.org
-   which is a free service that builds and hosts Sphinx_ documentation for open source 
+   which is a free service that builds and hosts sphinx-doc_ documentation for open source 
    projects.
 
 The tables below list the most relevant and markup languages and documentation build tools.
@@ -937,7 +938,7 @@ The tables below list the most relevant and markup languages and documentation b
 
    * - Name
      - Description
-   * - `Sphinx`_
+   * - `sphinx-doc`_
      - A tool that makes it easy to create intelligent and beautiful documentation for Python
        projects (or other documents consisting of multiple reStructuredText sources), initially
        created for the Python documentation.

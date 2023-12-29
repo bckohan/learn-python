@@ -19,8 +19,9 @@
 .. _pytest: https://docs.pytest.org
 .. _stdlib: https://docs.python.org/3/library
 .. _PyPI: https://pypi.org
-.. _Sphinx: https://www.sphinx-doc.org
+.. _sphinx-doc: https://www.sphinx-doc.org
 .. _reStructuredText: https://docutils.sourceforge.io/rst.html
+.. _rst: https://docutils.sourceforge.io/rst.html
 .. _Diataxis: https://diataxis.fr/
 .. _Xcode: https://apps.apple.com/us/app/xcode
 .. _Homebrew: https://brew.sh
@@ -30,3 +31,4 @@
 .. _Read the Docs: https://readthedocs.org/
 .. _Doxygen: http://www.doxygen.nl/
 .. _Pandoc: https://pandoc.org/
+.. _DRY: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
