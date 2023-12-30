@@ -1,4 +1,11 @@
 """
+..  youtube:: xmfm4Gy8m8g
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 `Booleans <https://docs.python.org/3/library/stdtypes.html#boolean-operations-and-or-not>`_
 are either True or False.
 
@@ -74,17 +81,40 @@ assert my_boolean + my_int == 4
 # For Example, None does not support the < or > operators, so if we tried None > 0
 # the program would crash. We could write:
 variable = None
-gt_zero = False
+var_is_greater_than_zero = False
 if variable is not None:
     if variable > 0:
-        gt_zero = True
+        var_is_greater_than_zero = True
 
 # or we could take advantage of the laziness optimization and simply write:
 if variable is not None and variable > 0:
-    gt_zero = True
+    var_is_greater_than_zero = True
 
 # this is safe to do because if variable is None, variable > 0 will not
 # execute
+    
+# we could also shorten the above to:
+if variable and variable > 0:
+    var_is_greater_than_zero = True
+
+# remember that when used in an if statement expressions are implicitly treated
+# as booleans. "variable" by itself is an expression. None always evaluates
+# to False and integers evaluate to False only if they are 0. So in the first
+# if condition, variable > 0 is checked only when variable is not None and in
+# the second if condition variable > 0 is checked only when variable is an
+# integer less than or greater than 0. You'll note that the second if condition
+# is both more efficient, concise and logically equivalent to the first if
+# condition.
+    
+# But notice that logical equivalence is dependent on our second expression,
+# For example, this is incorrect:
+
+var_is_greater_than_or_eq_to_zero = False
+if variable and variable >= 0:
+    var_is_greater_than_or_eq_to_zero = True
+
+# why is this if condition incorrect?
+# be careful when short handing if statements when Nones are involved!
 
 # The or operator can be used with the assignment operator as shorthand 
 # (or idiom) for assignment to a variable to whichever of a group of 

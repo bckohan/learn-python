@@ -56,6 +56,19 @@ Here are the common numerical operators (also look at the :ref:`cheat sheets <ex
 |         | right one.                                                                            |
 +---------+---------------------------------------------------------------------------------------+
 
+.. youtube:: sD-BXi3sbcw
+   :width: 50%
+   :align: right
+   :url_parameters: ?vq=hd1080
+
+
+If all this talk of binary numbers and bitwise operations is confusing, just remember that all
+data in a computer system is represented by a sequence of bits (0s and 1s). Integers and negative
+integers are no different. The other thing to remember is that computers are finite. We
+do not have an infinite number of bits to play with, so when we represent numbers in a computer
+there is a point at which adding 1 to a number will cause it to exceed that limitation. This is
+called an integer overflow - and it's actually a feature we rely on to do arithmetic on positive
+and negative integers in binary. Checkout the video to the right for all the gory details!
 """
 from learn_python.module2_basics.lesson.part1_none import *
 
@@ -64,7 +77,9 @@ my_int = 3  # assignment - my_int now holds the value of 3
 assert my_int == 3
 
 # integers in Python are not limited to the word size of your processor 
-#  (i.e. 64 bits)! They can be as large as your computer's memory can hold!
+#  (i.e. 64 bits)! They can be as large as the amount of memory Python has been
+# configured to allow - which for all practical purposes can be considered arbitrarily
+# large
 my_512_bit_integer = 2**512-1
 assert my_512_bit_integer == 13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084095
 
