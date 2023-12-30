@@ -16,6 +16,14 @@ The the absence of a value is ``None``. In most other languages this is called `
 | ``is not``  | Non-identity: Checks if two references point to different objects. Useful to   |
 |             | check if a variable is not ``None`` (if x is not None:).                       |
 +-------------+--------------------------------------------------------------------------------+
+
+..  youtube:: gUGYVdhbCW8
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 """
 import ipdb
 
