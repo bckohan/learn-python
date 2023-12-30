@@ -48,6 +48,14 @@ Here are the common numerical operators (also look at the :ref:`cheat sheets <ex
 | ``>=``  | Greater than or equal to: Checks if left integer is greater than or equal to the      |
 |         | right one.                                                                            |
 +---------+---------------------------------------------------------------------------------------+
+
+..  youtube:: jvFgzq4ltG0
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 """
 from learn_python.module2_basics.lesson.part1_none import *
 
