@@ -1,3 +1,5 @@
+.. include:: ../refs.rst
+
 .. _part5:
 
 :code-ref:`Part 5: Functions <learn_python/module2_basics/lesson/part5_functions.py>`
@@ -9,3 +11,6 @@
    :language: python
    :start-after: import
    :linenos:
+
+
+.. autofunction:: learn_python.module2_basics.lesson.part5_functions.multiple_returns

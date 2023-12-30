@@ -71,6 +71,11 @@ def multiple_returns(x):
     This function returns either -1, 0, or 1 depending on if
     the value of x is negative (-1), zero (0), or positive (1).
 
+    .. note::
+
+        To see how sphinx-doc_ renders this docstring, jump to the bottom
+        of the page.
+
     :param x: int - the value to return the sign of
     :return: int - -1 if x is negative, 0 if x is zero, 1 if x is positive
     """

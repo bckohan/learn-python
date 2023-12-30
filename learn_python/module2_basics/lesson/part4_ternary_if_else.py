@@ -1,4 +1,11 @@
 """
+..  youtube:: 5ONFMLmWOcM
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 Ternary if/else expressions are a shorthand for simple if/else statements that
 produce a value. Ternary expressions are composed of three parts:
 
@@ -12,7 +19,6 @@ The if true expression is written first so the whole expression reads similar
 to an english sentence.
 """
 from learn_python.module2_basics.lesson.part3_booleans import *
-
 
 # as we have already discussed if/else statements are used to control the flow
 # of a program:
