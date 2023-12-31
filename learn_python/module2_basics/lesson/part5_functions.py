@@ -1,6 +1,22 @@
 """
+..  youtube:: 75hLVSuHPBo
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 We talked about basic function definitions last time - but here's a few more
-things to know about python functions.
+things to know about python functions:
+
+1) They can have default arguments!
+2) If functions do not return anything, their return value is None
+3) Functions can return multiple values!
+4) Function arguments can be passed by name
+5) Functions can have multiple return statements
+6) Functions can have docstrings, like modules!
+7) You can store functions in variables!
+8) Functions can be defined inside other functions!
 """
 from learn_python.module2_basics.lesson.part4_ternary_if_else import *
 
@@ -118,19 +134,7 @@ assert add_one(5) == 6 == add(5, 1)
 add_one_to_five = partial(add, x=1, y=5)
 assert add_one_to_five() == 6
 
-# 8) naming arguments in a function call
-def function_args(arg1, arg2, arg3=None, arg4=None):
-    return arg1, arg2, arg3, arg4
-
-# you do not have to not have to pass arguments into python functions in the
-# order they appear in the function definition - IF you name them in your
-# function call - it is often good practice to name arguments in function
-# calls - this can make your code more robust to future changes to the function
-# definition
-assert function_args(1, 2, 3, 4) == (1, 2, 3, 4)
-assert function_args(arg4=4, arg3=3, arg2=2, arg1=1) == (1, 2, 3, 4)
-
-# 9) Nested function definitions
+# 8) Nested function definitions
 # you can define functions INSIDE other functions! And even RETURN them!
 def get_delegate(var):
     

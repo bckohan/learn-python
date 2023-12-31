@@ -13,4 +13,11 @@
    :linenos:
 
 
+Sphinx Auto-Documentation
+-------------------------
+
+Sphinx transforms the docstring into the rendering below automatically for us.
+Many libraries have documentation generated directly from the source code like
+this!
+
 .. autofunction:: learn_python.module2_basics.lesson.part5_functions.multiple_returns
