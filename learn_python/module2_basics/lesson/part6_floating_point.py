@@ -1,4 +1,11 @@
 """
+..  youtube:: BXjh3yCYViM
+   :width: 70%
+   :align: center
+   :url_parameters: ?vq=hd1080
+
+|
+
 `Floating point numbers <https://docs.python.org/3/library/functions.html#float>`_ are 
 numbers with fractions (e.g. 2.99792458)!
 
