@@ -3,7 +3,7 @@
     Implement normal_distribution according to its docstring.
 
 .. hint::
-    * You will need to import three things from math
+    * You will need to import three things from `math <https://docs.python.org/3/library/math.html>`_
     * Its possible to write this in a single statement (not including the imports)
 
 .. warning::
