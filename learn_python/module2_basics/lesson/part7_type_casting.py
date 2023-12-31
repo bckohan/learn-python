@@ -13,7 +13,6 @@ find out!
 """
 from learn_python.module2_basics.lesson.part6_floating_point import *
 
-ipdb.set_trace()
 assert type(my_int) is int
 assert type(my_float) is float
 assert type(my_boolean) is bool
