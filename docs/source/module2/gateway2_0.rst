@@ -9,6 +9,8 @@ Gateway 2.0
 
 |
 
+.. automodule:: learn_python.module2_basics.gateway2
+
 .. _module2-is_even:
 
 :code-ref:`is_even() <learn_python/module2_basics/gateway2/task0_is_even.py>`

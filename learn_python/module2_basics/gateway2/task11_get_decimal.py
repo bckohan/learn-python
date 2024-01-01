@@ -21,3 +21,6 @@
 .. hint::
     Use type coercion.
 """
+
+def get_decimal(var):
+    return float(var - int(var))

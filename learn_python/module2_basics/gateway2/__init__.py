@@ -1,6 +1,6 @@
 """
-This assignment is designed to exercise your knowledge of the basics of
-Python covered in the module 2 lesson. Take your time and if you get
+These assignments are designed to exercise your knowledge of the basics of
+Python covered in the module 2 lessons. Take your time and if you get
 frustrated ask for help! Some of these tasks can be tricky and some of
 the later ones especially are designed to challenge your handle of 
 looping, conditionals, sequence indexing and the syntactic sugar that
@@ -20,11 +20,11 @@ implementation is found the test will be skipped. Once you have completed
 the gateway assignment you should see that all tests pass with no skipped
 tests (but tests from other modules will be "deselected")!
 
-To run a specific test use its full name:
+To run a specific test use its full path:
 
     .. code-block:: bash
 
-        poetry run pytest -k test_gateway2_is_even
+        poetry run pytest learn_python/tests/module2.py::test_gateway2_is_even
 
 Remember, if you want to run one of your functions outside of a pytest
 run you can do so like this:
@@ -35,7 +35,7 @@ run you can do so like this:
 
     .. code-block:: python
 
-        >> from learn_python.module2.gateway2 import my_function
+        >> from learn_python.module2.gateway2.task_module import my_function
         >> my_function()
 
 .. note::
