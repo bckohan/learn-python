@@ -17,7 +17,7 @@ module2 = 'learn_python.module2_basics:module2'
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
 ipython = "^8.14.0"
-pytest = "^7.4.2"
+pytest = "^8.0.2"
 ipdb = "^0.13.13"
 matplotlib = "^3.7.2"
 numpy = "^1.25.2"
